@@ -1,1 +1,287 @@
-<placeholder>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventive Solutions — Portfolio Pipeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --teal: #2ec4b6; --teal-deep: #1a9e93; --cyan: #3dd6f5; --blue-glow: #3b82f6;
+      --purple-neon: #a855f7; --mint: #d8f3ef;
+      --bg-0: #0b0c0e; --bg-1: #121417; --bg-2: #1a1d21; --bg-3: #24282e; --bg-4: #32383f;
+      --line: #3d444d; --text: #f3f4f6; --text-dim: #b8bec7; --text-mute: #8b929c;
+      --font: "Inter", system-ui, sans-serif;
+      --title-size: clamp(2rem, 5vw, 4.2rem); --h2-size: clamp(1.6rem, 3.4vw, 2.7rem); --body-size: 1.05rem;
+      --pad: clamp(1.25rem, 4vw, 4rem); --radius: 18px; --max: 1180px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      background-color: #1a1c1f;
+      background-attachment: fixed;
+      background-image:
+        radial-gradient(ellipse at 78% 18%, rgba(120,70,170,.07), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%),
+        linear-gradient(to right, transparent 0, transparent calc(33.3% - 1px), rgba(0,0,0,.55) calc(33.3% - 1px), rgba(255,255,255,.04) 33.3%, transparent calc(33.3% + 2px)),
+        linear-gradient(to right, transparent 0, transparent calc(66.6% - 1px), rgba(0,0,0,.55) calc(66.6% - 1px), rgba(255,255,255,.04) 66.6%, transparent calc(66.6% + 2px)),
+        linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), rgba(0,0,0,.5) calc(50% - 1px), rgba(255,255,255,.035) 50%, transparent calc(50% + 2px)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 9px),
+        repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 14px),
+        linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%);
+    }
+    .page { min-height: 100vh; min-height: 100dvh; scroll-snap-align: start; scroll-snap-stop: always; position: relative; overflow: hidden; padding: var(--pad); display: flex; flex-direction: column; justify-content: center; background: transparent; }
+    .page::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.04), transparent 55%), radial-gradient(ellipse at 10% 100%, rgba(0,0,0,.28), transparent 50%); }
+    .inner { position: relative; z-index: 1; width: 100%; max-width: var(--max); margin: 0 auto; }
+    .kicker { font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: .6rem; }
+    h1, h2 { letter-spacing: -.03em; line-height: 1.08; }
+    h1 { font-size: var(--title-size); font-weight: 800; }
+    h1 span, h2 span { color: var(--teal); }
+    h2 { font-size: var(--h2-size); font-weight: 750; margin-bottom: .6rem; }
+    .lede { color: var(--text-dim); max-width: 48rem; line-height: 1.55; font-size: var(--body-size); }
+    .chips { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: 1rem; }
+    .chip { border: 1px solid var(--line); background: var(--bg-3); color: var(--text-dim); font-size: .78rem; font-weight: 600; padding: .35rem .7rem; border-radius: 999px; }
+    .chip.live { border-color: var(--teal); color: var(--teal); }
+    .chip.done { background: var(--teal); color: #06221f; border-color: var(--teal); }
+    .chip.warn { color: #fbbf24; border-color: #fbbf24; }
+    .chip.purple { color: var(--purple-neon); border-color: var(--purple-neon); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .card { background: rgba(22,24,28,.78); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.35rem; box-shadow: 0 18px 40px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.04) inset; backdrop-filter: blur(8px); }
+    .card h3 { font-size: 1.05rem; margin-bottom: .45rem; }
+    .card p, .card li { color: var(--text-dim); font-size: .95rem; line-height: 1.5; }
+    .card ul { padding-left: 1.1rem; margin-top: .4rem; }
+    .photo { width: 100%; height: 280px; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); display: block; background: var(--bg-3); }
+    .photo-wrap { position: relative; }
+    .photo-label { position: absolute; left: 12px; top: 12px; background: rgba(10,12,14,.75); backdrop-filter: blur(8px); color: var(--text); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; padding: .3rem .6rem; border-radius: 999px; border: 1px solid var(--line); }
+    .next { margin-top: 1rem; padding: .9rem 1rem; background: var(--bg-3); border-radius: 12px; border-left: 3px solid var(--teal); color: var(--text-dim); font-size: .9rem; }
+    .next strong { color: var(--text); display: block; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .25rem; }
+    nav.dots { position: fixed; right: 18px; top: 50%; transform: translateY(-50%); z-index: 20; display: flex; flex-direction: column; gap: 10px; }
+    nav.dots a { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-4); border: 1px solid var(--line); display: block; }
+    nav.dots a.active { background: var(--teal); border-color: var(--teal); }
+    #hero { padding: 0; justify-content: flex-end; background: linear-gradient(to top, rgba(8,9,11,.92) 0%, rgba(8,9,11,.35) 45%, rgba(8,9,11,.2) 100%), url("images_hero.jpg") center/cover no-repeat; background-color: var(--bg-0); }
+    #hero .inner { padding: var(--pad); padding-bottom: 4.5rem; }
+    #hero .sub { color: var(--text-dim); letter-spacing: .14em; text-transform: uppercase; font-size: .78rem; margin-bottom: .8rem; }
+    #overview .status-row { display: grid; grid-template-columns: 1.4fr .8fr .8fr; gap: 1rem; margin-top: 1.4rem; }
+    #overview .pulse { border-top: 3px solid var(--teal); }
+    #overview .stat-big { font-size: 2rem; font-weight: 800; color: var(--teal); }
+    #overview img.pipeline { width: 100%; border-radius: 14px; border: 1px solid var(--line); margin-top: 1.2rem; max-height: 280px; object-fit: cover; object-position: center top; background: var(--bg-3); }
+    #track1 .photo { height: 240px; }
+    #infra .photo { height: 220px; }
+    #docket { padding: 0; }
+    #docket .split { display: grid; grid-template-columns: 1.15fr .85fr; min-height: 100vh; min-height: 100dvh; }
+    #docket .visual { background: url("images_docket.jpg") center/cover no-repeat; min-height: 360px; position: relative; background-color: var(--bg-2); }
+    #docket .visual .cap { position: absolute; left: 1.2rem; bottom: 1.2rem; max-width: 22rem; color: #e5e7eb; font-size: .85rem; background: rgba(10,12,14,.65); padding: .7rem .9rem; border-radius: 10px; }
+    #docket .copy { padding: var(--pad); display: flex; flex-direction: column; justify-content: center; background: transparent; }
+    #infra .fun { margin-top: 1rem; background: var(--bg-0); color: var(--text-dim); padding: .7rem 1rem; border-radius: 10px; font-size: .88rem; }
+    #logistics .photo { height: 260px; }
+    #logistics .brain { background: #101318; border-color: #2a3340; }
+    #logistics .brain h3 { color: var(--cyan); }
+    #glance .count { font-size: 2.4rem; font-weight: 800; }
+    #glance ol { list-style: none; counter-reset: step; }
+    #glance ol li { counter-increment: step; display: flex; gap: .7rem; padding: .55rem 0; border-bottom: 1px solid var(--line); color: var(--text-dim); font-size: .95rem; }
+    #glance ol li::before { content: counter(step); width: 26px; height: 26px; flex: 0 0 26px; border-radius: 50%; background: var(--teal); color: #06221f; font-weight: 800; font-size: .8rem; display: grid; place-items: center; }
+    #glance .rule { margin-top: 1rem; font-size: .88rem; color: var(--text-dim); border: 1px dashed var(--line); padding: .8rem 1rem; border-radius: 12px; }
+    #ink .press { display: grid; grid-template-columns: 1.35fr .85fr; gap: 1.4rem; align-items: center; }
+    #ink .shot { width: 100%; height: auto; max-height: 62vh; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); display: block; box-shadow: 0 18px 40px rgba(0,0,0,.4); background: #111; }
+    #ink .blurb p { color: var(--text-dim); line-height: 1.55; font-size: 1.02rem; }
+    @media (max-width: 860px) { #ink .press { grid-template-columns: 1fr; } }
+    footer.tiny, p.tiny { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: var(--text-mute); font-size: .75rem; z-index: 2; }
+    @media (max-width: 860px) {
+      .grid-2, .grid-3, #overview .status-row, #docket .split { grid-template-columns: 1fr; }
+      .page { scroll-snap-stop: normal; min-height: auto; padding-top: 3rem; padding-bottom: 3rem; }
+      #hero { min-height: 100vh; }
+      nav.dots { display: none; }
+      .photo { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="dots" aria-label="Sections">
+    <a href="#hero" class="active" title="Cover"></a>
+    <a href="#overview" title="Where we are"></a>
+    <a href="#track1" title="INVENT + Avi"></a>
+    <a href="#docket" title="DocketDate"></a>
+    <a href="#infra" title="PPI + CAD"></a>
+    <a href="#logistics" title="S+S + TAG"></a>
+    <a href="#glance" title="Glance"></a>
+    <a href="#ink" title="ETHR / BOOK"></a>
+  </nav>
+  <section class="page" id="hero">
+    <div class="inner">
+      <p class="sub">Scenery integrated · Logos in the wild · Fun summary vol 2</p>
+      <h1>INVENTIVE SOLUTIONS<br /><span>PORTFOLIO PIPELINE</span></h1>
+    </div>
+  </section>
+  <section class="page" id="overview">
+    <div class="inner">
+      <p class="kicker">Track 1 Digital & Community · Track 2 Engineering & Infra · TAG Central</p>
+      <h2>Where we are now — <span>scenery edition</span></h2>
+      <p class="lede">No more clip-art logos. Every brand now lives in its world. 8 projects, 2 tracks, 1 brain (TAG). All roads still lead to TAG integration.</p>
+      <div class="status-row">
+        <div class="card pulse"><h3>Overall pulse — updated statuses, fun but real</h3><p>3 websites DONE (DocketDate, PPI, TAG v1). 2 in testing (Avi App, CAD Plugin). 3 in progress (S+S, Gov Grants AI, INVENT/Whimsy).</p></div>
+        <div class="card"><div class="stat-big">4 LIVE</div><p>Scenery shots in the wild</p></div>
+        <div class="card"><div class="stat-big">100%</div><p>TAG integrated across the board</p></div>
+      </div>
+      <img class="pipeline" src="images_pipeline.jpg" alt="Portfolio pipeline blueprint" />
+      <div class="chips"><span class="chip">Logos as places, not stickers</span><span class="chip">Whimsy in a lightbulb terrarium</span><span class="chip">Avi purple over vendor maps</span><span class="chip">DocketDate bronze in the courthouse</span><span class="chip">Sophie+Sage stamped on steel</span></div>
+    </div>
+  </section>
+  <section class="page" id="track1">
+    <div class="inner">
+      <p class="kicker">Track 1 · Digital & Community · TAG integration everywhere</p>
+      <h2>Track 1: INVENT + Whimsy <span>x Avi</span></h2>
+      <p class="lede">Website + ad campaigns wired together. Whimsy grows inside a cracked bulb terrarium. Avi glows as purple neon over live vendor maps.</p>
+      <div class="grid-2" style="margin-top:1.3rem">
+        <div>
+          <div class="photo-wrap"><img class="photo" src="images_whimsy.jpg" alt="Whimsy greenhouse" /><span class="photo-label">Whimsy & Weeds — greenhouse lab</span></div>
+          <div class="card" style="margin-top:.8rem">
+            <h3>INVENT + Whimsy — Live & seeding</h3>
+            <p>Campaigns active · perf tuning in progress. INVENT tech bulb meets hand-crafted Whimsy growth. Site & ads bundled.</p>
+            <p style="margin-top:.4rem">Next: seed look-alikes, split-test greenhouse visuals, 3x organic lift goal.</p>
+            <div class="chips"><span class="chip live">Live</span><span class="chip">Wired to ads</span><span class="chip">Ad seeding →</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="photo-wrap"><img class="photo" src="imagesavi.jpg.webp" alt="Avi neon" /><span class="photo-label">Avi — neon ops center</span></div>
+          <div class="card" style="margin-top:.8rem">
+            <h3>Avi App — v1 launched ✓</h3>
+            <p>24 vendors · 8 routes · live map. Successful app launch phase 1 done. Vendor acquisition sprint: onboarding 10 new partners this month.</p>
+            <div class="chips"><span class="chip live">Vendor map LIVE</span><span class="chip">92% online</span><span class="chip purple">The power couple</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="docket">
+    <div class="split">
+      <div class="visual"><p class="cap">Big document energy: calendar + fees + compliance, turned into a monument. No clip art — real marble, real glow.</p></div>
+      <div class="copy">
+        <p class="kicker">Track 1 · Digital & Community · Compliance</p>
+        <h2>DocketDate — <span>Court Compliance Hub</span></h2>
+        <div class="card" style="margin-top:1rem">
+          <h3>Status: complete ✓ — updated</h3>
+          <p>Website v1 DONE · 97% compliance rate. Interim site completed, marketing assets ready, 12 upcoming deadlines wired, holographic dashboards live in atrium. Functional prototype in review.</p>
+          <div class="chips"><span class="chip done">Completed</span><span class="chip">12 deadlines</span><span class="chip live">97% rate</span><span class="chip">TAG Ready</span></div>
+        </div>
+        <div class="next"><strong>Next step — Henderson PD loop</strong> Get feedback from Henderson PD + Probation Officers for workflow validation. Tune UX for clerk → officer hand-off before public launch.</div>
+        <div class="card" style="margin-top:1rem"><h3>Integration path</h3><p>TAG → Grant Search → Internal Tracking. Once compliance data is normalized, it feeds Gov Grant AI (fine payment assistance programs) and TAG internal reporting.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="infra">
+    <div class="inner">
+      <p class="kicker">Track 2 · Engineering & Infrastructure · All TAG integrated</p>
+      <h2>PPI + CAD Plug-in — <span>building IRL stuff</span></h2>
+      <p class="lede">Water line from Long Beach to Primm, Nevada — ocean intake, desert crossing, tanks on the basin. The CAD plug-in draws the hoopity-hoolah: alignments, vaults, pump stations, the whole civil stack.</p>
+      <div class="grid-2" style="margin-top:1.3rem">
+        <div>
+          <div class="photo-wrap"><img class="photo" src="mages_ppi.jpg.jpg" alt="Long Beach to Primm water pipeline" /><span class="photo-label">PPI — Long Beach → Primm, NV</span></div>
+          <div class="card" style="margin-top:.8rem">
+            <div class="chips" style="margin:0 0 .7rem"><span class="chip done">Website done</span><span class="chip">Exec review</span></div>
+            <h3>Project Pacific Island</h3>
+            <p>Water line Long Beach → Primm, NV. Harbor intake, desert crossing, tanks on the basin. Visual corridor is live — in talks with corporate stakeholders.</p>
+            <ul><li>ROW + pump/tank footprints — stakeholder demo ready</li><li>Corporate exec discussions — aligning on use-case priorities</li></ul>
+            <div class="next"><strong>Next step</strong> Build detailed use-case titles (capture & hold, long-term use), then move to full project development phase with engineering specs.</div>
+          </div>
+        </div>
+        <div>
+          <div class="photo-wrap"><img class="photo" src="images_cad.jpg.jpg" alt="CAD plug-in over the ROW" /><span class="photo-label">CAD — civil stack on the ROW</span></div>
+          <div class="card" style="margin-top:.8rem">
+            <div class="chips" style="margin:0 0 .7rem"><span class="chip warn">V1 testing</span><span class="chip live">TAG integration</span></div>
+            <h3>CAD Plug-in</h3>
+            <p>V1 in testing — core automation working. Built for civil engineering workflows: drawing validation, layer checks, auto-tagging.</p>
+            <ul><li>Core engine passes 87% of test drawings</li><li>Built for Civilworks + internal drafting team</li></ul>
+            <div class="next"><strong>Next step</strong> Talk to Civilworks engineering leads for product feedback, harden UX, then dogfood on PPI drawings.</div>
+            <p class="fun">Fun meter — drafting robots > manual clicks — fun when it actually works</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="logistics">
+    <div class="inner">
+      <p class="kicker">Scenery integrated · Synergy mode</p>
+      <h2>S+S Logistics + TAG + <span>Gov Grants</span></h2>
+      <p class="lede">Logistics ops meets the brain — Sophie + Sage stamps real steel containers while TAG & Gov Grant AI hunt money in the background.</p>
+      <div class="grid-2" style="margin-top:1.3rem">
+        <div>
+          <div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="Sophie + Sage yard" /><span class="photo-label">Sophie + Sage — container yard, drones up</span></div>
+          <div class="card" style="margin-top:.8rem"><h3>Sophie + Sage — in progress</h3><p>Website in progress → gov grant tap. Ops platform building. Next: launch site, then let Gov Grant AI auto-match shipments to public funding windows.</p><div class="chips"><span class="chip warn">In progress</span></div></div>
+        </div>
+        <div>
+          <div class="card brain"><h3>TAG — central brain · The glue</h3><p>Website v1 DONE. All 8 projects feed signals into TAG. Core hub is live, branded data engine under hood. Now dogfooding internally.</p><div class="chips"><span class="chip done">V1 done</span><span class="chip live">TAG integration</span><span class="chip">Internal use</span></div></div>
+          <div class="card" style="margin-top:.8rem"><h3>Gov Grants AI search engine — WIP</h3><p>Scraping public funding — synergy. In-house TAG testing. S+S → Grants loop: logistics jobs find grants automatically. Next: tune scoping.</p><div class="chips"><span class="chip">In-house test</span><span class="chip live">TAG Ready</span></div></div>
+          <div class="card" style="margin-top:.8rem"><h3>Cash Rotisserie — AI stock crunching</h3><p>Market data roasting via TAG brain. Evaluating signals, backtest in progress. Next: evaluate monetize vs internal only.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="glance">
+    <div class="inner">
+      <p class="kicker">All roads lead to TAG integration</p>
+      <h2>Portfolio at a glance — <span>fun rebuild, real progress</span></h2>
+      <p class="lede">Scenery integration done — logos now live in-world, not as clip-art stickers. 8 projects, all TAG-wired.</p>
+      <div class="grid-3" style="margin-top:1.3rem">
+        <div class="card"><div class="count" style="color:var(--teal)">3 DONE</div><p>Websites live — TAG v1 · DocketDate · PPI visual site</p></div>
+        <div class="card"><div class="count" style="color:#fbbf24">2 TEST</div><p>In testing — Avi App v1 (24 vendors) · CAD Plugin v1 (87% pass)</p></div>
+        <div class="card"><div class="count" style="color:var(--cyan)">3 WIP</div><p>In progress — S+S Logistics · Gov Grant AI · INVENT/Whimsy seeding</p></div>
+      </div>
+      <div class="grid-2" style="margin-top:1.2rem">
+        <div class="card">
+          <h3>Project snapshots</h3>
+          <ul>
+            <li>INVENT + Whimsy — ad campaigns seeding, greenhouse visuals</li>
+            <li>Avi — vendor map LIVE, 10 new onboardings</li>
+            <li>DocketDate — 97% compliance hub, Henderson PD feedback loop</li>
+            <li>Gov Grant AI + S+S + Cash + TAG — brain stack synergy in progress</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Next sprint — 6 moves</h3>
+          <ol>
+            <li>Avi + INVENT/Whimsy rollout: seed ads with scenery bulbs, onboard 10 vendors</li>
+            <li>DocketDate: run Henderson PD & Probation Officer UX test, close loop</li>
+            <li>PPI exec alignment: lock use-case titles, move to dev specs</li>
+            <li>CAD Plugin: Civilworks feedback session → harden v1</li>
+            <li>S+S + Gov Grants: tune AI scoping, first auto-matched grant batch</li>
+            <li>TAG dogfooding: use TAG daily for internal reporting, build v2 backlog</li>
+          </ol>
+          <p class="rule">Rule going forward: no logo floats alone. If it can’t live in a photo-real scene, it doesn’t ship. Fun = real scale.</p>
+        </div>
+      </div>
+    </div>
+    <p class="tiny">Building the future, one weird wonderful idea at a time — now with better lighting.</p>
+  </section>
+  <section class="page" id="ink">
+    <div class="inner press">
+      <img class="shot" src="book_machine.jpg.webp" alt="The press — notes in, books out" />
+      <div class="blurb">
+        <p class="kicker">ETHR / BOOK</p>
+        <h2>Scrap in.<br /><span>Spine out.</span></h2>
+        <p>A friend built a press that feeds a pack of AI bots your sticky notes, voice dumps, and 3am scraps — and they walk off the belt as a book.</p>
+        <div class="chips"><span class="chip purple">Bot-written</span><span class="chip live">On the belt</span></div>
+      </div>
+    </div>
+  </section>
+  <script>
+    const pages = [...document.querySelectorAll(".page")];
+    const dots  = [...document.querySelectorAll("nav.dots a")];
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const i = pages.indexOf(e.target);
+        dots.forEach((d, n) => d.classList.toggle("active", n === i));
+      });
+    }, { threshold: 0.55 });
+    pages.forEach((p) => io.observe(p));
+  </script>
+</body>
+</html>
