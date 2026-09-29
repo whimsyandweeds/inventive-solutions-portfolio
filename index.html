@@ -52,6 +52,8 @@
     .chip.done { background: var(--teal); color: #06221f; border-color: var(--teal); }
     .chip.warn { color: #fbbf24; border-color: #fbbf24; }
     .chip.purple { color: var(--purple-neon); border-color: var(--purple-neon); }
+    .tag-pill { display: inline-flex; align-items: center; gap: .45rem; border: 1px solid #ec4899; box-shadow: 0 0 18px rgba(236,72,153,.32), inset 0 0 12px rgba(236,72,153,.12); background: #120814; color: #fff; font-size: .7rem; letter-spacing: .1em; font-weight: 700; padding: .42rem .9rem .42rem .65rem; border-radius: 999px; }
+    .tag-pill i { width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #f9a8d4, #db2777); box-shadow: 0 0 8px #ec4899; flex: 0 0 12px; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .card { background: rgba(22,24,28,.78); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.35rem; box-shadow: 0 18px 40px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.04) inset; backdrop-filter: blur(8px); }
@@ -72,6 +74,10 @@
     #overview .status-row { display: grid; grid-template-columns: 1.4fr .8fr .8fr; gap: 1rem; margin-top: 1.4rem; }
     #overview .pulse { border-top: 3px solid var(--teal); }
     #overview .stat-big { font-size: 2rem; font-weight: 800; color: var(--teal); }
+    #overview .goal-tag { border: 1px solid #ec4899; background: rgba(18,8,20,.88); box-shadow: 0 0 24px rgba(236,72,153,.28), inset 0 0 18px rgba(236,72,153,.1); }
+    #overview .goal-tag .stat-big { color: #f9a8d4; }
+    #overview .goal-tag p { color: #d1d5db; }
+    #overview .goal-tag .tag-pill { margin-bottom: .55rem; }
     #overview img.pipeline { width: 100%; border-radius: 14px; border: 1px solid var(--line); margin-top: 1.2rem; max-height: 280px; object-fit: cover; object-position: center top; background: var(--bg-3); }
     #track1 .photo { height: 220px; }
     #track1 .couple { background: rgba(10,16,14,.9); border-color: #2f4a3c; }
@@ -98,8 +104,6 @@
     @media (max-width: 860px) { #ink .press { grid-template-columns: 1fr; } }
     #tag .hero-shot { width: 100%; height: 210px; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); display: block; background: #0b0614; }
     #tag .tag-row { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap; margin-bottom: .45rem; }
-    #tag .tag-pill { display: inline-flex; align-items: center; gap: .45rem; border: 1px solid #ec4899; box-shadow: 0 0 18px rgba(236,72,153,.32), inset 0 0 12px rgba(236,72,153,.12); background: #120814; color: #fff; font-size: .7rem; letter-spacing: .1em; font-weight: 700; padding: .42rem .9rem .42rem .65rem; border-radius: 999px; }
-    #tag .tag-pill i { width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #f9a8d4, #db2777); box-shadow: 0 0 8px #ec4899; flex: 0 0 12px; }
     #tag .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 1rem; }
     #tag .stat { padding: .85rem 1rem; }
     #tag .stat b { display: block; font-size: 1.35rem; color: var(--purple-neon); font-weight: 800; letter-spacing: -.03em; }
@@ -141,7 +145,7 @@
       <div class="status-row">
         <div class="card pulse"><h3>Overall pulse — updated statuses, fun but real</h3><p>3 websites DONE (DocketDate, PPI, TAG v1). 2 in testing (Avi App, CAD Plugin). 3 in progress (S+S, Gov Grants AI, INVENT/Whimsy).</p></div>
         <div class="card"><div class="stat-big">4 LIVE</div><p>Scenery shots in the wild</p></div>
-        <div class="card"><div class="stat-big">100%</div><p>TAG integrated across the board</p></div>
+        <div class="card goal-tag"><span class="tag-pill"><i></i>TAG INTEGRATION</span><div class="stat-big">100%</div><p>Goal — every project on the board talks through TAG</p></div>
       </div>
       <img class="pipeline" src="images_pipeline.jpg" alt="Portfolio pipeline blueprint" />
       <div class="chips"><span class="chip">Logos as places, not stickers</span><span class="chip">Whimsy in a lightbulb terrarium</span><span class="chip">Avi purple over vendor maps</span><span class="chip">DocketDate bronze in the courthouse</span><span class="chip">Sophie+Sage stamped on steel</span></div>
