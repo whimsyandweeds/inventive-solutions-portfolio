@@ -111,6 +111,17 @@
     #tag .stat b { display: block; font-size: 1.35rem; color: var(--purple-neon); font-weight: 800; letter-spacing: -.03em; }
     #tag .stat span { color: var(--text-mute); font-size: .78rem; display: block; margin-top: .15rem; }
     @media (max-width: 860px) { #tag .stat-row { grid-template-columns: 1fr; } #tag .hero-shot { height: 180px; } }
+    #pitch form { display: grid; gap: .7rem; margin-top: 1.1rem; }
+    #pitch label { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+    #pitch input, #pitch textarea, #pitch select { width: 100%; background: rgba(10,12,14,.7); border: 1px solid var(--line); color: var(--text); border-radius: 12px; padding: .75rem .9rem; font: inherit; font-size: .95rem; }
+    #pitch input:focus, #pitch textarea:focus, #pitch select:focus { outline: none; border-color: var(--purple-neon); box-shadow: 0 0 0 3px rgba(168,85,247,.18); }
+    #pitch textarea { min-height: 90px; resize: vertical; }
+    #pitch button { justify-self: start; background: var(--purple-neon); color: #1a0828; border: 0; font-weight: 800; letter-spacing: .04em; padding: .7rem 1.15rem; border-radius: 999px; cursor: pointer; }
+    #pitch button:hover { filter: brightness(1.08); }
+    #pitch .fine { color: var(--text-mute); font-size: .78rem; }
+    #pitch .thanks { display: none; margin-top: .8rem; }
+    #pitch.sent .thanks { display: block; }
+    #pitch.sent form { display: none; }
     footer.tiny, p.tiny { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: var(--text-mute); font-size: .75rem; z-index: 2; }
     @media (max-width: 860px) {
       .grid-2, .grid-3, #overview .status-row, #docket .split { grid-template-columns: 1fr; }
@@ -133,6 +144,7 @@
     <a href="#glance" title="Glance"></a>
     <a href="#ink" title="ETHR / BOOK"></a>
     <a href="#ideas" title="Idea pipeline"></a>
+    <a href="#pitch" title="Feed the belt"></a>
   </nav>
   <section class="page" id="hero">
     <div class="inner">
@@ -397,6 +409,42 @@
       </div>
     </div>
   </section>
+  <section class="page" id="pitch">
+    <div class="inner">
+      <p class="kicker">Idea intake · no meetings · no mercy</p>
+      <h2>Got a spark? <span>Feed the belt.</span></h2>
+      <p class="lede">Half-ideas welcome. Whole pitch decks will be mocked. If it survives the press, it gets a crate on the pipe. If it doesn’t, TAG files it under Tuesday.</p>
+      <form id="idea-form">
+        <div>
+          <label for="who">What do we call you</label>
+          <input id="who" name="who" placeholder="Alias, government name, or 'a raccoon'" />
+        </div>
+        <div>
+          <label for="spark">The spark</label>
+          <textarea id="spark" name="spark" required placeholder="Notes, scraps, 3am thought, napkin crime..."></textarea>
+        </div>
+        <div>
+          <label for="machine">Which machine should eat this</label>
+          <select id="machine" name="machine">
+            <option>Surprise me. I’m brave.</option>
+            <option>The book press</option>
+            <option>LUMA — defrag my skull</option>
+            <option>LUNA — night light that stays</option>
+            <option>Can’t Lie — no weasel clause</option>
+            <option>Don’t Dial — hold till morning</option>
+            <option>TAG — kill the meeting first</option>
+            <option>Something worse. Surprise me harder.</option>
+          </select>
+        </div>
+        <button type="submit">Yeet it onto the belt</button>
+        <p class="fine">By submitting you agree we may steal the good parts, ignore the boring parts, and never schedule a standup about it.</p>
+      </form>
+      <div class="card thanks">
+        <h3>Belt ate it.</h3>
+        <p>If it comes off as a book, you get a spine. If not, it becomes a chip. Either way — no calendar invite.</p>
+      </div>
+    </div>
+  </section>
   <script>
     const pages = [...document.querySelectorAll(".page")];
     const dots  = [...document.querySelectorAll("nav.dots a")];
@@ -408,6 +456,16 @@
       });
     }, { threshold: 0.55 });
     pages.forEach((p) => io.observe(p));
+    const form = document.getElementById("idea-form");
+    if (form) form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const who = (form.who.value || "a raccoon").trim();
+      const spark = (form.spark.value || "").trim();
+      const machine = form.machine.value;
+      document.getElementById("pitch").classList.add("sent");
+      const body = encodeURIComponent("Who: "+who+"\nMachine: "+machine+"\n\n"+spark);
+      window.location.href = "mailto:whimsyandweeds@gmail.com?subject="+encodeURIComponent("Belt spark from "+who)+"&body="+body;
+    });
   </script>
 </body>
 </html>
