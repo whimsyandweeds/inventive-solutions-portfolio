@@ -78,7 +78,7 @@
     #overview .goal-tag .stat-big { color: #f9a8d4; }
     #overview .goal-tag p { color: #d1d5db; }
     #overview .goal-tag .tag-pill { margin-bottom: .55rem; }
-    #overview img.pipeline { width: 100%; border-radius: 14px; border: 1px solid var(--line); margin-top: 1.2rem; max-height: 280px; object-fit: cover; object-position: center top; background: var(--bg-3); }
+    #overview .pipeline { width: 100%; border-radius: 14px; border: 1px solid var(--line); margin-top: 1.2rem; max-height: 280px; object-fit: cover; object-position: center top; background: var(--bg-3); display: block; }
     #track1 .photo { height: 220px; }
     #track1 .couple { background: rgba(10,16,14,.9); border-color: #2f4a3c; }
     #track1 .couple .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: .35rem; }
@@ -150,7 +150,9 @@
         <div class="card"><div class="stat-big">4 LIVE</div><p>Scenery shots in the wild</p></div>
         <div class="card goal-tag"><span class="tag-pill"><i></i>TAG INTEGRATION</span><div class="stat-big">100%</div><p>Goal — every project on the board talks through TAG</p></div>
       </div>
-      <img class="pipeline" src="images_pipeline.jpg" alt="Portfolio pipeline blueprint" />
+      <video class="pipeline" autoplay muted loop playsinline poster="images_pipeline.jpg">
+        <source src="pipeline_hero.mp4" type="video/mp4" />
+      </video>
       <div class="chips"><span class="chip">Logos as places, not stickers</span><span class="chip">Whimsy in a lightbulb terrarium</span><span class="chip">Avi purple over vendor maps</span><span class="chip">DocketDate bronze in the courthouse</span><span class="chip">Sophie+Sage stamped on steel</span></div>
     </div>
   </section>
