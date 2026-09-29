@@ -73,7 +73,10 @@
     #overview .pulse { border-top: 3px solid var(--teal); }
     #overview .stat-big { font-size: 2rem; font-weight: 800; color: var(--teal); }
     #overview img.pipeline { width: 100%; border-radius: 14px; border: 1px solid var(--line); margin-top: 1.2rem; max-height: 280px; object-fit: cover; object-position: center top; background: var(--bg-3); }
-    #track1 .photo { height: 240px; }
+    #track1 .photo { height: 220px; }
+    #track1 .couple { background: rgba(10,16,14,.9); border-color: #2f4a3c; }
+    #track1 .couple .eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: .35rem; }
+    #track1 .couple h3 em { color: var(--teal); font-style: normal; }
     #infra .photo { height: 220px; }
     #docket { padding: 0; }
     #docket .split { display: grid; grid-template-columns: 1.15fr .85fr; min-height: 100vh; min-height: 100dvh; }
@@ -140,22 +143,26 @@
       <h2>Track 1: INVENT + Whimsy <span>x Avi</span></h2>
       <p class="lede">Website + ad campaigns wired together. Whimsy grows inside a cracked bulb terrarium. Avi glows as purple neon over live vendor maps.</p>
       <div class="grid-2" style="margin-top:1.3rem">
-        <div>
-          <div class="photo-wrap"><img class="photo" src="images_whimsy.jpg" alt="Whimsy greenhouse" /><span class="photo-label">Whimsy & Weeds — greenhouse lab</span></div>
-          <div class="card" style="margin-top:.8rem">
-            <h3>INVENT + Whimsy — Live & seeding</h3>
-            <p>Campaigns active · perf tuning in progress. INVENT tech bulb meets hand-crafted Whimsy growth. Site & ads bundled.</p>
-            <p style="margin-top:.4rem">Next: seed look-alikes, split-test greenhouse visuals, 3x organic lift goal.</p>
-            <div class="chips"><span class="chip live">Live</span><span class="chip">Wired to ads</span><span class="chip">Ad seeding →</span></div>
-          </div>
+        <div class="photo-wrap"><img class="photo" src="images_whimsy.jpg" alt="Whimsy greenhouse" /><span class="photo-label">Whimsy & Weeds — greenhouse lab</span></div>
+        <div class="photo-wrap"><img class="photo" src="imagesavi.jpg.webp" alt="Avi neon" /><span class="photo-label">Avi — neon ops center</span></div>
+      </div>
+      <div class="grid-3" style="margin-top:.9rem">
+        <div class="card">
+          <h3>INVENT + Whimsy — Live & seeding</h3>
+          <p>Campaigns active · perf tuning in progress. INVENT tech bulb meets hand-crafted Whimsy growth. Site & ads bundled.</p>
+          <p style="margin-top:.4rem">Next: seed look-alikes, split-test greenhouse visuals, 3x organic lift goal.</p>
+          <div class="chips"><span class="chip live">Live</span><span class="chip">Wired to ads</span><span class="chip">Ad seeding →</span></div>
         </div>
-        <div>
-          <div class="photo-wrap"><img class="photo" src="imagesavi.jpg.webp" alt="Avi neon" /><span class="photo-label">Avi — neon ops center</span></div>
-          <div class="card" style="margin-top:.8rem">
-            <h3>Avi App — v1 launched ✓</h3>
-            <p>24 vendors · 8 routes · live map. Successful app launch phase 1 done. Vendor acquisition sprint: onboarding 10 new partners this month.</p>
-            <div class="chips"><span class="chip live">Vendor map LIVE</span><span class="chip">92% online</span><span class="chip purple">The power couple</span></div>
-          </div>
+        <div class="card">
+          <h3>Avi App — v1 launched ✓</h3>
+          <p>24 vendors · 8 routes · live map. Successful app launch phase 1 done. Vendor acquisition sprint: onboarding 10 new partners this month.</p>
+          <div class="chips"><span class="chip live">Vendor map LIVE</span><span class="chip">92% online</span></div>
+        </div>
+        <div class="card couple">
+          <p class="eyebrow">The power couple</p>
+          <h3>Brain + beauty = <em>revenue</em></h3>
+          <p>INVENT scales the idea, Whimsy makes it human, Avi moves it. All feeding TAG signals.</p>
+          <div class="chips"><span class="chip live">Fun synergy</span></div>
         </div>
       </div>
     </div>
