@@ -54,6 +54,8 @@
     .chip.purple { color: var(--purple-neon); border-color: var(--purple-neon); }
     .tag-pill { display: inline-flex; align-items: center; gap: .45rem; border: 1px solid #ec4899; box-shadow: 0 0 18px rgba(236,72,153,.32), inset 0 0 12px rgba(236,72,153,.12); background: #120814; color: #fff; font-size: .7rem; letter-spacing: .1em; font-weight: 700; padding: .42rem .9rem .42rem .65rem; border-radius: 999px; }
     .tag-pill i { width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #f9a8d4, #db2777); box-shadow: 0 0 8px #ec4899; flex: 0 0 12px; }
+    .tag-pill.making { font-size: .62rem; letter-spacing: .08em; padding: .32rem .7rem .32rem .5rem; }
+    .photo-wrap .tag-pill { position: absolute; right: 10px; top: 10px; z-index: 2; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
     .card { background: rgba(22,24,28,.78); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.35rem; box-shadow: 0 18px 40px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.04) inset; backdrop-filter: blur(8px); }
@@ -91,6 +93,11 @@
     #docket .copy { padding: var(--pad); display: flex; flex-direction: column; justify-content: center; background: transparent; }
     #infra .fun { margin-top: 1rem; background: var(--bg-0); color: var(--text-dim); padding: .7rem 1rem; border-radius: 10px; font-size: .88rem; }
     #logistics .photo { height: 200px; object-fit: cover; object-position: center; }
+    #logistics .logi-row { display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; margin-top: 1.2rem; }
+    #logistics .linked { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    #logistics .net { position: absolute; left: 16%; right: 16%; top: 92px; height: 26px; pointer-events: none; z-index: 3; overflow: visible; }
+    #logistics .linked .photo { box-shadow: 0 0 24px rgba(236,72,153,.16); }
+    #logistics .linked .card { border-color: rgba(236,72,153,.35); }
     #logistics .brain { background: #101318; border-color: #2a3340; }
     #logistics .brain h3 { color: var(--cyan); }
     #glance .count { font-size: 2.4rem; font-weight: 800; }
@@ -124,7 +131,8 @@
     #pitch.sent form { display: none; }
     footer.tiny, p.tiny { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: var(--text-mute); font-size: .75rem; z-index: 2; }
     @media (max-width: 860px) {
-      .grid-2, .grid-3, #overview .status-row, #docket .split { grid-template-columns: 1fr; }
+      .grid-2, .grid-3, #overview .status-row, #docket .split, #logistics .logi-row, #logistics .linked { grid-template-columns: 1fr; }
+      #logistics .net { display: none; }
       .page { scroll-snap-stop: normal; min-height: auto; padding-top: 3rem; padding-bottom: 3rem; }
       #hero { min-height: 100vh; }
       nav.dots { display: none; }
@@ -257,21 +265,29 @@
         <strong>Hook — same ticket</strong>
         S+S is lining up with the grant hunter. Freight moves. Aid rides with it. Victims get the window instead of the runaround.
       </div>
-      <div class="grid-3" style="margin-top:1.2rem">
-        <div>
-          <div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="Sophie + Sage yard" /><span class="photo-label">Sophie + Sage — container yard</span></div>
-          <div class="card" style="margin-top:.75rem">
-            <h3>Sophie + Sage — in progress</h3>
-            <p>Website in progress. Next play: plug jobs into the grant finder so aid can travel with the freight.</p>
-            <div class="chips"><span class="chip warn">In progress</span><span class="chip live">Grant hook →</span></div>
+      <div class="logi-row">
+        <div class="linked">
+          <svg class="net" viewBox="0 0 200 26" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M8 13 C 50 2, 150 24, 192 13" fill="none" stroke="#ec4899" stroke-width="1.4" stroke-dasharray="3 4" opacity=".85"/>
+            <circle cx="8" cy="13" r="3.2" fill="#ec4899"/>
+            <circle cx="100" cy="13" r="2.4" fill="#f9a8d4"/>
+            <circle cx="192" cy="13" r="3.2" fill="#ec4899"/>
+          </svg>
+          <div>
+            <div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="Sophie + Sage yard" /><span class="photo-label">Sophie + Sage — container yard</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+            <div class="card" style="margin-top:.75rem">
+              <h3>Sophie + Sage — in progress</h3>
+              <p>Website in progress. Next play: plug jobs into the grant finder so aid can travel with the freight.</p>
+              <div class="chips"><span class="chip warn">In progress</span><span class="chip live">Grant hook →</span></div>
+            </div>
           </div>
-        </div>
-        <div>
-          <div class="photo-wrap"><img class="photo" src="images_grants.jpg" alt="Gov Grants AI filing applications" /><span class="photo-label">Gov Grants AI — the filer</span></div>
-          <div class="card" style="margin-top:.75rem">
-            <h3>Gov Grants AI — the bot that files</h3>
-            <p>Hunts public funding and drops the application on the desk. First desk: S+S. Then the rest of the pipeline.</p>
-            <div class="chips"><span class="chip">In-house test</span><span class="chip live">Grant hunter</span></div>
+          <div>
+            <div class="photo-wrap"><img class="photo" src="images_grants.jpg" alt="Gov Grants AI filing applications" /><span class="photo-label">Gov Grants AI — the filer</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+            <div class="card" style="margin-top:.75rem">
+              <h3>Gov Grants AI — the bot that files</h3>
+              <p>Hunts public funding and drops the application on the desk. First desk: S+S. Then the rest of the pipeline.</p>
+              <div class="chips"><span class="chip">In-house test</span><span class="chip live">Grant hunter</span></div>
+            </div>
           </div>
         </div>
         <div>
