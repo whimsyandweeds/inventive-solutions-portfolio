@@ -90,7 +90,7 @@
     #docket .visual .cap { position: absolute; left: 1.2rem; bottom: 1.2rem; max-width: 22rem; color: #e5e7eb; font-size: .85rem; background: rgba(10,12,14,.65); padding: .7rem .9rem; border-radius: 10px; }
     #docket .copy { padding: var(--pad); display: flex; flex-direction: column; justify-content: center; background: transparent; }
     #infra .fun { margin-top: 1rem; background: var(--bg-0); color: var(--text-dim); padding: .7rem 1rem; border-radius: 10px; font-size: .88rem; }
-    #logistics .photo { height: 170px; }
+    #logistics .photo { height: 200px; object-fit: cover; object-position: center; }
     #logistics .brain { background: #101318; border-color: #2a3340; }
     #logistics .brain h3 { color: var(--cyan); }
     #glance .count { font-size: 2.4rem; font-weight: 800; }
@@ -236,19 +236,33 @@
       <p class="kicker">Scenery integrated · Synergy mode</p>
       <h2>S+S Logistics + <span>Gov Grants</span></h2>
       <p class="lede">Steel in the yard. Money in the pipeline. Sophie + Sage moves freight while an AI bot hunts and files the government grants that pay for the work.</p>
-      <div class="grid-2" style="margin-top:1.3rem">
+      <div class="next" style="margin-top:1rem">
+        <strong>Hook — same ticket</strong>
+        S+S is lining up with the grant hunter. Freight moves. Aid rides with it. Victims get the window instead of the runaround.
+      </div>
+      <div class="grid-3" style="margin-top:1.2rem">
         <div>
-          <div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="Sophie + Sage yard" /><span class="photo-label">Sophie + Sage — container yard, drones up</span></div>
-          <div class="card" style="margin-top:.8rem"><h3>Sophie + Sage — in progress</h3><p>Website in progress → gov grant tap. Ops platform building. Next: launch site, then let Gov Grant AI auto-match shipments to public funding windows.</p><div class="chips"><span class="chip warn">In progress</span></div></div>
+          <div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="Sophie + Sage yard" /><span class="photo-label">Sophie + Sage — container yard</span></div>
+          <div class="card" style="margin-top:.75rem">
+            <h3>Sophie + Sage — in progress</h3>
+            <p>Website in progress. Next play: plug jobs into the grant finder so aid can travel with the freight.</p>
+            <div class="chips"><span class="chip warn">In progress</span><span class="chip live">Grant hook →</span></div>
+          </div>
         </div>
         <div>
           <div class="photo-wrap"><img class="photo" src="images_grants.jpg" alt="Gov Grants AI filing applications" /><span class="photo-label">Gov Grants AI — the filer</span></div>
-          <div class="card" style="margin-top:.8rem"><h3>Gov Grants AI — the bot that files</h3><p>An AI that hunts public funding and puts the application on the desk. Built to sit on S+S jobs first, then the rest of the pipeline. Next: tighten scoping, then let it loose on live windows.</p><div class="chips"><span class="chip">In-house test</span><span class="chip live">Grant hunter</span></div></div>
-          <div class="photo-wrap" style="margin-top:.8rem"><img class="photo" src="images_cash.jpg" alt="Cash Rotisserie trading dial" /><span class="photo-label">Cash Rotisserie — the pit</span></div>
-          <div class="card" style="margin-top:.8rem">
-            <div class="chips" style="margin:0 0 .7rem"><span class="chip done">Completed</span><span class="chip live">AI trading</span><span class="chip">Cookin profits</span></div>
+          <div class="card" style="margin-top:.75rem">
+            <h3>Gov Grants AI — the bot that files</h3>
+            <p>Hunts public funding and drops the application on the desk. First desk: S+S. Then the rest of the pipeline.</p>
+            <div class="chips"><span class="chip">In-house test</span><span class="chip live">Grant hunter</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="photo-wrap"><img class="photo" src="images_cash.jpg" alt="Cash Rotisserie trading dial" /><span class="photo-label">Cash Rotisserie — the pit</span></div>
+          <div class="card" style="margin-top:.75rem">
+            <div class="chips" style="margin:0 0 .55rem"><span class="chip done">Completed</span><span class="chip live">AI trading</span></div>
             <h3>Cash Rotisserie</h3>
-            <p>Finished app. A pack of AIs that work the book — sell puts, sell calls, collect premium, assign, roll. The dial turns. Positions cook.</p>
+            <p>Finished app. AIs work the book — sell puts, sell calls, collect premium. The dial turns.</p>
           </div>
         </div>
       </div>
