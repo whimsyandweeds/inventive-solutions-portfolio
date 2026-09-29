@@ -102,6 +102,8 @@
     #ink .shot { width: 100%; height: auto; max-height: 62vh; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); display: block; box-shadow: 0 18px 40px rgba(0,0,0,.4); background: #111; }
     #ink .blurb p { color: var(--text-dim); line-height: 1.55; font-size: 1.02rem; }
     @media (max-width: 860px) { #ink .press { grid-template-columns: 1fr; } }
+    #ideas .spark h3 { font-size: 1.12rem; }
+    #ideas .spark .who { color: var(--teal); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; margin-bottom: .35rem; }
     #tag .hero-shot { width: 100%; height: 210px; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); display: block; background: #0b0614; }
     #tag .tag-row { display: flex; align-items: center; justify-content: space-between; gap: .8rem; flex-wrap: wrap; margin-bottom: .45rem; }
     #tag .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 1rem; }
@@ -130,6 +132,7 @@
     <a href="#tag" title="TAG"></a>
     <a href="#glance" title="Glance"></a>
     <a href="#ink" title="ETHR / BOOK"></a>
+    <a href="#ideas" title="Idea pipeline"></a>
   </nav>
   <section class="page" id="hero">
     <div class="inner">
@@ -336,6 +339,39 @@
           <span class="chip live">Grid notes complete</span>
           <span class="chip purple">Mommy decoded</span>
           <span class="chip">On the belt</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="ideas">
+    <div class="inner">
+      <p class="kicker">Idea pipeline · sparks, not shipped</p>
+      <h2>Still on the stove — <span>four that want out</span></h2>
+      <p class="lede">Not products yet. Not vapor either. These are the ones circling the drain until TAG, the press, and the board have room.</p>
+      <div class="grid-2" style="margin-top:1.3rem">
+        <div class="card spark">
+          <p class="who">Adult OS</p>
+          <h3>LUMA-SYNC — Brain Defrag</h3>
+          <p>Too many tabs in the skull. LUMA closes them in the right order — dumps RAM back to disk, files the day, lets sleep actually land. A nightly defrag for people who think in 47 threads.</p>
+          <div class="chips"><span class="chip purple">Idea</span><span class="chip">Brain defrag</span><span class="chip">Nightly</span></div>
+        </div>
+        <div class="card spark">
+          <p class="who">Kid + the adult they become</p>
+          <h3>LUNA-SYNC — the night light that stays</h3>
+          <p>Sister app. For the kids who don’t feel safe, and the adults who grew up that way. A voice in the dark that grounds the room and doesn’t leave at bedtime. Trauma doesn’t get a lecture. It gets a moon.</p>
+          <div class="chips"><span class="chip purple">Idea</span><span class="chip">Anxiety</span><span class="chip live">Safe room</span></div>
+        </div>
+        <div class="card spark">
+          <p class="who">Party, no weasel clause</p>
+          <h3>Can’t Lie — Truth or Dare</h3>
+          <p>Mobile game. The AI deals the prompt and it will not let you duck. No “I don’t know.” No fake dare. The room finds out who you actually are. Bruises optional. Honesty isn’t.</p>
+          <div class="chips"><span class="chip purple">Idea</span><span class="chip">AI game</span><span class="chip">No weasel</span></div>
+        </div>
+        <div class="card spark">
+          <p class="who">1:47am you vs morning you</p>
+          <h3>Don’t Dial</h3>
+          <p>Safety app. The last call you try to make at 1:47am never leaves the phone. AI catches the drunk thumb, holds the text, asks at sunrise if you still mean it. Never drunk-dial again. Mean it in daylight or don’t send it.</p>
+          <div class="chips"><span class="chip purple">Idea</span><span class="chip">Safety</span><span class="chip live">Hold till morning</span></div>
         </div>
       </div>
     </div>
