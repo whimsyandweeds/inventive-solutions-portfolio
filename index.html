@@ -96,6 +96,13 @@
     #ink .shot { width: 100%; height: auto; max-height: 62vh; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); display: block; box-shadow: 0 18px 40px rgba(0,0,0,.4); background: #111; }
     #ink .blurb p { color: var(--text-dim); line-height: 1.55; font-size: 1.02rem; }
     @media (max-width: 860px) { #ink .press { grid-template-columns: 1fr; } }
+    #tag .hero-shot { width: 100%; height: 190px; object-fit: cover; object-position: left center; border-radius: 14px; border: 1px solid var(--line); display: block; background: #0b0614; }
+    #tag .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 1rem; }
+    #tag .stat { padding: .85rem 1rem; }
+    #tag .stat b { display: block; font-size: 1.35rem; color: var(--purple-neon); font-weight: 800; letter-spacing: -.03em; }
+    #tag .stat span { color: var(--text-mute); font-size: .78rem; display: block; margin-top: .15rem; }
+    #tag .badge { width: 220px; max-width: 100%; height: auto; display: block; margin-top: .8rem; }
+    @media (max-width: 860px) { #tag .stat-row { grid-template-columns: 1fr; } #tag .hero-shot { height: 180px; } }
     footer.tiny, p.tiny { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; color: var(--text-mute); font-size: .75rem; z-index: 2; }
     @media (max-width: 860px) {
       .grid-2, .grid-3, #overview .status-row, #docket .split { grid-template-columns: 1fr; }
@@ -113,7 +120,8 @@
     <a href="#track1" title="INVENT + Avi"></a>
     <a href="#docket" title="DocketDate"></a>
     <a href="#infra" title="PPI + CAD"></a>
-    <a href="#logistics" title="S+S + TAG"></a>
+    <a href="#logistics" title="S+S + Grants"></a>
+    <a href="#tag" title="TAG"></a>
     <a href="#glance" title="Glance"></a>
     <a href="#ink" title="ETHR / BOOK"></a>
   </nav>
@@ -224,9 +232,48 @@
           <div class="card" style="margin-top:.8rem"><h3>Sophie + Sage — in progress</h3><p>Website in progress → gov grant tap. Ops platform building. Next: launch site, then let Gov Grant AI auto-match shipments to public funding windows.</p><div class="chips"><span class="chip warn">In progress</span></div></div>
         </div>
         <div>
-          <div class="card brain"><h3>TAG — central brain · The glue</h3><p>Website v1 DONE. All 8 projects feed signals into TAG. Core hub is live, branded data engine under hood. Now dogfooding internally.</p><div class="chips"><span class="chip done">V1 done</span><span class="chip live">TAG integration</span><span class="chip">Internal use</span></div></div>
+          <div class="card brain"><h3>TAG — workspace proxy</h3><p>Own snap below. TAG is the layer that plugs every project into one workspace so the bots talk to each other instead of you sitting in another standup.</p><div class="chips"><span class="chip done">V1 done</span><span class="chip purple">Private beta</span><span class="chip">See TAG →</span></div></div>
           <div class="card" style="margin-top:.8rem"><h3>Gov Grants AI search engine — WIP</h3><p>Scraping public funding — synergy. In-house TAG testing. S+S → Grants loop: logistics jobs find grants automatically. Next: tune scoping.</p><div class="chips"><span class="chip">In-house test</span><span class="chip live">TAG Ready</span></div></div>
           <div class="card" style="margin-top:.8rem"><h3>Cash Rotisserie — AI stock crunching</h3><p>Market data roasting via TAG brain. Evaluating signals, backtest in progress. Next: evaluate monetize vs internal only.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="page" id="tag">
+    <div class="inner">
+      <p class="kicker">Private beta · the glue for every project</p>
+      <h2>TAG — <span>kills meetings, not momentum</span></h2>
+      <p class="lede">Stop forcing your brain onto somebody else's calendar. TAG is the asynchronous AI proxy that lives in the workspace, talks to every project in the pipeline, and keeps work moving while the standups melt.</p>
+      <div class="grid-2" style="margin-top:1.2rem">
+        <div class="photo-wrap">
+          <img class="hero-shot" src="tag_hero.jpg" alt="TAG — the asynchronous AI proxy" />
+          <span class="photo-label">TAG · private beta</span>
+        </div>
+        <div class="photo-wrap">
+          <img class="hero-shot" src="tag_problem.jpg" alt="The problem is coordination" />
+          <span class="photo-label">Coordination is the leak</span>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="card stat"><b>31H</b>Calendar Tetris<span>wasted per week in meetings — a full-time job doing nothing</span></div>
+        <div class="card stat"><b>2–3D</b>Timezone Tax<span>lost per handoff while distributed teams wait for overlap</span></div>
+        <div class="card stat"><b>60%</b>Status Theater<span>of meetings are updates, not decisions. Nothing ships.</span></div>
+      </div>
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card">
+          <h3>What it actually is</h3>
+          <p>An AI proxy that sits in the workspace and works on your schedule — not the calendar's. It integrates the rest of the pipeline so Avi, DocketDate, PPI, CAD, S+S, grants, and ETHR all talk through one brain instead of eight inboxes.</p>
+          <div class="chips">
+            <span class="chip done">Website v1 done</span>
+            <span class="chip purple">Private beta</span>
+            <span class="chip live">All-project hookup</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Where it goes next</h3>
+          <p>Dogfood it internally, then wire every live project as a TAG integration — one workspace, one proxy, no more calendar hostage situation.</p>
+          <img class="badge" src="tag_badge.jpg" alt="TAG Integration" />
+          <div class="next"><strong>Next step</strong> Internal daily use → v2 backlog from real friction → hook the rest of the portfolio in.</div>
         </div>
       </div>
     </div>
@@ -274,7 +321,10 @@
         <p class="kicker">ETHR / BOOK</p>
         <h2>Scrap in.<br /><span>Spine out.</span></h2>
         <p>A friend built a press that feeds a pack of AI bots your sticky notes, voice dumps, and 3am scraps — and they walk off the belt as a book.</p>
-        <div class="chips"><span class="chip purple">Bot-written</span><span class="chip live">On the belt</span></div>
+        <div class="chips">
+          <span class="chip purple">Bot-written</span>
+          <span class="chip live">On the belt</span>
+        </div>
       </div>
     </div>
   </section>
