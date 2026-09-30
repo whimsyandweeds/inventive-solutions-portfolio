@@ -108,6 +108,14 @@
     #ink .press { display: grid; grid-template-columns: 1.35fr .85fr; gap: 1.4rem; align-items: center; }
     #ink .shot { width: 100%; height: auto; max-height: 62vh; object-fit: cover; object-position: center; border-radius: 14px; border: 1px solid var(--line); display: block; box-shadow: 0 18px 40px rgba(0,0,0,.4); background: #111; }
     #ink .blurb p { color: var(--text-dim); line-height: 1.55; font-size: 1.02rem; }
+    #ink .belt { margin-top: 1rem; }
+    #ink .belt .label { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: .45rem; }
+    #ink .work { display: grid; grid-template-columns: 18px 1fr; gap: .55rem; align-items: start; padding: .55rem 0; border-bottom: 1px solid var(--line); }
+    #ink .work:last-child { border-bottom: 0; }
+    #ink .work i { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 8px var(--teal); margin-top: .45rem; display: block; }
+    #ink .work.soon i { background: var(--purple-neon); box-shadow: 0 0 8px var(--purple-neon); }
+    #ink .work b { display: block; font-size: .92rem; letter-spacing: -.01em; line-height: 1.25; }
+    #ink .work span { color: var(--text-mute); font-size: .78rem; }
     @media (max-width: 860px) { #ink .press { grid-template-columns: 1fr; } }
     #ideas .spark h3 { font-size: 1.12rem; }
     #ideas .spark .who { color: var(--teal); font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; margin-bottom: .35rem; }
@@ -387,12 +395,11 @@
         <p class="kicker">ETHR-BOOK × Novel Nexus</p>
         <h2>Scan it.<br /><span>It talks back.</span></h2>
         <p>Novel Nexus eats the scraps and binds a spine. ETHR drops a QR in the paper so the book opens a live room. Read it. Scan it. The spark keeps moving.</p>
-        <div class="chips">
-          <span class="chip live">ETHR-BOOK</span>
-          <span class="chip purple">Novel Nexus</span>
-          <span class="chip">QR that bites</span>
-          <span class="chip">Grid notes in</span>
-          <span class="chip">Mommy decoded</span>
+        <div class="belt">
+          <p class="label">Books on the belt</p>
+          <div class="work"><i></i><div><b>D3c0d1ng th3 Gr1d</b><span>Notes in. Spine forming.</span></div></div>
+          <div class="work"><i></i><div><b>Mommy Meanest: D3c0d1ng L3gacy Malwar3</b><span>Decoded. On the press.</span></div></div>
+          <div class="work soon"><i></i><div><b>AI takeover</b><span>Title in the works. The machines write back.</span></div></div>
         </div>
       </div>
     </div>
