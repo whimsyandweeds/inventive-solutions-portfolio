@@ -83,15 +83,15 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #overview .goal-tag { border:1px solid #ec4899; background:rgba(18,8,20,.88); }
 #overview .goal-tag .stat-big { color:#f9a8d4; }
 #overview .pipeline { width:100%; height:min(42vh, 420px); border-radius:14px; border:1px solid var(--line); margin-top:1.2rem; object-fit:cover; object-position:center 45%; background:var(--bg-3); display:block; }
-#board .inner { display:flex; flex-direction:column; max-height:calc(100dvh - 2 * var(--pad)); }
-#board .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.7rem 0 0; }
-#board .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
-#board .pills button.on { background:var(--teal); color:#06221f; border-color:var(--teal); }
-#board .pills button.hot { border-color:var(--purple-neon); color:var(--purple-neon); }
-#board .pills button.hot.on { background:var(--purple-neon); color:#1a0828; }
-#board .stage { margin-top:.9rem; overflow:auto; flex:1; min-height:0; }
-#board .panel { display:none; }
-#board .panel.on { display:block; }
+#board .inner, #pitch .inner { display:flex; flex-direction:column; max-height:calc(100dvh - 2 * var(--pad)); }
+#board .pills, #pitch .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.7rem 0 0; }
+#board .pills button, #pitch .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
+#board .pills button.on, #pitch .pills button.on { background:var(--teal); color:#06221f; border-color:var(--teal); }
+#board .pills button.hot, #pitch .pills button.hot { border-color:var(--purple-neon); color:var(--purple-neon); }
+#board .pills button.hot.on, #pitch .pills button.hot.on { background:var(--purple-neon); color:#1a0828; }
+#board .stage, #pitch .stage { margin-top:.9rem; overflow:auto; flex:1; min-height:0; }
+#board .panel, #pitch .panel { display:none; }
+#board .panel.on, #pitch .panel.on { display:block; }
 #board .crate { font-size:1.45rem; letter-spacing:-.03em; margin:0 0 .35rem; }
 #board .photo { height:340px; object-position:center 30%; }
 #board .dock-pic { width:100%; height:380px; object-fit:cover; object-position:center 28%; border-radius:14px; border:1px solid var(--line); display:block; }
@@ -106,12 +106,12 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #board .work i { width:8px; height:8px; border-radius:50%; background:var(--teal); margin-top:.45rem; display:block; }
 #board .work.soon i { background:var(--purple-neon); }
 #board .work span { color:var(--text-mute); font-size:.78rem; }
-#ideas .spark .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; }
-#pitch form { display:grid; gap:.7rem; margin-top:1.1rem; }
+#pitch .spark .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; }
+#pitch form { display:grid; gap:.7rem; margin-top:.2rem; }
 #pitch label { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:700; }
 #pitch input, #pitch textarea, #pitch select { width:100%; background:rgba(10,12,14,.7); border:1px solid var(--line); color:var(--text); border-radius:12px; padding:.75rem .9rem; font:inherit; }
 #pitch textarea { min-height:90px; }
-#pitch button { justify-self:start; background:var(--purple-neon); color:#1a0828; border:0; font-weight:800; padding:.7rem 1.15rem; border-radius:999px; cursor:pointer; }
+#pitch button[type="submit"] { justify-self:start; background:var(--purple-neon); color:#1a0828; border:0; font-weight:800; padding:.7rem 1.15rem; border-radius:999px; cursor:pointer; }
 #pitch .fine { color:var(--text-mute); font-size:.78rem; }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
@@ -145,8 +145,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <a href="#hero" class="active" title="Cover"></a>
 <a href="#overview" title="Where we are"></a>
 <a href="#board" title="The board"></a>
-<a href="#ideas" title="Idea pipeline"></a>
-<a href="#pitch" title="Feed the belt"></a>
+<a href="#pitch" title="Sparks + belt"></a>
 </nav>
 <section class="page" id="hero"><div class="inner"><p class="sub">Scenery integrated · Logos in the wild</p><h1>INVENTIVE SOLUTIONS<br /><span>PORTFOLIO PIPELINE</span></h1></div></section>
 <section class="page" id="overview"><div class="inner">
@@ -254,18 +253,31 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <div class="work soon"><i></i><div><b>AI takeover</b><span>Title in the works.</span></div></div>
 </div></div></div></div>
 </div></div></section>
-<section class="page" id="ideas"><div class="inner">
-<p class="kicker">Idea pipeline · sparks, not shipped</p>
-<h2>Still on the stove — <span>four that want out</span></h2>
-<div class="grid-2" style="margin-top:1.3rem">
-<div class="card spark"><p class="who">Adult OS</p><h3>LUMA-SYNC — Brain Defrag</h3><p>Too many tabs in the skull. A nightly defrag.</p></div>
-<div class="card spark"><p class="who">Kid + the adult they become</p><h3>LUNA-SYNC — the night light that stays</h3><p>For the kids who do not feel safe, and the adults who grew up that way.</p></div>
-<div class="card spark"><p class="who">Party, no weasel clause</p><h3>Can't Lie</h3><p>Truth or dare. The AI will not let you duck.</p></div>
-<div class="card spark"><p class="who">1:47am you vs morning you</p><h3>Don't Dial</h3><p>The last call at 1:47am never leaves the phone.</p></div>
-</div></div></section>
 <section class="page" id="pitch"><div class="inner">
-<p class="kicker">Idea intake · no meetings</p>
-<h2>Got a spark? <span>Feed the belt.</span></h2>
+<p class="kicker">Still on the stove · then yeet a new one</p>
+<h2>Sparks on the <span>belt</span></h2>
+<p class="lede">Four that want out. Tap a pill. Or skip them and feed the machine.</p>
+<div class="pills" id="pitch-pills">
+<button type="button" class="on" data-spark="luma">LUMA-SYNC</button>
+<button type="button" data-spark="luna">LUNA-SYNC</button>
+<button type="button" data-spark="lie">Can't Lie</button>
+<button type="button" data-spark="dial">Don't Dial</button>
+<button type="button" class="hot" data-spark="yeet">Pitch one</button>
+</div>
+<div class="stage">
+<div class="panel on" id="spark-luma">
+<div class="card spark"><p class="who">Adult OS</p><h3>LUMA-SYNC — Brain Defrag</h3><p>Too many tabs in the skull. A nightly defrag so morning-you inherits a clean drive.</p></div>
+</div>
+<div class="panel" id="spark-luna">
+<div class="card spark"><p class="who">Kid + the adult they become</p><h3>LUNA-SYNC — the night light that stays</h3><p>For the kids who do not feel safe, and the adults who grew up that way.</p></div>
+</div>
+<div class="panel" id="spark-lie">
+<div class="card spark"><p class="who">Party, no weasel clause</p><h3>Can't Lie</h3><p>Truth or dare. The AI will not let you duck.</p></div>
+</div>
+<div class="panel" id="spark-dial">
+<div class="card spark"><p class="who">1:47am you vs morning you</p><h3>Don't Dial</h3><p>The last call at 1:47am never leaves the phone.</p></div>
+</div>
+<div class="panel" id="spark-yeet">
 <form id="idea-form">
 <div><label for="who">What do we call you</label><input id="who" name="who" placeholder="Alias or a raccoon" /></div>
 <div><label for="spark">The spark</label><textarea id="spark" name="spark" required placeholder="Notes, scraps, 3am thought..."></textarea></div>
@@ -274,6 +286,8 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <p class="fine">We may steal the good parts and never schedule a standup.</p>
 </form>
 <div class="card thanks"><h3>Belt ate it.</h3><p>Spine or chip. No calendar invite.</p></div>
+</div>
+</div>
 </div></section>
 <script>
 const pages=[...document.querySelectorAll(".page")];
@@ -282,8 +296,9 @@ const io=new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(!e.isInte
 pages.forEach((p)=>io.observe(p));
 const form=document.getElementById("idea-form");
 if(form)form.addEventListener("submit",(e)=>{e.preventDefault();const who=(form.who.value||"a raccoon").trim();const spark=(form.spark.value||"").trim();const machine=form.machine.value;document.getElementById("pitch").classList.add("sent");window.location.href="mailto:whimsyandweeds@gmail.com?subject="+encodeURIComponent("Belt spark from "+who)+"&body="+encodeURIComponent("Who: "+who+"\nMachine: "+machine+"\n\n"+spark);});
-const pills=document.getElementById("board-pills");
-if(pills)pills.addEventListener("click",(e)=>{const btn=e.target.closest("button[data-panel]");if(!btn)return;pills.querySelectorAll("button").forEach((b)=>b.classList.toggle("on",b===btn));document.querySelectorAll("#board .panel").forEach((p)=>p.classList.toggle("on",p.id==="panel-"+btn.dataset.panel));});
+const wirePills=(id,attr,prefix)=>{const row=document.getElementById(id);if(!row)return;row.addEventListener("click",(e)=>{const btn=e.target.closest("button["+attr+"]");if(!btn)return;row.querySelectorAll("button").forEach((b)=>b.classList.toggle("on",b===btn));const wrap=row.parentElement;wrap.querySelectorAll(".panel").forEach((p)=>p.classList.toggle("on",p.id===prefix+btn.getAttribute(attr)));});};
+wirePills("board-pills","data-panel","panel-");
+wirePills("pitch-pills","data-spark","spark-");
 const shop=document.getElementById("shop");
 const cartBtn=document.getElementById("cart-btn");
 const cartN=document.getElementById("cart-n");
