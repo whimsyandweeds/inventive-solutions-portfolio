@@ -82,7 +82,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #overview .stat-big { font-size:2rem; font-weight:800; color:var(--teal); }
 #overview .goal-tag { border:1px solid #ec4899; background:rgba(18,8,20,.88); }
 #overview .goal-tag .stat-big { color:#f9a8d4; }
-#overview .pipeline { width:100%; border-radius:14px; border:1px solid var(--line); margin-top:1.2rem; max-height:280px; object-fit:cover; object-position:center top; display:block; }
+#overview .pipeline { width:100%; height:min(42vh, 420px); border-radius:14px; border:1px solid var(--line); margin-top:1.2rem; object-fit:cover; object-position:center 45%; background:var(--bg-3); display:block; }
 #board .inner { display:flex; flex-direction:column; max-height:calc(100dvh - 2 * var(--pad)); }
 #board .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.7rem 0 0; }
 #board .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
@@ -115,7 +115,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
 #pitch.sent form { display:none; }
-@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #overview .pipeline { height:220px; } }
 </style>
 </head>
 <body>
