@@ -1,1 +1,271 @@
-see-file
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inventive Solutions — Portfolio Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root { --teal:#2ec4b6; --teal-deep:#1a9e93; --cyan:#3dd6f5; --purple-neon:#a855f7; --bg-0:#0b0c0e; --bg-3:#24282e; --bg-4:#32383f; --line:#3d444d; --text:#f3f4f6; --text-dim:#b8bec7; --text-mute:#8b929c; --font:"Inter",system-ui,sans-serif; --title-size:clamp(2rem,5vw,4.2rem); --h2-size:clamp(1.6rem,3.4vw,2.7rem); --pad:clamp(1.25rem,4vw,4rem); --radius:18px; --max:1180px; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { height:100%; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--font); color:var(--text); overflow-y:auto; scroll-snap-type:y mandatory; background-color:#1a1c1f; background-attachment:fixed; background-image: radial-gradient(ellipse at 78% 18%, rgba(120,70,170,.07), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%), linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%); }
+.page { min-height:100vh; min-height:100dvh; scroll-snap-align:start; scroll-snap-stop:always; position:relative; overflow:hidden; padding:var(--pad); display:flex; flex-direction:column; justify-content:center; }
+.inner { position:relative; z-index:1; width:100%; max-width:var(--max); margin:0 auto; }
+.kicker { font-size:.78rem; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); font-weight:600; margin-bottom:.6rem; }
+h1,h2 { letter-spacing:-.03em; line-height:1.08; }
+h1 { font-size:var(--title-size); font-weight:800; }
+h1 span,h2 span { color:var(--teal); }
+h2 { font-size:var(--h2-size); font-weight:750; margin-bottom:.6rem; }
+.lede { color:var(--text-dim); max-width:48rem; line-height:1.55; font-size:1.05rem; }
+.chips { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:1rem; }
+.chip { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font-size:.78rem; font-weight:600; padding:.35rem .7rem; border-radius:999px; }
+.chip.live { border-color:var(--teal); color:var(--teal); }
+.chip.done { background:var(--teal); color:#06221f; border-color:var(--teal); }
+.chip.warn { color:#fbbf24; border-color:#fbbf24; }
+.chip.purple { color:var(--purple-neon); border-color:var(--purple-neon); }
+.tag-pill { display:inline-flex; align-items:center; gap:.45rem; border:1px solid #ec4899; box-shadow:0 0 18px rgba(236,72,153,.32); background:#120814; color:#fff; font-size:.7rem; letter-spacing:.1em; font-weight:700; padding:.42rem .9rem .42rem .65rem; border-radius:999px; }
+.tag-pill i { width:12px; height:12px; border-radius:50%; background:#db2777; box-shadow:0 0 8px #ec4899; }
+.tag-pill.making { font-size:.62rem; padding:.32rem .7rem .32rem .5rem; }
+.photo-wrap { position:relative; }
+.photo-wrap .tag-pill { position:absolute; right:10px; top:10px; z-index:2; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; }
+.grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+.card { background:rgba(22,24,28,.78); border:1px solid var(--line); border-radius:var(--radius); padding:1.25rem 1.35rem; }
+.card h3 { font-size:1.05rem; margin-bottom:.45rem; }
+.card p { color:var(--text-dim); font-size:.95rem; line-height:1.5; }
+.photo { width:100%; height:200px; object-fit:cover; border-radius:14px; border:1px solid var(--line); display:block; }
+.photo-label { position:absolute; left:12px; top:12px; background:rgba(10,12,14,.75); color:var(--text); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .6rem; border-radius:999px; border:1px solid var(--line); }
+.next { margin-top:1rem; padding:.9rem 1rem; background:var(--bg-3); border-radius:12px; border-left:3px solid var(--teal); color:var(--text-dim); font-size:.9rem; }
+.next strong { color:var(--text); display:block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.25rem; }
+nav.dots { position:fixed; right:18px; top:50%; transform:translateY(-50%); z-index:20; display:flex; flex-direction:column; gap:10px; }
+nav.dots a { width:10px; height:10px; border-radius:50%; background:var(--bg-4); border:1px solid var(--line); display:block; }
+nav.dots a.active { background:var(--teal); border-color:var(--teal); }
+.cart-btn { position:fixed; top:16px; left:16px; z-index:40; display:inline-flex; align-items:center; gap:.45rem; background:rgba(12,10,16,.88); color:var(--text); border:1px solid var(--purple-neon); border-radius:999px; padding:.45rem .85rem .45rem .6rem; font:inherit; font-size:.78rem; font-weight:700; cursor:pointer; }
+.cart-btn b { min-width:18px; height:18px; border-radius:50%; background:var(--purple-neon); color:#1a0828; font-size:.7rem; display:grid; place-items:center; }
+#shop { position:fixed; inset:0; z-index:50; display:none; }
+#shop.open { display:block; }
+#shop .dim { position:absolute; inset:0; background:rgba(6,7,9,.72); }
+#shop .tray { position:absolute; top:0; right:0; width:min(420px,100%); height:100%; background:rgba(16,18,22,.96); border-left:1px solid var(--line); overflow:auto; padding:1.2rem 1.15rem 2rem; }
+#shop .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
+#shop .close { position:absolute; top:12px; right:12px; background:var(--bg-3); border:1px solid var(--line); color:var(--text); width:36px; height:36px; border-radius:50%; cursor:pointer; }
+#shop .sku { display:grid; grid-template-columns:1fr auto; gap:.35rem 8px; padding:.8rem 0; border-bottom:1px solid var(--line); }
+#shop .sku p { color:var(--text-mute); font-size:.8rem; grid-column:1; }
+#shop .sku em { color:var(--teal); font-style:normal; font-size:.82rem; font-weight:700; }
+#shop .sku button { grid-column:2; grid-row:2; justify-self:end; background:transparent; color:var(--purple-neon); border:1px solid var(--purple-neon); border-radius:999px; padding:.25rem .6rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
+#shop .pay { margin-top:1.1rem; width:100%; background:var(--purple-neon); color:#1a0828; border:0; font-weight:800; padding:.75rem 1rem; border-radius:999px; cursor:pointer; font:inherit; }
+#shop .fine { color:var(--text-mute); font-size:.75rem; margin-top:.7rem; }
+#shop .receipt { display:none; margin-top:1rem; }
+#shop.paid .menu, #shop.paid .pay { display:none; }
+#shop.paid .receipt { display:block; }
+#hero { padding:0; justify-content:flex-end; background:linear-gradient(to top, rgba(8,9,11,.92) 0%, rgba(8,9,11,.35) 45%, rgba(8,9,11,.2) 100%), url("images_hero.jpg") center/cover no-repeat; background-color:var(--bg-0); }
+#hero .inner { padding:var(--pad); padding-bottom:4.5rem; }
+#hero .sub { color:var(--text-dim); letter-spacing:.14em; text-transform:uppercase; font-size:.78rem; margin-bottom:.8rem; }
+#overview .status-row { display:grid; grid-template-columns:1.4fr .8fr .8fr; gap:1rem; margin-top:1.4rem; }
+#overview .pulse { border-top:3px solid var(--teal); }
+#overview .stat-big { font-size:2rem; font-weight:800; color:var(--teal); }
+#overview .goal-tag { border:1px solid #ec4899; background:rgba(18,8,20,.88); }
+#overview .goal-tag .stat-big { color:#f9a8d4; }
+#overview .pipeline { width:100%; border-radius:14px; border:1px solid var(--line); margin-top:1.2rem; max-height:280px; object-fit:cover; object-position:center top; display:block; }
+#board .inner { display:flex; flex-direction:column; max-height:calc(100dvh - 2 * var(--pad)); }
+#board .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.7rem 0 0; }
+#board .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
+#board .pills button.on { background:var(--teal); color:#06221f; border-color:var(--teal); }
+#board .pills button.hot { border-color:var(--purple-neon); color:var(--purple-neon); }
+#board .pills button.hot.on { background:var(--purple-neon); color:#1a0828; }
+#board .stage { margin-top:.9rem; overflow:auto; flex:1; min-height:0; }
+#board .panel { display:none; }
+#board .panel.on { display:block; }
+#board .dock-pic { width:100%; height:220px; object-fit:cover; border-radius:14px; border:1px solid var(--line); display:block; }
+#board .couple { background:rgba(10,16,14,.9); border-color:#2f4a3c; }
+#board .couple .eyebrow { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin-bottom:.35rem; }
+#board .couple h3 em { color:var(--teal); font-style:normal; }
+#board .stat b { display:block; font-size:1.35rem; color:var(--purple-neon); font-weight:800; }
+#board .stat span { color:var(--text-mute); font-size:.78rem; display:block; margin-top:.15rem; }
+#board .belt .label { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin:.45rem 0; }
+#board .work { display:grid; grid-template-columns:18px 1fr; gap:.55rem; padding:.45rem 0; border-bottom:1px solid var(--line); }
+#board .work i { width:8px; height:8px; border-radius:50%; background:var(--teal); margin-top:.45rem; display:block; }
+#board .work.soon i { background:var(--purple-neon); }
+#board .work span { color:var(--text-mute); font-size:.78rem; }
+#ideas .spark .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; }
+#pitch form { display:grid; gap:.7rem; margin-top:1.1rem; }
+#pitch label { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:700; }
+#pitch input, #pitch textarea, #pitch select { width:100%; background:rgba(10,12,14,.7); border:1px solid var(--line); color:var(--text); border-radius:12px; padding:.75rem .9rem; font:inherit; }
+#pitch textarea { min-height:90px; }
+#pitch button { justify-self:start; background:var(--purple-neon); color:#1a0828; border:0; font-weight:800; padding:.7rem 1.15rem; border-radius:999px; cursor:pointer; }
+#pitch .fine { color:var(--text-mute); font-size:.78rem; }
+#pitch .thanks { display:none; margin-top:.8rem; }
+#pitch.sent .thanks { display:block; }
+#pitch.sent form { display:none; }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } }
+</style>
+</head>
+<body>
+<button class="cart-btn" id="cart-btn" type="button">Cart <b id="cart-n">0</b></button>
+<aside id="shop" aria-hidden="true">
+<div class="dim" data-close="1"></div>
+<div class="tray">
+<button class="close" type="button" data-close="1">x</button>
+<p class="who">Client tasting menu</p>
+<h2>The fake cart</h2>
+<p class="fine">For showing, not charging.</p>
+<div class="menu">
+<div class="sku"><div><b>DocketDate</b><p>A calendar that snitches on deadlines.</p></div><em>1 handshake</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>TAG Integration</b><p>Kills the standup. Keeps the work.</p></div><em>31h back</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>ETHR-BOOK</b><p>Paper that talks back.</p></div><em>1 live QR</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>Cash Rotisserie</b><p>AIs turn the premium dial.</p></div><em>1 cooked book</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>Don't Dial</b><p>Holds the 1:47am text until sunrise.</p></div><em>1 saved friendship</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>Pacific water, gallon</b><p>Long Beach to Primm. We built a pipe.</p></div><em>200 miles</em><button type="button" data-add>Add</button></div>
+</div>
+<button class="pay" id="cart-pay" type="button">Checkout (spiritually)</button>
+<p class="fine">This cart is theater.</p>
+<div class="card receipt"><h3>Receipt: emotional only</h3><p>Nothing billed. Yeeted onto the belt.</p></div>
+</div>
+</aside>
+<nav class="dots" aria-label="Sections">
+<a href="#hero" class="active" title="Cover"></a>
+<a href="#overview" title="Where we are"></a>
+<a href="#board" title="The board"></a>
+<a href="#ideas" title="Idea pipeline"></a>
+<a href="#pitch" title="Feed the belt"></a>
+</nav>
+<section class="page" id="hero"><div class="inner"><p class="sub">Scenery integrated · Logos in the wild</p><h1>INVENTIVE SOLUTIONS<br /><span>PORTFOLIO PIPELINE</span></h1></div></section>
+<section class="page" id="overview"><div class="inner">
+<p class="kicker">Track 1 Digital & Community · Track 2 Engineering & Infra · TAG Central</p>
+<h2>Where we are now — <span>scenery edition</span></h2>
+<p class="lede">8 projects, 2 tracks, 1 brain. Open a crate on the next snap. All roads still lead to TAG.</p>
+<div class="status-row">
+<div class="card pulse"><h3>Overall pulse</h3><p>4 done (TAG v1, DocketDate site, PPI site, Cash Rotisserie). Avi live. CAD + S+S + Grants in build.</p></div>
+<div class="card"><div class="stat-big">4 LIVE</div><p>Scenery shots in the wild</p></div>
+<div class="card goal-tag"><span class="tag-pill"><i></i>TAG INTEGRATION</span><div class="stat-big">100%</div><p>Goal — every project talks through TAG</p></div>
+</div>
+<video class="pipeline" autoplay muted loop playsinline poster="images_pipeline.jpg"><source src="pipeline_hero.mp4" type="video/mp4" /></video>
+</div></section>
+<section class="page" id="board"><div class="inner">
+<p class="kicker">The board · packed on purpose</p>
+<h2>What’s riding the <span>pipe</span></h2>
+<div class="pills" id="board-pills">
+<button type="button" class="on" data-panel="invent">INVENT × Avi</button>
+<button type="button" data-panel="docket">DocketDate</button>
+<button type="button" data-panel="ppi">PPI + CAD</button>
+<button type="button" data-panel="ss">S+S + Grants</button>
+<button type="button" data-panel="cash">Cash Rotisserie</button>
+<button type="button" class="hot" data-panel="tag">TAG</button>
+<button type="button" data-panel="ethr">ETHR / BOOK</button>
+</div>
+<div class="stage">
+<div class="panel on" id="panel-invent">
+<p class="lede">Website + ads wired. Whimsy in a cracked-bulb terrarium. Avi as purple neon over vendor maps.</p>
+<div class="grid-2">
+<div class="photo-wrap"><img class="photo" src="images_whimsy.jpg" alt="Whimsy" /><span class="photo-label">Whimsy & Weeds</span></div>
+<div class="photo-wrap"><img class="photo" src="imagesavi.jpg.webp" alt="Avi" /><span class="photo-label">Avi ops</span></div>
+</div>
+<div class="grid-3" style="margin-top:.8rem">
+<div class="card"><h3>INVENT + Whimsy</h3><p>Live & seeding. Site and ads bundled.</p><div class="chips"><span class="chip live">Live</span><span class="chip">Ads seeding</span></div></div>
+<div class="card"><h3>Avi App</h3><p>v1 launched. 24 vendors · 8 routes · live map.</p><div class="chips"><span class="chip live">Map LIVE</span></div></div>
+<div class="card couple"><p class="eyebrow">Power couple</p><h3>Brain + beauty = <em>revenue</em></h3><p>INVENT scales it. Whimsy makes it human. Avi moves it.</p></div>
+</div></div>
+<div class="panel" id="panel-docket">
+<p class="lede">Court compliance hub. Clerk desk now. Testimony + City weight later.</p>
+<div class="grid-2">
+<img class="dock-pic" src="images_docket.jpg" alt="DocketDate" />
+<div>
+<div class="card"><h3>Status: complete ✓</h3><p>Website v1 DONE, assets ready, prototype in review. Tonya builds after Henderson go-ahead.</p><div class="chips"><span class="chip done">V1 done</span><span class="chip live">Waiting on Henderson</span></div></div>
+<div class="next"><strong>Next — Henderson PD loop</strong> PD + Probation validate the clerk → officer hand-off.</div>
+<div class="next" style="border-left-color:var(--purple-neon)"><strong style="color:var(--purple-neon)">Long game — close the loophole</strong> Desk. Testimony. City. Stack those three and walk the receipts into the room where laws get written.</div>
+</div></div></div>
+<div class="panel" id="panel-ppi">
+<p class="lede">200-mile seawater line. Long Beach → Primm.</p>
+<div class="grid-2">
+<div><div class="photo-wrap"><img class="photo" src="mages_ppi.jpg.jpg" alt="PPI" /><span class="photo-label">Long Beach → Primm</span></div>
+<div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip live">Exec conversations</span><span class="chip done">Website done</span></div><h3>Project Pacific Inland</h3><p>Colorado is tapped. This one takes the ocean.</p></div></div>
+<div><div class="photo-wrap"><img class="photo" src="images_cad.jpg.jpg" alt="CAD" /><span class="photo-label">CAD civil stack</span></div>
+<div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip purple">In build</span><span class="chip live">For PPI</span></div><h3>CAD Plug-in</h3><p>Draws the civil stack so PPI does not live in a slide deck.</p></div></div>
+</div></div>
+<div class="panel" id="panel-ss">
+<p class="lede">Freight in the yard. Grants in the pipe. Same ticket.</p>
+<div class="next"><strong>Hook — same ticket</strong> S+S lines up with the grant hunter. Victims get the window, not the runaround.</div>
+<div class="grid-2" style="margin-top:.8rem">
+<div><div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="S+S" /><span class="photo-label">Sophie + Sage</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+<div class="card" style="margin-top:.7rem"><h3>Sophie + Sage</h3><p>Website in progress. Next: plug jobs into the grant finder.</p></div></div>
+<div><div class="photo-wrap"><img class="photo" src="images_grants.jpg" alt="Grants" /><span class="photo-label">Gov Grants AI</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+<div class="card" style="margin-top:.7rem"><h3>Gov Grants AI</h3><p>Hunts funding and files it. First desk: S+S.</p></div></div>
+</div></div>
+<div class="panel" id="panel-cash">
+<p class="lede">Finished app. AIs work the book.</p>
+<div class="grid-2">
+<div class="photo-wrap"><img class="photo" src="images_cash.jpg" alt="Cash" /><span class="photo-label">The pit</span></div>
+<div class="card"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">Completed</span><span class="chip live">AI trading</span></div><h3>Cash Rotisserie</h3><p>Sell puts, sell calls, collect premium. Extra crispy.</p></div>
+</div></div>
+<div class="panel" id="panel-tag">
+<p class="lede">Site v1 live. In-house build next. Standups melt.</p>
+<div class="grid-2">
+<div class="photo-wrap"><img class="photo" src="tag_here.jpg" alt="TAG" /><span class="photo-label">Workspace brain</span></div>
+<div class="photo-wrap"><img class="photo" src="tag_console.jpg" alt="TAG console" /><span class="photo-label">TAG Integration</span></div>
+</div>
+<div class="grid-3" style="margin-top:.8rem">
+<div class="card stat"><b>31H</b><span>Calendar Tetris wasted per week</span></div>
+<div class="card stat"><b>2–3D</b><span>Timezone tax</span></div>
+<div class="card stat"><b>60%</b><span>Status theater</span></div>
+</div>
+<div class="card" style="margin-top:.8rem"><h3>Status</h3><p>Website v1 done. Next is the in-house build on live projects.</p></div>
+</div>
+<div class="panel" id="panel-ethr">
+<p class="lede">Novel Nexus binds the spine. ETHR drops a QR so the book opens a live room.</p>
+<div class="grid-2">
+<img class="dock-pic" src="book_machine.jpg" alt="ETHR-BOOK" />
+<div>
+<p class="kicker">ETHR-BOOK × Novel Nexus</p>
+<h2 style="font-size:1.7rem">Scan it. <span>It talks back.</span></h2>
+<div class="belt">
+<p class="label">Books on the belt</p>
+<div class="work"><i></i><div><b>D3c0d1ng th3 Gr1d</b><span>Notes in. Spine forming.</span></div></div>
+<div class="work"><i></i><div><b>Mommy Meanest: D3c0d1ng L3gacy Malwar3</b><span>Decoded. On the press.</span></div></div>
+<div class="work soon"><i></i><div><b>AI takeover</b><span>Title in the works.</span></div></div>
+</div></div></div></div>
+</div></div></section>
+<section class="page" id="ideas"><div class="inner">
+<p class="kicker">Idea pipeline · sparks, not shipped</p>
+<h2>Still on the stove — <span>four that want out</span></h2>
+<div class="grid-2" style="margin-top:1.3rem">
+<div class="card spark"><p class="who">Adult OS</p><h3>LUMA-SYNC — Brain Defrag</h3><p>Too many tabs in the skull. A nightly defrag.</p></div>
+<div class="card spark"><p class="who">Kid + the adult they become</p><h3>LUNA-SYNC — the night light that stays</h3><p>For the kids who do not feel safe, and the adults who grew up that way.</p></div>
+<div class="card spark"><p class="who">Party, no weasel clause</p><h3>Can't Lie</h3><p>Truth or dare. The AI will not let you duck.</p></div>
+<div class="card spark"><p class="who">1:47am you vs morning you</p><h3>Don't Dial</h3><p>The last call at 1:47am never leaves the phone.</p></div>
+</div></div></section>
+<section class="page" id="pitch"><div class="inner">
+<p class="kicker">Idea intake · no meetings</p>
+<h2>Got a spark? <span>Feed the belt.</span></h2>
+<form id="idea-form">
+<div><label for="who">What do we call you</label><input id="who" name="who" placeholder="Alias or a raccoon" /></div>
+<div><label for="spark">The spark</label><textarea id="spark" name="spark" required placeholder="Notes, scraps, 3am thought..."></textarea></div>
+<div><label for="machine">Which machine should eat this</label><select id="machine" name="machine"><option>Surprise me.</option><option>The book press</option><option>TAG</option></select></div>
+<button type="submit">Yeet it onto the belt</button>
+<p class="fine">We may steal the good parts and never schedule a standup.</p>
+</form>
+<div class="card thanks"><h3>Belt ate it.</h3><p>Spine or chip. No calendar invite.</p></div>
+</div></section>
+<script>
+const pages=[...document.querySelectorAll(".page")];
+const dots=[...document.querySelectorAll("nav.dots a")];
+const io=new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(!e.isIntersecting)return;const i=pages.indexOf(e.target);dots.forEach((d,n)=>d.classList.toggle("active",n===i));});},{threshold:0.55});
+pages.forEach((p)=>io.observe(p));
+const form=document.getElementById("idea-form");
+if(form)form.addEventListener("submit",(e)=>{e.preventDefault();const who=(form.who.value||"a raccoon").trim();const spark=(form.spark.value||"").trim();const machine=form.machine.value;document.getElementById("pitch").classList.add("sent");window.location.href="mailto:whimsyandweeds@gmail.com?subject="+encodeURIComponent("Belt spark from "+who)+"&body="+encodeURIComponent("Who: "+who+"\nMachine: "+machine+"\n\n"+spark);});
+const pills=document.getElementById("board-pills");
+if(pills)pills.addEventListener("click",(e)=>{const btn=e.target.closest("button[data-panel]");if(!btn)return;pills.querySelectorAll("button").forEach((b)=>b.classList.toggle("on",b===btn));document.querySelectorAll("#board .panel").forEach((p)=>p.classList.toggle("on",p.id==="panel-"+btn.dataset.panel));});
+const shop=document.getElementById("shop");
+const cartBtn=document.getElementById("cart-btn");
+const cartN=document.getElementById("cart-n");
+let cartCount=0;
+const openShop=(on)=>{shop.classList.toggle("open",on);shop.setAttribute("aria-hidden",on?"false":"true");if(!on)shop.classList.remove("paid");};
+if(cartBtn)cartBtn.addEventListener("click",()=>openShop(true));
+shop.addEventListener("click",(e)=>{if(e.target.dataset.close)openShop(false);});
+shop.querySelectorAll("[data-add]").forEach((b)=>b.addEventListener("click",()=>{cartCount+=1;cartN.textContent=cartCount;b.textContent="In the bag";}));
+document.getElementById("cart-pay").addEventListener("click",()=>shop.classList.add("paid"));
+</script>
+</body>
+</html>
