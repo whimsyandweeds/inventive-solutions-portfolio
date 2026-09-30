@@ -95,6 +95,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #board .crate { font-size:1.45rem; letter-spacing:-.03em; margin:0 0 .35rem; }
 #board .photo { height:340px; object-position:center 30%; }
 #board .dock-pic { width:100%; height:380px; object-fit:cover; object-position:center 28%; border-radius:14px; border:1px solid var(--line); display:block; }
+#board .collide { height:min(46vh, 440px); object-position:center 42%; }
 #board .couple { background:rgba(10,16,14,.9); border-color:#2f4a3c; }
 #board .couple .eyebrow { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin-bottom:.35rem; }
 #board .couple h3 em { color:var(--teal); font-style:normal; }
@@ -115,7 +116,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
 #pitch.sent form { display:none; }
-@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #overview .pipeline { height:220px; } }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } }
 </style>
 </head>
 <body>
@@ -175,11 +176,9 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <div class="stage">
 <div class="panel on" id="panel-invent">
 <h3 class="crate">INVENT + Whimsy — <span>brain + beauty</span></h3>
-<p class="lede">Website + ads wired. Whimsy grows in a cracked-bulb terrarium. INVENT scales the idea. Together they sell it.</p>
-<div class="grid-2">
-<div class="photo-wrap"><img class="photo" src="images_whimsy.jpg" alt="Whimsy" /><span class="photo-label">Whimsy & Weeds</span></div>
-<div class="card couple"><p class="eyebrow">The pair</p><h3>INVENT + Whimsy</h3><p>Live & seeding. Site and ads bundled. Next: lookalikes and greenhouse tests.</p><div class="chips"><span class="chip live">Live</span><span class="chip">Ads seeding</span></div></div>
-</div>
+<p class="lede">Website + ads wired. Two bulbs. One impact.</p>
+<div class="photo-wrap"><img class="dock-pic collide" src="images_collide.jpg" alt="INVENT colliding with Whimsy" /><span class="photo-label">The collision</span></div>
+<div class="card couple" style="margin-top:.7rem"><p class="eyebrow">The pair</p><h3>INVENT + Whimsy</h3><p>Live & seeding. Site and ads bundled. Dirt meets circuit. Next: lookalikes and greenhouse tests.</p><div class="chips"><span class="chip live">Live</span><span class="chip">Ads seeding</span></div></div>
 </div>
 <div class="panel" id="panel-avi">
 <h3 class="crate">Avi — <span>the wingman that books the table</span></h3>
