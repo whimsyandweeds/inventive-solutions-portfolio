@@ -12,8 +12,21 @@
 * { box-sizing:border-box; margin:0; padding:0; }
 html,body { height:100%; }
 html { scroll-behavior:smooth; }
-body { font-family:var(--font); color:var(--text); overflow-y:auto; scroll-snap-type:y mandatory; background-color:#1a1c1f; background-attachment:fixed; background-image: radial-gradient(ellipse at 78% 18%, rgba(120,70,170,.07), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%), linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%); }
-.page { min-height:100vh; min-height:100dvh; scroll-snap-align:start; scroll-snap-stop:always; position:relative; overflow:hidden; padding:var(--pad); display:flex; flex-direction:column; justify-content:center; }
+body {
+  font-family:var(--font); color:var(--text); overflow-y:auto; scroll-snap-type:y mandatory;
+  background-color:#1a1c1f; background-attachment:fixed;
+  background-image:
+    radial-gradient(ellipse at 78% 18%, rgba(120,70,170,.07), transparent 42%),
+    linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%),
+    linear-gradient(to right, transparent 0, transparent calc(33.3% - 1px), rgba(0,0,0,.55) calc(33.3% - 1px), rgba(255,255,255,.04) 33.3%, transparent calc(33.3% + 2px)),
+    linear-gradient(to right, transparent 0, transparent calc(66.6% - 1px), rgba(0,0,0,.55) calc(66.6% - 1px), rgba(255,255,255,.04) 66.6%, transparent calc(66.6% + 2px)),
+    linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), rgba(0,0,0,.5) calc(50% - 1px), rgba(255,255,255,.035) 50%, transparent calc(50% + 2px)),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 14px),
+    linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%);
+}
+.page { min-height:100vh; min-height:100dvh; scroll-snap-align:start; scroll-snap-stop:always; position:relative; overflow:hidden; padding:var(--pad); display:flex; flex-direction:column; justify-content:center; background:transparent; }
+.page::before { content:""; position:absolute; inset:0; pointer-events:none; background-image: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.04), transparent 55%), radial-gradient(ellipse at 10% 100%, rgba(0,0,0,.28), transparent 50%); }
 .inner { position:relative; z-index:1; width:100%; max-width:var(--max); margin:0 auto; }
 .kicker { font-size:.78rem; letter-spacing:.16em; text-transform:uppercase; color:var(--teal); font-weight:600; margin-bottom:.6rem; }
 h1,h2 { letter-spacing:-.03em; line-height:1.08; }
