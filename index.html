@@ -101,11 +101,16 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #board .couple h3 em { color:var(--teal); font-style:normal; }
 #board .stat b { display:block; font-size:1.35rem; color:var(--purple-neon); font-weight:800; }
 #board .stat span { color:var(--text-mute); font-size:.78rem; display:block; margin-top:.15rem; }
-#board .belt .label { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin:.45rem 0; }
-#board .work { display:grid; grid-template-columns:18px 1fr; gap:.55rem; padding:.45rem 0; border-bottom:1px solid var(--line); }
-#board .work i { width:8px; height:8px; border-radius:50%; background:var(--teal); margin-top:.45rem; display:block; }
-#board .work.soon i { background:var(--purple-neon); }
-#board .work span { color:var(--text-mute); font-size:.78rem; }
+#board .hug { align-items:start; }
+#board .hug .card { height:fit-content; }
+#board .books { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
+#board .books .label { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin:0 0 .45rem; grid-column:1 / -1; }
+#board .book { background:rgba(22,24,28,.78); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+#board .book img { width:100%; height:210px; object-fit:cover; display:block; }
+#board .book p { padding:.65rem .8rem .85rem; }
+#board .book b { display:block; font-size:.82rem; line-height:1.25; }
+#board .book span { color:var(--text-mute); font-size:.72rem; display:block; margin-top:.25rem; }
+#board .book.soon { min-height:72px; display:flex; align-items:center; justify-content:center; text-align:center; color:var(--text-mute); padding:.2rem; border-style:dashed; grid-column:1 / -1; }
 #pitch .spark .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; }
 #pitch form { display:grid; gap:.7rem; margin-top:.2rem; }
 #pitch label { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:700; }
@@ -116,7 +121,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
 #pitch.sent form { display:none; }
-@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } }
 </style>
 </head>
 <body>
@@ -222,7 +227,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <div class="panel" id="panel-cash">
 <h3 class="crate">Cash Rotisserie — <span>the pit</span></h3>
 <p class="lede">Finished app. AIs work the book.</p>
-<div class="grid-2">
+<div class="grid-2 hug">
 <div class="photo-wrap"><img class="photo" src="images_cash.jpg" alt="Cash" /><span class="photo-label">The pit</span></div>
 <div class="card"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">Completed</span><span class="chip live">AI trading</span></div><h3>Cash Rotisserie</h3><p>Sell puts, sell calls, collect premium. Extra crispy.</p></div>
 </div></div>
@@ -245,13 +250,12 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <p class="lede">Novel Nexus binds the spine. ETHR drops a QR so the book opens a live room.</p>
 <div class="grid-2">
 <img class="dock-pic" src="book_machine.jpg" alt="ETHR-BOOK" />
-<div>
-<div class="belt">
-<p class="label">Books on the belt</p>
-<div class="work"><i></i><div><b>D3c0d1ng th3 Gr1d</b><span>Notes in. Spine forming.</span></div></div>
-<div class="work"><i></i><div><b>Mommy Meanest: D3c0d1ng L3gacy Malwar3</b><span>Decoded. On the press.</span></div></div>
-<div class="work soon"><i></i><div><b>AI takeover</b><span>Title in the works.</span></div></div>
-</div></div></div></div>
+<div class="books">
+<p class="label">On the press</p>
+<div class="book"><img src="book_grid.jpg.jpg" alt="Decoding the Grid" /><p><b>D3c0d1ng th3 Gr1d</b><span>Notes in. Spine forming.</span></p></div>
+<div class="book"><img src="book_mommy.jpg.jpg" alt="Mommy Meanest" /><p><b>Mommy Meanest</b><span>Decoded. On the press.</span></p></div>
+<div class="book soon"><p><b>AI takeover</b><span>Cover incoming. Title in the works.</span></p></div>
+</div></div></div>
 </div></div></section>
 <section class="page" id="pitch"><div class="inner">
 <p class="kicker">Still on the stove · then yeet a new one</p>
