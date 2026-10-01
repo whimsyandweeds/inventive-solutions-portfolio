@@ -378,6 +378,8 @@ const mock=document.getElementById("mock-stall");
 const stall=document.getElementById("stall");
 const calBtn=document.getElementById("mock-cal");
 const cal=document.getElementById("cal");
+if(mock)mock.addEventListener("click",()=>{const on=!stall.classList.contains("on");stall.classList.toggle("on",on);mock.classList.toggle("on",on);mock.textContent=on?"Close stall":"Mock stall";if(on){cal.classList.remove("on");calBtn.classList.remove("on");}});
+if(calBtn)calBtn.addEventListener("click",()=>{const on=!cal.classList.contains("on");cal.classList.toggle("on",on);calBtn.classList.toggle("on",on);if(on){stall.classList.remove("on");mock.classList.remove("on");mock.textContent="Mock stall";}});
 const syncWeek=()=>{document.querySelectorAll("#days button").forEach((b)=>{const day=b.textContent.trim();const open=b.classList.contains("on");const stop=document.querySelector('#stops [data-stop="'+day+'"]');if(stop)stop.classList.toggle("off",!open);const loc=(document.querySelector('[data-stop-loc="'+day+'"]')||{}).value||"";const time=(document.querySelector('[data-stop-time="'+day+'"]')||{}).value||"";const cell=document.querySelector('#cal-week [data-day="'+day+'"]');if(cell){cell.classList.toggle("on",open);cell.classList.remove("off");cell.querySelector(".time").textContent=open?(time||"—"):"dark";cell.querySelector(".spot").textContent=open?(loc||"—"):"—";}const row=document.querySelector('#cal-stops [data-row="'+day+'"]');if(row){row.classList.toggle("off",!open);row.querySelector("span").textContent=loc||"—";row.querySelector("em").textContent=time||"—";}});};
 const booth=document.getElementById("booth");
 const boothBtn=document.getElementById("booth-btn");
