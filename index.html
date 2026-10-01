@@ -142,7 +142,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #board .stage, #pitch .stage { margin-top:.9rem; overflow:auto; flex:1; min-height:0; }
 #board .panel, #pitch .panel { display:none; }
 #board .panel.on, #pitch .panel.on { display:block; }
-.tag-pair { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-top:.8rem; } .tag-card { position:relative; z-index:1; border:1px solid rgba(255,61,138,.45); border-radius:16px; padding:.45rem; box-shadow:0 0 24px rgba(255,61,138,.12); } .tag-mesh { position:absolute; left:8%; right:8%; top:18%; height:46%; z-index:2; pointer-events:none; } @media (max-width:860px) { .tag-pair { grid-template-columns:1fr; } .tag-mesh { display:none; } } .tag-panel { background:radial-gradient(ellipse at 80% 20%, rgba(255,61,138,.16), transparent 46%); border-radius:16px; } .tag-kicker { color:#e4b83a; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; } .tag-word { font-size:clamp(3rem,8vw,5rem); letter-spacing:-.04em; margin:.1rem 0 .3rem; } .tag-word span { color:#ff3d8a; } .tag-panel .stat b { color:#ff3d8a; } .tag-hero { height:min(42vh,380px); object-position:center; } #board .crate { font-size:1.45rem; letter-spacing:-.03em; margin:0 0 .35rem; }
+.tag-pair { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-top:.8rem; } .tag-card { position:relative; z-index:1; border:1px solid rgba(255,61,138,.45); border-radius:16px; padding:.45rem; box-shadow:0 0 24px rgba(255,61,138,.12); } .tag-mesh { position:absolute; left:50%; top:16%; width:220px; height:42%; transform:translateX(-50%); z-index:2; pointer-events:none; } @media (max-width:860px) { .tag-pair { grid-template-columns:1fr; } .tag-mesh { display:none; } } .tag-panel { background:radial-gradient(ellipse at 80% 20%, rgba(255,61,138,.16), transparent 46%); border-radius:16px; } .tag-kicker { color:#e4b83a; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; } .tag-word { font-size:clamp(3rem,8vw,5rem); letter-spacing:-.04em; margin:.1rem 0 .3rem; } .tag-word span { color:#ff3d8a; } .tag-panel .stat b { color:#ff3d8a; } .tag-hero { height:min(42vh,380px); object-position:center; } #board .crate { font-size:1.45rem; letter-spacing:-.03em; margin:0 0 .35rem; }
 #board .photo { height:340px; object-position:center 30%; }
 #board .dock-pic { width:100%; height:380px; object-fit:cover; object-position:center 28%; border-radius:14px; border:1px solid var(--line); display:block; }
 #board .collide { height:min(46vh, 440px); object-position:center 42%; }
@@ -303,20 +303,17 @@ button, .chip, .pills button { touch-action:manipulation; }
 <p class="lede">TAG is the wire. Freight on one side, the grant hunter on the other.</p>
 <div class="next"><strong>Hook — same ticket</strong> S+S lines up with the grant hunter. Victims get the window, not the runaround.</div>
 <div class="tag-pair">
-<svg class="tag-mesh" viewBox="0 0 800 280" preserveAspectRatio="none" aria-hidden="true">
-<g fill="none" stroke="#ff3d8a" stroke-width="1.2" opacity=".85">
-<path d="M250 70 C340 40 390 90 400 140"/><path d="M250 140 C330 120 370 150 400 140"/><path d="M250 200 C340 230 380 180 400 140"/>
-<path d="M550 70 C460 40 420 90 400 140"/><path d="M550 140 C470 120 430 150 400 140"/><path d="M550 200 C460 230 420 180 400 140"/>
-<path d="M250 70 L310 110 L250 140 L300 170 L250 200"/><path d="M550 70 L490 110 L550 140 L500 170 L550 200"/>
+<svg class="tag-mesh" viewBox="0 0 220 200" aria-hidden="true">
+<g fill="none" stroke="#ff3d8a" stroke-width="1.4" opacity=".9">
+<path d="M18 36 C60 20 80 70 110 100"/><path d="M18 100 C55 80 80 110 110 100"/><path d="M18 164 C60 180 80 130 110 100"/>
+<path d="M202 36 C160 20 140 70 110 100"/><path d="M202 100 C165 80 140 110 110 100"/><path d="M202 164 C160 180 140 130 110 100"/>
 </g>
 <g fill="#ff3d8a">
-<circle cx="250" cy="70" r="4"/><circle cx="250" cy="140" r="4"/><circle cx="250" cy="200" r="4"/>
-<circle cx="310" cy="110" r="3"/><circle cx="300" cy="170" r="3"/>
-<circle cx="550" cy="70" r="4"/><circle cx="550" cy="140" r="4"/><circle cx="550" cy="200" r="4"/>
-<circle cx="490" cy="110" r="3"/><circle cx="500" cy="170" r="3"/>
-<circle cx="400" cy="140" r="7"/>
+<circle cx="18" cy="36" r="3.5"/><circle cx="18" cy="100" r="3.5"/><circle cx="18" cy="164" r="3.5"/>
+<circle cx="202" cy="36" r="3.5"/><circle cx="202" cy="100" r="3.5"/><circle cx="202" cy="164" r="3.5"/>
+<circle cx="110" cy="100" r="11"/>
 </g>
-<text x="400" y="144" text-anchor="middle" fill="#1a0610" font-size="8" font-weight="800">TAG</text>
+<text x="110" y="104" text-anchor="middle" fill="#1a0610" font-size="9" font-weight="800">TAG</text>
 </svg>
 <div class="tag-card"><div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="S+S" /><span class="photo-label">Sophie + Sage</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
 <div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">Website v1</span><span class="chip done">Marketing done</span></div><h3>Sophie + Sage</h3><p>Site and marketing done. Grants plugs into the service next.</p></div></div>
