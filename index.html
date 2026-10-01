@@ -54,10 +54,10 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #shop .tray, #booth .tray { position:absolute; top:0; right:0; width:min(440px,100%); height:100%; background:rgba(16,18,22,.96); border-left:1px solid var(--line); overflow:auto; padding:1.2rem 1.15rem 2rem; }
 #shop .who, #booth .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
 #shop .close, #booth .close { position:absolute; top:12px; right:12px; background:var(--bg-3); border:1px solid var(--line); color:var(--text); width:36px; height:36px; border-radius:50%; cursor:pointer; }
-#shop .sku { display:grid; grid-template-columns:1fr auto; gap:.35rem 8px; padding:.8rem 0; border-bottom:1px solid var(--line); }
-#shop .sku p { color:var(--text-mute); font-size:.8rem; grid-column:1; }
+#shop .sku { display:grid; grid-template-columns:1fr auto auto; gap:.35rem 8px; padding:.8rem 0; border-bottom:1px solid var(--line); align-items:center; }
+#shop .sku p { color:var(--text-mute); font-size:.8rem; }
 #shop .sku em { color:#000; -webkit-text-fill-color:#000; background:var(--teal); border:1px solid var(--teal); font-style:normal; font-size:.78rem; font-weight:800; padding:.4rem .75rem; border-radius:999px; }
-#shop .sku button { grid-column:2; grid-row:2; justify-self:end; background:transparent; color:var(--purple-neon); border:1px solid var(--purple-neon); border-radius:999px; padding:.25rem .6rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
+#shop .sku .n { color:#1a0828; background:var(--purple-neon); border-radius:999px; font-style:normal; font-weight:800; font-size:.72rem; padding:.25rem .5rem; }
 #shop .pay, #booth .live { margin-top:1.1rem; width:100%; background:var(--purple-neon); color:#1a0828; border:0; font-weight:800; padding:.75rem 1rem; border-radius:999px; cursor:pointer; font:inherit; }
 #booth .live { background:var(--teal); color:#06221f; }
 #shop .fine, #booth .fine { color:var(--text-mute); font-size:.75rem; margin-top:.7rem; }
@@ -105,6 +105,9 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #market .item div { padding:.7rem .85rem .9rem; }
 #market .item b { display:block; }
 #market .item span { color:var(--text-mute); font-size:.82rem; }
+#market .buy { display:flex; align-items:center; gap:.4rem; margin-top:.55rem; }
+#market .buy button { border:0; background:var(--purple-neon); color:#1a0828; font:inherit; font-size:.75rem; font-weight:800; padding:.32rem .7rem; border-radius:999px; cursor:pointer; }
+#market .buy i { font-style:normal; min-width:22px; height:22px; border-radius:50%; background:#111; color:#fff; display:grid; place-items:center; font-size:.72rem; font-weight:800; }
 #market .price { position:absolute; right:10px; top:10px; background:var(--teal); color:#000; -webkit-text-fill-color:#000; border:1px solid var(--teal); font-weight:800; font-size:.78rem; padding:.4rem .75rem; border-radius:999px; line-height:1; }
 #market .item.out img { filter:grayscale(.7) brightness(.6); }
 #market .item.out::after { content:"SOLD OUT"; position:absolute; left:12px; top:72px; letter-spacing:.14em; font-size:.72rem; font-weight:800; color:#fff; border:1px solid #fff; padding:.25rem .45rem; }
@@ -167,13 +170,8 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <button class="close" type="button" data-close="1">x</button>
 <p class="who">Client tasting menu</p>
 <h2>The fake cart</h2>
-<p class="fine">For showing, not charging.</p>
-<div class="menu">
-<div class="sku"><div><b>Slap Peaches</b><p>They started it.</p></div><em>$6</em><button type="button" data-add>Add</button></div>
-<div class="sku"><div><b>Alibi Eggs</b><p>Home all night. Allegedly.</p></div><em>$8</em><button type="button" data-add>Add</button></div>
-<div class="sku"><div><b>Union Honey</b><p>The bees have a contract.</p></div><em>$12</em><button type="button" data-add>Add</button></div>
-<div class="sku"><div><b>Rumor Bread</b><p>Still warm. Still talking.</p></div><em>$5</em><button type="button" data-add>Add</button></div>
-</div>
+<p class="fine">Adds from the board land here.</p>
+<div class="menu"></div>
 <button class="pay" id="cart-pay" type="button">Checkout (spiritually)</button>
 <p class="fine">This cart is theater.</p>
 <div class="card receipt"><h3>Receipt: emotional only</h3><p>Nothing billed. Yeeted onto the belt.</p></div>
@@ -322,14 +320,14 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <section class="page" id="market"><div class="inner">
 <p class="kicker">Farmers market demo · stall board</p>
 <h2>The board they <span>actually read</span></h2>
-<p class="lede">Tap a pill. Crates, or the week they show up. Booth if the truck moves.</p>
+<p class="lede">Tap a pill. Add from the crate. The corner cart keeps the count.</p>
 <div class="pills"><button type="button" id="mock-stall">Mock stall</button><button type="button" id="mock-cal">When we're here</button></div>
 <div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">The truck moves</h3><div class="week" id="cal-week"><b class="on" data-day="Thu">Thu<span class="time">8a–1p</span><span class="spot">Henderson, stall 12</span></b><b class="on" data-day="Fri">Fri<span class="time">4p–8p</span><span class="spot">Downtown lot</span></b><b class="on" data-day="Sat">Sat<span class="time">8a–1p</span><span class="spot">Summerlin</span></b><b data-day="Sun">Sun<span class="time">dark</span><span class="spot">—</span></b><b data-day="Mon">Mon<span class="time">dark</span><span class="spot">—</span></b><b class="on" data-day="Tue">Tue<span class="time">11a–2p</span><span class="spot">Boulder Hwy</span></b><b data-day="Wed">Wed<span class="time">dark</span><span class="spot">—</span></b></div><div class="stops" id="cal-stops"><div data-row="Thu"><b>Thu</b><span>Henderson market, stall 12</span><em>8a–1p</em></div><div data-row="Fri"><b>Fri</b><span>Downtown lot, Water St</span><em>4p–8p</em></div><div data-row="Sat"><b>Sat</b><span>Summerlin market</span><em>8a–1p</em></div><div class="off" data-row="Sun"><b>Sun</b><span>Dark</span><em>—</em></div><div class="off" data-row="Mon"><b>Mon</b><span>Dark</span><em>—</em></div><div data-row="Tue"><b>Tue</b><span>Food truck row, Boulder Hwy</span><em>11a–2p</em></div><div class="off" data-row="Wed"><b>Wed</b><span>Dark</span><em>—</em></div></div></div></div>
 <div class="stall" id="stall">
-<article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span></div></article>
-<article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span></div></article>
-<article class="item" id="item-honey"><img src="menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span data-line="honey">The bees have a contract.</span></div></article>
-<article class="item" id="item-bread"><img src="menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span data-line="bread">Still warm. Still talking.</span></div></article>
+<article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span><div class="buy"><button type="button" data-bag="peaches">Add</button><i data-n="peaches">0</i></div></div></article>
+<article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span><div class="buy"><button type="button" data-bag="eggs">Add</button><i data-n="eggs">0</i></div></div></article>
+<article class="item" id="item-honey"><img src="menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span data-line="honey">The bees have a contract.</span><div class="buy"><button type="button" data-bag="honey">Add</button><i data-n="honey">0</i></div></div></article>
+<article class="item" id="item-bread"><img src="menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span data-line="bread">Still warm. Still talking.</span><div class="buy"><button type="button" data-bag="bread">Add</button><i data-n="bread">0</i></div></div></article>
 </div>
 </div></section>
 <section class="page" id="pitch"><div class="inner">
@@ -389,18 +387,20 @@ let extra=0;
 const toolHtml='<div class="tools"><button type="button" data-up>Up</button><button type="button" data-down>Down</button><button type="button" data-pic>Photo</button><input class="file" type="file" accept="image/*" /></div>';
 const bindBlock=(block)=>{const name=block.querySelector("[data-name]");const id=()=>name.dataset.name;block.querySelector("[data-up]").onclick=()=>{const prev=block.previousElementSibling;if(!prev||!prev.classList.contains("item-block"))return;block.parentNode.insertBefore(block,prev);const card=document.getElementById("item-"+id());const before=card&&card.previousElementSibling;if(before)stallEl.insertBefore(card,before);};block.querySelector("[data-down]").onclick=()=>{const next=block.nextElementSibling;if(!next||!next.classList.contains("item-block"))return;block.parentNode.insertBefore(next,block);const card=document.getElementById("item-"+id());if(card&&card.nextElementSibling)stallEl.insertBefore(card.nextElementSibling,card);};const file=block.querySelector(".file");block.querySelector("[data-pic]").onclick=()=>file.click();file.onchange=()=>{const f=file.files&&file.files[0];if(!f)return;const img=document.querySelector("#item-"+id()+" img");if(img)img.src=URL.createObjectURL(f);};};
 document.querySelectorAll("#booth .item-block").forEach(bindBlock);
-document.getElementById("add-crate").onclick=()=>{extra+=1;const id="extra"+extra;const block=document.createElement("div");block.className="item-block";block.innerHTML='<div class="row"><input type="text" value="New crate" data-name="'+id+'" /><input type="text" value="$4" data-price="'+id+'" /><button type="button" class="sold" data-out="'+id+'">Sold out</button></div><input class="blurb" type="text" value="Just showed up." data-blurb="'+id+'" />'+toolHtml;document.getElementById("add-crate").before(block);const card=document.createElement("article");card.className="item";card.id="item-"+id;card.innerHTML='<img src="menu_bread.jpg" alt="New crate" /><span class="price" data-show="'+id+'">$4</span><div><b data-title="'+id+'">New crate</b><span data-line="'+id+'">Just showed up.</span></div>';stallEl.appendChild(card);bindBlock(block);block.querySelector("[data-name]").addEventListener("input",(e)=>{card.querySelector("b").textContent=e.target.value||"Untitled";});block.querySelector("[data-price]").addEventListener("input",(e)=>{card.querySelector(".price").textContent=e.target.value||"$0";});block.querySelector("[data-blurb]").addEventListener("input",(e)=>{card.querySelector("[data-line]").textContent=e.target.value||"No line yet.";});block.querySelector("[data-out]").addEventListener("click",(e)=>{const b=e.currentTarget;b.classList.toggle("on");card.classList.toggle("out",b.classList.contains("on"));b.textContent=b.classList.contains("on")?"Back":"Sold out";});};
+document.getElementById("add-crate").onclick=()=>{extra+=1;const id="extra"+extra;const block=document.createElement("div");block.className="item-block";block.innerHTML='<div class="row"><input type="text" value="New crate" data-name="'+id+'" /><input type="text" value="$4" data-price="'+id+'" /><button type="button" class="sold" data-out="'+id+'">Sold out</button></div><input class="blurb" type="text" value="Just showed up." data-blurb="'+id+'" />'+toolHtml;document.getElementById("add-crate").before(block);const card=document.createElement("article");card.className="item";card.id="item-"+id;card.innerHTML='<img src="menu_bread.jpg" alt="New crate" /><span class="price" data-show="'+id+'">$4</span><div><b data-title="'+id+'">New crate</b><span data-line="'+id+'">Just showed up.</span><div class="buy"><button type="button" data-bag="'+id+'">Add</button><i data-n="'+id+'">0</i></div></div>';stallEl.appendChild(card);bindBlock(block);card.querySelector("[data-bag]").onclick=()=>addBag(id);block.querySelector("[data-name]").addEventListener("input",(e)=>{card.querySelector("b").textContent=e.target.value||"Untitled";});block.querySelector("[data-price]").addEventListener("input",(e)=>{card.querySelector(".price").textContent=e.target.value||"$0";});block.querySelector("[data-blurb]").addEventListener("input",(e)=>{card.querySelector("[data-line]").textContent=e.target.value||"No line yet.";});block.querySelector("[data-out]").addEventListener("click",(e)=>{const b=e.currentTarget;b.classList.toggle("on");card.classList.toggle("out",b.classList.contains("on"));b.textContent=b.classList.contains("on")?"Back":"Sold out";});};
 document.getElementById("days").addEventListener("click",(e)=>{const b=e.target.closest("button");if(b){b.classList.toggle("on");syncWeek();}});
 document.querySelectorAll("[data-stop-loc],[data-stop-time]").forEach((inp)=>inp.addEventListener("input",syncWeek));
 document.getElementById("booth-live").addEventListener("click",()=>{document.getElementById("booth-note").textContent="Board updated. Still theater. They will not know.";openBooth(false);});
 const shop=document.getElementById("shop");
 const cartBtn=document.getElementById("cart-btn");
 const cartN=document.getElementById("cart-n");
-let cartCount=0;
+const menu=document.querySelector("#shop .menu");
+const bag={};
+function addBag(id){const card=document.getElementById("item-"+id);if(!card||card.classList.contains("out"))return;bag[id]=(bag[id]||0)+1;const n=card.querySelector("[data-n]");if(n)n.textContent=bag[id];let row=menu.querySelector('[data-sku="'+id+'"]');const title=card.querySelector("b").textContent;const price=card.querySelector(".price").textContent;if(!row){row=document.createElement("div");row.className="sku";row.dataset.sku=id;row.innerHTML='<div><b></b><p>From the board.</p></div><em></em><span class="n">1</span>';menu.appendChild(row);}row.querySelector("b").textContent=title;row.querySelector("em").textContent=price;row.querySelector(".n").textContent=bag[id];cartN.textContent=Object.values(bag).reduce((a,b)=>a+b,0);}
+document.querySelectorAll("[data-bag]").forEach((b)=>b.addEventListener("click",()=>addBag(b.dataset.bag)));
 const openShop=(on)=>{shop.classList.toggle("open",on);shop.setAttribute("aria-hidden",on?"false":"true");if(!on)shop.classList.remove("paid");};
 if(cartBtn)cartBtn.addEventListener("click",()=>openShop(true));
 shop.addEventListener("click",(e)=>{if(e.target.dataset.close)openShop(false);});
-shop.querySelectorAll("[data-add]").forEach((b)=>b.addEventListener("click",()=>{cartCount+=1;cartN.textContent=cartCount;b.textContent="In the bag";}));
 document.getElementById("cart-pay").addEventListener("click",()=>shop.classList.add("paid"));
 </script>
 </body>
