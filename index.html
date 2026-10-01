@@ -59,21 +59,39 @@ nav.dots a { width:10px; height:10px; border-radius:50%; background:var(--bg-4);
 nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 .cart-btn { position:fixed; top:16px; left:16px; z-index:40; display:inline-flex; align-items:center; gap:.45rem; background:rgba(12,10,16,.88); color:var(--text); border:1px solid var(--purple-neon); border-radius:999px; padding:.45rem .85rem .45rem .6rem; font:inherit; font-size:.78rem; font-weight:700; cursor:pointer; }
 .cart-btn b { min-width:18px; height:18px; border-radius:50%; background:var(--purple-neon); color:#1a0828; font-size:.7rem; display:grid; place-items:center; }
-#shop { position:fixed; inset:0; z-index:50; display:none; }
-#shop.open { display:block; }
-#shop .dim { position:absolute; inset:0; background:rgba(6,7,9,.72); }
-#shop .tray { position:absolute; top:0; right:0; width:min(420px,100%); height:100%; background:rgba(16,18,22,.96); border-left:1px solid var(--line); overflow:auto; padding:1.2rem 1.15rem 2rem; }
-#shop .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
-#shop .close { position:absolute; top:12px; right:12px; background:var(--bg-3); border:1px solid var(--line); color:var(--text); width:36px; height:36px; border-radius:50%; cursor:pointer; }
+.booth-btn { position:fixed; top:16px; left:118px; z-index:40; display:inline-flex; align-items:center; gap:.45rem; background:rgba(12,16,14,.88); color:var(--text); border:1px solid var(--teal); border-radius:999px; padding:.45rem .85rem; font:inherit; font-size:.78rem; font-weight:700; cursor:pointer; }
+#shop, #booth { position:fixed; inset:0; z-index:50; display:none; }
+#shop.open, #booth.open { display:block; }
+#shop .dim, #booth .dim { position:absolute; inset:0; background:rgba(6,7,9,.72); }
+#shop .tray, #booth .tray { position:absolute; top:0; right:0; width:min(440px,100%); height:100%; background:rgba(16,18,22,.96); border-left:1px solid var(--line); overflow:auto; padding:1.2rem 1.15rem 2rem; }
+#shop .who, #booth .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; }
+#shop .close, #booth .close { position:absolute; top:12px; right:12px; background:var(--bg-3); border:1px solid var(--line); color:var(--text); width:36px; height:36px; border-radius:50%; cursor:pointer; }
 #shop .sku { display:grid; grid-template-columns:1fr auto; gap:.35rem 8px; padding:.8rem 0; border-bottom:1px solid var(--line); }
 #shop .sku p { color:var(--text-mute); font-size:.8rem; grid-column:1; }
 #shop .sku em { color:var(--teal); font-style:normal; font-size:.82rem; font-weight:700; }
 #shop .sku button { grid-column:2; grid-row:2; justify-self:end; background:transparent; color:var(--purple-neon); border:1px solid var(--purple-neon); border-radius:999px; padding:.25rem .6rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
-#shop .pay { margin-top:1.1rem; width:100%; background:var(--purple-neon); color:#1a0828; border:0; font-weight:800; padding:.75rem 1rem; border-radius:999px; cursor:pointer; font:inherit; }
-#shop .fine { color:var(--text-mute); font-size:.75rem; margin-top:.7rem; }
+#shop .pay, #booth .live { margin-top:1.1rem; width:100%; background:var(--purple-neon); color:#1a0828; border:0; font-weight:800; padding:.75rem 1rem; border-radius:999px; cursor:pointer; font:inherit; }
+#booth .live { background:var(--teal); color:#06221f; }
+#shop .fine, #booth .fine { color:var(--text-mute); font-size:.75rem; margin-top:.7rem; }
 #shop .receipt { display:none; margin-top:1rem; }
 #shop.paid .menu, #shop.paid .pay { display:none; }
 #shop.paid .receipt { display:block; }
+#booth .row { display:grid; grid-template-columns:1fr 84px auto; gap:.45rem; align-items:center; padding:.7rem 0; border-bottom:1px solid var(--line); }
+#booth input[type=text] { width:100%; background:rgba(10,12,14,.7); border:1px solid var(--line); color:var(--text); border-radius:10px; padding:.45rem .6rem; font:inherit; }
+#booth .sold { background:transparent; color:#fbbf24; border:1px solid #fbbf24; border-radius:999px; padding:.3rem .55rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
+#booth .sold.on { background:#fbbf24; color:#1c1404; }
+#booth .days { display:flex; flex-wrap:wrap; gap:.35rem; margin:.6rem 0 1rem; }
+#booth .days button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); border-radius:999px; padding:.35rem .6rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
+#booth .days button.on { background:var(--teal); color:#06221f; border-color:var(--teal); }
+#market .stall { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; margin-top:.9rem; }
+#market .item { background:rgba(22,24,28,.78); border:1px solid var(--line); border-radius:16px; overflow:hidden; position:relative; }
+#market .item img { width:100%; height:168px; object-fit:cover; display:block; background:#1a1c1f; }
+#market .item div { padding:.7rem .85rem .9rem; }
+#market .item b { display:block; }
+#market .item span { color:var(--text-mute); font-size:.82rem; }
+#market .price { position:absolute; right:10px; top:10px; background:var(--teal); color:#06221f; font-weight:800; font-size:.78rem; padding:.28rem .55rem; border-radius:999px; }
+#market .item.out img { filter:grayscale(.7) brightness(.6); }
+#market .item.out::after { content:"SOLD OUT"; position:absolute; left:12px; top:72px; letter-spacing:.14em; font-size:.72rem; font-weight:800; color:#fff; border:1px solid #fff; padding:.25rem .45rem; }
 #hero { padding:0; justify-content:flex-end; background:linear-gradient(to top, rgba(8,9,11,.92) 0%, rgba(8,9,11,.35) 45%, rgba(8,9,11,.2) 100%), url("images_hero.jpg") center/cover no-repeat; background-color:var(--bg-0); }
 #hero .inner { padding:var(--pad); padding-bottom:4.5rem; }
 #hero .sub { color:var(--text-dim); letter-spacing:.14em; text-transform:uppercase; font-size:.78rem; margin-bottom:.8rem; }
@@ -83,7 +101,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #overview .goal-tag { border:1px solid #ec4899; background:rgba(18,8,20,.88); }
 #overview .goal-tag .stat-big { color:#f9a8d4; }
 #overview .pipeline { width:100%; height:min(42vh, 420px); border-radius:14px; border:1px solid var(--line); margin-top:1.2rem; object-fit:cover; object-position:center 45%; background:var(--bg-3); display:block; }
-#board .inner, #pitch .inner { display:flex; flex-direction:column; max-height:calc(100dvh - 2 * var(--pad)); }
+#board .inner, #pitch .inner, #market .inner { display:flex; flex-direction:column; max-height:calc(100dvh - 2 * var(--pad)); }
 #board .pills, #pitch .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.7rem 0 0; }
 #board .pills button, #pitch .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
 #board .pills button.on, #pitch .pills button.on { background:var(--teal); color:#06221f; border-color:var(--teal); }
@@ -121,11 +139,12 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
 #pitch.sent form { display:none; }
-@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row,#market .stall { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } .booth-btn { left:16px; top:58px; } }
 </style>
 </head>
 <body>
 <button class="cart-btn" id="cart-btn" type="button">Cart <b id="cart-n">0</b></button>
+<button class="booth-btn" id="booth-btn" type="button">Booth</button>
 <aside id="shop" aria-hidden="true">
 <div class="dim" data-close="1"></div>
 <div class="tray">
@@ -134,22 +153,42 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <h2>The fake cart</h2>
 <p class="fine">For showing, not charging.</p>
 <div class="menu">
+<div class="sku"><div><b>Slap Peaches</b><p>They started it.</p></div><em>$6</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>Alibi Eggs</b><p>Home all night. Allegedly.</p></div><em>$8</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>Union Honey</b><p>The bees have a contract.</p></div><em>$12</em><button type="button" data-add>Add</button></div>
+<div class="sku"><div><b>Rumor Bread</b><p>Still warm. Still talking.</p></div><em>$5</em><button type="button" data-add>Add</button></div>
 <div class="sku"><div><b>DocketDate</b><p>A calendar that snitches on deadlines.</p></div><em>1 handshake</em><button type="button" data-add>Add</button></div>
 <div class="sku"><div><b>TAG Integration</b><p>Kills the standup. Keeps the work.</p></div><em>31h back</em><button type="button" data-add>Add</button></div>
-<div class="sku"><div><b>ETHR-BOOK</b><p>Paper that talks back.</p></div><em>1 live QR</em><button type="button" data-add>Add</button></div>
-<div class="sku"><div><b>Cash Rotisserie</b><p>AIs turn the premium dial.</p></div><em>1 cooked book</em><button type="button" data-add>Add</button></div>
-<div class="sku"><div><b>Don't Dial</b><p>Holds the 1:47am text until sunrise.</p></div><em>1 saved friendship</em><button type="button" data-add>Add</button></div>
-<div class="sku"><div><b>Pacific water, gallon</b><p>Long Beach to Primm. We built a pipe.</p></div><em>200 miles</em><button type="button" data-add>Add</button></div>
 </div>
 <button class="pay" id="cart-pay" type="button">Checkout (spiritually)</button>
 <p class="fine">This cart is theater.</p>
 <div class="card receipt"><h3>Receipt: emotional only</h3><p>Nothing billed. Yeeted onto the belt.</p></div>
 </div>
 </aside>
+<aside id="booth" aria-hidden="true">
+<div class="dim" data-close="1"></div>
+<div class="tray">
+<button class="close" type="button" data-close="1">x</button>
+<p class="who">Vendor door · booth code 441</p>
+<h2>Update the board</h2>
+<p class="fine">Name. Price. Sold out. Week. Done.</p>
+<div class="row"><input type="text" value="Slap Peaches" data-name="peaches" /><input type="text" value="$6" data-price="peaches" /><button type="button" class="sold" data-out="peaches">Sold out</button></div>
+<div class="row"><input type="text" value="Alibi Eggs" data-name="eggs" /><input type="text" value="$8" data-price="eggs" /><button type="button" class="sold" data-out="eggs">Sold out</button></div>
+<div class="row"><input type="text" value="Union Honey" data-name="honey" /><input type="text" value="$12" data-price="honey" /><button type="button" class="sold" data-out="honey">Sold out</button></div>
+<div class="row"><input type="text" value="Rumor Bread" data-name="bread" /><input type="text" value="$5" data-price="bread" /><button type="button" class="sold" data-out="bread">Sold out</button></div>
+<p class="who" style="margin-top:1rem">This week · teal means open</p>
+<div class="days" id="days">
+<button type="button" class="on">Thu</button><button type="button" class="on">Fri</button><button type="button" class="on">Sat</button><button type="button">Sun</button><button type="button">Mon</button><button type="button" class="on">Tue</button><button type="button">Wed</button>
+</div>
+<button class="live" id="booth-live" type="button">Board is live</button>
+<p class="fine" id="booth-note">Demo only. Nothing saves. The market still feels it.</p>
+</div>
+</aside>
 <nav class="dots" aria-label="Sections">
 <a href="#hero" class="active" title="Cover"></a>
 <a href="#overview" title="Where we are"></a>
 <a href="#board" title="The board"></a>
+<a href="#market" title="Market board"></a>
 <a href="#pitch" title="Sparks + belt"></a>
 </nav>
 <section class="page" id="hero"><div class="inner"><p class="sub">Scenery integrated · Logos in the wild</p><h1>INVENTIVE SOLUTIONS<br /><span>PORTFOLIO PIPELINE</span></h1></div></section>
@@ -257,6 +296,17 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <div class="book soon"><p><b>AI takeover</b><span>Cover incoming. Title in the works.</span></p></div>
 </div></div></div>
 </div></div></section>
+<section class="page" id="market"><div class="inner">
+<p class="kicker">Farmers market demo · stall board</p>
+<h2>The board they <span>actually read</span></h2>
+<p class="lede">Four items. Price on the crate. Booth button if the vendor needs to mark something dead.</p>
+<div class="stall">
+<article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span>They started it.</span></div></article>
+<article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span>Home all night. Allegedly.</span></div></article>
+<article class="item" id="item-honey"><img src="menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span>The bees have a contract.</span></div></article>
+<article class="item" id="item-bread"><img src="menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span>Still warm. Still talking.</span></div></article>
+</div>
+</div></section>
 <section class="page" id="pitch"><div class="inner">
 <p class="kicker">Still on the stove · then yeet a new one</p>
 <h2>Sparks on the <span>belt</span></h2>
@@ -303,6 +353,16 @@ if(form)form.addEventListener("submit",(e)=>{e.preventDefault();const who=(form.
 const wirePills=(id,attr,prefix)=>{const row=document.getElementById(id);if(!row)return;row.addEventListener("click",(e)=>{const btn=e.target.closest("button["+attr+"]");if(!btn)return;row.querySelectorAll("button").forEach((b)=>b.classList.toggle("on",b===btn));const wrap=row.parentElement;wrap.querySelectorAll(".panel").forEach((p)=>p.classList.toggle("on",p.id===prefix+btn.getAttribute(attr)));});};
 wirePills("board-pills","data-panel","panel-");
 wirePills("pitch-pills","data-spark","spark-");
+const booth=document.getElementById("booth");
+const boothBtn=document.getElementById("booth-btn");
+const openBooth=(on)=>{booth.classList.toggle("open",on);booth.setAttribute("aria-hidden",on?"false":"true");};
+if(boothBtn)boothBtn.addEventListener("click",()=>openBooth(true));
+booth.addEventListener("click",(e)=>{if(e.target.dataset.close)openBooth(false);});
+booth.querySelectorAll("[data-name]").forEach((inp)=>inp.addEventListener("input",()=>{const el=document.querySelector('[data-title="'+inp.dataset.name+'"]');if(el)el.textContent=inp.value||"Untitled";}));
+booth.querySelectorAll("[data-price]").forEach((inp)=>inp.addEventListener("input",()=>{const el=document.querySelector('[data-show="'+inp.dataset.price+'"]');if(el)el.textContent=inp.value||"$0";}));
+booth.querySelectorAll("[data-out]").forEach((b)=>b.addEventListener("click",()=>{b.classList.toggle("on");const card=document.getElementById("item-"+b.dataset.out);if(card)card.classList.toggle("out",b.classList.contains("on"));b.textContent=b.classList.contains("on")?"Back":"Sold out";}));
+document.getElementById("days").addEventListener("click",(e)=>{const b=e.target.closest("button");if(b)b.classList.toggle("on");});
+document.getElementById("booth-live").addEventListener("click",()=>{document.getElementById("booth-note").textContent="Board updated. Still theater. They will not know.";openBooth(false);});
 const shop=document.getElementById("shop");
 const cartBtn=document.getElementById("cart-btn");
 const cartN=document.getElementById("cart-n");
