@@ -64,16 +64,28 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #shop .receipt { display:none; margin-top:1rem; }
 #shop.paid .menu, #shop.paid .pay { display:none; }
 #shop.paid .receipt { display:block; }
-#booth .row { display:grid; grid-template-columns:1fr 84px auto; gap:.45rem; align-items:center; padding:.7rem 0; border-bottom:1px solid var(--line); }
+#booth .row { display:grid; grid-template-columns:1fr 84px auto; gap:.45rem; align-items:center; padding:.2rem 0 .35rem; border-bottom:0; }
+#booth .item-block { padding:.7rem 0; border-bottom:1px solid var(--line); }
+#booth .blurb, #booth .meta input { width:100%; margin-top:.35rem; }
+#booth .meta { display:grid; gap:.45rem; margin:.55rem 0 .2rem; }
 #booth input[type=text] { width:100%; background:rgba(10,12,14,.7); border:1px solid var(--line); color:var(--text); border-radius:10px; padding:.45rem .6rem; font:inherit; }
 #booth .sold { background:transparent; color:#fbbf24; border:1px solid #fbbf24; border-radius:999px; padding:.3rem .55rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
 #booth .sold.on { background:#fbbf24; color:#1c1404; }
 #booth .days { display:flex; flex-wrap:wrap; gap:.35rem; margin:.6rem 0 1rem; }
 #booth .days button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); border-radius:999px; padding:.35rem .6rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
-#booth .days button.on { background:var(--teal); color:#06221f; border-color:var(--teal); }
-#market .pills { display:flex; gap:.4rem; margin:.8rem 0 0; }
+#booth .days button.on { background:var(--teal); color:#000; border-color:var(--teal); }
+#market .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.8rem 0 0; }
 #market .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
 #market .pills button.on { background:var(--teal); color:#000; border-color:var(--teal); }
+#market .cal { display:none; margin-top:.9rem; }
+#market .cal.on { display:block; }
+#market .cal-card { background:rgba(22,24,28,.82); border:1px solid var(--line); border-radius:16px; padding:1.1rem 1.2rem 1.2rem; }
+#market .cal-card .where { font-size:1.35rem; letter-spacing:-.03em; margin:.2rem 0 .25rem; }
+#market .cal-card .when { color:var(--text-dim); margin-bottom:.8rem; }
+#market .week { display:grid; grid-template-columns:repeat(7,1fr); gap:.4rem; }
+#market .week b { display:block; text-align:center; border:1px solid var(--line); background:var(--bg-3); color:var(--text-mute); border-radius:12px; padding:.7rem .2rem; font-size:.78rem; }
+#market .week b.on { background:var(--teal); color:#000; border-color:var(--teal); }
+#market .week b span { display:block; font-weight:500; font-size:.68rem; margin-top:.2rem; }
 #market .stall { display:none; grid-template-columns:1fr 1fr; gap:.8rem; margin-top:.9rem; }
 #market .stall.on { display:grid; }
 #market .item { background:rgba(22,24,28,.78); border:1px solid var(--line); border-radius:16px; overflow:hidden; position:relative; }
@@ -131,7 +143,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
 #pitch.sent form { display:none; }
-@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row,#market .stall.on { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } .booth-btn { left:16px; top:58px; } }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row,#market .stall.on,#market .week { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } .booth-btn { left:16px; top:58px; } #market .week { grid-template-columns:repeat(4,1fr); } }
 </style>
 </head>
 <body>
@@ -161,11 +173,13 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <button class="close" type="button" data-close="1">x</button>
 <p class="who">Vendor door · booth code 441</p>
 <h2>Update the board</h2>
-<p class="fine">Name. Price. Sold out. Week. Done.</p>
-<div class="row"><input type="text" value="Slap Peaches" data-name="peaches" /><input type="text" value="$6" data-price="peaches" /><button type="button" class="sold" data-out="peaches">Sold out</button></div>
-<div class="row"><input type="text" value="Alibi Eggs" data-name="eggs" /><input type="text" value="$8" data-price="eggs" /><button type="button" class="sold" data-out="eggs">Sold out</button></div>
-<div class="row"><input type="text" value="Union Honey" data-name="honey" /><input type="text" value="$12" data-price="honey" /><button type="button" class="sold" data-out="honey">Sold out</button></div>
-<div class="row"><input type="text" value="Rumor Bread" data-name="bread" /><input type="text" value="$5" data-price="bread" /><button type="button" class="sold" data-out="bread">Sold out</button></div>
+<p class="fine">Name. Line. Price. Sold out. Where. When. Done.</p>
+<div class="item-block"><div class="row"><input type="text" value="Slap Peaches" data-name="peaches" /><input type="text" value="$6" data-price="peaches" /><button type="button" class="sold" data-out="peaches">Sold out</button></div><input class="blurb" type="text" value="They started it." data-blurb="peaches" /></div>
+<div class="item-block"><div class="row"><input type="text" value="Alibi Eggs" data-name="eggs" /><input type="text" value="$8" data-price="eggs" /><button type="button" class="sold" data-out="eggs">Sold out</button></div><input class="blurb" type="text" value="Home all night. Allegedly." data-blurb="eggs" /></div>
+<div class="item-block"><div class="row"><input type="text" value="Union Honey" data-name="honey" /><input type="text" value="$12" data-price="honey" /><button type="button" class="sold" data-out="honey">Sold out</button></div><input class="blurb" type="text" value="The bees have a contract." data-blurb="honey" /></div>
+<div class="item-block"><div class="row"><input type="text" value="Rumor Bread" data-name="bread" /><input type="text" value="$5" data-price="bread" /><button type="button" class="sold" data-out="bread">Sold out</button></div><input class="blurb" type="text" value="Still warm. Still talking." data-blurb="bread" /></div>
+<p class="who" style="margin-top:1rem">Where and when</p>
+<div class="meta"><input type="text" id="booth-loc" value="Henderson market · stall 12" /><input type="text" id="booth-hours" value="8a–1p" /></div>
 <p class="who" style="margin-top:1rem">This week · teal means open</p>
 <div class="days" id="days">
 <button type="button" class="on">Thu</button><button type="button" class="on">Fri</button><button type="button" class="on">Sat</button><button type="button">Sun</button><button type="button">Mon</button><button type="button" class="on">Tue</button><button type="button">Wed</button>
@@ -215,15 +229,13 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 </div>
 <div class="panel" id="panel-avi">
 <h3 class="crate">Avi — <span>the wingman that books the table</span></h3>
-<p class="lede">Locals meet at local businesses. An AI wingman proxy matches on real data and personality, then kills the scheduling debate. Nobody texts “when works?” for 11 days.</p>
+<p class="lede">Locals meet at local businesses. An AI wingman proxy matches on real data and personality, then kills the scheduling debate.</p>
 <div class="grid-2">
 <div class="photo-wrap"><img class="photo" src="imagesavi.jpg.webp" alt="Avi" /><span class="photo-label">Avi ops</span></div>
 <div>
 <div class="card"><h3>Meeting app, not a calendar pile</h3><p>Match on who they actually are. Drop them at a real shop. Avi holds the time so the hang happens.</p><div class="chips"><span class="chip live">Map LIVE</span><span class="chip">24 vendors</span><span class="chip">8 routes</span></div></div>
 <div class="next"><strong>What it kills</strong> The group-chat standoff. Avi picks the place, picks the hour, walks both people in.</div>
-</div>
-</div>
-</div>
+</div></div></div>
 <div class="panel" id="panel-docket">
 <h3 class="crate">DocketDate — <span>Court Compliance Hub</span></h3>
 <p class="lede">Clerk desk now. Testimony + City weight later.</p>
@@ -289,13 +301,14 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <section class="page" id="market"><div class="inner">
 <p class="kicker">Farmers market demo · stall board</p>
 <h2>The board they <span>actually read</span></h2>
-<p class="lede">Tap the pill. Four crates. Booth if something dies mid-market.</p>
-<div class="pills"><button type="button" id="mock-stall">Mock stall</button></div>
+<p class="lede">Tap a pill. Crates, or the week they show up. Booth if something changes.</p>
+<div class="pills"><button type="button" id="mock-stall">Mock stall</button><button type="button" id="mock-cal">When we're here</button></div>
+<div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where" id="cal-loc">Henderson market · stall 12</h3><p class="when" id="cal-hours">Open 8a–1p. Teal days only.</p><div class="week" id="cal-week"><b class="on" data-day="Thu">Thu<span>open</span></b><b class="on" data-day="Fri">Fri<span>open</span></b><b class="on" data-day="Sat">Sat<span>open</span></b><b data-day="Sun">Sun<span>dark</span></b><b data-day="Mon">Mon<span>dark</span></b><b class="on" data-day="Tue">Tue<span>open</span></b><b data-day="Wed">Wed<span>dark</span></b></div></div></div>
 <div class="stall" id="stall">
-<article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span>They started it.</span></div></article>
-<article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span>Home all night. Allegedly.</span></div></article>
-<article class="item" id="item-honey"><img src="menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span>The bees have a contract.</span></div></article>
-<article class="item" id="item-bread"><img src="menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span>Still warm. Still talking.</span></div></article>
+<article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span></div></article>
+<article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span></div></article>
+<article class="item" id="item-honey"><img src="menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span data-line="honey">The bees have a contract.</span></div></article>
+<article class="item" id="item-bread"><img src="menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span data-line="bread">Still warm. Still talking.</span></div></article>
 </div>
 </div></section>
 <section class="page" id="pitch"><div class="inner">
@@ -323,9 +336,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <p class="fine">We may steal the good parts and never schedule a standup.</p>
 </form>
 <div class="card thanks"><h3>Belt ate it.</h3><p>Spine or chip. No calendar invite.</p></div>
-</div>
-</div>
-</div></section>
+</div></div></div></section>
 <script>
 const pages=[...document.querySelectorAll(".page")];
 const dots=[...document.querySelectorAll("nav.dots a")];
@@ -338,7 +349,11 @@ wirePills("board-pills","data-panel","panel-");
 wirePills("pitch-pills","data-spark","spark-");
 const mock=document.getElementById("mock-stall");
 const stall=document.getElementById("stall");
-if(mock)mock.addEventListener("click",()=>{const on=!stall.classList.contains("on");stall.classList.toggle("on",on);mock.classList.toggle("on",on);mock.textContent=on?"Close stall":"Mock stall";});
+const calBtn=document.getElementById("mock-cal");
+const cal=document.getElementById("cal");
+const syncWeek=()=>{document.querySelectorAll("#days button").forEach((b)=>{const day=b.textContent.trim();const cell=document.querySelector('#cal-week [data-day="'+day+'"]');if(!cell)return;const open=b.classList.contains("on");cell.classList.toggle("on",open);cell.querySelector("span").textContent=open?"open":"dark";});};
+if(mock)mock.addEventListener("click",()=>{const on=!stall.classList.contains("on");stall.classList.toggle("on",on);mock.classList.toggle("on",on);mock.textContent=on?"Close stall":"Mock stall";if(on){cal.classList.remove("on");calBtn.classList.remove("on");}});
+if(calBtn)calBtn.addEventListener("click",()=>{const on=!cal.classList.contains("on");cal.classList.toggle("on",on);calBtn.classList.toggle("on",on);if(on){stall.classList.remove("on");mock.classList.remove("on");mock.textContent="Mock stall";}});
 const booth=document.getElementById("booth");
 const boothBtn=document.getElementById("booth-btn");
 const openBooth=(on)=>{booth.classList.toggle("open",on);booth.setAttribute("aria-hidden",on?"false":"true");};
@@ -346,8 +361,11 @@ if(boothBtn)boothBtn.addEventListener("click",()=>openBooth(true));
 booth.addEventListener("click",(e)=>{if(e.target.dataset.close)openBooth(false);});
 booth.querySelectorAll("[data-name]").forEach((inp)=>inp.addEventListener("input",()=>{const el=document.querySelector('[data-title="'+inp.dataset.name+'"]');if(el)el.textContent=inp.value||"Untitled";}));
 booth.querySelectorAll("[data-price]").forEach((inp)=>inp.addEventListener("input",()=>{const el=document.querySelector('[data-show="'+inp.dataset.price+'"]');if(el)el.textContent=inp.value||"$0";}));
+booth.querySelectorAll("[data-blurb]").forEach((inp)=>inp.addEventListener("input",()=>{const el=document.querySelector('[data-line="'+inp.dataset.blurb+'"]');if(el)el.textContent=inp.value||"No line yet.";}));
 booth.querySelectorAll("[data-out]").forEach((b)=>b.addEventListener("click",()=>{b.classList.toggle("on");const card=document.getElementById("item-"+b.dataset.out);if(card)card.classList.toggle("out",b.classList.contains("on"));b.textContent=b.classList.contains("on")?"Back":"Sold out";}));
-document.getElementById("days").addEventListener("click",(e)=>{const b=e.target.closest("button");if(b)b.classList.toggle("on");});
+document.getElementById("days").addEventListener("click",(e)=>{const b=e.target.closest("button");if(b){b.classList.toggle("on");syncWeek();}});
+document.getElementById("booth-loc").addEventListener("input",(e)=>{document.getElementById("cal-loc").textContent=e.target.value||"Somewhere with peaches";});
+document.getElementById("booth-hours").addEventListener("input",(e)=>{document.getElementById("cal-hours").textContent="Open "+(e.target.value||"whenever")+". Teal days only.";});
 document.getElementById("booth-live").addEventListener("click",()=>{document.getElementById("booth-note").textContent="Board updated. Still theater. They will not know.";openBooth(false);});
 const shop=document.getElementById("shop");
 const cartBtn=document.getElementById("cart-btn");
