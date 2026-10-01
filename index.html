@@ -42,7 +42,7 @@ h2 { font-size:var(--h2-size); font-weight:750; margin-bottom:.6rem; }
 .photo-label { position:absolute; left:12px; top:12px; background:rgba(10,12,14,.75); color:var(--text); font-size:.7rem; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .6rem; border-radius:999px; border:1px solid var(--line); }
 .next { margin-top:1rem; padding:.9rem 1rem; background:var(--bg-3); border-radius:12px; border-left:3px solid var(--teal); color:var(--text-dim); font-size:.9rem; }
 .next strong { color:var(--text); display:block; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.25rem; }
-nav.dots { position:fixed; right:18px; top:50%; transform:translateY(-50%); z-index:20; display:flex; flex-direction:column; gap:10px; }
+.mobile-nav { display:none; position:fixed; left:10px; right:10px; bottom:10px; z-index:45; gap:.35rem; overflow:auto; padding:.35rem; background:rgba(12,14,16,.92); border:1px solid var(--line); border-radius:999px; } .mobile-nav a { flex:0 0 auto; color:var(--text-dim); text-decoration:none; font-size:.72rem; font-weight:800; padding:.45rem .7rem; border-radius:999px; } .mobile-nav a.on { background:var(--teal); color:#000; }nav.dots { position:fixed; right:18px; top:50%; transform:translateY(-50%); z-index:20; display:flex; flex-direction:column; gap:10px; }
 nav.dots a { width:10px; height:10px; border-radius:50%; background:var(--bg-4); border:1px solid var(--line); display:block; }
 nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 .cart-btn { position:fixed; top:16px; left:16px; z-index:40; display:inline-flex; align-items:center; gap:.45rem; background:rgba(12,10,16,.88); color:var(--text); border:1px solid var(--purple-neon); border-radius:999px; padding:.45rem .85rem .45rem .6rem; font:inherit; font-size:.78rem; font-weight:700; cursor:pointer; }
@@ -164,7 +164,8 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
 #pitch.sent form { display:none; }
-@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row,#market .stall.on { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } .booth-btn { left:16px; top:58px; } #market .week { grid-template-columns:repeat(2,1fr); } #booth .stop { grid-template-columns:36px 1fr; } #booth .stop input:last-child { grid-column:2; } #booth .row { grid-template-columns:1fr 64px 48px; } }
+button, .chip, .pills button { touch-action:manipulation; }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row,#market .stall.on { grid-template-columns:1fr; } nav.dots { display:none; } body { scroll-snap-type:y proximity; } .page { scroll-snap-stop:normal; overflow:auto; } #board .inner, #pitch .inner, #market .inner { max-height:none; } #market .pills button, #board .pills button, #pitch .pills button { min-height:44px; } .mobile-nav { display:flex; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } .booth-btn { left:16px; top:58px; } #market .week { grid-template-columns:repeat(2,1fr); } #booth .stop { grid-template-columns:36px 1fr; } #booth .stop input:last-child { grid-column:2; } #booth .row { grid-template-columns:1fr 64px 48px; } }
 </style>
 </head>
 <body>
@@ -214,6 +215,13 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <p class="fine" id="booth-note">The small number next to price is how many are available.</p>
 </div>
 </aside>
+<nav class="mobile-nav" aria-label="Mobile sections">
+<a href="#hero" class="on">Cover</a>
+<a href="#overview">Now</a>
+<a href="#board">Belt</a>
+<a href="#pitch">Sparks</a>
+<a href="#market">Demo</a>
+</nav>
 <nav class="dots" aria-label="Sections">
 <a href="#hero" class="active" title="Cover"></a>
 <a href="#overview" title="Where we are"></a>
@@ -367,7 +375,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <script>
 const pages=[...document.querySelectorAll(".page")];
 const dots=[...document.querySelectorAll("nav.dots a")];
-const io=new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(!e.isIntersecting)return;const i=pages.indexOf(e.target);dots.forEach((d,n)=>d.classList.toggle("active",n===i));});},{threshold:0.55});
+const io=new IntersectionObserver((entries)=>{entries.forEach((e)=>{if(!e.isIntersecting)return;const i=pages.indexOf(e.target);dots.forEach((d,n)=>d.classList.toggle("active",n===i));document.querySelectorAll(".mobile-nav a").forEach((a,n)=>a.classList.toggle("on",n===i));});},{threshold:0.55});
 pages.forEach((p)=>io.observe(p));
 const form=document.getElementById("idea-form");
 if(form)form.addEventListener("submit",(e)=>{e.preventDefault();const who=(form.who.value||"a raccoon").trim();const spark=(form.spark.value||"").trim();const machine=form.machine.value;document.getElementById("pitch").classList.add("sent");window.location.href="mailto:whimsyandweeds@gmail.com?subject="+encodeURIComponent("Belt spark from "+who)+"&body="+encodeURIComponent("Who: "+who+"\nMachine: "+machine+"\n\n"+spark);});
