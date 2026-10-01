@@ -132,10 +132,12 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #board .pills button.on, #pitch .pills button.on { background:var(--teal); color:#06221f; border-color:var(--teal); }
 #board .pills button.hot, #pitch .pills button.hot { border-color:var(--purple-neon); color:var(--purple-neon); }
 #board .pills button.hot.on, #pitch .pills button.hot.on { background:var(--purple-neon); color:#1a0828; }
+#board .pills button.tag { border-color:#ff3d8a; color:#ff3d8a; }
+#board .pills button.tag.on { background:#ff3d8a; color:#1a0610; border-color:#ff3d8a; }
 #board .stage, #pitch .stage { margin-top:.9rem; overflow:auto; flex:1; min-height:0; }
 #board .panel, #pitch .panel { display:none; }
 #board .panel.on, #pitch .panel.on { display:block; }
-#board .crate { font-size:1.45rem; letter-spacing:-.03em; margin:0 0 .35rem; }
+.tag-panel { background:radial-gradient(ellipse at 80% 20%, rgba(255,61,138,.16), transparent 46%); border-radius:16px; } .tag-kicker { color:#e4b83a; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; } .tag-word { font-size:clamp(3rem,8vw,5rem); letter-spacing:-.04em; margin:.1rem 0 .3rem; } .tag-word span { color:#ff3d8a; } .tag-panel .stat b { color:#ff3d8a; } .tag-hero { height:min(42vh,380px); object-position:center; } #board .crate { font-size:1.45rem; letter-spacing:-.03em; margin:0 0 .35rem; }
 #board .photo { height:340px; object-position:center 30%; }
 #board .dock-pic { width:100%; height:380px; object-fit:cover; object-position:center 28%; border-radius:14px; border:1px solid var(--line); display:block; }
 #board .collide { height:min(46vh, 440px); object-position:center 42%; }
@@ -251,7 +253,7 @@ button, .chip, .pills button { touch-action:manipulation; }
 <button type="button" data-panel="ppi">PPI + CADveyor</button>
 <button type="button" data-panel="ss">S+S + Grants</button>
 <button type="button" data-panel="cash">Cash Rotisserie</button>
-<button type="button" class="hot" data-panel="tag">TAG</button>
+<button type="button" class="tag" data-panel="tag">TAG</button>
 <button type="button" data-panel="ethr">ETHR/Nexus</button>
 </div>
 <div class="stage">
@@ -306,13 +308,11 @@ button, .chip, .pills button { touch-action:manipulation; }
 <div class="photo-wrap"><img class="photo" src="images_cash.jpg" alt="Cash" /><span class="photo-label">The pit</span></div>
 <div class="card"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">Completed</span><span class="chip live">AI trading</span></div><h3>Cash Rotisserie</h3><p>Sell puts, sell calls, collect premium. Extra crispy.</p></div>
 </div></div>
-<div class="panel" id="panel-tag">
-<h3 class="crate">TAG — <span>kills meetings, not momentum</span></h3>
-<p class="lede">Site v1 live. In-house build next. Standups melt.</p>
-<div class="grid-2">
-<div class="photo-wrap"><img class="photo" src="tag_here.jpg" alt="TAG" /><span class="photo-label">Workspace brain</span></div>
-<div class="photo-wrap"><img class="photo" src="tag_console.jpg" alt="TAG console" /><span class="photo-label">TAG Integration</span></div>
-</div>
+<div class="panel tag-panel" id="panel-tag">
+<p class="tag-kicker">Stop forcing your brain to work on somebody else's schedule</p>
+<h3 class="crate tag-word">TA<span>G</span></h3>
+<p class="lede">The asynchronous AI proxy that kills meetings, not momentum.</p>
+<div class="photo-wrap"><img class="dock-pic tag-hero" src="tag_brand.jpg" alt="TAG brand" /></div>
 <div class="grid-3" style="margin-top:.8rem">
 <div class="card stat"><b>31H</b><span>Calendar Tetris wasted per week</span></div>
 <div class="card stat"><b>2–3D</b><span>Timezone tax</span></div>
