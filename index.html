@@ -71,24 +71,30 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #booth input[type=text] { width:100%; background:rgba(10,12,14,.7); border:1px solid var(--line); color:var(--text); border-radius:10px; padding:.45rem .6rem; font:inherit; }
 #booth .sold { background:transparent; color:#fbbf24; border:1px solid #fbbf24; border-radius:999px; padding:.3rem .55rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
 #booth .sold.on { background:#fbbf24; color:#1c1404; }
-#booth .days { display:flex; flex-wrap:wrap; gap:.35rem; margin:.6rem 0 1rem; }
+#booth .days { display:flex; flex-wrap:wrap; gap:.35rem; margin:.6rem 0 .4rem; }
 #booth .days button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); border-radius:999px; padding:.35rem .6rem; font:inherit; font-size:.72rem; font-weight:700; cursor:pointer; }
 #booth .days button.on { background:var(--teal); color:#000; border-color:var(--teal); }
+#booth .stops { display:grid; gap:.45rem; margin:.2rem 0 .8rem; }
+#booth .stop { display:grid; grid-template-columns:42px 1fr 92px; gap:.35rem; align-items:center; }
+#booth .stop b { font-size:.72rem; color:var(--text-mute); }
+#booth .stop.off { opacity:.35; }
 #market .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.8rem 0 0; }
 #market .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
 #market .pills button.on { background:var(--teal); color:#000; border-color:var(--teal); }
 #market .cal { display:none; margin-top:.9rem; }
 #market .cal.on { display:block; }
 #market .cal-card { background:rgba(22,24,28,.82); border:1px solid var(--line); border-radius:16px; padding:1.1rem 1.2rem 1.2rem; }
-#market .cal-card .where { font-size:1.35rem; letter-spacing:-.03em; margin:.2rem 0 .25rem; }
-#market .facts { display:grid; grid-template-columns:1.4fr .8fr; gap:.6rem; margin:.7rem 0 .9rem; }
-#market .facts div { background:rgba(10,12,14,.55); border:1px solid var(--line); border-radius:12px; padding:.65rem .75rem; }
-#market .facts span { display:block; color:var(--teal); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; font-weight:700; margin-bottom:.2rem; }
-#market .facts b { font-size:.95rem; font-weight:700; }
+#market .cal-card .where { font-size:1.35rem; letter-spacing:-.03em; margin:.2rem 0 .7rem; }
 #market .week { display:grid; grid-template-columns:repeat(7,1fr); gap:.4rem; }
-#market .week b { display:block; text-align:center; border:1px solid var(--line); background:var(--bg-3); color:var(--text-mute); border-radius:12px; padding:.7rem .2rem; font-size:.78rem; }
+#market .week b { display:block; text-align:center; border:1px solid var(--line); background:var(--bg-3); color:var(--text-mute); border-radius:12px; padding:.65rem .2rem; font-size:.78rem; min-height:92px; }
 #market .week b.on { background:var(--teal); color:#000; border-color:var(--teal); }
-#market .week b span { display:block; font-weight:500; font-size:.68rem; margin-top:.2rem; }
+#market .week b .time, #market .week b .spot { display:block; font-weight:600; font-size:.62rem; line-height:1.2; margin-top:.15rem; }
+#market .stops { display:grid; gap:.4rem; margin-top:.85rem; }
+#market .stops div { display:grid; grid-template-columns:52px 1fr auto; gap:.6rem; align-items:center; background:rgba(10,12,14,.55); border:1px solid var(--line); border-radius:12px; padding:.55rem .7rem; }
+#market .stops div.off { display:none; }
+#market .stops b { color:var(--teal); font-size:.78rem; }
+#market .stops span { color:var(--text); font-size:.88rem; }
+#market .stops em { color:#000; background:var(--teal); font-style:normal; font-weight:800; font-size:.72rem; padding:.25rem .5rem; border-radius:999px; }
 #market .stall { display:none; grid-template-columns:1fr 1fr; gap:.8rem; margin-top:.9rem; }
 #market .stall.on { display:grid; }
 #market .item { background:rgba(22,24,28,.78); border:1px solid var(--line); border-radius:16px; overflow:hidden; position:relative; }
@@ -146,7 +152,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #pitch .thanks { display:none; margin-top:.8rem; }
 #pitch.sent .thanks { display:block; }
 #pitch.sent form { display:none; }
-@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row,#market .stall.on,#market .facts { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } .booth-btn { left:16px; top:58px; } #market .week { grid-template-columns:repeat(4,1fr); } }
+@media (max-width:860px) { .grid-2,.grid-3,#overview .status-row,#market .stall.on { grid-template-columns:1fr; } nav.dots { display:none; } #board .photo { height:260px; } #board .dock-pic { height:300px; } #board .collide { height:220px; } #overview .pipeline { height:220px; } #board .books { grid-template-columns:1fr; } #board .book img { height:180px; } .booth-btn { left:16px; top:58px; } #market .week { grid-template-columns:repeat(2,1fr); } #booth .stop { grid-template-columns:36px 1fr; } #booth .stop input:last-child { grid-column:2; } }
 </style>
 </head>
 <body>
@@ -176,18 +182,24 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <button class="close" type="button" data-close="1">x</button>
 <p class="who">Vendor door · booth code 441</p>
 <h2>Update the board</h2>
-<p class="fine">Name. Line. Price. Sold out. Location. Time. Done.</p>
+<p class="fine">Name. Line. Price. Then a stop for each day.</p>
 <div class="item-block"><div class="row"><input type="text" value="Slap Peaches" data-name="peaches" /><input type="text" value="$6" data-price="peaches" /><button type="button" class="sold" data-out="peaches">Sold out</button></div><input class="blurb" type="text" value="They started it." data-blurb="peaches" /></div>
 <div class="item-block"><div class="row"><input type="text" value="Alibi Eggs" data-name="eggs" /><input type="text" value="$8" data-price="eggs" /><button type="button" class="sold" data-out="eggs">Sold out</button></div><input class="blurb" type="text" value="Home all night. Allegedly." data-blurb="eggs" /></div>
 <div class="item-block"><div class="row"><input type="text" value="Union Honey" data-name="honey" /><input type="text" value="$12" data-price="honey" /><button type="button" class="sold" data-out="honey">Sold out</button></div><input class="blurb" type="text" value="The bees have a contract." data-blurb="honey" /></div>
 <div class="item-block"><div class="row"><input type="text" value="Rumor Bread" data-name="bread" /><input type="text" value="$5" data-price="bread" /><button type="button" class="sold" data-out="bread">Sold out</button></div><input class="blurb" type="text" value="Still warm. Still talking." data-blurb="bread" /></div>
-<label class="field" for="booth-loc">Location</label>
-<input type="text" id="booth-loc" value="Henderson Farmers Market, stall 12" />
-<label class="field" for="booth-hours">Time</label>
-<input type="text" id="booth-hours" value="8:00a – 1:00p" />
 <p class="who" style="margin-top:1rem">This week · teal means open</p>
 <div class="days" id="days">
 <button type="button" class="on">Thu</button><button type="button" class="on">Fri</button><button type="button" class="on">Sat</button><button type="button">Sun</button><button type="button">Mon</button><button type="button" class="on">Tue</button><button type="button">Wed</button>
+</div>
+<p class="who">Stops · lot can move</p>
+<div class="stops" id="stops">
+<div class="stop" data-stop="Thu"><b>Thu</b><input type="text" data-stop-loc="Thu" value="Henderson market, stall 12" /><input type="text" data-stop-time="Thu" value="8a–1p" /></div>
+<div class="stop" data-stop="Fri"><b>Fri</b><input type="text" data-stop-loc="Fri" value="Downtown lot, Water St" /><input type="text" data-stop-time="Fri" value="4p–8p" /></div>
+<div class="stop" data-stop="Sat"><b>Sat</b><input type="text" data-stop-loc="Sat" value="Summerlin market" /><input type="text" data-stop-time="Sat" value="8a–1p" /></div>
+<div class="stop off" data-stop="Sun"><b>Sun</b><input type="text" data-stop-loc="Sun" value="Dark" /><input type="text" data-stop-time="Sun" value="—" /></div>
+<div class="stop off" data-stop="Mon"><b>Mon</b><input type="text" data-stop-loc="Mon" value="Dark" /><input type="text" data-stop-time="Mon" value="—" /></div>
+<div class="stop" data-stop="Tue"><b>Tue</b><input type="text" data-stop-loc="Tue" value="Food truck row, Boulder Hwy" /><input type="text" data-stop-time="Tue" value="11a–2p" /></div>
+<div class="stop off" data-stop="Wed"><b>Wed</b><input type="text" data-stop-loc="Wed" value="Dark" /><input type="text" data-stop-time="Wed" value="—" /></div>
 </div>
 <button class="live" id="booth-live" type="button">Board is live</button>
 <p class="fine" id="booth-note">Demo only. Nothing saves. The market still feels it.</p>
@@ -306,9 +318,9 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <section class="page" id="market"><div class="inner">
 <p class="kicker">Farmers market demo · stall board</p>
 <h2>The board they <span>actually read</span></h2>
-<p class="lede">Tap a pill. Crates, or the week they show up. Booth if something changes.</p>
+<p class="lede">Tap a pill. Crates, or the week they show up. Booth if the truck moves.</p>
 <div class="pills"><button type="button" id="mock-stall">Mock stall</button><button type="button" id="mock-cal">When we're here</button></div>
-<div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">When the stall is up</h3><div class="facts"><div><span>Location</span><b id="cal-loc">Henderson Farmers Market, stall 12</b></div><div><span>Time</span><b id="cal-hours">8:00a – 1:00p</b></div></div><div class="week" id="cal-week"><b class="on" data-day="Thu">Thu<span>8:00a – 1:00p</span></b><b class="on" data-day="Fri">Fri<span>8:00a – 1:00p</span></b><b class="on" data-day="Sat">Sat<span>8:00a – 1:00p</span></b><b data-day="Sun">Sun<span>dark</span></b><b data-day="Mon">Mon<span>dark</span></b><b class="on" data-day="Tue">Tue<span>8:00a – 1:00p</span></b><b data-day="Wed">Wed<span>dark</span></b></div></div></div>
+<div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">The truck moves</h3><div class="week" id="cal-week"><b class="on" data-day="Thu">Thu<span class="time">8a–1p</span><span class="spot">Henderson, stall 12</span></b><b class="on" data-day="Fri">Fri<span class="time">4p–8p</span><span class="spot">Downtown lot</span></b><b class="on" data-day="Sat">Sat<span class="time">8a–1p</span><span class="spot">Summerlin</span></b><b data-day="Sun">Sun<span class="time">dark</span><span class="spot">—</span></b><b data-day="Mon">Mon<span class="time">dark</span><span class="spot">—</span></b><b class="on" data-day="Tue">Tue<span class="time">11a–2p</span><span class="spot">Boulder Hwy</span></b><b data-day="Wed">Wed<span class="time">dark</span><span class="spot">—</span></b></div><div class="stops" id="cal-stops"><div data-row="Thu"><b>Thu</b><span>Henderson market, stall 12</span><em>8a–1p</em></div><div data-row="Fri"><b>Fri</b><span>Downtown lot, Water St</span><em>4p–8p</em></div><div data-row="Sat"><b>Sat</b><span>Summerlin market</span><em>8a–1p</em></div><div class="off" data-row="Sun"><b>Sun</b><span>Dark</span><em>—</em></div><div class="off" data-row="Mon"><b>Mon</b><span>Dark</span><em>—</em></div><div data-row="Tue"><b>Tue</b><span>Food truck row, Boulder Hwy</span><em>11a–2p</em></div><div class="off" data-row="Wed"><b>Wed</b><span>Dark</span><em>—</em></div></div></div></div>
 <div class="stall" id="stall">
 <article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span></div></article>
 <article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span></div></article>
@@ -356,7 +368,7 @@ const mock=document.getElementById("mock-stall");
 const stall=document.getElementById("stall");
 const calBtn=document.getElementById("mock-cal");
 const cal=document.getElementById("cal");
-const syncWeek=()=>{const hours=document.getElementById("booth-hours").value||"open";document.querySelectorAll("#days button").forEach((b)=>{const day=b.textContent.trim();const cell=document.querySelector('#cal-week [data-day="'+day+'"]');if(!cell)return;const open=b.classList.contains("on");cell.classList.toggle("on",open);cell.querySelector("span").textContent=open?hours:"dark";});};
+const syncWeek=()=>{document.querySelectorAll("#days button").forEach((b)=>{const day=b.textContent.trim();const open=b.classList.contains("on");const stop=document.querySelector('#stops [data-stop="'+day+'"]');if(stop)stop.classList.toggle("off",!open);const loc=(document.querySelector('[data-stop-loc="'+day+'"]')||{}).value||"";const time=(document.querySelector('[data-stop-time="'+day+'"]')||{}).value||"";const cell=document.querySelector('#cal-week [data-day="'+day+'"]');if(cell){cell.classList.toggle("on",open);cell.querySelector(".time").textContent=open?time:"dark";cell.querySelector(".spot").textContent=open?loc:"—";}const row=document.querySelector('#cal-stops [data-row="'+day+'"]');if(row){row.classList.toggle("off",!open);row.querySelector("span").textContent=loc||"Set a stop";row.querySelector("em").textContent=time||"—";}});};
 if(mock)mock.addEventListener("click",()=>{const on=!stall.classList.contains("on");stall.classList.toggle("on",on);mock.classList.toggle("on",on);mock.textContent=on?"Close stall":"Mock stall";if(on){cal.classList.remove("on");calBtn.classList.remove("on");}});
 if(calBtn)calBtn.addEventListener("click",()=>{const on=!cal.classList.contains("on");cal.classList.toggle("on",on);calBtn.classList.toggle("on",on);if(on){stall.classList.remove("on");mock.classList.remove("on");mock.textContent="Mock stall";}});
 const booth=document.getElementById("booth");
@@ -369,8 +381,7 @@ booth.querySelectorAll("[data-price]").forEach((inp)=>inp.addEventListener("inpu
 booth.querySelectorAll("[data-blurb]").forEach((inp)=>inp.addEventListener("input",()=>{const el=document.querySelector('[data-line="'+inp.dataset.blurb+'"]');if(el)el.textContent=inp.value||"No line yet.";}));
 booth.querySelectorAll("[data-out]").forEach((b)=>b.addEventListener("click",()=>{b.classList.toggle("on");const card=document.getElementById("item-"+b.dataset.out);if(card)card.classList.toggle("out",b.classList.contains("on"));b.textContent=b.classList.contains("on")?"Back":"Sold out";}));
 document.getElementById("days").addEventListener("click",(e)=>{const b=e.target.closest("button");if(b){b.classList.toggle("on");syncWeek();}});
-document.getElementById("booth-loc").addEventListener("input",(e)=>{document.getElementById("cal-loc").textContent=e.target.value||"Set a location";});
-document.getElementById("booth-hours").addEventListener("input",(e)=>{document.getElementById("cal-hours").textContent=e.target.value||"Set a time";syncWeek();});
+document.querySelectorAll("[data-stop-loc],[data-stop-time]").forEach((inp)=>inp.addEventListener("input",syncWeek));
 document.getElementById("booth-live").addEventListener("click",()=>{document.getElementById("booth-note").textContent="Board updated. Still theater. They will not know.";openBooth(false);});
 const shop=document.getElementById("shop");
 const cartBtn=document.getElementById("cart-btn");
