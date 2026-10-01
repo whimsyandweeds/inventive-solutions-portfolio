@@ -147,7 +147,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #board .dock-pic { width:100%; height:380px; object-fit:cover; object-position:center 28%; border-radius:14px; border:1px solid var(--line); display:block; }
 #board .collide { height:min(46vh, 440px); object-position:center 42%; }
 #board .couple { background:rgba(10,16,14,.9); border-color:#2f4a3c; }
-.couple a { color:var(--teal); font-weight:700; }#board .couple .eyebrow { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin-bottom:.35rem; }
+.couple a, .card a { color:var(--teal); font-weight:700; }#board .couple .eyebrow { font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); font-weight:700; margin-bottom:.35rem; }
 #board .couple h3 em { color:var(--teal); font-style:normal; }
 #board .stat b { display:block; font-size:1.35rem; color:var(--purple-neon); font-weight:800; }
 #board .stat span { color:var(--text-mute); font-size:.78rem; display:block; margin-top:.15rem; }
@@ -243,7 +243,7 @@ button, .chip, .pills button { touch-action:manipulation; }
 <p class="lede">Ten crates. Two tracks. TAG is the group chat they have not all joined yet. Tap a pill.</p>
 <div class="status-row">
 <div class="card pulse"><h3>No cosplay</h3><p>The crates do not lie. Deets are on the belt.</p><a class="jump" href="#board">On the belt</a></div>
-<div class="card"><div class="stat-big">6 SITES</div><p>Invent, DocketDate, PPI, S+S, TAG, LUMA-SYNC</p></div>
+<div class="card"><div class="stat-big">7 SITES</div><p>Invent, DocketDate, PPI, S+S, TAG, LUMA-SYNC, CTO Pools</p></div>
 <div class="card"><div class="stat-big">7 APPS</div><p>2 done, Grants and Cash Rot. 3 in testing, Avi, CADveyor, Nexus. 2 in the shop, DocketDate and TAG.</p></div>
 <div class="card goal-tag"><span class="tag-pill"><i></i>TAG INTEGRATION</span><div class="stat-big">100%</div><p>Goal — every project talks through TAG</p></div>
 </div>
@@ -256,6 +256,7 @@ button, .chip, .pills button { touch-action:manipulation; }
 <button type="button" class="on" data-panel="invent">INVENT + Whimsy</button>
 <button type="button" data-panel="avi">Avi</button>
 <button type="button" data-panel="cash">Cash Rotisserie</button>
+<button type="button" data-panel="cto">CTO Pools</button>
 <button type="button" data-panel="docket">DocketDate</button>
 <button type="button" data-panel="ethr">ETHR/Nexus</button>
 <button type="button" data-panel="ppi">PPI + CADveyor</button>
@@ -335,6 +336,12 @@ button, .chip, .pills button { touch-action:manipulation; }
 <div class="photo-wrap"><img class="photo" src="images_cash.jpg" alt="Cash" /><span class="photo-label">The pit</span></div>
 <div class="card"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">App complete</span></div><h3>Cash Rotisserie</h3><p>Sell puts, sell calls, collect premium. Extra crispy.</p></div>
 </div></div>
+<div class="panel" id="panel-cto">
+<h3 class="crate">CTO Pools — <span>dead tokens, live room</span></h3>
+<p class="lede">Community funding for abandoned takeovers on Solana. The pool earns while the vote cooks.</p>
+<div class="photo-wrap"><img class="dock-pic" src="cto_pools.jpg" alt="CTO Pools" /><span class="photo-label">The revival pool</span></div>
+<div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip live">Website live</span><span class="chip">Devnet</span></div><h3>CTO Pools</h3><p>Stake while you wait. Fund the takeover. Vote the revival. Dull coins in, lit coins out.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://ctopools.com/" target="_blank" rel="noopener">ctopools.com</a></p></div>
+</div>
 <div class="panel tag-panel" id="panel-tag">
 <p class="tag-kicker">Stop forcing your brain to work on somebody else's schedule</p>
 <h3 class="crate tag-word">TA<span>G</span></h3>
