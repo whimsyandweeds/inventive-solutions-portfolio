@@ -161,7 +161,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #board .book b { display:block; font-size:.82rem; line-height:1.25; }
 #board .book span { color:var(--text-mute); font-size:.72rem; display:block; margin-top:.25rem; }
 #board .book.soon { min-height:72px; display:flex; align-items:center; justify-content:center; text-align:center; color:var(--text-mute); padding:.2rem; border-style:dashed; grid-column:1 / -1; }
-.spark-vid { width:100%; height:min(62vh,560px); object-fit:cover; border-radius:16px; border:1px solid var(--line); margin-bottom:.7rem; display:block; background:#0c1c20; } #pitch .spark .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; }
+.spark a { color:var(--teal); font-weight:700; } .spark-vid { width:100%; height:min(62vh,560px); object-fit:cover; border-radius:16px; border:1px solid var(--line); margin-bottom:.7rem; display:block; background:#0c1c20; } #pitch .spark .who { color:var(--teal); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:700; margin-bottom:.35rem; }
 #pitch form { display:grid; gap:.7rem; margin-top:.2rem; }
 #pitch label { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); font-weight:700; }
 #pitch input, #pitch textarea, #pitch select { width:100%; background:rgba(10,12,14,.7); border:1px solid var(--line); color:var(--text); border-radius:12px; padding:.75rem .9rem; font:inherit; }
@@ -243,7 +243,7 @@ button, .chip, .pills button { touch-action:manipulation; }
 <p class="lede">Ten crates. Two tracks. TAG is the group chat they have not all joined yet. Tap a pill.</p>
 <div class="status-row">
 <div class="card pulse"><h3>No cosplay</h3><p>The crates do not lie. Deets are on the belt.</p><a class="jump" href="#board">On the belt</a></div>
-<div class="card"><div class="stat-big">5 SITES</div><p>Invent, DocketDate, PPI, S+S, TAG</p></div>
+<div class="card"><div class="stat-big">6 SITES</div><p>Invent, DocketDate, PPI, S+S, TAG, LUMA-SYNC</p></div>
 <div class="card"><div class="stat-big">7 APPS</div><p>2 done, Grants and Cash Rot. 3 in testing, Avi, CADveyor, Nexus. 2 in the shop, DocketDate and TAG.</p></div>
 <div class="card goal-tag"><span class="tag-pill"><i></i>TAG INTEGRATION</span><div class="stat-big">100%</div><p>Goal — every project talks through TAG</p></div>
 </div>
@@ -374,7 +374,7 @@ button, .chip, .pills button { touch-action:manipulation; }
 <button type="button" class="hot" data-spark="yeet">Pitch one</button>
 </div>
 <div class="stage">
-<div class="panel on" id="spark-luma"><video class="spark-vid" src="luma_sync.mp4" autoplay muted loop playsinline poster=""></video><div class="card spark"><p class="who">Adult OS</p><h3>LUMA-SYNC — Brain Defrag</h3><p>Too many tabs in the skull. A nightly defrag so morning-you inherits a clean drive.</p></div></div>
+<div class="panel on" id="spark-luma"><video class="spark-vid" src="luma_sync.mp4" autoplay muted loop playsinline poster=""></video><div class="card spark"><p class="who">Adult OS</p><div class="chips" style="margin:0 0 .55rem"><span class="chip live">Website live</span></div><h3>LUMA-SYNC — Brain Defrag</h3><p>Too many tabs in the skull. A nightly defrag so morning-you inherits a clean drive.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://luma-sync.com/" target="_blank" rel="noopener">luma-sync.com</a></p></div></div>
 <div class="panel" id="spark-luna"><div class="card spark"><p class="who">Kid + the adult they become</p><h3>LUNA-SYNC — the night light that stays</h3><p>For the kids who do not feel safe, and the adults who grew up that way.</p></div></div>
 <div class="panel" id="spark-lie"><div class="card spark"><p class="who">Party, no weasel clause</p><h3>Can't Lie</h3><p>Truth or dare. The AI will not let you duck.</p></div></div>
 <div class="panel" id="spark-dial"><div class="card spark"><p class="who">1:47am you vs morning you</p><h3>Don't Dial</h3><p>The last call at 1:47am never leaves the phone.</p></div></div>
