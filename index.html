@@ -85,7 +85,7 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 #booth .stop { display:grid; grid-template-columns:42px 1fr 92px; gap:.35rem; align-items:center; }
 #booth .stop b { font-size:.72rem; color:var(--text-mute); }
 #booth .stop.off { opacity:.35; }
-#market.page { justify-content:flex-start; }
+.demo-flag { display:inline-flex; align-items:center; gap:.4rem; margin:0 0 .7rem; border:1px dashed #fbbf24; color:#fbbf24; background:rgba(251,191,36,.08); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; font-weight:800; padding:.35rem .7rem; border-radius:999px; width:fit-content; }#market.page { justify-content:flex-start; }
 #market .inner { overflow-y:auto; }
 #market .pills { display:flex; flex-wrap:wrap; gap:.4rem; margin:.8rem 0 0; }
 #market .pills button { border:1px solid var(--line); background:var(--bg-3); color:var(--text-dim); font:inherit; font-size:.78rem; font-weight:700; padding:.4rem .75rem; border-radius:999px; cursor:pointer; }
@@ -218,8 +218,8 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <a href="#hero" class="active" title="Cover"></a>
 <a href="#overview" title="Where we are"></a>
 <a href="#board" title="The board"></a>
-<a href="#market" title="Market board"></a>
 <a href="#pitch" title="Sparks + belt"></a>
+<a href="#market" title="Demo stall"></a>
 </nav>
 <section class="page" id="hero"><div class="inner"><p class="sub">Scenery integrated · Logos in the wild</p><h1>INVENTIVE SOLUTIONS<br /><span>PORTFOLIO PIPELINE</span></h1></div></section>
 <section class="page" id="overview"><div class="inner">
@@ -324,19 +324,6 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 <div class="book soon"><p><b>AI takeover</b><span>Cover incoming. Title in the works.</span></p></div>
 </div></div></div>
 </div></div></section>
-<section class="page" id="market"><div class="inner">
-<p class="kicker">Farmers market · no witnesses</p>
-<h2>Crates with <span>priors</span></h2>
-<p class="lede">The peaches swung first. The eggs have an alibi. The honey is union.</p>
-<div class="pills"><button type="button" id="mock-stall">Mock stall</button><button type="button" id="mock-cal">When we're here</button></div>
-<div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">The truck moves</h3><div class="week" id="cal-week"><b class="on" data-day="Thu">Thu<span class="time">8a–1p</span><span class="spot">Henderson, stall 12</span></b><b class="on" data-day="Fri">Fri<span class="time">4p–8p</span><span class="spot">Downtown lot</span></b><b class="on" data-day="Sat">Sat<span class="time">8a–1p</span><span class="spot">Summerlin</span></b><b data-day="Sun">Sun<span class="time">dark</span><span class="spot">—</span></b><b data-day="Mon">Mon<span class="time">dark</span><span class="spot">—</span></b><b class="on" data-day="Tue">Tue<span class="time">11a–2p</span><span class="spot">Boulder Hwy</span></b><b data-day="Wed">Wed<span class="time">dark</span><span class="spot">—</span></b></div><div class="stops" id="cal-stops"><div data-row="Thu"><b>Thu</b><span>Henderson market, stall 12</span><em>8a–1p</em></div><div data-row="Fri"><b>Fri</b><span>Downtown lot, Water St</span><em>4p–8p</em></div><div data-row="Sat"><b>Sat</b><span>Summerlin market</span><em>8a–1p</em></div><div class="off" data-row="Sun"><b>Sun</b><span>Dark</span><em>—</em></div><div class="off" data-row="Mon"><b>Mon</b><span>Dark</span><em>—</em></div><div data-row="Tue"><b>Tue</b><span>Food truck row, Boulder Hwy</span><em>11a–2p</em></div><div class="off" data-row="Wed"><b>Wed</b><span>Dark</span><em>—</em></div></div></div></div>
-<div class="stall" id="stall">
-<article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span><div class="buy"><button type="button" data-step="-1" data-id="peaches">−</button><i data-n="peaches">0</i><button type="button" data-step="1" data-id="peaches">+</button><button type="button" class="drop" data-clear="peaches">Remove</button><span class="left" data-left="peaches">12 left</span></div></div></article>
-<article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span><div class="buy"><button type="button" data-step="-1" data-id="eggs">−</button><i data-n="eggs">0</i><button type="button" data-step="1" data-id="eggs">+</button><button type="button" class="drop" data-clear="eggs">Remove</button><span class="left" data-left="eggs">12 left</span></div></div></article>
-<article class="item" id="item-honey"><img src="menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span data-line="honey">The bees have a contract.</span><div class="buy"><button type="button" data-step="-1" data-id="honey">−</button><i data-n="honey">0</i><button type="button" data-step="1" data-id="honey">+</button><button type="button" class="drop" data-clear="honey">Remove</button><span class="left" data-left="honey">12 left</span></div></div></article>
-<article class="item" id="item-bread"><img src="menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span data-line="bread">Still warm. Still talking.</span><div class="buy"><button type="button" data-step="-1" data-id="bread">−</button><i data-n="bread">0</i><button type="button" data-step="1" data-id="bread">+</button><button type="button" class="drop" data-clear="bread">Remove</button><span class="left" data-left="bread">12 left</span></div></div></article>
-</div>
-</div></section>
 <section class="page" id="pitch"><div class="inner">
 <p class="kicker">Still on the stove · then yeet a new one</p>
 <h2>Sparks on the <span>belt</span></h2>
@@ -363,6 +350,20 @@ nav.dots a.active { background:var(--teal); border-color:var(--teal); }
 </form>
 <div class="card thanks"><h3>Belt ate it.</h3><p>Spine or chip. No calendar invite.</p></div>
 </div></div></div></section>
+<section class="page" id="market"><div class="inner">
+<p class="kicker">Demo only · not a live project</p>
+<div class="demo-flag">Demo stall · client theater</div>
+<h2>Crates with <span>priors</span></h2>
+<p class="lede">The peaches swung first. The eggs have an alibi. The honey is union.</p>
+<div class="pills"><button type="button" id="mock-stall">Mock stall</button><button type="button" id="mock-cal">When we're here</button></div>
+<div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">The truck moves</h3><div class="week" id="cal-week"><b class="on" data-day="Thu">Thu<span class="time">8a–1p</span><span class="spot">Henderson, stall 12</span></b><b class="on" data-day="Fri">Fri<span class="time">4p–8p</span><span class="spot">Downtown lot</span></b><b class="on" data-day="Sat">Sat<span class="time">8a–1p</span><span class="spot">Summerlin</span></b><b data-day="Sun">Sun<span class="time">dark</span><span class="spot">—</span></b><b data-day="Mon">Mon<span class="time">dark</span><span class="spot">—</span></b><b class="on" data-day="Tue">Tue<span class="time">11a–2p</span><span class="spot">Boulder Hwy</span></b><b data-day="Wed">Wed<span class="time">dark</span><span class="spot">—</span></b></div><div class="stops" id="cal-stops"><div data-row="Thu"><b>Thu</b><span>Henderson market, stall 12</span><em>8a–1p</em></div><div data-row="Fri"><b>Fri</b><span>Downtown lot, Water St</span><em>4p–8p</em></div><div data-row="Sat"><b>Sat</b><span>Summerlin market</span><em>8a–1p</em></div><div class="off" data-row="Sun"><b>Sun</b><span>Dark</span><em>—</em></div><div class="off" data-row="Mon"><b>Mon</b><span>Dark</span><em>—</em></div><div data-row="Tue"><b>Tue</b><span>Food truck row, Boulder Hwy</span><em>11a–2p</em></div><div class="off" data-row="Wed"><b>Wed</b><span>Dark</span><em>—</em></div></div></div></div>
+<div class="stall" id="stall">
+<article class="item" id="item-peaches"><img src="menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span><div class="buy"><button type="button" data-step="-1" data-id="peaches">−</button><i data-n="peaches">0</i><button type="button" data-step="1" data-id="peaches">+</button><button type="button" class="drop" data-clear="peaches">Remove</button><span class="left" data-left="peaches">12 left</span></div></div></article>
+<article class="item" id="item-eggs"><img src="menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span><div class="buy"><button type="button" data-step="-1" data-id="eggs">−</button><i data-n="eggs">0</i><button type="button" data-step="1" data-id="eggs">+</button><button type="button" class="drop" data-clear="eggs">Remove</button><span class="left" data-left="eggs">12 left</span></div></div></article>
+<article class="item" id="item-honey"><img src="menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span data-line="honey">The bees have a contract.</span><div class="buy"><button type="button" data-step="-1" data-id="honey">−</button><i data-n="honey">0</i><button type="button" data-step="1" data-id="honey">+</button><button type="button" class="drop" data-clear="honey">Remove</button><span class="left" data-left="honey">12 left</span></div></div></article>
+<article class="item" id="item-bread"><img src="menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span data-line="bread">Still warm. Still talking.</span><div class="buy"><button type="button" data-step="-1" data-id="bread">−</button><i data-n="bread">0</i><button type="button" data-step="1" data-id="bread">+</button><button type="button" class="drop" data-clear="bread">Remove</button><span class="left" data-left="bread">12 left</span></div></div></article>
+</div>
+</div></section>
 <script>
 const pages=[...document.querySelectorAll(".page")];
 const dots=[...document.querySelectorAll("nav.dots a")];
