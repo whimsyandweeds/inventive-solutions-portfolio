@@ -10,7 +10,14 @@
 <script>
 fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-portfolio/a0c354633d010553474d624dca1e767411ef6d77/index.html')
 .then(function(r){return r.text();})
-.then(function(t){document.open();document.write(t);document.close();})
+.then(function(t){
+  var m=t.match(/<div id="sure"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/);
+  if(m){
+    t=t.replace(m[0],'');
+    t=t.replace('<script>', m[0]+'\n<script>');
+  }
+  document.open(); document.write(t); document.close();
+})
 .catch(function(){document.body.textContent='Restore failed. Hard-refresh once more.';});
 </script>
 </body>
