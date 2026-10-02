@@ -18,16 +18,16 @@ fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-port
   function chip(label,cls,dot){var s=doc.createElement('span');s.className='chip '+cls;if(dot){var i=doc.createElement('i');s.appendChild(i);}s.appendChild(doc.createTextNode(label));return s;}
   function fill(id,groups){var boxes=doc.querySelectorAll('#'+id+' .chips');groups.forEach(function(group,n){if(!boxes[n])return;boxes[n].innerHTML='';group.forEach(function(item){boxes[n].appendChild(chip(item[0],item[1],item[2]));});});}
   fill('panel-invent',[[['Ads Active','act',1],['LIVE SITE','onair',1]]]);
-  fill('panel-avi',[[['App v1 Testing','test',1],['Ads Ready','ready',1],['Strategy Phase','talk',0]]]);
+  fill('panel-avi',[[['App v1 Testing','test',1],['Ads Ready','ready',1],['\uD83D\uDCAC Strategy Phase','talk',0]]]);
   fill('panel-cash',[[['LIVE APP','onair',1]]]);
   fill('panel-cto',[[['LIVE SITE','onair',1]]]);
-  fill('panel-docket',[[['Website v1','push',1],['Ads Ready','ready',1],['Strategy Phase','talk',0]]]);
+  fill('panel-docket',[[['Website v1','push',1],['Ads Ready','ready',1],['\uD83D\uDCAC Strategy Phase','talk',0]]]);
   fill('panel-ethr',[[['App v1 Testing','test',1]]]);
-  fill('panel-ppi',[[['LIVE SITE','onair',1],['Strategy Phase','talk',0]],[['App v1 Testing','test',1]]]);
+  fill('panel-ppi',[[['LIVE SITE','onair',1],['\uD83D\uDCAC Strategy Phase','talk',0]],[['App v1 Testing','test',1]]]);
   fill('panel-ss',[[['Website v1','push',1],['Ads Ready','ready',1]],[['LIVE APP','onair',1]]]);
   fill('panel-tag',[[['Website v1','push',1],['App in Shop','hold',0]]]);
   var luma=doc.getElementById('spark-luma');
-  if(luma){luma.id='panel-luma';luma.classList.remove('on');var ppi=doc.querySelector('#board-pills [data-panel="ppi"]');var b=doc.createElement('button');b.type='button';b.setAttribute('data-panel','luma');b.textContent='LUMA-SYNC';ppi.parentNode.insertBefore(b,ppi);doc.querySelector('#board .inner').appendChild(luma);var oldBtn=doc.querySelector('#pitch-pills [data-spark="luma"]');if(oldBtn)oldBtn.remove();var lunaBtn=doc.querySelector('#pitch-pills [data-spark="luna"]');if(lunaBtn)lunaBtn.classList.add('on');var luna=doc.getElementById('spark-luna');if(luna)luna.classList.add('on');var media=luma.querySelector('video,img');var card=luma.querySelector('.card');if(media&&card){var grid=doc.createElement('div');grid.className='grid-2 hug';var wrap=doc.createElement('div');wrap.className='photo-wrap';media.setAttribute('class','photo');wrap.appendChild(media);var side=doc.createElement('div');side.appendChild(card);grid.appendChild(wrap);grid.appendChild(side);luma.appendChild(grid);}fill('panel-luma',[[['LIVE SITE','onair',1],['Strategy Phase','talk',0],['Ads Ready','ready',1]]]);}
+  if(luma){luma.id='panel-luma';luma.classList.remove('on');var ppi=doc.querySelector('#board-pills [data-panel="ppi"]');var b=doc.createElement('button');b.type='button';b.setAttribute('data-panel','luma');b.textContent='LUMA-SYNC';ppi.parentNode.insertBefore(b,ppi);doc.querySelector('#board .inner').appendChild(luma);var oldBtn=doc.querySelector('#pitch-pills [data-spark="luma"]');if(oldBtn)oldBtn.remove();var lunaBtn=doc.querySelector('#pitch-pills [data-spark="luna"]');if(lunaBtn)lunaBtn.classList.add('on');var luna=doc.getElementById('spark-luna');if(luna)luna.classList.add('on');var media=luma.querySelector('video,img');var card=luma.querySelector('.card');if(media&&card){var grid=doc.createElement('div');grid.className='grid-2 hug';var wrap=doc.createElement('div');wrap.className='photo-wrap';media.setAttribute('class','photo');wrap.appendChild(media);var side=doc.createElement('div');side.appendChild(card);grid.appendChild(wrap);grid.appendChild(side);luma.appendChild(grid);}fill('panel-luma',[[['LIVE SITE','onair',1],['\uD83D\uDCAC Strategy Phase','talk',0],['Ads Ready','ready',1]]]);}
   var yeet=doc.querySelector('#pitch-pills [data-spark="yeet"]');if(yeet)yeet.parentNode.insertBefore(yeet,yeet.parentNode.firstChild);
   var vendor=doc.getElementById('vendor-pill');if(vendor)vendor.parentNode.insertBefore(vendor,vendor.parentNode.firstChild);
   t='<!DOCTYPE html>\n'+doc.documentElement.outerHTML;
