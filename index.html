@@ -23,7 +23,7 @@ fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-port
   fill('panel-cto',[[['LIVE SITE','onair',1]]]);
   fill('panel-docket',[[['Website v1','site',1],['Ads Ready','ad',1],['\uD83D\uDCAC Strategy Phase','talk',0]]]);
   fill('panel-ethr',[[['App v1 Testing','test',1]]]);var books=doc.querySelectorAll('#panel-ethr .book');[0,1].forEach(function(n){var b=books[n];if(!b)return;var p=b.querySelector('p');if(!p||p.querySelector('.onair'))return;p.insertBefore(chip('LIVE SITE','onair',1),p.querySelector('span'));});function tagOn(img){if(!img)return;var wrap=img.parentNode;if(!wrap.querySelector('.tag-pill')){if(!wrap.classList.contains('photo-wrap')){var w=doc.createElement('div');w.className='photo-wrap tag-shot';img.parentNode.insertBefore(w,img);w.appendChild(img);wrap=w;}var s=doc.createElement('span');s.className='tag-pill making';var dot=doc.createElement('i');s.appendChild(dot);s.appendChild(doc.createTextNode('TAG IN THE MAKING'));wrap.appendChild(s);}}tagOn(doc.querySelector('#panel-ethr .dock-pic'));doc.querySelectorAll('#panel-ethr .book img').forEach(tagOn);
-  fill('panel-ppi',[[['LIVE SITE','onair',1],['\uD83D\uDCAC Strategy Phase','talk',0]],[['App v1 Testing','test',1]]]);
+  fill('panel-ppi',[[['LIVE SITE','onair',1],['\uD83D\uDCAC Strategy Phase','talk',0]],[['App v1 Testing','test',1],['\uD83D\uDCAC Strategy Phase','talk',0]]]);
   fill('panel-ss',[[['Website v1','site',1],['Ads Ready','ad',1]],[['LIVE APP','onair',1]]]);
   fill('panel-tag',[[['Website v1','site',1],['App in Shop','hold',0]]]);
   var luma=doc.getElementById('spark-luma');
