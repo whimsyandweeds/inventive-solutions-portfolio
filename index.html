@@ -6,6 +6,12 @@
 <title>Inventive Solutions — Portfolio Pipeline</title>
 </head>
 <body>
-<p>Restoring the board. Hard-refresh in a moment.</p>
+<p>Putting the board back.</p>
+<script>
+fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-portfolio/a0c354633d010553474d624dca1e767411ef6d77/index.html')
+.then(function(r){return r.text();})
+.then(function(t){document.open();document.write(t);document.close();})
+.catch(function(){document.body.textContent='Restore failed. Hard-refresh once more.';});
+</script>
 </body>
 </html>
