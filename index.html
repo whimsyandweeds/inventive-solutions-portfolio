@@ -33,6 +33,9 @@ fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-port
   t='<!DOCTYPE html>\n'+doc.documentElement.outerHTML;
   t=t.replace('<h3>Project Pacific Inland</h3><p>Colorado is tapped. This one takes the ocean.</p>','<h3>Project Pacific Inland</h3><p>Colorado is tapped. This one takes the ocean.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://pacificinlandwater.com/" target="_blank" rel="noopener">pacificinlandwater.com</a></p>');
   t=t.replace('7 SITES','10 SITES').replace('Invent, DocketDate, PPI, S+S, TAG, LUMA-SYNC, CTO Pools','Invent, Whimsy and Weeds, DocketDate, PPI, S+S, TAG, LUMA-SYNC, CTO Pools, Decoding the Grid, Mommy Meanest');
+  t=t.replace('App v1 Testing</span>','LIVE SITE</span><span class="chip test"><i></i>App v1 Testing</span>');
+  t=t.replace('Avi holds the time so the hang happens.</p>','Avi holds the time so the hang happens.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://whimsyandweeds.github.io/avi-marketing/" target="_blank" rel="noopener">Avi v1</a></p>');
+  t=t.replace('10 SITES','11 SITES').replace('Mommy Meanest','Mommy Meanest, Avi');
   t=t.replace('</body>', extra+'</body>');
   document.open(); document.write(t); document.close();
 })
