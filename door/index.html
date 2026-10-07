@@ -18,7 +18,7 @@
   #door.bad{animation:shake .35s}
   @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
   #sheet{display:none;background:#efe8dc}
-  #sheet img{width:min(920px,100%);display:block;margin:0 auto}#jump{position:fixed;left:72px;bottom:16px;z-index:40;width:78px;height:78px;padding:6px;border:0;border-radius:50%;background:#efe8dc;box-shadow:0 12px 24px rgba(0,0,0,.5);cursor:pointer}#jump img{width:74px;height:74px;display:block}#out{position:fixed;left:16px;bottom:16px;z-index:40;width:44px;height:44px;display:grid;place-items:center;border:1px solid #3dd68c;border-radius:50%;background:#0c0e12;text-decoration:none}
+  #sheet img{width:min(920px,100%);display:block;margin:0 auto}#jump{position:fixed;left:72px;bottom:16px;z-index:40;width:78px;height:78px;padding:6px;border:0;border-radius:50%;background:#efe8dc;box-shadow:0 12px 24px rgba(0,0,0,.5);cursor:pointer}#jump img{width:74px;height:74px;display:block}#out{position:fixed;left:16px;bottom:16px;z-index:40;width:44px;height:44px;display:grid;place-items:center;border:1px solid #d2d2d2;border-radius:50%;background:#1a1a1c;text-decoration:none}
 </style>
 </head>
 <body>
@@ -31,7 +31,7 @@
     <button type="submit">Enter</button>
   </form>
 </div>
-<div id="sheet"><a id="out" href="../" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#3dd68c" stroke-width="1.8"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a><img src="docket-sheet.jpg" alt="Docket Date" /></div>
+<div id="sheet"><a id="out" href="../" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="1.8"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a><img src="docket-sheet.jpg" alt="Docket Date" /></div>
 <script>
 if(location.search.indexOf("open=1")>-1){document.getElementById("door").style.display="none";document.getElementById("sheet").style.display="block";}
 document.getElementById("door-form").addEventListener("submit", function(e){
