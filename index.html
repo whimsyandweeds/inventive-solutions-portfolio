@@ -63,7 +63,7 @@ function openBoard(){
   t=t.replace('Avi holds the time so the hang happens.</p>','Avi holds the time so the hang happens.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://meetavi.world/" target="_blank" rel="noopener">meetavi.world</a></p>');
   t=t.replace('10 SITES','11 SITES').replace('Mommy Meanest','Mommy Meanest, Avi');
   t=t.replace('<h3>Sophie + Sage</h3><p>Site and marketing done. Grants plugs into the service next.</p>','<h3>Sophie + Sage</h3><p>Site and marketing done. Grants plugs into the service next.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://whimsyandweeds.github.io/sophie-sage-v3/" target="_blank" rel="noopener">Sophie + Sage v1</a></p>');
-  t=t.replace('</body>', extra+'<button id="out" onclick="sessionStorage.removeItem(\'pipe-door\');location.href=\'./\'">OUT!</button><style>#out{position:fixed;top:14px;right:14px;z-index:9999;background:#123f38;color:#fff;border:1px solid #3dd68c;border-radius:999px;padding:8px 14px;letter-spacing:.08em;font:600 13px Inter,sans-serif}</style></body>');
+  t=t.replace('</body>', extra+'<button id="out" onclick="sessionStorage.removeItem(\'pipe-door\');location.href=\'./\'">OUT!</button><style>#out{position:fixed;top:14px;left:14px;z-index:9999;background:#123f38;color:#fff;border:1px solid #3dd68c;border-radius:999px;padding:8px 14px;letter-spacing:.08em;font:600 13px Inter,sans-serif}</style></body>');
   document.open(); document.write(t); document.close();
 })
 .catch(function(){document.body.textContent='Restore failed. Hard-refresh once more.';});
