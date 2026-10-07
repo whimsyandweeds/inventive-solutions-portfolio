@@ -71,7 +71,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 
 .pencil{margin-top:8px;border:1px solid #a855f7;background:transparent;color:#d8b4fe;border-radius:999px;padding:6px 12px;font-size:.85rem;cursor:pointer}
 .postit{margin:10px 0 0;padding:10px 12px 12px;background:#f5e7a2;color:#3a3208;font-size:.84rem;line-height:1.35;transform:rotate(-1.2deg);box-shadow:0 8px 16px rgba(0,0,0,.25)}
-.pin .stamp{color:#e4b83a !important}</style>
+.pin .stamp{color:#e4b83a !important}.postit[hidden]{display:none}</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back">←</a>
@@ -115,9 +115,18 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 </ul>
 </details>
 <button class="pencil" type="button" aria-label="Has a note">✏️ Note</button>
-<p class="postit">No sheet note on this one yet.</p>
+<p class="postit" hidden>No sheet note on this one yet.</p>
 </article>
 </div>
 </main>
+<script>
+document.querySelectorAll(".pencil").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var note=btn.nextElementSibling;
+    if(!note) return;
+    note.hidden=!note.hidden;
+  });
+});
+</script>
 </body>
 </html>
