@@ -94,7 +94,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 .pin{background-image:linear-gradient(rgba(228,184,58,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(228,184,58,.07) 1px,transparent 1px),linear-gradient(180deg,#2a2d32,#1c1e22);background-size:18px 18px,18px 18px,auto}
 .pin.hooked{background-image:linear-gradient(rgba(47,158,79,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(47,158,79,.1) 1px,transparent 1px),linear-gradient(180deg,#2a2d32,#1c1e22);background-size:18px 18px,18px 18px,auto}
 .pin.caution{background-image:linear-gradient(rgba(228,184,58,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(228,184,58,.12) 1px,transparent 1px),linear-gradient(180deg,#2a2d32,#1c1e22);background-size:18px 18px,18px 18px,auto}
-.face{position:absolute;right:18px;top:128px;width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #f4f1ea;z-index:3;box-shadow:0 6px 14px rgba(0,0,0,.45)}</style>
+.face{position:absolute;right:18px;top:128px;width:54px;height:54px;border-radius:50%;object-fit:cover;border:2px solid #f4f1ea;z-index:3;box-shadow:0 6px 14px rgba(0,0,0,.45)}.projects{margin-top:-6px}.proj{display:inline-block;margin:0;padding:7px 14px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.08em;background:transparent;cursor:pointer}.proj.avi{border:1px solid #a855f7;color:#fff}.proj.ss{border:1px solid #9caf9a;color:#fff}.keys .on{box-shadow:0 0 0 1px currentColor}</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back">←</a>
@@ -102,7 +102,8 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 <p class="kicker">COLLAB</p>
 <h1>People I have <span>not poked</span></h1>
 <p class="sub">Saved from the scroll. Still strangers.</p>
-<div class="keys"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
+<div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
+<div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj avi" type="button" data-project="AVI">AVI</button><button class="proj ss" type="button" data-project="S+S">S+S</button></div>
 <div class="wall">
 <article data-for="AVI" class="pin film" data-id="vegas">
 <div class="frame"><img src="vegas.jpg" alt="Vegas night, disposable flash" /></div>
@@ -348,16 +349,23 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
   var wall=document.querySelector(".wall");
   var keys=document.querySelector(".keys");
   if(!wall||!keys) return;
-  keys.addEventListener("click", function(e){
-    var btn=e.target.closest("button");
-    if(!btn) return;
-    keys.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
-    btn.classList.add("on");
-    var mode=btn.dataset.filter;
-    wall.querySelectorAll(".pin").forEach(function(card){
-      var hit=card.classList.contains("hooked");
-      var pending=!hit;
-      card.style.display=(mode==="all"||(mode==="hit"&&hit)||(mode==="pending"&&pending))?"":"none";
+  var status="all", project="all";
+  document.querySelectorAll(".keys").forEach(function(row){
+    row.addEventListener("click", function(e){
+      var btn=e.target.closest("button");
+      if(!btn) return;
+      row.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
+      btn.classList.add("on");
+      if(btn.dataset.filter) status=btn.dataset.filter;
+      if(btn.dataset.project) project=btn.dataset.project;
+      wall.querySelectorAll(".pin").forEach(function(card){
+        var hit=card.classList.contains("hooked");
+        var pending=!hit;
+        var proj=card.querySelector(".ss")?"S+S":"AVI";
+        var okStatus=status==="all"||(status==="hit"&&hit)||(status==="pending"&&pending);
+        var okProj=project==="all"||project===proj;
+        card.style.display=(okStatus&&okProj)?"":"none";
+      });
     });
   });
 })();
