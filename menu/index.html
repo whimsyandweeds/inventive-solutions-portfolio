@@ -274,7 +274,7 @@ html,body{background-color:#1a1c1f;background-attachment:fixed;background-image:
 h2 span,.kicker,.price,#market .price,.pills button.on,.week b.on,.stops em,.stops b{color:#08332e}
 h2 span,.kicker{color:#2ec4b6}
 .price,#market .price,.pills button.on,.week b.on,.stops em{background:#2ec4b6;border-color:#2ec4b6;color:#04221e}
-</style>
+.stall,.stall.on{display:grid !important} #booth.open,#shop.open{display:block !important}</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="1.8"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a>
@@ -331,7 +331,7 @@ h2 span,.kicker{color:#2ec4b6}
 <p class="lede">The peaches swung first. The eggs have an alibi. The honey is union.</p>
 <div class="pills"><button type="button" id="mock-stall" class="on">Mock stall</button><button type="button" id="mock-cal">When we're here</button></div>
 <div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">The truck moves</h3><div class="week" id="cal-week"><b data-day="Sun">Sun<span class="time">Empty</span><span class="spot"></span></b><b data-day="Mon">Mon<span class="time">Empty</span><span class="spot"></span></b><b class="on" data-day="Tue">Tue<span class="time">11a–2p</span><span class="spot">Boulder Hwy</span></b><b data-day="Wed">Wed<span class="time">Empty</span><span class="spot"></span></b><b class="on" data-day="Thu">Thu<span class="time">8a–1p</span><span class="spot">Henderson, stall 12</span></b><b class="on" data-day="Fri">Fri<span class="time">4p–8p</span><span class="spot">Downtown lot</span></b><b class="on" data-day="Sat">Sat<span class="time">8a–1p</span><span class="spot">Summerlin</span></b></div><div class="stops" id="cal-stops"><div class="off" data-row="Sun"><b>Sun</b><span>Empty</span><em>—</em></div><div class="off" data-row="Mon"><b>Mon</b><span>Empty</span><em>—</em></div><div data-row="Tue"><b>Tue</b><span>Food truck row, Boulder Hwy</span><em>11a–2p</em></div><div class="off" data-row="Wed"><b>Wed</b><span>Empty</span><em>—</em></div><div data-row="Thu"><b>Thu</b><span>Henderson market, stall 12</span><em>8a–1p</em></div><div data-row="Fri"><b>Fri</b><span>Downtown lot, Water St</span><em>4p–8p</em></div><div data-row="Sat"><b>Sat</b><span>Summerlin market</span><em>8a–1p</em></div>
-<div class="stall" id="stall">
+<div class="stall on" id="stall">
 <article class="item" id="item-peaches"><img src="../menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span><div class="buy"><button type="button" data-step="-1" data-id="peaches">−</button><i data-n="peaches">0</i><button type="button" data-step="1" data-id="peaches">+</button><button type="button" class="drop" data-clear="peaches">Remove</button><span class="left" data-left="peaches">12 left</span></div></div></article>
 <article class="item" id="item-eggs"><img src="../menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span><div class="buy"><button type="button" data-step="-1" data-id="eggs">−</button><i data-n="eggs">0</i><button type="button" data-step="1" data-id="eggs">+</button><button type="button" class="drop" data-clear="eggs">Remove</button><span class="left" data-left="eggs">12 left</span></div></div></article>
 <article class="item" id="item-honey"><img src="../menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span data-line="honey">The bees have a contract.</span><div class="buy"><button type="button" data-step="-1" data-id="honey">−</button><i data-n="honey">0</i><button type="button" data-step="1" data-id="honey">+</button><button type="button" class="drop" data-clear="honey">Remove</button><span class="left" data-left="honey">12 left</span></div></div></article>
@@ -366,8 +366,9 @@ if(vendorPill)vendorPill.addEventListener("click",()=>{const on=!vendor.classLis
 
 document.getElementById("stall").classList.add("on");
 document.getElementById("mock-cal").onclick=function(){document.getElementById("cal").classList.toggle("on");this.classList.toggle("on");};
-document.getElementById("booth-btn").onclick=function(){document.getElementById("booth").classList.add("open");};
-document.getElementById("cart-btn").onclick=function(){document.getElementById("shop").classList.add("open");};
+function openTray(id){var el=document.getElementById(id); if(el) el.classList.add("open");}
+document.getElementById("booth-btn").addEventListener("click", function(){openTray("booth");});
+document.getElementById("cart-btn").addEventListener("click", function(){openTray("shop");});
 document.querySelectorAll("[data-close]").forEach(function(el){el.onclick=function(){document.getElementById("booth").classList.remove("open");document.getElementById("shop").classList.remove("open");};});
 </script>
 </body>
