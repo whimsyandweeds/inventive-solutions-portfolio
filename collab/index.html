@@ -233,16 +233,6 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 </article>
 </div>
 </main>
-<script>
-document.querySelectorAll(".pencil").forEach(function(btn){
-  btn.addEventListener("click", function(){
-    var note=btn.parentElement.nextElementSibling;
-    if(!note || !note.classList.contains("postit")) note=btn.nextElementSibling;
-    if(!note) return;
-    note.hidden=!note.hidden;
-  });
-});
-</script>
 
 <script>
 (function(){
