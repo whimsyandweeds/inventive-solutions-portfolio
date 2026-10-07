@@ -82,7 +82,6 @@ function tryDoor(){
   if(key==="collab"){ sessionStorage.removeItem("pipe-door"); location.href="collab/"; return true; }
   return false;
 }
-document.getElementById("door-code").addEventListener("input", function(){ tryDoor(); });
 document.getElementById("door-form").addEventListener("submit", function(e){
   e.preventDefault();
   if(!tryDoor()){ document.getElementById("door-code").value=""; document.getElementById("door").classList.remove("bad"); void document.getElementById("door").offsetWidth; document.getElementById("door").classList.add("bad"); }
