@@ -199,7 +199,12 @@ button, .chip, .pills button { touch-action:manipulation; }
  #booth .stop { grid-template-columns:36px 1fr; }
  #booth .stop input:last-child { grid-column:2; }
  #booth .row { grid-template-columns:1fr 64px 48px; }
-body{padding:72px 16px 80px}
+*{box-sizing:border-box}
+body{padding:72px 16px 96px;overflow-x:hidden}
+.tray{width:100%;max-width:440px;left:auto;right:0;padding:1.2rem 1rem 5rem}
+.item b,.item span{display:block}
+.item b{margin-top:.35rem}
+@media(max-width:700px){.booth-btn{right:112px}.cart-btn{right:12px}}
 .sheet{width:min(760px,100%);margin:0 auto}
 .kicker{letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-size:.72rem}
 h2{font-size:2rem;margin:.3rem 0}
