@@ -19,8 +19,8 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}
 .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .pin{position:relative;background:var(--card);border:1px solid #2ec4b6;border-radius:18px;padding:22px 18px 16px;box-shadow:0 0 0 1px rgba(46,196,182,.35),0 16px 40px rgba(0,0,0,.35);transform-origin:50% 0;transition:transform .45s cubic-bezier(.2,.8,.2,1);cursor:pointer}
 .pin:before{content:"";position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--pin);box-shadow:0 6px 0 rgba(0,0,0,.35);z-index:2}
-.pin.swing{transform:rotate(-2.4deg)}
-.pin.swing.back{transform:rotate(2.4deg)}
+.pin:hover{transform:rotate(-1.6deg) translateY(-3px)}
+.pin:nth-child(even):hover{transform:rotate(1.8deg) translateY(-3px)}
 .handle{font-size:1.25rem;font-weight:650;margin:8px 0 4px}
 .why{color:var(--mute);font-size:.92rem;min-height:2.6em}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
@@ -46,14 +46,5 @@ a.go{display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:n
 </article>
 </div>
 </main>
-<script>
-document.querySelectorAll(".pin").forEach(function(card){
-  card.addEventListener("click", function(e){
-    if(e.target.closest("a")) return;
-    card.classList.add("swing");
-    card.classList.toggle("back");
-  });
-});
-</script>
 </body>
 </html>
