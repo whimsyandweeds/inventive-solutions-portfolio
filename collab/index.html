@@ -92,7 +92,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 <p class="sub">Saved from the scroll. Still strangers.</p>
 <p class="lane">Pending</p>
 <div class="wall">
-<article class="pin film" data-for="AVI" data-id="vegas">
+<article class="pin film" data-for="AVI" data-id="vegas" data-for="AVI">
 <div class="frame"><img src="vegas.jpg" alt="Vegas night, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -110,7 +110,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 </details>
 </article>
 
-<article class="pin film caution" data-for="AVI" data-id="sincity">
+<article class="pin film caution" data-for="AVI" data-id="sincity" data-for="AVI">
 <div class="frame"><img src="sincity.jpg" alt="Downtown Vegas neon, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -213,11 +213,11 @@ document.querySelectorAll(".pencil").forEach(function(btn){
       box.querySelector("[data-down]").disabled=i===list.length-1;
     });
   }
-  function save(){localStorage.setItem("collab-order", cards().map(function(c){return c.dataset.id;}).join(","));}
+  function save(){localStorage.setItem("collab-order-2", cards().map(function(c){return c.dataset.id;}).join(","));}
   function load(){
-    var order=(localStorage.getItem("collab-order")||"").split(",").filter(Boolean);
+    var order=(localStorage.getItem("collab-order-2")||"").split(",").filter(Boolean);
     order.forEach(function(id){
-      var card=wall.querySelector('.pin[data-for="AVI" data-id="'+id+'"]');
+      var card=wall.querySelector('.pin[data-id="'+id+'"]');
       if(card) wall.appendChild(card);
     });
   }
