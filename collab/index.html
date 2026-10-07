@@ -13,9 +13,9 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,syste
 body{min-height:100vh;background-color:#1a1c1f;background-attachment:fixed;background-image:radial-gradient(ellipse at 78% 18%, rgba(46,196,182,.08), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%), linear-gradient(to right, transparent 0, transparent calc(33.3% - 1px), rgba(0,0,0,.55) calc(33.3% - 1px), rgba(255,255,255,.04) 33.3%, transparent calc(33.3% + 2px)), linear-gradient(to right, transparent 0, transparent calc(66.6% - 1px), rgba(0,0,0,.55) calc(66.6% - 1px), rgba(255,255,255,.04) 66.6%, transparent calc(66.6% + 2px)), linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), rgba(0,0,0,.5) calc(50% - 1px), rgba(255,255,255,.035) 50%, transparent calc(50% + 2px)), repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 9px), repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 14px), linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%)}
 main{max-width:920px;margin:0 auto;padding:28px 18px 80px}
 .kicker{letter-spacing:.22em;font-size:.72rem;color:var(--mute);margin:0}
-h1{font-size:1.7rem;margin:.35rem 0 .2rem;font-weight:600}
+h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}h1 span{color:#2ec4b6}
 .sub{color:var(--mute);margin:0 0 22px}
-.lane{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#e4b83a;margin:0 0 10px}
+.lane{display:inline-block;margin:0 0 14px;padding:7px 14px;border:1.5px dashed #e4b83a;border-radius:999px;color:#e4b83a;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .pin{position:relative;background:var(--card);border:1px solid #2ec4b6;border-radius:18px;padding:22px 18px 16px;box-shadow:0 0 0 1px rgba(46,196,182,.35),0 16px 40px rgba(0,0,0,.35);transform-origin:50% 0;transition:transform .45s cubic-bezier(.2,.8,.2,1);cursor:pointer}
 .pin:before{content:"";position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--pin);box-shadow:0 6px 0 rgba(0,0,0,.35);z-index:2}
@@ -33,15 +33,15 @@ a.go{display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:n
 <a id="out" href="../" aria-label="Back">←</a>
 <main>
 <p class="kicker">COLLAB</p>
-<h1>Hit list</h1>
-<p class="sub">People saved. Not contacted yet.</p>
+<h1>People I have <span>not poked</span></h1>
+<p class="sub">Saved from the scroll. Still strangers.</p>
 <p class="lane">Pending</p>
 <div class="wall">
 <article class="pin">
 <p class="kicker">TIKTOK</p>
 <p class="handle">@vegasandvacation</p>
-<p class="why">Vegas and vacation. Saved from the sheet. No note yet.</p>
-<div class="pills"><span class="pill">Not contacted</span></div>
+<p class="why">Vegas, on camera. No pitch sent. No excuse logged.</p>
+<div class="pills"><span class="pill">Not poked</span></div>
 <a class="go" href="https://www.tiktok.com/@vegasandvacation" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg> TikTok</a>
 </article>
 </div>
