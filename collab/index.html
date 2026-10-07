@@ -78,7 +78,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 .arrows{position:absolute;right:10px;bottom:10px;display:flex;gap:4px;z-index:4}
 .arrows button{width:26px;height:26px;border-radius:999px;border:1px solid #3d444d;background:#16181b;color:#f3f4f6;font-size:.8rem;line-height:1}
 .arrows button:disabled{opacity:.25}
-</style>
+.for{position:absolute;left:12px;bottom:12px;z-index:4;border:1px solid #a855f7;color:#fff;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.08em;font-weight:700}</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back">←</a>
@@ -88,7 +88,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 <p class="sub">Saved from the scroll. Still strangers.</p>
 <p class="lane">Pending</p>
 <div class="wall">
-<article class="pin film" data-id="vegas">
+<article class="pin film" data-id="vegas" data-for="AVI">
 <div class="frame"><img src="vegas.jpg" alt="Vegas night, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -106,7 +106,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 </details>
 </article>
 
-<article class="pin film caution" data-id="sincity">
+<article class="pin film caution" data-id="sincity" data-for="AVI">
 <div class="frame"><img src="sincity.jpg" alt="Downtown Vegas neon, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -149,7 +149,8 @@ document.querySelectorAll(".pencil").forEach(function(btn){
         box=document.createElement("div");
         box.className="arrows";
         box.innerHTML='<button type="button" data-up aria-label="Up">^</button><button type="button" data-down aria-label="Down">v</button>';
-        card.appendChild(box);
+        card.appendChild(box);}
+      if(card.dataset.for && !card.querySelector(".for")){var tag=document.createElement("span");tag.className="for";tag.textContent=card.dataset.for;card.appendChild(tag);
       }
       box.querySelector("[data-up]").disabled=i===0;
       box.querySelector("[data-down]").disabled=i===list.length-1;
