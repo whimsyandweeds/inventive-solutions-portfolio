@@ -74,14 +74,18 @@ function openBoard(){
 .catch(function(){document.body.textContent='Restore failed. Hard-refresh once more.';});
 }
 if(sessionStorage.getItem("pipe-door")==="1") openBoard();
-document.getElementById("door-form").addEventListener("submit", function(e){
-  e.preventDefault();
+function tryDoor(){
   var code=(document.getElementById("door-code").value||"").trim();
   var key=code.toLowerCase();
-  if(code==="Yomama369"){ sessionStorage.setItem("pipe-door","1"); openBoard(); }
-  else if(key==="docket"){ sessionStorage.removeItem("pipe-door"); location.href="door/?open=1"; }
-  else if(key==="collab"){ sessionStorage.removeItem("pipe-door"); location.href="collab/"; }
-  else { document.getElementById("door-code").value=""; document.getElementById("door").classList.remove("bad"); void document.getElementById("door").offsetWidth; document.getElementById("door").classList.add("bad"); }
+  if(code==="Yomama369"){ sessionStorage.setItem("pipe-door","1"); openBoard(); return true; }
+  if(key==="docket"){ sessionStorage.removeItem("pipe-door"); location.href="door/?open=1"; return true; }
+  if(key==="collab"){ sessionStorage.removeItem("pipe-door"); location.href="collab/"; return true; }
+  return false;
+}
+document.getElementById("door-code").addEventListener("input", function(){ tryDoor(); });
+document.getElementById("door-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  if(!tryDoor()){ document.getElementById("door-code").value=""; document.getElementById("door").classList.remove("bad"); void document.getElementById("door").offsetWidth; document.getElementById("door").classList.add("bad"); }
 });
 </script>
 </body>
