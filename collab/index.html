@@ -74,6 +74,10 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 .pin .stamp{color:#e4b83a !important}.postit[hidden]{display:none}
 .caution{box-shadow:inset 0 0 0 2px #e4b83a,0 0 0 1px rgba(20,184,166,.28),0 18px 36px rgba(0,0,0,.4)}
 .caution:after{content:"!";position:absolute;top:12px;right:12px;z-index:3;width:22px;height:22px;border-radius:4px;background:#e4b83a;color:#1a1404;font-weight:800;display:grid;place-items:center;font-size:.85rem}
+
+.arrows{position:absolute;right:10px;bottom:10px;display:flex;gap:4px;z-index:4}
+.arrows button{width:26px;height:26px;border-radius:999px;border:1px solid #3d444d;background:#16181b;color:#f3f4f6;font-size:.8rem;line-height:1}
+.arrows button:disabled{opacity:.25}
 </style>
 </head>
 <body>
@@ -84,7 +88,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 <p class="sub">Saved from the scroll. Still strangers.</p>
 <p class="lane">Pending</p>
 <div class="wall">
-<article class="pin film">
+<article class="pin film" data-id="vegas">
 <div class="frame"><img src="vegas.jpg" alt="Vegas night, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -102,7 +106,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 </details>
 </article>
 
-<article class="pin film caution">
+<article class="pin film caution" data-id="sincity">
 <div class="frame"><img src="sincity.jpg" alt="Downtown Vegas neon, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -130,6 +134,46 @@ document.querySelectorAll(".pencil").forEach(function(btn){
     note.hidden=!note.hidden;
   });
 });
+</script>
+
+<script>
+(function(){
+  var wall=document.querySelector(".wall");
+  if(!wall) return;
+  function cards(){return Array.prototype.slice.call(wall.querySelectorAll(".pin"));}
+  function paint(){
+    var list=cards();
+    list.forEach(function(card,i){
+      var box=card.querySelector(".arrows");
+      if(!box){
+        box=document.createElement("div");
+        box.className="arrows";
+        box.innerHTML='<button type="button" data-up aria-label="Up">^</button><button type="button" data-down aria-label="Down">v</button>';
+        card.appendChild(box);
+      }
+      box.querySelector("[data-up]").disabled=i===0;
+      box.querySelector("[data-down]").disabled=i===list.length-1;
+    });
+  }
+  function save(){localStorage.setItem("collab-order", cards().map(function(c){return c.dataset.id;}).join(","));}
+  function load(){
+    var order=(localStorage.getItem("collab-order")||"").split(",").filter(Boolean);
+    order.forEach(function(id){
+      var card=wall.querySelector('.pin[data-id="'+id+'"]');
+      if(card) wall.appendChild(card);
+    });
+  }
+  wall.addEventListener("click", function(e){
+    var up=e.target.closest("[data-up]");
+    var down=e.target.closest("[data-down]");
+    if(!up && !down) return;
+    var card=e.target.closest(".pin");
+    if(up && card.previousElementSibling) wall.insertBefore(card, card.previousElementSibling);
+    if(down && card.nextElementSibling) wall.insertBefore(card.nextElementSibling, card);
+    save(); paint();
+  });
+  load(); paint();
+})();
 </script>
 </body>
 </html>
