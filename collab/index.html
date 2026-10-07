@@ -92,7 +92,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 <p class="sub">Saved from the scroll. Still strangers.</p>
 <p class="lane">Pending</p>
 <div class="wall">
-<article class="pin film" data-for="AVI" data-id="vegas" data-for="AVI">
+<article class="pin film" data-for="AVI" data-id="vegas">
 <div class="frame"><img src="vegas.jpg" alt="Vegas night, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -110,7 +110,7 @@ a.go{position:relative;display:inline-flex;align-items:center;justify-content:ce
 </details>
 </article>
 
-<article class="pin film caution" data-for="AVI" data-id="sincity" data-for="AVI">
+<article class="pin film caution" data-for="AVI" data-id="sincity">
 <div class="frame"><img src="sincity.jpg" alt="Downtown Vegas neon, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -217,7 +217,7 @@ document.querySelectorAll(".pencil").forEach(function(btn){
   function load(){
     var order=(localStorage.getItem("collab-order")||"").split(",").filter(Boolean);
     order.forEach(function(id){
-      var card=wall.querySelector('.pin[data-id="'+id+'"]');
+      var card=wall.querySelector('.pin[data-for="AVI" data-id="'+id+'"]');
       if(card) wall.appendChild(card);
     });
   }
