@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Whimsy & Weeds</title>
+<link rel="icon" href="../favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{--text:#f4f1ea;--teal:#3dd68c;--line:#2c3138}
+html,body{margin:0;background:#121418;color:var(--text);font-family:Inter,sans-serif}
+.inner{width:min(760px,calc(100% - 32px));margin:72px auto 40px}
+.kicker{letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-size:.72rem}
+.demo-flag{display:inline-block;margin:.6rem 0;border:1px dashed #c9a227;color:#c9a227;border-radius:999px;padding:.3rem .7rem;font-size:.72rem}
+h2{font-size:2rem;margin:.2rem 0}h2 span{color:var(--teal)}
+.lede{color:#c8c4bc}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin:1rem 0}
+.pills button{background:#1c2026;color:#fff;border:1px solid #3a3a3f;border-radius:999px;padding:.55rem .9rem}
+.pills button.on,.pills .hot{border-color:#b07cff;color:#d7c2ff}
+.cart-btn,.booth-btn{position:fixed;top:16px;z-index:40;border-radius:999px;padding:.45rem .85rem;font:700 .78rem Inter,sans-serif}
+.booth-btn{right:108px;background:rgba(12,16,14,.88);color:#fff;border:1px solid var(--teal)}
+.cart-btn{right:16px;background:#241433;color:#fff;border:1px solid #b07cff}
+#shop,#booth{position:fixed;inset:0;z-index:50;display:none}
+#shop.open,#booth.open{display:block}
+.dim{position:absolute;inset:0;background:rgba(6,7,9,.72)}
+.tray{position:absolute;top:0;right:0;width:min(440px,100%);height:100%;overflow:auto;background:#121418;padding:1.2rem}
+.stall{display:none;margin-top:1rem}
+.stall.on{display:grid;gap:12px}
+.item{display:grid;grid-template-columns:92px 1fr;gap:10px;background:#1a1e24;border-radius:16px;padding:10px}
+.item img{width:92px;height:92px;object-fit:cover;border-radius:12px}
+.price{font-weight:700}
+.buy{display:flex;gap:6px;align-items:center;margin-top:6px}
+.buy button,.drop,.sold{border:0;border-radius:999px;padding:.3rem .55rem}
+#out{position:fixed;left:16px;bottom:16px;z-index:40;width:44px;height:44px;display:grid;place-items:center;border:1px solid #d2d2d2;border-radius:50%;background:#1a1a1c}
+.vendor,.cal{display:none}
+.vendor.on,.cal.on{display:block}
+</style>
+</head>
+<body>
+<a id="out" href="../" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="1.8"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a>
+<button class="booth-btn" id="booth-btn" type="button">Booth</button>
+<button class="cart-btn" id="cart-btn" type="button">Cart <b id="cart-n">0</b></button>
+<aside id="shop" aria-hidden="true">
+<div class="dim" data-close="1"></div>
+<div class="tray">
+<button class="close" type="button" data-close="1">x</button>
+<p class="who">Client tasting menu</p>
+<h2>The fake cart</h2>
+<p class="fine">Plus, minus, or pull it. Same count as the board.</p>
+<div class="menu"></div>
+<div class="totals" id="totals"><div><span>Subtotal</span><b id="sub-n">$0.00</b></div><div><span>Stall cut 8%</span><b id="cut-n">$0.00</b></div><div class="grand"><span>Grand total</span><b id="grand-n">$0.00</b></div></div>
+<button class="pay" id="cart-pay" type="button">Checkout (spiritually)</button>
+<p class="fine">This cart is theater.</p>
+<div class="card receipt"><h3>Receipt: emotional only</h3><p>Nothing billed. Yeeted onto the belt.</p></div>
+</div>
+</aside>
+<aside id="booth" aria-hidden="true">
+<div class="dim" data-close="1"></div>
+<div class="tray">
+<button class="close" type="button" data-close="1">x</button>
+<p class="who">Vendor door · booth code 441</p>
+<h2>Update the board</h2>
+<p class="fine">Price, then how many you actually have. The counter stops there.</p>
+<div class="item-block"><div class="row"><input type="text" value="Slap Peaches" data-name="peaches" /><input type="text" value="$6" data-price="peaches" /><input type="text" value="12" data-stock="peaches" title="Available" /><button type="button" class="sold" data-out="peaches">Sold out</button></div><input class="blurb" type="text" value="They started it." data-blurb="peaches" /><div class="tools"><button type="button" data-up>Up</button><button type="button" data-down>Down</button><button type="button" data-pic>Photo</button><button type="button" data-kill>Delete</button><input class="file" type="file" accept="image/*" /></div></div>
+<div class="item-block"><div class="row"><input type="text" value="Alibi Eggs" data-name="eggs" /><input type="text" value="$8" data-price="eggs" /><input type="text" value="12" data-stock="eggs" title="Available" /><button type="button" class="sold" data-out="eggs">Sold out</button></div><input class="blurb" type="text" value="Home all night. Allegedly." data-blurb="eggs" /><div class="tools"><button type="button" data-up>Up</button><button type="button" data-down>Down</button><button type="button" data-pic>Photo</button><button type="button" data-kill>Delete</button><input class="file" type="file" accept="image/*" /></div></div>
+<div class="item-block"><div class="row"><input type="text" value="Union Honey" data-name="honey" /><input type="text" value="$12" data-price="honey" /><input type="text" value="12" data-stock="honey" title="Available" /><button type="button" class="sold" data-out="honey">Sold out</button></div><input class="blurb" type="text" value="The bees have a contract." data-blurb="honey" /><div class="tools"><button type="button" data-up>Up</button><button type="button" data-down>Down</button><button type="button" data-pic>Photo</button><button type="button" data-kill>Delete</button><input class="file" type="file" accept="image/*" /></div></div>
+<div class="item-block"><div class="row"><input type="text" value="Rumor Bread" data-name="bread" /><input type="text" value="$5" data-price="bread" /><input type="text" value="12" data-stock="bread" title="Available" /><button type="button" class="sold" data-out="bread">Sold out</button></div><input class="blurb" type="text" value="Still warm. Still talking." data-blurb="bread" /><div class="tools"><button type="button" data-up>Up</button><button type="button" data-down>Down</button><button type="button" data-pic>Photo</button><button type="button" data-kill>Delete</button><input class="file" type="file" accept="image/*" /></div></div>
+<button class="add" id="add-crate" type="button">Add a crate</button>
+<p class="who" style="margin-top:1rem">This week · teal means open</p>
+<div class="days" id="days">
+<button type="button">Sun</button><button type="button">Mon</button><button type="button" class="on">Tue</button><button type="button">Wed</button><button type="button" class="on">Thu</button><button type="button" class="on">Fri</button><button type="button" class="on">Sat</button>
+</div>
+<p class="who">Stops · lot can move</p>
+<div class="stops" id="stops">
+<div class="stop off" data-stop="Sun"><b>Sun</b><input type="text" data-stop-loc="Sun" value="" /><input type="text" data-stop-time="Sun" value="" /></div>
+<div class="stop off" data-stop="Mon"><b>Mon</b><input type="text" data-stop-loc="Mon" value="" /><input type="text" data-stop-time="Mon" value="" /></div>
+<div class="stop" data-stop="Tue"><b>Tue</b><input type="text" data-stop-loc="Tue" value="Food truck row, Boulder Hwy" /><input type="text" data-stop-time="Tue" value="11a–2p" /></div>
+<div class="stop off" data-stop="Wed"><b>Wed</b><input type="text" data-stop-loc="Wed" value="" /><input type="text" data-stop-time="Wed" value="" /></div>
+<div class="stop" data-stop="Thu"><b>Thu</b><input type="text" data-stop-loc="Thu" value="Henderson market, stall 12" /><input type="text" data-stop-time="Thu" value="8a–1p" /></div>
+<div class="stop" data-stop="Fri"><b>Fri</b><input type="text" data-stop-loc="Fri" value="Downtown lot, Water St" /><input type="text" data-stop-time="Fri" value="4p–8p" /></div>
+<div class="stop" data-stop="Sat"><b>Sat</b><input type="text" data-stop-loc="Sat" value="Summerlin market" /><input type="text" data-stop-time="Sat" value="8a–1p" /></div>
+</div>
+<button class="live" id="booth-live" type="button">Board is live</button>
+<p class="fine" id="booth-note">The small number next to price is how many are available.</p>
+</div>
+</aside>
+<nav class="mobile-nav" aria-label="Mobile sections">
+<a href="#hero" class="on">Cover</a>
+<a href="#overview">Now</a>
+<a href="#board">Belt</a>
+<a href="#pitch">Sparks</a>
+<a href="#market">Demo</a>
+</nav>
+<nav class="dots" aria-label="Sections">
+<a href="#hero" class="active" title="Cover"></a>
+<a href="#overview" title="Where we are"></a>
+<a href="#board" title="The board"></a>
+<a href="#pitch" title="Sparks + belt"></a>
+<a href="#market" title="Demo stall"></a>
+</nav>
+<section class="page" id="hero"><div class="inner"><p class="sub">Scenery integrated · Logos in the wild</p><h1>INVENTIVE SOLUTIONS<br /><span>PORTFOLIO PIPELINE</span></h1></div></section>
+<section class="page" id="overview"><div class="inner">
+<p class="kicker">Track 1 Digital & Community · Track 2 Engineering & Infra · TAG Central</p>
+<h2>Where we are now — <span>scenery edition</span></h2>
+<p class="lede">Ten crates. Two tracks. TAG is the group chat they have not all joined yet. Tap a pill.</p>
+<div class="status-row">
+<div class="card pulse"><h3>No cosplay</h3><p>The crates do not lie. Deets are on the belt.</p><a class="jump" href="#board">On the belt</a></div>
+<div class="card"><div class="stat-big">7 SITES</div><p>Invent, DocketDate, PPI, S+S, TAG, LUMA-SYNC, CTO Pools</p></div>
+<div class="card"><div class="stat-big">7 APPS</div><p>2 done, Grants and Cash Rot. 3 in testing, Avi, CADveyor, Nexus. 2 in the shop, DocketDate and TAG.</p></div>
+<div class="card goal-tag"><span class="tag-pill"><i></i>TAG INTEGRATION</span><div class="stat-big">100%</div><p>Goal — every project talks through TAG</p></div>
+</div>
+<video class="pipeline" autoplay muted loop playsinline poster="images_pipeline.jpg?v=17"><source src="pipeline_hero.mp4?v=17" type="video/mp4" /></video>
+</div></section>
+<section class="page" id="board"><div class="inner">
+<p class="kicker">The board · packed on purpose</p>
+<h2>On the <span>belt</span></h2>
+<div class="pills" id="board-pills">
+<button type="button" class="on" data-panel="invent">INVENT + Whimsy</button>
+<button type="button" data-panel="avi">Avi</button>
+<button type="button" data-panel="cash">Cash Rotisserie</button>
+<button type="button" data-panel="cto">CTO Pools</button>
+<button type="button" data-panel="docket">DocketDate</button>
+<button type="button" data-panel="ethr">ETHR/Nexus</button>
+<button type="button" data-panel="ppi">PPI + CADveyor</button>
+<button type="button" data-panel="ss">S+S + Grants</button>
+<button type="button" class="tag" data-panel="tag">TAG</button>
+</div>
+<div class="stage">
+<div class="panel on" id="panel-invent">
+<h3 class="crate">INVENT + Whimsy — <span>brain + beauty</span></h3>
+<p class="lede">Website + ads wired. Two bulbs. One impact.</p>
+<div class="photo-wrap"><img class="dock-pic collide" src="images_collide.jpg" alt="INVENT colliding with Whimsy" /><span class="photo-label">The collision</span></div>
+<div class="card couple" style="margin-top:.7rem"><p class="eyebrow">The pair</p><h3>INVENT + Whimsy</h3><p>Live & seeding. Site and ads bundled. Dirt meets circuit. Next: lookalikes and greenhouse tests.</p><div class="chips"><span class="chip live">Active selling</span><span class="chip done">Website live</span></div><p class="next" style="margin-top:.8rem"><strong>The studio</strong><a href="https://inventstudio.dev/" target="_blank" rel="noopener">inventstudio.dev</a></p></div>
+</div>
+<div class="panel" id="panel-avi">
+<h3 class="crate">Avi — <span>the wingman that books the table</span></h3>
+<p class="lede">Locals meet at local businesses. An AI wingman proxy matches on real data and personality, then kills the scheduling debate.</p>
+<div class="grid-2">
+<div class="photo-wrap"><img class="photo" src="imagesavi.jpg.webp" alt="Avi" /><span class="photo-label">Avi ops</span></div>
+<div>
+<div class="card"><h3>Meeting app, not a calendar pile</h3><p>Match on who they actually are. Drop them at a real shop. Avi holds the time so the hang happens.</p><div class="chips"><span class="chip warn">In testing</span><span class="chip live">Deals in progress</span></div></div>
+<div class="next"><strong>What it kills</strong> The group-chat standoff. Avi picks the place, picks the hour, walks both people in.</div>
+</div></div></div>
+<div class="panel" id="panel-docket">
+<h3 class="crate">DocketDate — <span>Court Compliance Hub</span></h3>
+<p class="lede">Clerk desk now. Testimony + City weight later.</p>
+<div class="grid-2">
+<img class="dock-pic" src="images_docket.jpg" alt="DocketDate" />
+<div>
+<div class="card"><h3>Desk is built</h3><p>Website v1 done. Marketing done. In conversation.</p><div class="chips"><span class="chip done">Website v1</span><span class="chip done">Marketing done</span><span class="chip warn">App in the shop</span><span class="chip live">In convo</span></div></div>
+<div class="next"><strong>Next — Henderson PD loop</strong> PD + Probation validate the clerk → officer hand-off.</div>
+<div class="next" style="border-left-color:var(--purple-neon)"><strong style="color:var(--purple-neon)">Long game — close the loophole</strong> Desk. Testimony. City. Stack those three and walk the receipts into the room where laws get written.</div>
+</div></div></div>
+<div class="panel tag-panel" id="panel-ppi">
+<h3 class="crate">PPI + CADveyor — <span>building IRL stuff</span></h3>
+<p class="lede">200-mile seawater line. Long Beach → Primm.</p>
+<div class="tag-pair">
+<svg class="tag-mesh" viewBox="0 0 220 200" aria-hidden="true">
+<g fill="none" stroke="#ff3d8a" stroke-width="1.4" opacity=".9">
+<path d="M18 36 C60 20 80 70 110 100"/><path d="M18 100 C55 80 80 110 110 100"/><path d="M18 164 C60 180 80 130 110 100"/>
+<path d="M202 36 C160 20 140 70 110 100"/><path d="M202 100 C165 80 140 110 110 100"/><path d="M202 164 C160 180 140 130 110 100"/>
+</g>
+<g fill="#ff3d8a"><circle cx="18" cy="36" r="3.5"/><circle cx="18" cy="100" r="3.5"/><circle cx="18" cy="164" r="3.5"/><circle cx="202" cy="36" r="3.5"/><circle cx="202" cy="100" r="3.5"/><circle cx="202" cy="164" r="3.5"/><circle cx="110" cy="100" r="11"/></g>
+<text x="110" y="104" text-anchor="middle" fill="#1a0610" font-size="9" font-weight="800">TAG</text>
+</svg>
+<div class="tag-card"><div class="photo-wrap"><img class="photo" src="mages_ppi.jpg.jpg" alt="PPI" /><span class="photo-label">Long Beach → Primm</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+<div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">Website done</span><span class="chip live">In convos</span></div><h3>Project Pacific Inland</h3><p>Colorado is tapped. This one takes the ocean.</p></div></div>
+<div class="tag-card"><div class="photo-wrap"><img class="photo" src="images_cad.jpg.jpg" alt="CADveyor" /><span class="photo-label">CADveyor</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+<div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip warn">App v1 in testing</span><span class="chip live">In convos</span></div><h3>CADveyor</h3><p>The civil stack. Draws the line so PPI does not live in a slide deck.</p></div></div>
+</div></div>
+<div class="panel tag-panel" id="panel-ss">
+<p class="tag-kicker">First real TAG hook</p>
+<h3 class="crate">S+S + Grants — <span>same ticket</span></h3>
+<p class="lede">TAG is the wire. Freight on one side, the grant hunter on the other.</p>
+<div class="next"><strong>Hook — same ticket</strong> S+S lines up with the grant hunter. Victims get the window, not the runaround.</div>
+<div class="tag-pair">
+<svg class="tag-mesh" viewBox="0 0 220 200" aria-hidden="true">
+<g fill="none" stroke="#ff3d8a" stroke-width="1.4" opacity=".9">
+<path d="M18 36 C60 20 80 70 110 100"/><path d="M18 100 C55 80 80 110 110 100"/><path d="M18 164 C60 180 80 130 110 100"/>
+<path d="M202 36 C160 20 140 70 110 100"/><path d="M202 100 C165 80 140 110 110 100"/><path d="M202 164 C160 180 140 130 110 100"/>
+</g>
+<g fill="#ff3d8a">
+<circle cx="18" cy="36" r="3.5"/><circle cx="18" cy="100" r="3.5"/><circle cx="18" cy="164" r="3.5"/>
+<circle cx="202" cy="36" r="3.5"/><circle cx="202" cy="100" r="3.5"/><circle cx="202" cy="164" r="3.5"/>
+<circle cx="110" cy="100" r="11"/>
+</g>
+<text x="110" y="104" text-anchor="middle" fill="#1a0610" font-size="9" font-weight="800">TAG</text>
+</svg>
+<div class="tag-card"><div class="photo-wrap"><img class="photo" src="images_sophie.jpg" alt="S+S" /><span class="photo-label">Sophie + Sage</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+<div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">Website v1</span><span class="chip done">Marketing done</span></div><h3>Sophie + Sage</h3><p>Site and marketing done. Grants plugs into the service next.</p></div></div>
+<div class="tag-card"><div class="photo-wrap"><img class="photo" src="images_grants.jpg" alt="Grants" /><span class="photo-label">Gov Grants AI</span><span class="tag-pill making"><i></i>TAG IN THE MAKING</span></div>
+<div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">App complete</span><span class="chip live">Into S+S</span></div><h3>Gov Grants AI</h3><p>App complete. Next is wiring it into S+S services.</p></div></div>
+</div></div>
+<div class="panel" id="panel-cash">
+<h3 class="crate">Cash Rotisserie — <span>the pit</span></h3>
+<p class="lede">Finished app. AIs work the book.</p>
+<div class="grid-2 hug">
+<div class="photo-wrap"><img class="photo" src="images_cash.jpg" alt="Cash" /><span class="photo-label">The pit</span></div>
+<div class="card"><div class="chips" style="margin:0 0 .55rem"><span class="chip done">App complete</span></div><h3>Cash Rotisserie</h3><p>Sell puts, sell calls, collect premium. Extra crispy.</p></div>
+</div></div>
+<div class="panel" id="panel-cto">
+<h3 class="crate">CTO Pools — <span>dead tokens, live room</span></h3>
+<p class="lede">Community funding for abandoned takeovers on Solana. The pool earns while the vote cooks.</p>
+<div class="grid-2 hug">
+<div class="photo-wrap"><img class="photo" src="cto_pools.jpg" alt="CTO Pools" /><span class="photo-label">The revival pool</span></div>
+<div class="card"><div class="chips" style="margin:0 0 .55rem"><span class="chip live">Website live</span><span class="chip">Devnet</span></div><h3>CTO Pools</h3><p>Stake while you wait. Fund the takeover. Vote the revival. Dull coins in, lit coins out.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://ctopools.com/" target="_blank" rel="noopener">ctopools.com</a></p></div>
+</div>
+</div>
+<div class="panel tag-panel" id="panel-tag">
+<p class="tag-kicker">Stop forcing your brain to work on somebody else's schedule</p>
+<h3 class="crate tag-word">TA<span>G</span></h3>
+<p class="lede">The asynchronous AI proxy that kills meetings, not momentum.</p>
+<div class="grid-2">
+<div class="tag-card"><div class="photo-wrap"><img class="photo" src="tag_here.jpg" alt="TAG" /><span class="photo-label">Workspace brain</span><span class="tag-pill making"><i></i>TAG</span></div></div>
+<div class="tag-card"><div class="photo-wrap"><img class="photo" src="tag_console.jpg" alt="TAG console" /><span class="photo-label">TAG Integration</span><span class="tag-pill making"><i></i>TAG</span></div></div>
+</div>
+<div class="grid-3" style="margin-top:.8rem">
+<div class="card stat"><b>31H</b><span>Calendar Tetris wasted per week</span></div>
+<div class="card stat"><b>2–3D</b><span>Timezone tax</span></div>
+<div class="card stat"><b>60%</b><span>Status theater</span></div>
+</div>
+<div class="chips" style="margin-top:.8rem"><span class="chip done">Website v1</span><span class="chip warn">App in the works</span></div><div class="card tag-status" style="margin-top:.8rem"><h3>Status</h3><p>Website v1 complete. The app is in the works.</p></div>
+</div>
+<div class="panel" id="panel-ethr">
+<h3 class="crate">ETHR-BOOK × Novel Nexus — <span>it talks back</span></h3>
+<p class="lede">Novel Nexus binds the spine. ETHR drops a QR so the book opens a live room.</p><div class="chips"><span class="chip warn">Nexus in testing</span><span class="chip live">Decoding the Grid</span></div>
+<div class="grid-2">
+<img class="dock-pic" src="book_machine.jpg" alt="ETHR-BOOK" />
+<div class="books">
+<p class="label">On the press</p>
+<div class="book"><img src="book_grid.jpg.jpg" alt="Decoding the Grid" /><p><b>D3c0d1ng th3 Gr1d</b><span>In testing with Nexus.</span></p></div>
+<div class="book"><img src="book_mommy.jpg.jpg" alt="Mommy Meanest" /><p><b>Mommy Meanest</b><span>Decoded. On the press.</span></p></div>
+<div class="book soon"><p><b>AI takeover</b><span>Cover incoming. Title in the works.</span></p></div>
+</div></div></div>
+</div></div></section>
+<section class="page" id="pitch"><div class="inner">
+<p class="kicker">Still on the stove · then yeet a new one</p>
+<h2>Sparks on the <span>belt</span></h2>
+<p class="lede">Six that want out. Tap a pill. Or skip them and feed the machine.</p>
+<div class="pills" id="pitch-pills">
+<button type="button" class="on" data-spark="luma">LUMA-SYNC</button>
+<button type="button" data-spark="luna">LUNA-SYNC</button>
+<button type="button" data-spark="lie">Can't Lie</button>
+<button type="button" data-spark="dial">Don't Dial</button>
+<button type="button" data-spark="fu">What the fu?</button>
+<button type="button" data-spark="heart">is it &#9829;?</button>
+<button type="button" class="hot" data-spark="yeet">Pitch one</button>
+</div>
+<div class="stage">
+<div class="panel spark-side on" id="spark-luma"><video class="spark-clip" src="luma_sync.mp4?v=14" autoplay muted loop playsinline poster=""></video><div class="card spark"><p class="who">Adult OS</p><div class="chips" style="margin:0 0 .55rem"><span class="chip live">Website live</span></div><h3>LUMA-SYNC — Brain Defrag</h3><p>Too many tabs in the skull. A nightly defrag so morning-you inherits a clean drive.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://luma-sync.com/" target="_blank" rel="noopener">luma-sync.com</a></p></div></div>
+<div class="panel" id="spark-luna"><div class="card spark"><p class="who">Kid + the adult they become</p><h3>LUNA-SYNC — the night light that stays</h3><p>For the kids who do not feel safe, and the adults who grew up that way.</p></div></div>
+<div class="panel" id="spark-lie"><div class="card spark"><p class="who">Party, no weasel clause</p><h3>Can't Lie</h3><p>Truth or dare. The AI will not let you duck.</p></div></div>
+<div class="panel spark-side" id="spark-fu"><video class="spark-clip" src="what_the_fu.mp4" autoplay muted loop playsinline></video><div class="card spark"><p class="who">Still an idea</p><h3>What the fu? — two buttons, no maze</h3><p>A dementia door with almost nothing on it. Teal assists. Gold soothes: a story, and something quiet to look at. No menus. Name is temporary.</p></div></div>
+<div class="panel" id="spark-dial"><div class="card spark"><p class="who">1:47am you vs morning you</p><h3>Don't Dial</h3><p>The last call at 1:47am never leaves the phone.</p></div></div>
+<div class="panel spark-side heart-edge" id="spark-heart"><img src="is_it_heart.jpg?v=9" alt="is it heart" /><div class="card spark"><p class="who">Still an idea</p><h3>is it &#9829;?</h3><p>Heart tracker with a bad attitude. Rate, rhythm, the quiet spike you talked yourself out of. Not a diagnosis. A tap that says look again, or sit down. Love is a guess. The beat is not.</p></div></div>
+<div class="panel" id="spark-yeet">
+<form id="idea-form">
+<div><label for="who">What do we call you</label><input id="who" name="who" placeholder="Alias or a raccoon" /></div>
+<div><label for="spark">The spark</label><textarea id="spark" name="spark" required placeholder="Notes, scraps, 3am thought..."></textarea></div>
+<div><label for="machine">Which machine should eat this</label><select id="machine" name="machine"><option>Surprise me.</option><option>The beauty</option><option>The brain</option><option>Beauty + brain</option><option>The book press</option><option>TAG</option></select></div>
+<button type="submit">Yeet it onto the belt</button>
+<p class="fine">We may steal the good parts and never schedule a standup.</p>
+</form>
+<div class="card thanks"><h3>Belt ate it.</h3><p>Spine or chip. No calendar invite.</p></div>
+</div></div></div></section>
+<section class="page" id="market"><div class="inner">
+<p class="kicker">Demo only · not a live project</p>
+<div class="demo-flag">Demo stall · client theater</div>
+<h2>Crates with <span>priors</span></h2>
+<p class="lede">The peaches swung first. The eggs have an alibi. The honey is union.</p>
+<div class="pills"><button type="button" id="mock-stall">Mock stall</button><button type="button" id="mock-cal">When we're here</button><button type="button" id="vendor-pill" class="hot">Vendor intake</button></div>
+<div class="vendor" id="vendor"><form id="vendor-form" class="card"><p class="who">Avi booth partners</p><h3>Put the QR on the booth</h3><label>Biz<input name="biz" required placeholder="The truck, the shop, the name on the sign" /></label><label>Name<input name="name" required placeholder="Who we ask for" /></label><label>Number<input name="number" required placeholder="Text-friendly" /></label><label>Email<input name="email" type="email" required placeholder="you@thespot.com" /></label><label>Notes <span>optional</span><textarea name="notes" placeholder="Perk, lot, hours, whatever you want on the record"></textarea></label><button type="submit">Send it</button><p class="fine">Lands in the inbox. Not a robot yet.</p></form><div class="card thanks" id="vendor-thanks"><h3>Got it.</h3><p>If the mail app opened, hit send. That is the whole handshake.</p></div></div>
+<div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">The truck moves</h3><div class="week" id="cal-week"><b data-day="Sun">Sun<span class="time">Empty</span><span class="spot"></span></b><b data-day="Mon">Mon<span class="time">Empty</span><span class="spot"></span></b><b class="on" data-day="Tue">Tue<span class="time">11a–2p</span><span class="spot">Boulder Hwy</span></b><b data-day="Wed">Wed<span class="time">Empty</span><span class="spot"></span></b><b class="on" data-day="Thu">Thu<span class="time">8a–1p</span><span class="spot">Henderson, stall 12</span></b><b class="on" data-day="Fri">Fri<span class="time">4p–8p</span><span class="spot">Downtown lot</span></b><b class="on" data-day="Sat">Sat<span class="time">8a–1p</span><span class="spot">Summerlin</span></b></div><div class="stops" id="cal-stops"><div class="off" data-row="Sun"><b>Sun</b><span>Empty</span><em>—</em></div><div class="off" data-row="Mon"><b>Mon</b><span>Empty</span><em>—</em></div><div data-row="Tue"><b>Tue</b><span>Food truck row, Boulder Hwy</span><em>11a–2p</em></div><div class="off" data-row="Wed"><b>Wed</b><span>Empty</span><em>—</em></div><div data-row="Thu"><b>Thu</b><span>Henderson market, stall 12</span><em>8a–1p</em></div><div data-row="Fri"><b>Fri</b><span>Downtown lot, Water St</span><em>4p–8p</em></div><div data-row="Sat"><b>Sat</b><span>Summerlin market</span><em>8a–1p</em></div></div></div></div>
+
+<main class="inner">
+<p class="kicker">Demo only · not a live project</p>
+<div class="demo-flag">Demo stall · client theater</div>
+<h2>Crates with <span>priors</span></h2>
+<p class="lede">The peaches swung first. The eggs have an alibi. The honey is union.</p>
+<div class="pills"><button type="button" id="mock-stall">Mock stall</button><button type="button" id="mock-cal">When we're here</button><button type="button" id="vendor-pill" class="hot">Vendor intake</button></div>
+<div class="vendor" id="vendor"></div>
+<div class="cal" id="cal"></div>
+<div class="stall" id="stall">
+<article class="item" id="item-peaches"><img src="../menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span><div class="buy"><button type="button" data-step="-1" data-id="peaches">−</button><i data-n="peaches">0</i><button type="button" data-step="1" data-id="peaches">+</button><button type="button" class="drop" data-clear="peaches">Remove</button><span class="left" data-left="peaches">12 left</span></div></div></article>
+<article class="item" id="item-eggs"><img src="../menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span><div class="buy"><button type="button" data-step="-1" data-id="eggs">−</button><i data-n="eggs">0</i><button type="button" data-step="1" data-id="eggs">+</button><button type="button" class="drop" data-clear="eggs">Remove</button><span class="left" data-left="eggs">12 left</span></div></div></article>
+<article class="item" id="item-honey"><img src="../menu_honey.jpg" alt="Union Honey" /><span class="price" data-show="honey">$12</span><div><b data-title="honey">Union Honey</b><span data-line="honey">The bees have a contract.</span><div class="buy"><button type="button" data-step="-1" data-id="honey">−</button><i data-n="honey">0</i><button type="button" data-step="1" data-id="honey">+</button><button type="button" class="drop" data-clear="honey">Remove</button><span class="left" data-left="honey">12 left</span></div></div></article>
+<article class="item" id="item-bread"><img src="../menu_bread.jpg" alt="Rumor Bread" /><span class="price" data-show="bread">$5</span><div><b data-title="bread">Rumor Bread</b><span data-line="bread">Still warm. Still talking.</span><div class="buy"><button type="button" data-step="-1" data-id="bread">−</button><i data-n="bread">0</i><button type="button" data-step="1" data-id="bread">+</button><button type="button" class="drop" data-clear="bread">Remove</button><span class="left" data-left="bread">12 left</span></div></div></article>
+</div>
+</main>
+<script>
+const bag={};
+const cartN=document.getElementById("cart-n");
+const menu=document.querySelector("#shop .menu");
+function money(s){const n=parseFloat(String(s).replace(/[^0-9.]/g,""));return Number.isFinite(n)?n:0;}
+function bucks(n){return "$"+n.toFixed(2);}
+function stockOf(id){const el=document.querySelector('[data-stock="'+id+'"]');const n=parseInt(el&&el.value,10);return Number.isFinite(n)?Math.max(0,n):12;}
+function tally(){let sub=0;Object.keys(bag).forEach((id)=>{const qty=bag[id]||0;if(qty<1)return;const card=document.getElementById("item-"+id);if(!card)return;const line=money(card.querySelector(".price").textContent)*qty;sub+=line;const row=menu.querySelector('[data-sku="'+id+'"]');if(row)row.querySelector("em").textContent=bucks(line);});const cut=Math.round(sub*8)/100;const subN=document.getElementById("sub-n");if(subN)subN.textContent=bucks(sub);const cutN=document.getElementById("cut-n");if(cutN)cutN.textContent=bucks(cut);const grand=document.getElementById("grand-n");if(grand)grand.textContent=bucks(sub+cut);if(cartN)cartN.textContent=Object.values(bag).reduce((a,b)=>a+b,0);}
+function paint(id){const card=document.getElementById("item-"+id);if(!card)return;const qty=bag[id]||0;const left=Math.max(0,stockOf(id)-qty);const n=card.querySelector("[data-n]");if(n)n.textContent=qty;const L=card.querySelector("[data-left]");if(L)L.textContent=left+" left";let row=menu.querySelector('[data-sku="'+id+'"]');if(qty<1){if(row)row.remove();tally();return;}const title=card.querySelector("b").textContent;const line=money(card.querySelector(".price").textContent)*qty;if(!row){row=document.createElement("div");row.className="sku";row.dataset.sku=id;row.innerHTML='<div><b></b></div><em></em><span class="qty"><button type="button" class="step" data-step="-1" data-id="'+id+'">−</button><span class="n">0</span><button type="button" class="step" data-step="1" data-id="'+id+'">+</button></span><button type="button" class="drop" data-clear="'+id+'">Remove</button>';menu.appendChild(row);}row.querySelector("b").textContent=title;row.querySelector("em").textContent=bucks(line);row.querySelector(".n").textContent=qty;tally();}
+function setBag(id,next){const card=document.getElementById("item-"+id);if(!card||card.classList.contains("out"))return;bag[id]=Math.max(0,Math.min(stockOf(id),next));paint(id);}
+function showLeft(id){const card=document.getElementById("item-"+id);if(!card)return;const L=card.querySelector("[data-left]");if(L)L.textContent=Math.max(0,stockOf(id)-(bag[id]||0))+" left";}
+let lastTap=0;
+function fromStep(step,dir){const now=Date.now();if(now-lastTap<280)return;lastTap=now;const id=step.dataset.id||(step.closest("[data-sku]")||{}).dataset.sku;if(id)setBag(id,(bag[id]||0)+dir);}
+function onCounter(e){const step=e.target.closest("[data-step]");if(step){e.preventDefault();fromStep(step,Number(step.dataset.step));return;}const clear=e.target.closest("[data-clear], .drop");if(clear){e.preventDefault();const now=Date.now();if(now-lastTap<280)return;lastTap=now;const id=clear.dataset.clear||(clear.closest("[data-sku]")||{}).dataset.sku;if(id)setBag(id,0);}}
+document.addEventListener("click",onCounter);
+const mock=document.getElementById("mock-stall");
+const stall=document.getElementById("stall");
+const calBtn=document.getElementById("mock-cal");
+const cal=document.getElementById("cal");
+const vendorPill=document.getElementById("vendor-pill");
+const vendor=document.getElementById("vendor");
+function shutVendor(){if(!vendor)return;vendor.classList.remove("on");vendorPill.classList.remove("on");}
+if(mock)mock.addEventListener("click",()=>{const on=!stall.classList.contains("on");stall.classList.toggle("on",on);mock.classList.toggle("on",on);mock.textContent=on?"Close stall":"Mock stall";if(on){cal.classList.remove("on");calBtn.classList.remove("on");shutVendor();}});
+if(calBtn)calBtn.addEventListener("click",()=>{const on=!cal.classList.contains("on");cal.classList.toggle("on",on);calBtn.classList.toggle("on",on);if(on){stall.classList.remove("on");mock.classList.remove("on");mock.textContent="Mock stall";shutVendor();}});
+if(vendorPill)vendorPill.addEventListener("click",()=>{const on=!vendor.classList.contains("on");vendor.classList.toggle("on",on);vendorPill.classList.toggle("on",on);if(on){stall.classList.remove("on");mock.classList.remove("on");mock.textContent="Mock stall";cal.classList.remove("on");calBtn.classList.remove("on");}});
+
+document.getElementById("booth-btn").onclick=function(){document.getElementById("booth").classList.add("open");};
+document.getElementById("cart-btn").onclick=function(){document.getElementById("shop").classList.add("open");};
+document.querySelectorAll("[data-close]").forEach(function(el){el.onclick=function(){document.getElementById("booth").classList.remove("open");document.getElementById("shop").classList.remove("open");};});
+</script>
+</body>
+</html>
