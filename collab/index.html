@@ -17,12 +17,12 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}
 .sub{color:var(--mute);margin:0 0 22px}
 .lane{display:inline-block;margin:0 0 14px;padding:7px 14px;border:1.5px dashed #e4b83a;border-radius:999px;color:#e4b83a;font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
 .wall{display:flex;flex-wrap:wrap;gap:36px 42px;align-items:flex-start;padding:18px 8px 8px}
-.pin{position:relative;width:min(280px,100%);background:var(--card);border:1px solid #14b8a6;border-radius:18px;padding:22px 18px 16px;box-shadow:0 0 0 1px rgba(20,184,166,.28),0 18px 36px rgba(0,0,0,.4);transform:rotate(-1.7deg);transform-origin:22% 0;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
-.pin:before{content:"";position:absolute;top:-8px;left:22%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--pin);box-shadow:0 7px 0 rgba(0,0,0,.4);z-index:2}
-.pin:nth-child(even){transform:rotate(1.8deg);transform-origin:78% 0;margin-top:14px}
-.pin:nth-child(even):before{left:78%}
-.pin:hover{transform:rotate(-2.6deg) translateY(-4px)}
-.pin:nth-child(even):hover{transform:rotate(2.8deg) translateY(-4px)}
+.tack{position:relative;width:min(280px,100%);transform:rotate(-1.7deg);transform-origin:22% 0;transition:transform .45s cubic-bezier(.2,.8,.2,1)}.pin{position:relative;background:linear-gradient(180deg,#2a2d32,#1c1e22);border:0;border-radius:0;padding:22px 16px 16px;box-shadow:0 18px 36px rgba(0,0,0,.4);clip-path:polygon(0 8px,4% 2px,8% 9px,12% 1px,16% 8px,20% 3px,24% 9px,28% 2px,32% 8px,36% 1px,40% 9px,44% 2px,48% 8px,52% 3px,56% 9px,60% 1px,64% 8px,68% 2px,72% 9px,76% 3px,80% 8px,84% 1px,88% 9px,92% 2px,96% 8px,100% 3px,100% calc(100% - 3px),96% calc(100% - 8px),92% calc(100% - 2px),88% calc(100% - 9px),84% calc(100% - 1px),80% calc(100% - 8px),76% calc(100% - 3px),72% calc(100% - 9px),68% calc(100% - 2px),64% calc(100% - 8px),60% calc(100% - 1px),56% calc(100% - 9px),52% calc(100% - 3px),48% calc(100% - 8px),44% calc(100% - 2px),40% calc(100% - 9px),36% calc(100% - 1px),32% calc(100% - 8px),28% calc(100% - 2px),24% calc(100% - 9px),20% calc(100% - 3px),16% calc(100% - 8px),12% calc(100% - 1px),8% calc(100% - 9px),4% calc(100% - 2px),0 calc(100% - 8px))}
+.tack:before{content:"";position:absolute;top:-8px;left:22%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--pin);box-shadow:0 7px 0 rgba(0,0,0,.4);z-index:2}
+.tack:nth-child(even){transform:rotate(1.8deg);transform-origin:78% 0;margin-top:14px}
+.tack:nth-child(even):before{left:78%}
+.tack:hover{transform:rotate(-2.6deg) translateY(-4px)}
+.tack:nth-child(even):hover{transform:rotate(2.8deg) translateY(-4px)}
 .handle{font-size:1.25rem;font-weight:650;margin:8px 0 4px}
 .why{color:var(--mute);font-size:.92rem;margin:.2rem 0}.why a{color:#14b8a6}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
@@ -30,7 +30,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}
 a.go{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;width:34px;height:34px;color:#fff;text-decoration:none;border:1px solid #d2d2d2;border-radius:999px}
 #out{position:fixed;left:16px;bottom:16px;z-index:70;width:44px;height:44px;display:grid;place-items:center;border:1px solid #d2d2d2;border-radius:50%;background:#1a1a1c;color:#d2d2d2;text-decoration:none}
 
-.film{background:linear-gradient(180deg,#2a2d32 0%,#1c1e22 100%);padding:16px 14px 14px}
+.film{background:transparent;padding:20px 14px 14px}
 .frame{background:#0c0c0c;padding:10px 22px;border-radius:4px;background-image:radial-gradient(circle at 8px 12px,#1a1a1a 3px,transparent 4px),radial-gradient(circle at calc(100% - 8px) 12px,#1a1a1a 3px,transparent 4px);background-size:100% 18px;background-repeat:repeat-y}
 .frame img{display:block;width:100%;height:148px;object-fit:cover;filter:contrast(1.05) saturate(.9)}
 .stamp{margin:10px 0 0;color:#e4b83a;font-size:.72rem;font-weight:700;letter-spacing:.16em}
@@ -47,11 +47,7 @@ a.go{display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto
 .receipts span{color:#8b929c;margin-right:6px}
 .receipts a{color:#14b8a6}
 .name{color:#14b8a6;font-weight:650}.count{color:#ff3d8a;font-weight:700}
-.pin{box-shadow:0 0 0 1px rgba(20,184,166,.28),0 18px 36px rgba(0,0,0,.4)}
-.pin{background:
-radial-gradient(circle at 0 12px,transparent 7px,#1c1e22 8px) 0 0/14px 22px repeat-y,
-radial-gradient(circle at 100% 12px,transparent 7px,#1c1e22 8px) 100% 0/14px 22px repeat-y,
-linear-gradient(180deg,#2a2d32,#1c1e22)}
+
 </style>
 </head>
 <body>
@@ -62,7 +58,7 @@ linear-gradient(180deg,#2a2d32,#1c1e22)}
 <p class="sub">Saved from the scroll. Still strangers.</p>
 <p class="lane">Pending</p>
 <div class="wall">
-<article class="pin film">
+<div class="tack"><article class="pin film">
 <div class="frame"><img src="vegas.jpg" alt="Vegas night, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -78,9 +74,9 @@ linear-gradient(180deg,#2a2d32,#1c1e22)}
 <li><span>Email</span> <a href="mailto:vegasandvacation@gmail.com">vegasandvacation@gmail.com</a></li>
 </ul>
 </details>
-</article>
+</article></div>
 
-<article class="pin film">
+<div class="tack"><article class="pin film">
 <div class="frame"><img src="sincity.jpg" alt="Downtown Vegas neon, disposable flash" /></div>
 <p class="stamp">WANTED · NOT POKED</p>
 <div class="who">
@@ -95,7 +91,7 @@ linear-gradient(180deg,#2a2d32,#1c1e22)}
 <li><span>Name</span> SINCITY BORN & RAISED</li>
 </ul>
 </details>
-</article>
+</article></div>
 </div>
 </main>
 </body>
