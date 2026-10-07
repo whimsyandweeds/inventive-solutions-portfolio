@@ -18,7 +18,7 @@
   #door.bad{animation:shake .35s}
   @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
   #sheet{display:none;background:#efe8dc}
-  #sheet img{width:min(920px,100%);display:block;margin:0 auto}
+  #sheet img{width:min(920px,100%);display:block;margin:0 auto}#out{position:fixed;top:14px;right:14px;z-index:9;background:#123f38;color:#fff;border:1px solid #3dd68c;border-radius:999px;padding:8px 14px;letter-spacing:.08em;text-decoration:none;font:600 13px Inter,sans-serif}
 </style>
 </head>
 <body>
@@ -31,7 +31,7 @@
     <button type="submit">Enter</button>
   </form>
 </div>
-<div id="sheet"><img src="docket-sheet.jpg" alt="Docket Date" /></div>
+<div id="sheet"><a id="out" href="../">OUT!</a><img src="docket-sheet.jpg" alt="Docket Date" /></div>
 <script>
 if(location.search.indexOf("open=1")>-1){document.getElementById("door").style.display="none";document.getElementById("sheet").style.display="block";}
 document.getElementById("door-form").addEventListener("submit", function(e){
