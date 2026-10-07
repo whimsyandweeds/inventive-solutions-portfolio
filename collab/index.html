@@ -7,22 +7,22 @@
 <link rel="icon" href="../favicon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-:root{--bg:#121214;--card:#1c1c20;--line:#3a3a40;--ink:#f4f4f5;--mute:#a1a1aa;--pin:#e11d48;--wait:#f5d76e}
+:root{--bg:#1a1c1f;--card:#1c1e22;--line:#3d444d;--ink:#f3f4f6;--mute:#b8bec7;--pin:#2ec4b6;--wait:#2ec4b6}
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif}
-body{min-height:100vh;background-image:radial-gradient(circle at 20% 0%,rgba(255,255,255,.04),transparent 32%),repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 28px),repeating-linear-gradient(90deg,rgba(255,255,255,.02) 0 1px,transparent 1px 28px)}
+body{min-height:100vh;background-color:#1a1c1f;background-attachment:fixed;background-image:radial-gradient(ellipse at 78% 18%, rgba(46,196,182,.08), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%), linear-gradient(to right, transparent 0, transparent calc(33.3% - 1px), rgba(0,0,0,.55) calc(33.3% - 1px), rgba(255,255,255,.04) 33.3%, transparent calc(33.3% + 2px)), linear-gradient(to right, transparent 0, transparent calc(66.6% - 1px), rgba(0,0,0,.55) calc(66.6% - 1px), rgba(255,255,255,.04) 66.6%, transparent calc(66.6% + 2px)), linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), rgba(0,0,0,.5) calc(50% - 1px), rgba(255,255,255,.035) 50%, transparent calc(50% + 2px)), repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 9px), repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 14px), linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%)}
 main{max-width:920px;margin:0 auto;padding:28px 18px 80px}
 .kicker{letter-spacing:.22em;font-size:.72rem;color:var(--mute);margin:0}
 h1{font-size:1.7rem;margin:.35rem 0 .2rem;font-weight:600}
 .sub{color:var(--mute);margin:0 0 22px}
-.lane{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wait);margin:0 0 10px}
+.lane{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#2ec4b6;margin:0 0 10px}
 .wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .pin{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 18px 16px;box-shadow:0 16px 40px rgba(0,0,0,.35)}
 .pin:before{content:"";position:absolute;top:-7px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--pin);box-shadow:0 6px 0 rgba(0,0,0,.35)}
 .handle{font-size:1.25rem;font-weight:650;margin:8px 0 4px}
 .why{color:var(--mute);font-size:.92rem;min-height:2.6em}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.pill{border:1px solid var(--wait);color:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem}
+.pill{border:1px solid #2ec4b6;color:#fff;border-radius:999px;padding:4px 10px;font-size:.75rem}
 a.go{display:inline-block;color:#fff;text-decoration:none;border:1px solid #d2d2d2;border-radius:999px;padding:8px 12px;font-size:.85rem}
 #out{position:fixed;left:16px;bottom:16px;z-index:70;width:44px;height:44px;display:grid;place-items:center;border:1px solid #d2d2d2;border-radius:50%;background:#1a1a1c;color:#d2d2d2;text-decoration:none}
 </style>
