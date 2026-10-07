@@ -73,6 +73,7 @@ document.getElementById("door-form").addEventListener("submit", function(e){
   e.preventDefault();
   var code=(document.getElementById("door-code").value||"").trim();
   if(code==="Yomama369"){ sessionStorage.setItem("pipe-door","1"); openBoard(); }
+  else if(code.toLowerCase()==="docket"){ location.href="door/"; }
   else { document.getElementById("door-code").value=""; document.getElementById("door").classList.remove("bad"); void document.getElementById("door").offsetWidth; document.getElementById("door").classList.add("bad"); }
 });
 </script>
