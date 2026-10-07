@@ -6,12 +6,31 @@
 <title>Inventive Solutions — Portfolio Pipeline</title>
 </head>
 <body>
-<div id="door" style="min-height:100vh;display:grid;place-items:center;background:#0c0e12;color:#f4f1ea;font-family:Inter,sans-serif">
-  <form id="door-form" style="display:flex;gap:8px">
-    <input id="door-code" autocomplete="off" aria-label="Code" style="background:#16181c;color:#fff;border:1px solid #3a3a3f;border-radius:999px;padding:10px 14px" />
-    <button style="background:#123f38;color:#fff;border:0;border-radius:999px;padding:10px 16px" type="submit">Open</button>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<div id="door">
+  <form id="door-form">
+    <span class="mark">IS</span>
+    <p class="kicker">INVENTIVE SOLUTIONS</p>
+    <h1>Private board</h1>
+    <label for="door-code">Access code</label>
+    <input id="door-code" type="password" autocomplete="off" />
+    <button type="submit">Enter</button>
   </form>
 </div>
+<style>
+  html,body{margin:0;background:#07080b}
+  #door{min-height:100vh;display:grid;place-items:center;background:radial-gradient(900px 480px at 50% 40%,rgba(18,63,56,.35),transparent 60%),#07080b;font-family:Inter,sans-serif;color:#f4f1ea}
+  #door-form{width:min(380px,calc(100% - 40px));padding:36px 32px 28px;border:1px solid rgba(61,214,140,.35);border-radius:22px;background:rgba(12,14,18,.92);box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 40px rgba(18,63,56,.25)}
+  #door .mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;border:1px solid #3dd68c;color:#3dd68c;font-size:13px;letter-spacing:.08em}
+  #door .kicker{margin:18px 0 0;letter-spacing:.22em;font-size:11px;color:#8d978f}
+  #door h1{margin:8px 0 22px;font-size:28px;font-weight:500;letter-spacing:-.03em}
+  #door label{display:block;font-size:12px;color:#8d978f;margin-bottom:8px}
+  #door input{width:100%;box-sizing:border-box;background:#0c0e12;color:#fff;border:1px solid #2c3138;border-radius:12px;padding:14px 12px;font-size:16px}
+  #door input:focus{outline:none;border-color:#3dd68c}
+  #door button{width:100%;margin-top:16px;background:#123f38;color:#f4f1ea;border:0;border-radius:12px;padding:14px;font-size:15px;letter-spacing:.04em}
+  #door.bad{animation:shake .35s}
+  @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+</style>
 <script>
 function openBoard(){
   var door=document.getElementById("door");
@@ -54,7 +73,7 @@ document.getElementById("door-form").addEventListener("submit", function(e){
   e.preventDefault();
   var code=(document.getElementById("door-code").value||"").trim();
   if(code==="Yomama369"){ sessionStorage.setItem("pipe-door","1"); openBoard(); }
-  else document.getElementById("door-code").value="";
+  else { document.getElementById("door-code").value=""; document.getElementById("door").classList.remove("bad"); void document.getElementById("door").offsetWidth; document.getElementById("door").classList.add("bad"); }
 });
 </script>
 </body>
