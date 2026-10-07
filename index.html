@@ -6,9 +6,17 @@
 <title>Inventive Solutions — Portfolio Pipeline</title>
 </head>
 <body>
-<p>Putting the board back.</p>
+<div id="door" style="min-height:100vh;display:grid;place-items:center;background:#0c0e12;color:#f4f1ea;font-family:Inter,sans-serif">
+  <form id="door-form" style="display:flex;gap:8px">
+    <input id="door-code" autocomplete="off" aria-label="Code" style="background:#16181c;color:#fff;border:1px solid #3a3a3f;border-radius:999px;padding:10px 14px" />
+    <button style="background:#123f38;color:#fff;border:0;border-radius:999px;padding:10px 16px" type="submit">Open</button>
+  </form>
+</div>
 <script>
-fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-portfolio/a0c354633d010553474d624dca1e767411ef6d77/index.html')
+function openBoard(){
+  var door=document.getElementById("door");
+  if(door) door.remove();
+  fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-portfolio/a0c354633d010553474d624dca1e767411ef6d77/index.html')
 .then(function(r){return r.text();})
 .then(function(t){
   var m=t.match(/<div id="sure"[\s\S]*?<\/div>\s*<\/div>\s*<\/div>/);
@@ -40,6 +48,14 @@ fetch('https://raw.githubusercontent.com/whimsyandweeds/inventive-solutions-port
   document.open(); document.write(t); document.close();
 })
 .catch(function(){document.body.textContent='Restore failed. Hard-refresh once more.';});
+}
+if(sessionStorage.getItem("pipe-door")==="1") openBoard();
+document.getElementById("door-form").addEventListener("submit", function(e){
+  e.preventDefault();
+  var code=(document.getElementById("door-code").value||"").trim();
+  if(code==="Yomama369"){ sessionStorage.setItem("pipe-door","1"); openBoard(); }
+  else document.getElementById("door-code").value="";
+});
 </script>
 </body>
 </html>
