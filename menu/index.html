@@ -232,6 +232,24 @@ h2 span{color:var(--teal)}
 #market .buy i{font-style:normal;min-width:22px;height:22px;border-radius:50%;background:#111;display:grid;place-items:center;font-size:.72rem;font-weight:800}
 .demo-flag{display:inline-flex;margin:.4rem 0 .7rem;border:1px dashed #fbbf24;color:#fbbf24;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-weight:800;padding:.35rem .7rem;border-radius:999px}
 #out{z-index:5}
+
+#booth .row{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+#booth .row input[data-name]{flex:1 1 100%}
+#booth input[type=text]{background:rgba(10,12,14,.7);border:1px solid #3d444d;color:#f3f4f6;border-radius:12px;padding:.55rem .7rem;font:inherit}
+#booth .sold{background:transparent;color:#e7b7b7;border:1px solid #8a4a52;border-radius:999px;padding:.35rem .7rem}
+#booth .tools{display:flex;gap:.4rem;flex-wrap:wrap}
+#booth .tools button{width:36px;height:36px;border-radius:50%;border:1px solid #3d444d;background:#24282e;color:#b8bec7}
+#booth .tools [data-kill]{border-color:#c9a227;color:#c9a227}
+.cal{display:none;margin:1rem 0}
+.cal.on{display:block}
+.week{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.week b{display:block;text-align:center;border:1px solid #3d444d;background:#24282e;color:#8b929c;border-radius:16px;padding:.8rem .4rem;min-height:92px}
+.week b.on{background:#2ec4b6;color:#000;border-color:#2ec4b6}
+.week .time,.week .spot{display:block;font-size:.72rem;font-weight:600;margin-top:.15rem}
+.stops{display:grid;gap:.45rem;margin-top:.8rem}
+.stops div{display:grid;grid-template-columns:52px 1fr auto;gap:.5rem;align-items:center;border:1px solid #3d444d;border-radius:14px;padding:.6rem .7rem}
+.stops em{background:#2ec4b6;color:#000;border-radius:999px;padding:.25rem .55rem;font-style:normal;font-size:.72rem;font-weight:800}
+.who{color:#2ec4b6;letter-spacing:.12em;font-size:.72rem;font-weight:800}
 </style>
 </head>
 <body>
@@ -287,7 +305,8 @@ h2 span{color:var(--teal)}
 <div class="demo-flag">Demo stall · client theater</div>
 <h2>Crates with <span>priors</span></h2>
 <p class="lede">The peaches swung first. The eggs have an alibi. The honey is union.</p>
-<div class="pills"><button type="button" id="mock-stall" class="on">Mock stall</button></div>
+<div class="pills"><button type="button" id="mock-stall" class="on">Mock stall</button><button type="button" id="mock-cal">When we're here</button></div>
+<div class="cal" id="cal"><div class="cal-card"><p class="who">Booth calendar</p><h3 class="where">The truck moves</h3><div class="week" id="cal-week"><b data-day="Sun">Sun<span class="time">Empty</span><span class="spot"></span></b><b data-day="Mon">Mon<span class="time">Empty</span><span class="spot"></span></b><b class="on" data-day="Tue">Tue<span class="time">11a–2p</span><span class="spot">Boulder Hwy</span></b><b data-day="Wed">Wed<span class="time">Empty</span><span class="spot"></span></b><b class="on" data-day="Thu">Thu<span class="time">8a–1p</span><span class="spot">Henderson, stall 12</span></b><b class="on" data-day="Fri">Fri<span class="time">4p–8p</span><span class="spot">Downtown lot</span></b><b class="on" data-day="Sat">Sat<span class="time">8a–1p</span><span class="spot">Summerlin</span></b></div><div class="stops" id="cal-stops"><div class="off" data-row="Sun"><b>Sun</b><span>Empty</span><em>—</em></div><div class="off" data-row="Mon"><b>Mon</b><span>Empty</span><em>—</em></div><div data-row="Tue"><b>Tue</b><span>Food truck row, Boulder Hwy</span><em>11a–2p</em></div><div class="off" data-row="Wed"><b>Wed</b><span>Empty</span><em>—</em></div><div data-row="Thu"><b>Thu</b><span>Henderson market, stall 12</span><em>8a–1p</em></div><div data-row="Fri"><b>Fri</b><span>Downtown lot, Water St</span><em>4p–8p</em></div><div data-row="Sat"><b>Sat</b><span>Summerlin market</span><em>8a–1p</em></div>
 <div class="stall" id="stall">
 <article class="item" id="item-peaches"><img src="../menu_peaches.jpg" alt="Slap Peaches" /><span class="price" data-show="peaches">$6</span><div><b data-title="peaches">Slap Peaches</b><span data-line="peaches">They started it.</span><div class="buy"><button type="button" data-step="-1" data-id="peaches">−</button><i data-n="peaches">0</i><button type="button" data-step="1" data-id="peaches">+</button><button type="button" class="drop" data-clear="peaches">Remove</button><span class="left" data-left="peaches">12 left</span></div></div></article>
 <article class="item" id="item-eggs"><img src="../menu_eggs.jpg" alt="Alibi Eggs" /><span class="price" data-show="eggs">$8</span><div><b data-title="eggs">Alibi Eggs</b><span data-line="eggs">Home all night. Allegedly.</span><div class="buy"><button type="button" data-step="-1" data-id="eggs">−</button><i data-n="eggs">0</i><button type="button" data-step="1" data-id="eggs">+</button><button type="button" class="drop" data-clear="eggs">Remove</button><span class="left" data-left="eggs">12 left</span></div></div></article>
@@ -322,6 +341,7 @@ if(calBtn)calBtn.addEventListener("click",()=>{const on=!cal.classList.contains(
 if(vendorPill)vendorPill.addEventListener("click",()=>{const on=!vendor.classList.contains("on");vendor.classList.toggle("on",on);vendorPill.classList.toggle("on",on);if(on){stall.classList.remove("on");mock.classList.remove("on");mock.textContent="Mock stall";cal.classList.remove("on");calBtn.classList.remove("on");}});
 
 document.getElementById("stall").classList.add("on");
+document.getElementById("mock-cal").onclick=function(){document.getElementById("cal").classList.toggle("on");this.classList.toggle("on");};
 document.getElementById("booth-btn").onclick=function(){document.getElementById("booth").classList.add("open");};
 document.getElementById("cart-btn").onclick=function(){document.getElementById("shop").classList.add("open");};
 document.querySelectorAll("[data-close]").forEach(function(el){el.onclick=function(){document.getElementById("booth").classList.remove("open");document.getElementById("shop").classList.remove("open");};});
