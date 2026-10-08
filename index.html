@@ -81,6 +81,7 @@ function tryDoor(){
   if(key==="docket"){ sessionStorage.removeItem("pipe-door"); location.href="door/?open=1"; return true; }
   if(key==="collab"){ sessionStorage.removeItem("pipe-door"); location.href="collab/"; return true; }
   if(key==="vendor"){ sessionStorage.removeItem("pipe-door"); location.href="vendor/"; return true; }
+  if(key==="market"){ sessionStorage.removeItem("pipe-door"); location.href="market/"; return true; }
   return false;
 }
 document.getElementById("door-form").addEventListener("submit", function(e){
