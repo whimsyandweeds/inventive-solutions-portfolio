@@ -117,7 +117,16 @@
 .ops .sold.on{background:#fde8e6;color:var(--sold);border-color:#f3c4bf}
 .item{grid-template-columns:72px 1fr}
 .ops{grid-column:2}
-.item.parked{opacity:.4;filter:grayscale(1)}</style>
+.item.parked{opacity:.4;filter:grayscale(1)}
+.item.sold{opacity:.45;filter:grayscale(1)}
+.pic{position:relative}
+.pic input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.edit{outline:none}
+.edit:focus{box-shadow:0 0 0 2px var(--accent);border-radius:8px}
+.add{margin:12px 16px 4px;border:1px dashed var(--teal);background:var(--mist);color:var(--teal);border-radius:999px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer}
+.card.gone{position:relative}
+.card .flag{position:absolute;left:12px;top:12px;background:#fff;color:var(--sold);border:1px solid var(--sold);padding:4px 8px;font-size:12px;font-weight:700;letter-spacing:.08em}
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -139,6 +148,7 @@
       <p class="hint">Sold out flips the customer page.</p>
     </div>
     <div id="rows"></div>
+    <button class="add" id="add" type="button">Add item</button>
     <div class="stops">
       <span class="chip">Summerlin · Sat 8–1</span>
       <span class="chip">Henderson · Thu 8–1</span>
@@ -184,12 +194,17 @@ const seed = [
 let items = seed;
 try { const saved = JSON.parse(localStorage.getItem("market-board")||""); if (Array.isArray(saved) && saved.length) items = saved; } catch(e) {}
 function save(){ localStorage.setItem("market-board", JSON.stringify(items)); }
+function pic(it){ return it.photo || IMG[it.id] || ""; }
 function render() {
   rows.innerHTML = items.map((it, i) => `
-    <div class="item ${it.parked ? "parked" : ""}">
-      <img src="${IMG[it.id]||""}" alt="${it.name}">
+    <div class="item ${it.parked ? "parked" : ""} ${it.sold ? "sold" : ""}">
+      <label class="pic">
+        <img src="${pic(it)}" alt="${it.name}">
+        <input class="photo" data-i="${i}" type="file" accept="image/*">
+      </label>
       <div>
-        <div class="name">${it.name}</div>
+        <div class="name edit" contenteditable="true" data-field="name" data-i="${i}">${it.name}</div>
+        <div class="meta edit" contenteditable="true" data-field="desc" data-i="${i}">${it.desc || "Add a line"}</div>
         <div class="ops">
           <input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price">
           <button type="button" data-act="down" data-i="${i}">−</button>
@@ -202,8 +217,7 @@ function render() {
         </div>
       </div>
     </div>`).join("");
-  const live = items.filter(it => !it.sold && !it.parked);
-  const dead = items.filter(it => it.sold && !it.parked);
+  const shown = items.filter(it => !it.parked);
   customer.innerHTML = `
     <div class="head">
       <div>
@@ -212,18 +226,38 @@ function render() {
       </div>
       <p class="hint">Summerlin · 8–1</p>
     </div>
-    ${live.map(it => `
-      <article class="card">
-        <img src="${IMG[it.id]||""}" alt="${it.name}">
+    ${shown.map(it => `
+      <article class="card ${it.sold ? "gone" : ""}">
+        ${it.sold ? '<span class="flag">SOLD OUT</span>' : ""}
+        <img src="${pic(it)}" alt="${it.name}">
         <div class="pad">
           <span class="price">$${it.price}</span>
           <div class="name" style="margin-top:8px">${it.name}</div>
-          <div class="meta">${it.qty} left · hold for Saturday</div>
+          <div class="meta">${it.desc || ""} ${it.sold ? "" : "· " + it.qty + " left"}</div>
         </div>
       </article>`).join("")}
-    ${dead.length ? `<div class="pad"><div class="tag">Sold out</div><div class="meta">${dead.map(it => it.name).join(", ")}</div></div>` : ""}
   `;
-  rows.querySelectorAll("button,input").forEach(el => {
+  rows.querySelectorAll("[contenteditable]").forEach(el => {
+    el.onblur = () => {
+      const it = items[Number(el.dataset.i)];
+      it[el.dataset.field] = el.textContent.trim();
+      save();
+    };
+  });
+  rows.querySelectorAll(".photo").forEach(el => {
+    el.onchange = () => {
+      const file = el.files && el.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        items[Number(el.dataset.i)].photo = reader.result;
+        save();
+        render();
+      };
+      reader.readAsDataURL(file);
+    };
+  });
+  rows.querySelectorAll("button,input.price").forEach(el => {
     const go = () => {
       const i = Number(el.dataset.i);
       const act = el.dataset.act;
@@ -249,6 +283,11 @@ function render() {
     else el.onclick = go;
   });
 }
+document.getElementById("add").onclick = () => {
+  items.push({ id: "new"+Date.now(), name: "New item", desc: "Add a line", price: 0, qty: 1, sold: false });
+  save();
+  render();
+};
 render();
 const tabBoard = document.getElementById("tabBoard");
 const tabCustomer = document.getElementById("tabCustomer");
