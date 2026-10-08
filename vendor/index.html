@@ -69,7 +69,10 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .pin{padding-bottom:34px}
 .tagrow,.pin .tagrow{position:absolute;right:12px;bottom:-12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:78%}
 .tagrow .mkt,.tagrow .build,.tagrow .spot,.tagrow .fix,.tagrow .truck,.tagrow .bag,.tagrow .paint,.tagrow .rain,.tagrow .gem,.tagrow .sip,.tagrow .bloom{position:static}
-.slip{position:absolute;left:12px;top:10px;z-index:3;font-size:.85rem;opacity:.85;filter:grayscale(.2)}</style>
+.slip{position:absolute;left:12px;top:10px;z-index:3;font-size:.85rem;opacity:.85;filter:grayscale(.2)}
+.keys.tags button{position:static;letter-spacing:.08em}
+.slipkey{border:1.5px solid #9aa0a6;color:#d1d5db}
+</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back">←</a>
@@ -79,6 +82,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 <p class="sub">Saved from the sheet. Still strangers.</p>
 <div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button><button class="nogo-key" type="button" data-filter="nogo">No go</button></div>
 <div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj avi" type="button" data-project="AVI">AVI</button></div>
+<div class="keys tags" data-kind="tag"><button class="all on" type="button" data-tag="all">All</button><button class="build" type="button" data-tag="build">Site</button><button class="fix" type="button" data-tag="fix">Fix</button><button class="mkt" type="button" data-tag="mkt">Market</button><button class="spot" type="button" data-tag="spot">Food</button><button class="truck" type="button" data-tag="truck">Truck</button><button class="bag" type="button" data-tag="bag">Pickup</button><button class="slipkey" type="button" data-tag="receipts">Receipts</button><button class="slipkey" type="button" data-tag="noreceipts">No receipts</button></div>
 <div class="keys folds"><button class="fold open" type="button" data-fold="open">Expand all</button><button class="fold shut" type="button" data-fold="shut">Collapse all</button></div>
 <div class="wall">
 <article class="pin" data-id="hungry" data-for="AVI">
@@ -407,6 +411,13 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     t.closest(".pin").classList.toggle("open", !more.hidden);
     t.textContent=more.hidden?"v":"^";
   });
+  document.querySelector(".tags").addEventListener("click", function(e){
+    var btn=e.target.closest("button"); if(!btn) return;
+    this.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
+    btn.classList.add("on");
+    state.tag=btn.dataset.tag;
+    show();
+  });
   document.querySelector(".folds").addEventListener("click", function(e){
     var fold=e.target.closest("[data-fold]");
     if(!fold) return;
@@ -414,6 +425,20 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
   });
   wall.addEventListener("click", function(e){var btn=e.target.closest(".pencil"); if(!btn)return; var s=btn.closest(".pin").querySelector(".scratch"); s.hidden=!s.hidden;});
   
+  
+  var state={status:"all",project:"all",tag:"all"};
+  function show(){
+    wall.querySelectorAll(".pin").forEach(function(card){
+      var hit=card.classList.contains("hooked");
+      var nogo=card.classList.contains("nogo");
+      var okStatus=state.status==="all"||(state.status==="hit"&&hit)||(state.status==="pending"&&!hit&&!nogo)||(state.status==="nogo"&&nogo);
+      var proj=card.querySelector(".ss")?"S+S":"AVI";
+      var okProj=state.project==="all"||state.project===proj;
+      var has=card.querySelector(".receipts");
+      var okTag=state.tag==="all"||(state.tag==="receipts"&&has)||(state.tag==="noreceipts"&&!has)||card.querySelector("."+state.tag);
+      card.style.display=(okStatus&&okProj&&okTag)?"":"none";
+    });
+  }
   document.querySelector(".projects").addEventListener("click", function(e){
     var btn=e.target.closest("button"); if(!btn) return;
     this.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
@@ -422,18 +447,14 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     wall.querySelectorAll(".pin").forEach(function(card){
       var proj=card.querySelector(".ss")?"S+S":"AVI";
       card.dataset.proj=proj;
-      card.style.display=(project==="all"||project===proj)?"":"none";
+      state.project=project; show();
     });
   });
   document.querySelector(".keys").addEventListener("click", function(e){
     var btn=e.target.closest("button"); if(!btn || !btn.dataset.filter)return;
     this.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
     btn.classList.add("on");
-    var mode=btn.dataset.filter;
-    wall.querySelectorAll(".pin").forEach(function(card){
-      var hit=card.classList.contains("hooked");
-      var nogo=card.classList.contains("nogo"); card.style.display=(mode==="all"||(mode==="hit"&&hit)||(mode==="pending"&&!hit&&!nogo)||(mode==="nogo"&&nogo))?"":"none";
-    });
+    state.status=btn.dataset.filter; show();
   });
 })();
 </script>
