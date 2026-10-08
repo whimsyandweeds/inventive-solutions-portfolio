@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vendor</title>
+<link rel="icon" href="../favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#1a1c1f;--ink:#f3f4f6;--mute:#b8bec7}
+*{box-sizing:border-box}
+html,body{margin:0;background:#1a1c1f;color:var(--ink);font-family:Inter,system-ui,sans-serif}
+body{min-height:100vh;background-color:#1a1c1f;background-attachment:fixed;background-image:radial-gradient(ellipse at 78% 18%, rgba(168,85,247,.1), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%), linear-gradient(to right, transparent 0, transparent calc(33.3% - 1px), rgba(0,0,0,.55) calc(33.3% - 1px), rgba(255,255,255,.04) 33.3%, transparent calc(33.3% + 2px)), linear-gradient(to right, transparent 0, transparent calc(66.6% - 1px), rgba(0,0,0,.55) calc(66.6% - 1px), rgba(255,255,255,.04) 66.6%, transparent calc(66.6% + 2px)), linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), rgba(0,0,0,.5) calc(50% - 1px), rgba(255,255,255,.035) 50%, transparent calc(50% + 2px)), repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 9px), repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 14px), linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%)}
+#out{position:fixed;left:16px;bottom:16px;z-index:5;width:36px;height:36px;display:grid;place-items:center;border:1px solid #9aa0a6;border-radius:10px;color:#c5c7cc;text-decoration:none;background:rgba(22,24,27,.8)}
+main{max-width:920px;margin:0 auto;padding:28px 18px 80px}
+.kicker{letter-spacing:.22em;font-size:.72rem;color:var(--mute);margin:0}
+h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}h1 span{color:#a855f7}
+.sub{color:var(--mute);margin:0 0 22px}
+.keys{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.keys button{padding:7px 14px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;cursor:pointer}
+.all{border:1.5px solid #ff3d8a;color:#ff3d8a}
+.key{border:1.5px dashed #2f9e4f;color:#2f9e4f}
+.lane{border:1.5px dashed #e4b83a;color:#e4b83a}
+.proj{border:1.5px solid #a855f7;color:#d8b4fe}
+.keys .on{box-shadow:0 0 0 1px currentColor}
+.wall{display:flex;flex-wrap:wrap;gap:36px 42px;align-items:flex-start;padding:18px 8px 8px;min-height:180px}
+.empty{color:var(--mute);font-size:.92rem}
+</style>
+</head>
+<body>
+<a id="out" href="../" aria-label="Back">←</a>
+<main>
+<p class="kicker">VENDOR</p>
+<h1>Doors I have <span>not knocked</span></h1>
+<p class="sub">Blank wall. Cards land here.</p>
+<div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
+<div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj" type="button" data-project="vendor">Vendor</button></div>
+<div class="wall"><p class="empty">No cards yet.</p></div>
+</main>
+</body>
+</html>
