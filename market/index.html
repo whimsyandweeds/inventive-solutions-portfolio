@@ -144,7 +144,7 @@
 .look[hidden]{display:none}
 .look img{max-width:min(92vw,640px);max-height:82vh;object-fit:contain;background:#F0F7F6;border-radius:18px;border:1.5px solid #1C9792}
 .look button{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:700;cursor:pointer}
-.buck{color:#13302B;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}.card{border:1.5px solid #1C9792;border-radius:18px;overflow:hidden;background:#fff}.shot{position:relative}.tagprice{position:absolute;top:10px;right:10px;background:#1C9792;color:#fff;border-radius:999px;padding:4px 10px;font-weight:700;font-size:14px}.card .flag{left:10px;top:10px}@media(max-width:640px){.grid{grid-template-columns:1fr}}</style>
+.buck{color:#13302B;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}.card{border:1.5px solid #1C9792;border-radius:18px;overflow:hidden;background:#fff}.shot{position:relative}.tagprice{position:absolute;top:10px;right:10px;background:#1C9792;color:#fff;border-radius:999px;padding:4px 10px;font-weight:700;font-size:14px}.card .flag{left:10px;top:10px}@media(max-width:640px){.grid{grid-template-columns:1fr}}input.price::-webkit-outer-spin-button,input.price::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input.price{appearance:textfield;-moz-appearance:textfield}</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -212,10 +212,11 @@ const seed = [
   { id: "bread", name: "Bread", price: 5, qty: 8, sold: false }
 ];
 let items = seed;
-try { const saved = JSON.parse(localStorage.getItem("market-board-2")||""); if (Array.isArray(saved) && saved.length) items = saved; } catch(e) {}
-function save(){ localStorage.setItem("market-board-2", JSON.stringify(items)); }
+try { const saved = JSON.parse(localStorage.getItem("market-board-3")||""); if (Array.isArray(saved) && saved.length) items = saved; } catch(e) {}
+seed.forEach(s => { if (!items.some(it => it.id === s.id)) items.unshift(Object.assign({}, s)); });
+function save(){ localStorage.setItem("market-board-3", JSON.stringify(items)); }
 const picks = {};
-function pic(it){ return it.photo || ({peaches:"peaches.jpg",eggs:"eggs.jpg",honey:"honey.jpg",bread:"bread.jpg"}[it.id] || ""); ; }
+function pic(it){ return it.photo || ({peaches:"peaches.jpg",eggs:"eggs.jpg",honey:"honey.jpg",bread:"bread.jpg"}[it.id] || "peaches.jpg"); }
 function render() {
   rows.innerHTML = items.map((it, i) => `
     <div class="item ${it.parked ? "parked" : ""} ${it.sold ? "sold" : ""}">
@@ -314,8 +315,8 @@ function render() {
     const go = () => {
       const i = Number(el.dataset.i);
       const act = el.dataset.act;
-      if (el.classList.contains("price")) items[i].price = Math.max(0, Number(el.value)||0);
-      if (act === "up") items[i].qty += 1;
+      if (el.classList.contains("price")) { items[i].price = Math.max(0, Number(el.value)||0); save(); return; }
+      if (act === "up") { items[i].qty += 1; if (items[i].qty > 0) items[i].sold = false; }
       if (act === "down") items[i].qty = Math.max(0, items[i].qty-1);
       if (act === "sold") items[i].sold = !items[i].sold;
       if (act === "orderup" && i>0) items.splice(i-1, 0, items.splice(i,1)[0]);
@@ -324,7 +325,7 @@ function render() {
         if (items[i].parked) { items[i].parked = false; }
         else { askPull(i); return; }
       }
-      if (items[i] && items[i].qty === 0) items[i].sold = true;
+      if (act === "down" && items[i] && items[i].qty === 0) items[i].sold = true;
       save();
       render();
     };
@@ -347,7 +348,7 @@ document.getElementById("ask-yes").onclick=()=>{
   document.getElementById("ask").hidden=true;
 };
 document.getElementById("add").onclick = () => {
-  items.push({ id: "new"+Date.now(), name: "New item", desc: "Add a line", price: 0, qty: 1, sold: false });
+  items.push({ id: "new"+Date.now(), name: "New item", desc: "Add a line", price: 0, qty: 1, sold: false, photo: "peaches.jpg" });
   save();
   render();
 };
