@@ -117,7 +117,7 @@
 .ops .sold.on{background:#fde8e6;color:var(--sold);border-color:#f3c4bf}
 .item{grid-template-columns:72px 1fr}
 .ops{grid-column:2}
-</style>
+.item.parked{opacity:.4;filter:grayscale(1)}</style>
 </head>
 <body>
 <div class="wrap">
@@ -186,7 +186,7 @@ try { const saved = JSON.parse(localStorage.getItem("market-board")||""); if (Ar
 function save(){ localStorage.setItem("market-board", JSON.stringify(items)); }
 function render() {
   rows.innerHTML = items.map((it, i) => `
-    <div class="item">
+    <div class="item ${it.parked ? "parked" : ""}">
       <img src="${IMG[it.id]||""}" alt="${it.name}">
       <div>
         <div class="name">${it.name}</div>
@@ -198,12 +198,12 @@ function render() {
           <button class="sold ${it.sold ? "on" : ""}" data-act="sold" data-i="${i}" type="button">${it.sold ? "Sold out" : "Sold out"}</button>
           <button type="button" data-act="orderup" data-i="${i}" aria-label="Move up">↑</button>
           <button type="button" data-act="orderdown" data-i="${i}" aria-label="Move down">↓</button>
-          <button type="button" data-act="trash" data-i="${i}" aria-label="Delete">⌫</button>
+          <button type="button" data-act="trash" data-i="${i}" aria-label="Delete">${it.parked ? "Put back" : "⌫"}</button>
         </div>
       </div>
     </div>`).join("");
-  const live = items.filter(it => !it.sold);
-  const dead = items.filter(it => it.sold);
+  const live = items.filter(it => !it.sold && !it.parked);
+  const dead = items.filter(it => it.sold && !it.parked);
   customer.innerHTML = `
     <div class="head">
       <div>
@@ -233,7 +233,14 @@ function render() {
       if (act === "sold") items[i].sold = !items[i].sold;
       if (act === "orderup" && i>0) items.splice(i-1, 0, items.splice(i,1)[0]);
       if (act === "orderdown" && i<items.length-1) items.splice(i+1, 0, items.splice(i,1)[0]);
-      if (act === "trash") items.splice(i,1);
+      if (act === "trash") {
+        if (items[i].parked) { items[i].parked = false; }
+        else if (confirm("Pull " + items[i].name + " off the board?")) {
+          items[i].parked = true;
+          items[i].sold = true;
+          items.push(items.splice(i,1)[0]);
+        }
+      }
       if (items[i] && items[i].qty === 0) items[i].sold = true;
       save();
       render();
