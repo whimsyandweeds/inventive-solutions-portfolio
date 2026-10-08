@@ -177,13 +177,14 @@ body.dark #price-pill{color:#fff}
 #price-blurb strong{font-family:Lexend,sans-serif;font-size:42px}
 #price-blurb p{margin:6px 0 0;color:#5d6a64}
 body.dark #price-blurb p{color:#c9d5d1}
-</style>
+#bot{position:fixed;right:16px;bottom:22px;z-index:50;width:56px;height:56px;border-radius:50%;border:1.5px solid #1C9792;background:#13302B;color:#fff;font-size:24px;line-height:1;display:grid;place-items:center}
+#chat{position:fixed;right:16px;bottom:88px;z-index:50}</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
 <div class="look" id="look" hidden><button type="button" id="look-x">×</button><img id="look-img" alt=""></div>
 
-<button id="bot" type="button" aria-label="Ask">Ask</button>
+<button id="bot" type="button" aria-label="Ask">&#128172;</button>
 <div id="chat" hidden>
   <div class="chat-head">Ask the board<button id="chat-x" type="button">×</button></div>
   <div id="chat-log"></div>
@@ -449,6 +450,7 @@ document.getElementById("lead").onsubmit = (e) => {
   thanks.textContent="Mail is open. Hit send.";
 };
 document.addEventListener("click",function(e){if(e.target&&e.target.id==="price-pill"){var b=document.getElementById("price-blurb");if(b)b.hidden=!b.hidden;}});
+document.addEventListener("click",function(e){var t=e.target;if(t&&t.id==="bot"){var c=document.getElementById("chat");c.hidden=!c.hidden;var log=document.getElementById("chat-log");if(!log.childElementCount){var p=document.createElement("p");p.textContent="Menu, where, or contact.";log.appendChild(p);}}});
 </script>
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a><style>#exit-door{position:fixed;left:18px;bottom:18px;z-index:100000;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:#1a1a1c;border:1px solid #d2d2d2;box-shadow:0 8px 20px rgba(0,0,0,.45)}</style>
 </body>
