@@ -144,7 +144,7 @@
 .look[hidden]{display:none}
 .look img{max-width:min(92vw,640px);max-height:82vh;object-fit:contain;background:#F0F7F6;border-radius:18px;border:1.5px solid #1C9792}
 .look button{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:700;cursor:pointer}
-.buck{color:#13302B;font-weight:700}</style>
+.buck{color:#13302B;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}.card{border:1.5px solid #1C9792;border-radius:18px;overflow:hidden;background:#fff}.shot{position:relative}.tagprice{position:absolute;top:10px;right:10px;background:#1C9792;color:#fff;border-radius:999px;padding:4px 10px;font-weight:700;font-size:14px}.card .flag{left:10px;top:10px}@media(max-width:640px){.grid{grid-template-columns:1fr}}</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -249,16 +249,18 @@ function render() {
       </div>
       <p class="hint">Summerlin · 8–1</p>
     </div>
-    ${shown.map(it => {
+    <div class="grid">${shown.map(it => {
       const n = picks[it.id]||0;
       const maxed = it.sold || n >= it.qty;
       return `
       <article class="card ${it.sold ? "gone" : ""}">
-        ${it.sold ? '<span class="flag">SOLD OUT</span>' : ""}
-        <img src="${pic(it)}" alt="${it.name}">
+        <div class="shot">
+          ${it.sold ? '<span class="flag">SOLD OUT</span>' : ""}
+          <img class="zoom" src="${pic(it)}" alt="${it.name}" data-full="${pic(it)}">
+          <span class="tagprice">$${it.price}</span>
+        </div>
         <div class="pad">
-          <span class="price">$${it.price}</span>
-          <div class="name" style="margin-top:8px">${it.name}</div>
+          <div class="name">${it.name}</div>
           <div class="meta">${it.desc || ""}</div>
           <div class="pick">
             <button type="button" data-pick="down" data-id="${it.id}" ${n<=0?"disabled":""}>−</button>
@@ -268,7 +270,7 @@ function render() {
           </div>
         </div>
       </article>`;
-    }).join("")}
+    }).join("")}</div>
     <div class="pad tally"><b>$${total}</b><span>Stops at the number on the board.</span></div>
   `;
   
