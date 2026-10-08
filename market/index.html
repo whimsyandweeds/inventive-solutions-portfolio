@@ -139,7 +139,7 @@
 .ask button{flex:1;border-radius:999px;padding:12px;font:inherit;font-weight:600;cursor:pointer}
 .ask .no{background:#fff;border:1.5px solid #1C9792;color:#13302B}
 .ask .yes{background:#13302B;border:0;color:#fff}
-</style>
+.pick{display:flex;align-items:center;gap:8px;margin-top:12px}.pick button{width:36px;height:36px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:600;cursor:pointer}.pick button:disabled{opacity:.35}.pick .left{color:#5d6a64;font-size:13px}.tally{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #1C9792}.tally b{font-family:Lexend,sans-serif;font-size:28px}</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -208,6 +208,7 @@ const seed = [
 let items = seed;
 try { const saved = JSON.parse(localStorage.getItem("market-board")||""); if (Array.isArray(saved) && saved.length) items = saved; } catch(e) {}
 function save(){ localStorage.setItem("market-board", JSON.stringify(items)); }
+const picks = {};
 function pic(it){ return it.photo || IMG[it.id] || ""; }
 function render() {
   rows.innerHTML = items.map((it, i) => `
@@ -232,6 +233,8 @@ function render() {
       </div>
     </div>`).join("");
   const shown = items.filter(it => !it.parked);
+  shown.forEach(it => { picks[it.id] = Math.min(picks[it.id]||0, it.sold ? 0 : it.qty); });
+  const total = shown.reduce((n,it) => n + (picks[it.id]||0) * it.price, 0);
   customer.innerHTML = `
     <div class="head">
       <div>
@@ -240,17 +243,38 @@ function render() {
       </div>
       <p class="hint">Summerlin · 8–1</p>
     </div>
-    ${shown.map(it => `
+    ${shown.map(it => {
+      const n = picks[it.id]||0;
+      const maxed = it.sold || n >= it.qty;
+      return `
       <article class="card ${it.sold ? "gone" : ""}">
         ${it.sold ? '<span class="flag">SOLD OUT</span>' : ""}
         <img src="${pic(it)}" alt="${it.name}">
         <div class="pad">
           <span class="price">$${it.price}</span>
           <div class="name" style="margin-top:8px">${it.name}</div>
-          <div class="meta">${it.desc || ""} ${it.sold ? "" : "· " + it.qty + " left"}</div>
+          <div class="meta">${it.desc || ""}</div>
+          <div class="pick">
+            <button type="button" data-pick="down" data-id="${it.id}" ${n<=0?"disabled":""}>−</button>
+            <span>${n}</span>
+            <button type="button" data-pick="up" data-id="${it.id}" ${maxed?"disabled":""}>+</button>
+            <span class="left">${it.sold ? "Sold out" : it.qty + " left"}</span>
+          </div>
         </div>
-      </article>`).join("")}
+      </article>`;
+    }).join("")}
+    <div class="pad tally"><b>$${total}</b><span>Stops at the number on the board.</span></div>
   `;
+  customer.querySelectorAll("[data-pick]").forEach(btn => {
+    btn.onclick = () => {
+      const it = items.find(x => x.id === btn.dataset.id);
+      if (!it || it.sold) return;
+      const n = picks[it.id]||0;
+      if (btn.dataset.pick === "up" && n < it.qty) picks[it.id] = n+1;
+      if (btn.dataset.pick === "down") picks[it.id] = Math.max(0, n-1);
+      render();
+    };
+  });
   rows.querySelectorAll("[contenteditable]").forEach(el => {
     el.onblur = () => {
       const it = items[Number(el.dataset.i)];
