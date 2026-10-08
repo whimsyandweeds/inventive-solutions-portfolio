@@ -157,7 +157,7 @@ body.dark .switch .on{background:#1C9792;color:#fff}
 body.dark .ops button,body.dark .ops .price{background:transparent;color:#fff;border-color:#1C9792}
 .chip,.go,.tagprice{background:transparent;color:#1C9792;border:1.5px solid #1C9792}
 body.dark .chip,body.dark .go,body.dark .tagprice{color:#fff}
-</style>
+.meta:empty:before{content:"Add a line";color:#8aa099}</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -214,7 +214,7 @@ const seed = [
   { id: "bread", name: "Bread", price: 5, qty: 8, sold: false }
 ];
 let items = seed;
-try { const saved = JSON.parse(localStorage.getItem("market-board-3")||""); if (Array.isArray(saved) && saved.length) items = saved; else items = seed.map(s => Object.assign({}, s)); } catch(e) {}
+try { const saved = JSON.parse(localStorage.getItem("market-board-3")||""); if (Array.isArray(saved) && saved.length) items = saved.filter(it => !it.parked); else items = seed.map(s => Object.assign({}, s)); } catch(e) {}
 seed.forEach(s => { if (!items.some(it => it.id === s.id)) items.unshift(Object.assign({}, s)); });
 function save(){ localStorage.setItem("market-board-3", JSON.stringify(items)); }
 const picks = {};
@@ -228,7 +228,7 @@ function render() {
       </label>
       <div>
         <div class="name edit" contenteditable="true" data-field="name" data-i="${i}">${it.name}</div>
-        <div class="meta edit" contenteditable="true" data-field="desc" data-i="${i}">${it.desc || "Add a line"}</div>
+        <div class="meta edit" contenteditable="true" data-field="desc" data-i="${i}">${it.desc || ""}</div>
         <div class="ops">
           <span class="buck">$</span><input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price">
           <button type="button" data-act="down" data-i="${i}">−</button>
@@ -298,9 +298,13 @@ function render() {
     };
   });
   rows.querySelectorAll("[contenteditable]").forEach(el => {
+    el.onfocus = () => { if (el.textContent.trim() === "Add a line") el.textContent = ""; };
     el.onblur = () => {
       const it = items[Number(el.dataset.i)];
-      it[el.dataset.field] = el.textContent.trim();
+      let v = el.textContent.trim();
+      if (v === "Add a line") v = "";
+      it[el.dataset.field] = v;
+      if (!v && el.dataset.field === "desc") el.textContent = "";
       save();
     };
   });
@@ -343,18 +347,18 @@ function render() {
 let pullIndex=-1;
 function askPull(i){
   pullIndex=i;
-  document.getElementById("ask-line").textContent=items[i].name+" goes grey at the bottom. You can put it back.";
+  document.getElementById("ask-line").textContent=items[i].name+" comes off the board.";
   document.getElementById("ask").hidden=false;
 }
 document.getElementById("look-x").onclick=()=>{ document.getElementById("look").hidden=true; };
 document.getElementById("ask-no").onclick=()=>{ document.getElementById("ask").hidden=true; };
 document.getElementById("ask-yes").onclick=()=>{
   const i=pullIndex;
-  if(items[i]){ items[i].parked=true; items[i].sold=true; items.push(items.splice(i,1)[0]); save(); render(); }
+  if(items[i]){ items.splice(i,1); save(); render(); }
   document.getElementById("ask").hidden=true;
 };
 document.getElementById("add").onclick = () => {
-  items.push({ id: "new"+Date.now(), name: "New item", desc: "Add a line", price: 0, qty: 1, sold: false, photo: "peaches.jpg" });
+  items.push({ id: "new"+Date.now(), name: "New item", desc: "", price: 0, qty: 1, sold: false, photo: "peaches.jpg" });
   save();
   render();
 };
