@@ -79,7 +79,7 @@ function tryDoor(){
   var key=code.toLowerCase();
   if(code==="Yomama369"){ sessionStorage.setItem("pipe-door","1"); openBoard(); return true; }
   if(key==="docket"){ sessionStorage.removeItem("pipe-door"); location.href="door/?open=1"; return true; }
-  if(key==="collab"){ sessionStorage.removeItem("pipe-door"); location.href="collab/"; return true; }
+  if(key==="collab"){ sessionStorage.removeItem("pipe-door"); location.href="collab/"; return true; }\n  if(key==="vendor"){ sessionStorage.removeItem("pipe-door"); location.href="vendor/"; return true; }
   return false;
 }
 document.getElementById("door-form").addEventListener("submit", function(e){
