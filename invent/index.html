@@ -16,6 +16,7 @@ h1{font-weight:500;font-size:28px}
 video{width:100%;height:280px;object-fit:cover;display:block;background:#111}
 .card p{margin:0;padding:12px 14px}
 button,a.pick{display:inline-block;margin:0 14px 14px;border:1px solid #d2d2d2;background:transparent;color:#fff;border-radius:999px;padding:8px 14px;font:inherit}
+.card.on{border-color:#fff;box-shadow:0 0 0 1px #fff}
 #exit-door{position:fixed;left:16px;bottom:16px;width:46px;height:46px;border-radius:50%;border:1px solid #d2d2d2;display:grid;place-items:center;text-decoration:none}
 </style>
 </head>
@@ -33,7 +34,7 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:1px solid #d2d2d2;b
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10M16 8l4 4-4 4"/></svg></a>
 <script>
 var pick="";
-document.querySelectorAll("[data-pick]").forEach(function(b){b.onclick=function(){pick=b.dataset.pick;document.getElementById("chosen").textContent="Picked "+pick;};});
+document.querySelectorAll("[data-pick]").forEach(function(b){b.onclick=function(){pick=b.dataset.pick;document.getElementById("chosen").textContent="Picked "+pick;document.querySelectorAll(".card").forEach(function(c){c.classList.remove("on");});b.closest(".card").classList.add("on");};});
 document.getElementById("send").onclick=function(){if(!pick){document.getElementById("chosen").textContent="Pick A or B first.";return;}location.href="mailto:whimsyandweeds@gmail.com?subject="+encodeURIComponent("Background "+pick)+"&body="+encodeURIComponent("Picked background "+pick);};
 </script>
 </body>
