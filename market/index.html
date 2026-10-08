@@ -267,7 +267,7 @@ function render() {
             <button type="button" data-pick="down" data-id="${it.id}" ${n<=0?"disabled":""}>−</button>
             <span>${n}</span>
             <button type="button" data-pick="up" data-id="${it.id}" ${maxed?"disabled":""}>+</button>
-            <span class="left">${it.sold ? "Sold out" : it.qty + " left"}</span>
+            <span class="left">${it.sold ? "Sold out" : Math.max(0, it.qty - n) + " left"}</span>
           </div>
         </div>
       </article>`;
