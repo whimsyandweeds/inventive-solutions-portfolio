@@ -212,10 +212,10 @@ const seed = [
   { id: "bread", name: "Bread", price: 5, qty: 8, sold: false }
 ];
 let items = seed;
-try { const saved = JSON.parse(localStorage.getItem("market-board")||""); if (Array.isArray(saved) && saved.length) items = saved; } catch(e) {}
-function save(){ localStorage.setItem("market-board", JSON.stringify(items)); }
+try { const saved = JSON.parse(localStorage.getItem("market-board-2")||""); if (Array.isArray(saved) && saved.length) items = saved; } catch(e) {}
+function save(){ localStorage.setItem("market-board-2", JSON.stringify(items)); }
 const picks = {};
-function pic(it){ return it.photo || IMG[it.id] || ""; }
+function pic(it){ return it.photo || ({peaches:"peaches.jpg",eggs:"eggs.jpg",honey:"honey.jpg",bread:"bread.jpg"}[it.id] || ""); ; }
 function render() {
   rows.innerHTML = items.map((it, i) => `
     <div class="item ${it.parked ? "parked" : ""} ${it.sold ? "sold" : ""}">
