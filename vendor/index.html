@@ -51,6 +51,12 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .count{color:#ff3d8a}
 .why{margin:.4rem 0 0;font-size:.9rem}
 .toggle{position:absolute;right:12px;top:12px;width:22px;height:22px;border-radius:999px;border:1px solid #3d444d;background:#16181b;color:#fff;cursor:pointer}
+
+.pin{transform:rotate(-1.6deg);transform-origin:22% 0;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.pin:nth-child(even){transform:rotate(1.8deg);transform-origin:78% 0;margin-top:14px}
+.pin:nth-child(even):before{left:78%}
+.pin:hover{transform:rotate(-2.6deg) translateY(-4px)}
+.pin:nth-child(even):hover{transform:rotate(2.8deg) translateY(-4px)}
 </style>
 </head>
 <body>
