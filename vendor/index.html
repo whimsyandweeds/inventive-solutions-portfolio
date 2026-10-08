@@ -20,7 +20,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .all{border:1.5px solid #ff3d8a;color:#ff3d8a}
 .key{border:1.5px dashed #2f9e4f;color:#2f9e4f}
 .lane{border:1.5px dashed #e4b83a;color:#e4b83a}
-.proj{border:1.5px solid #a855f7;color:#d8b4fe}
+.proj.avi{border:1.5px solid #a855f7;color:#d8b4fe}.proj.ss{border:1.5px solid #9caf9a;color:#c5d4c2}
 .keys .on{box-shadow:0 0 0 1px currentColor}
 .wall{display:flex;flex-wrap:wrap;gap:28px 22px;align-items:flex-start;padding:18px 8px 28px}
 .pin{position:relative;width:min(260px,100%);background:linear-gradient(180deg,#2a2d32,#1c1e22);border:1.5px dashed #e4b83a;border-radius:18px;padding:22px 16px 28px;box-shadow:0 18px 36px rgba(0,0,0,.4)}
@@ -60,7 +60,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 <h1>Doors I have <span>not knocked</span></h1>
 <p class="sub">Saved from the sheet. Still strangers.</p>
 <div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
-<div class="keys projects"><button class="all on" type="button">AVI</button></div>
+<div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj avi" type="button" data-project="AVI">AVI</button><button class="proj ss" type="button" data-project="S+S">S+S</button></div>
 <div class="keys folds"><button class="fold" type="button" data-fold="open">Expand all</button><button class="fold" type="button" data-fold="shut">Collapse all</button></div>
 <div class="wall">
 <article class="pin hooked" data-id="starting" data-for="AVI">
@@ -281,6 +281,18 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     setAll(fold.dataset.fold==="open");
   });
   wall.addEventListener("click", function(e){var btn=e.target.closest(".pencil"); if(!btn)return; var s=btn.closest(".pin").querySelector(".scratch"); s.hidden=!s.hidden;});
+  
+  document.querySelector(".projects").addEventListener("click", function(e){
+    var btn=e.target.closest("button"); if(!btn) return;
+    this.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
+    btn.classList.add("on");
+    var project=btn.dataset.project;
+    wall.querySelectorAll(".pin").forEach(function(card){
+      var proj=card.querySelector(".ss")?"S+S":"AVI";
+      card.dataset.proj=proj;
+      card.style.display=(project==="all"||project===proj)?"":"none";
+    });
+  });
   document.querySelector(".keys").addEventListener("click", function(e){
     var btn=e.target.closest("button"); if(!btn || !btn.dataset.filter)return;
     this.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
