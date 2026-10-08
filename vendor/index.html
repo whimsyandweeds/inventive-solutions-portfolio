@@ -7,15 +7,14 @@
 <link rel="icon" href="../favicon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-:root{--bg:#1a1c1f;--ink:#f3f4f6;--mute:#b8bec7}
 *{box-sizing:border-box}
-html,body{margin:0;background:#1a1c1f;color:var(--ink);font-family:Inter,system-ui,sans-serif}
+html,body{margin:0;background:#1a1c1f;color:#f3f4f6;font-family:Inter,system-ui,sans-serif}
 body{min-height:100vh;background-color:#1a1c1f;background-attachment:fixed;background-image:radial-gradient(ellipse at 78% 18%, rgba(168,85,247,.1), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%), linear-gradient(to right, transparent 0, transparent calc(33.3% - 1px), rgba(0,0,0,.55) calc(33.3% - 1px), rgba(255,255,255,.04) 33.3%, transparent calc(33.3% + 2px)), linear-gradient(to right, transparent 0, transparent calc(66.6% - 1px), rgba(0,0,0,.55) calc(66.6% - 1px), rgba(255,255,255,.04) 66.6%, transparent calc(66.6% + 2px)), linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), rgba(0,0,0,.5) calc(50% - 1px), rgba(255,255,255,.035) 50%, transparent calc(50% + 2px)), repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 9px), repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 14px), linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%)}
 #out{position:fixed;left:16px;bottom:16px;z-index:5;width:36px;height:36px;display:grid;place-items:center;border:1px solid #9aa0a6;border-radius:10px;color:#c5c7cc;text-decoration:none;background:rgba(22,24,27,.8)}
-main{max-width:920px;margin:0 auto;padding:28px 18px 80px}
-.kicker{letter-spacing:.22em;font-size:.72rem;color:var(--mute);margin:0}
-h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}h1 span{color:#a855f7}
-.sub{color:var(--mute);margin:0 0 22px}
+main{max-width:980px;margin:0 auto;padding:28px 18px 80px}
+.kicker{letter-spacing:.22em;font-size:.72rem;color:#b8bec7;margin:0}
+h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
+.sub{color:#b8bec7;margin:0 0 22px}
 .keys{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
 .keys button{padding:7px 14px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;cursor:pointer}
 .all{border:1.5px solid #ff3d8a;color:#ff3d8a}
@@ -23,8 +22,27 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}
 .lane{border:1.5px dashed #e4b83a;color:#e4b83a}
 .proj{border:1.5px solid #a855f7;color:#d8b4fe}
 .keys .on{box-shadow:0 0 0 1px currentColor}
-.wall{display:flex;flex-wrap:wrap;gap:36px 42px;align-items:flex-start;padding:18px 8px 8px;min-height:180px}
-.empty{color:var(--mute);font-size:.92rem}
+.wall{display:flex;flex-wrap:wrap;gap:28px 22px;align-items:flex-start;padding:18px 8px 28px}
+.pin{position:relative;width:min(260px,100%);background:linear-gradient(180deg,#2a2d32,#1c1e22);border:1.5px dashed #e4b83a;border-radius:18px;padding:22px 16px 28px;box-shadow:0 18px 36px rgba(0,0,0,.4)}
+.pin.hooked{border:1.5px dashed #2f9e4f}
+.pin.hooked:before{background:#2f9e4f}
+.pin:before{content:"";position:absolute;top:-8px;left:22%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#e4b83a;box-shadow:0 7px 0 rgba(0,0,0,.4)}
+.stamp{margin:0 0 8px;color:#e4b83a;font-size:.72rem;letter-spacing:.12em;font-weight:700}
+.who{display:flex;align-items:center;gap:8px}
+.handle{margin:0;font-weight:650}
+.go{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;color:#fff;text-decoration:none;border-radius:10px;background:#111;box-shadow:2px 0 0 #25f4ee,-2px 0 0 #fe2c55}
+.receipts{margin-top:10px}
+.receipts summary{display:inline-block;border:1px solid #a855f7;color:#d8b4fe;border-radius:999px;padding:6px 12px;cursor:pointer}
+.receipts ul{list-style:none;margin:8px 0 0;padding:0}
+.receipts a{color:#d8b4fe}
+.for{position:absolute;left:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #a855f7;color:#d8b4fe;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.08em;font-weight:700}
+.pencil{border:1px solid #a855f7;background:transparent;color:#d8b4fe;border-radius:999px;padding:6px 12px}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.scratch{margin-top:8px}
+.scratch[hidden]{display:none}
+.addline{display:flex;gap:6px;align-items:center;background:#f5e7a2;color:#3a3208;padding:8px 10px}
+.addline input{flex:1;border:0;background:transparent;color:#3a3208;font:inherit;outline:none}
+.bullets{margin:8px 0 0 16px;padding:0;color:#3a3208}
 </style>
 </head>
 <body>
@@ -32,10 +50,207 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650;letter-spacing:-.03em}
 <main>
 <p class="kicker">VENDOR</p>
 <h1>Doors I have <span>not knocked</span></h1>
-<p class="sub">Blank wall. Cards land here.</p>
+<p class="sub">Saved from the sheet. Still strangers.</p>
 <div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
-<div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj" type="button" data-project="vendor">Vendor</button></div>
-<div class="wall"><p class="empty">No cards yet.</p></div>
+<div class="keys projects"><button class="all on" type="button">AVI</button></div>
+<div class="wall">
+<article class="pin hooked" data-id="starting" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@startinganyway" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@startinganyway</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="florena" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@florenavan" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@florenavan</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="shakeey" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@shakeey89" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@shakeey89</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="cozmic" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@cozmicmocktailclub" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@cozmicmocktailclub</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="jess" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@jessieraesbbq" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@jessieraesbbq</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="snap" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@snapitzcat" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@snapitzcat</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="kota" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@kotalovee26" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@kotalovee26</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="kim" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@kimberly.vegastamales" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@kimberly.vegastamales</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="toby" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@tobyscurbs" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@tobyscurbs</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="aniyah" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@aniyahlate" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@aniyahlate</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="hair" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@that_hair_girl_" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@that_hair_girl_</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="farm" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@crazyfarmgirlera" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@crazyfarmgirlera</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="cafe" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@lecafeduvegas" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@lecafeduvegas</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="parsley" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@eatparsleylv" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@eatparsleylv</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="partage" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@partagelv" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@partagelv</p></div>
+<details class="receipts"><summary>🧾 Receipts</summary><ul><li><span>Site</span> <a href="https://partage.vegas" target="_blank" rel="noopener">partage.vegas</a></li></ul></details>
+<span class="for">AVI</span>
+</article><article class="pin" data-id="nobl" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@nobl_vegas" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@nobl_vegas</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="raccoon" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@raccoonrevivallv" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@raccoonrevivallv</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="burrito" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@vegas.burrito8" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@vegas.burrito8</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="sloppy" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@sloppy.doms" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@sloppy.doms</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin hooked" data-id="cut" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@303inthecut" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@303inthecut</p></div>
+<details class="receipts"><summary>🧾 Receipts</summary><ul><li><span>Site</span> <a href="https://303inthecut.com" target="_blank" rel="noopener">303inthecut.com</a></li></ul></details>
+<span class="for">AVI</span>
+</article><article class="pin" data-id="bleu" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@bleukitchen" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@bleukitchen</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="bakery" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@thelasvegasbakery" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@thelasvegasbakery</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin hooked" data-id="cheese" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@cincitycheesecakes" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@cincitycheesecakes</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="tony" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@tonylimaart" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@tonylimaart</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="tova" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@tovagoldart" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@tovagoldart</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="pollitos" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@pollitosaguas" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@pollitosaguas</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="prep" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@702.prep" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@702.prep</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="sanctuary" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@that70ssanctuary" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@that70ssanctuary</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="studs" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@studs.coffee" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@studs.coffee</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="modest" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@modestmystichealing" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@modestmystichealing</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin" data-id="cartel" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@cartelfood1" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@cartelfood1</p></div>
+
+<span class="for">AVI</span>
+</article><article class="pin hooked" data-id="swangin" data-for="AVI">
+<p class="stamp">WANTED · NOT KNOCKED</p>
+<div class="who"><a class="go" href="https://www.tiktok.com/@swanginlvautodetail" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@swanginlvautodetail</p></div>
+
+<span class="for">AVI</span>
+</article>
+</div>
 </main>
+<script>
+(function(){
+  var wall=document.querySelector(".wall");
+  function read(id){try{return JSON.parse(localStorage.getItem("vendor-notes-"+id)||"[]");}catch(e){return [];}}
+  function write(id,lines){localStorage.setItem("vendor-notes-"+id, JSON.stringify(lines));}
+  wall.querySelectorAll(".pin").forEach(function(card){
+    var id=card.dataset.id;
+    var row=document.createElement("div");
+    row.className="pills";
+    row.innerHTML='<button class="pencil" type="button">✏️ Note</button>';
+    var rec=card.querySelector(".receipts");
+    if(rec) rec.before(row); else card.appendChild(row);
+    if(rec) row.prepend(rec);
+    var box=document.createElement("div");
+    box.className="scratch"; box.hidden=true;
+    box.innerHTML='<ul class="bullets"></ul><label class="addline"><span>•</span><input placeholder="Add a line" /></label>';
+    card.appendChild(box);
+    var list=box.querySelector(".bullets");
+    function paint(){list.innerHTML=""; read(id).forEach(function(line){var li=document.createElement("li"); li.textContent=line; list.appendChild(li);});}
+    paint();
+    box.querySelector("input").addEventListener("keydown", function(e){if(e.key!=="Enter")return; e.preventDefault(); var v=this.value.trim(); if(!v)return; var lines=read(id); lines.push(v); write(id,lines); this.value=""; paint();});
+  });
+  wall.addEventListener("click", function(e){var btn=e.target.closest(".pencil"); if(!btn)return; var s=btn.closest(".pin").querySelector(".scratch"); s.hidden=!s.hidden;});
+  document.querySelector(".keys").addEventListener("click", function(e){
+    var btn=e.target.closest("button"); if(!btn)return;
+    this.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
+    btn.classList.add("on");
+    var mode=btn.dataset.filter;
+    wall.querySelectorAll(".pin").forEach(function(card){
+      var hit=card.classList.contains("hooked");
+      card.style.display=(mode==="all"||(mode==="hit"&&hit)||(mode==="pending"&&!hit))?"":"none";
+    });
+  });
+})();
+</script>
 </body>
 </html>
