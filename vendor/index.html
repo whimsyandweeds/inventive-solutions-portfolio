@@ -59,7 +59,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .pin:nth-child(even):hover{transform:rotate(2.8deg) translateY(-4px)}
 .logo{position:absolute;right:14px;top:36px;width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #f4f1ea;background:#fff;z-index:3}.build{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #14b8a6;color:#5eead4;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}.mkt{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px dashed #e4b83a;color:#e4b83a;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}.pin .pills{display:none}.pin.open .pills{display:flex}
 .nogo-key{border:1.5px solid #e11d48;color:#fb7185}
-.pin.nogo{border-color:#e11d48}
+.pin.nogo{border-color:#e11d48}.pin.nogo .stamp{color:#fb7185}
 .pin.nogo:before{background:#e11d48}
 </style>
 </head>
@@ -308,6 +308,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
   var wall=document.querySelector(".wall");
   function read(id){try{return JSON.parse(localStorage.getItem("vendor-notes-"+id)||"[]");}catch(e){return [];}}
   function write(id,lines){localStorage.setItem("vendor-notes-"+id, JSON.stringify(lines));}
+  wall.querySelectorAll(".pin.nogo .stamp").forEach(function(s){s.textContent="HARD PASS";});
   wall.querySelectorAll(".pin").forEach(function(card){
     var id=card.dataset.id;
     var row=document.createElement("div");
