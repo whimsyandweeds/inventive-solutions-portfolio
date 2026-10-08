@@ -65,7 +65,11 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .pin.open .pills{align-items:center}
 .pin.open .pills details.receipts{display:contents}
 .pin.open .receipts ul{flex:1 0 100%;margin:6px 0 0;padding:0}
-.bloom{background:#1c1e22;border:1.5px solid #f9a8d4;color:#fbcfe8;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}</style>
+.bloom{background:#1c1e22;border:1.5px solid #f9a8d4;color:#fbcfe8;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}
+.pin{padding-bottom:34px}
+.tagrow,.pin .tagrow{position:absolute;right:12px;bottom:-12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:78%}
+.tagrow .mkt,.tagrow .build,.tagrow .spot,.tagrow .fix,.tagrow .truck,.tagrow .bag,.tagrow .paint,.tagrow .rain,.tagrow .gem,.tagrow .sip,.tagrow .bloom{position:static}
+</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back">←</a>
@@ -345,6 +349,15 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
   var wall=document.querySelector(".wall");
   function read(id){try{return JSON.parse(localStorage.getItem("vendor-notes-"+id)||"[]");}catch(e){return [];}}
   function write(id,lines){localStorage.setItem("vendor-notes-"+id, JSON.stringify(lines));}
+  
+  wall.querySelectorAll(".pin").forEach(function(card){
+    var marks=card.querySelectorAll(".mkt,.build,.spot,.fix,.truck,.bag,.paint,.rain,.gem,.sip,.bloom");
+    if(!marks.length) return;
+    var row=card.querySelector(".tagrow")||document.createElement("span");
+    row.className="tagrow";
+    marks.forEach(function(m){row.appendChild(m);});
+    card.appendChild(row);
+  });
   wall.querySelectorAll(".pin.nogo .stamp").forEach(function(s){s.textContent="HARD PASS";});
   wall.querySelectorAll(".pin").forEach(function(card){
     var id=card.dataset.id;
