@@ -170,6 +170,13 @@ body.dark .chip,body.dark .go,body.dark .tagprice{color:#fff}
 #chat-form{display:flex;gap:6px}
 #chat-form input{flex:1;border:1.5px solid #1C9792;border-radius:999px;padding:8px 10px}
 #chat-form button{border:0;border-radius:999px;background:#1C9792;color:#fff;padding:8px 12px}
+.pricewrap{margin:18px 0 8px}
+#price-pill{border:1.5px solid #1C9792;background:transparent;color:#1C9792;border-radius:999px;padding:8px 14px;font:inherit;font-weight:600}
+body.dark #price-pill{color:#fff}
+#price-blurb{margin-top:10px;padding:14px 16px;border:1px solid #d2d2d2;border-radius:16px}
+#price-blurb strong{font-family:Lexend,sans-serif;font-size:42px}
+#price-blurb p{margin:6px 0 0;color:#5d6a64}
+body.dark #price-blurb p{color:#c9d5d1}
 </style>
 </head>
 <body>
@@ -210,7 +217,15 @@ body.dark .chip,body.dark .go,body.dark .tagprice{color:#fff}
 
   <section id="customer" class="customer hidden"></section>
 
-  <form id="lead">
+  
+<div class="pricewrap">
+  <button id="price-pill" type="button">Pricing</button>
+  <div id="price-blurb" hidden>
+    <strong>$350</strong>
+    <p>Loaded and live before your next market. Logo and flyer, $550. $25 a month to keep it up.</p>
+  </div>
+</div>
+<form id="lead">
     <input id="stand" name="stand" placeholder="Farm or stand name" autocomplete="organization">
     <input id="phone" name="phone" placeholder="(702) phone" inputmode="tel" autocomplete="tel">
     <button class="go" type="submit">Submit</button>
@@ -315,6 +330,7 @@ function render() {
       if (btn.dataset.pick === "up" && n < it.qty) picks[it.id] = n+1;
       if (btn.dataset.pick === "down") picks[it.id] = Math.max(0, n-1);
       render();
+document.getElementById("price-pill").onclick=function(){var b=document.getElementById("price-blurb");b.hidden=!b.hidden;};
 
 var bot=document.getElementById("bot"), chat=document.getElementById("chat"), log=document.getElementById("chat-log");
 function say(t, me){ var p=document.createElement("p"); if(me) p.className="me"; p.textContent=t; log.appendChild(p); log.scrollTop=log.scrollHeight; }
