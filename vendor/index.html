@@ -69,7 +69,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .pin{padding-bottom:34px}
 .tagrow,.pin .tagrow{position:absolute;right:12px;bottom:-12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:78%}
 .tagrow .mkt,.tagrow .build,.tagrow .spot,.tagrow .fix,.tagrow .truck,.tagrow .bag,.tagrow .paint,.tagrow .rain,.tagrow .gem,.tagrow .sip,.tagrow .bloom{position:static}
-</style>
+.slip{position:absolute;left:12px;top:10px;z-index:3;font-size:.85rem;opacity:.85;filter:grayscale(.2)}</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back">←</a>
@@ -350,6 +350,13 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
   function read(id){try{return JSON.parse(localStorage.getItem("vendor-notes-"+id)||"[]");}catch(e){return [];}}
   function write(id,lines){localStorage.setItem("vendor-notes-"+id, JSON.stringify(lines));}
   
+  
+  wall.querySelectorAll(".pin").forEach(function(card){
+    if(!card.querySelector(".receipts") || card.querySelector(".slip")) return;
+    var s=document.createElement("span");
+    s.className="slip"; s.textContent="🧾"; s.setAttribute("aria-label","Has receipts");
+    card.appendChild(s);
+  });
   wall.querySelectorAll(".pin").forEach(function(card){
     var marks=card.querySelectorAll(".mkt,.build,.spot,.fix,.truck,.bag,.paint,.rain,.gem,.sip,.bloom");
     if(!marks.length) return;
