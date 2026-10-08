@@ -44,7 +44,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .addline input{flex:1;border:0;background:transparent;color:#3a3208;font:inherit;outline:none}
 .bullets{margin:8px 0 0 16px;padding:0;color:#3a3208}
 
-.fold{border:1px solid #9aa0a6;color:#fff}
+.folds{margin-top:-6px}.fold{border:1px solid #9aa0a6;color:#fff}
 .more[hidden]{display:none}
 .more{margin-top:8px}
 .name{color:#a855f7}
@@ -59,8 +59,9 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 <p class="kicker">VENDOR</p>
 <h1>Doors I have <span>not knocked</span></h1>
 <p class="sub">Saved from the sheet. Still strangers.</p>
-<div class="keys" data-kind="status"><button class="fold" type="button" data-fold="open">Expand all</button><button class="fold" type="button" data-fold="shut">Collapse all</button><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
+<div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
 <div class="keys projects"><button class="all on" type="button">AVI</button></div>
+<div class="keys folds"><button class="fold" type="button" data-fold="open">Expand all</button><button class="fold" type="button" data-fold="shut">Collapse all</button></div>
 <div class="wall">
 <article class="pin hooked" data-id="starting" data-for="AVI">
 <p class="stamp">WANTED · NOT KNOCKED</p>
@@ -274,14 +275,14 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     more.hidden=!more.hidden;
     t.textContent=more.hidden?"v":"^";
   });
-  document.querySelector(".keys").addEventListener("click", function(e){
+  document.querySelector(".folds").addEventListener("click", function(e){
     var fold=e.target.closest("[data-fold]");
     if(!fold) return;
     setAll(fold.dataset.fold==="open");
   });
   wall.addEventListener("click", function(e){var btn=e.target.closest(".pencil"); if(!btn)return; var s=btn.closest(".pin").querySelector(".scratch"); s.hidden=!s.hidden;});
   document.querySelector(".keys").addEventListener("click", function(e){
-    var btn=e.target.closest("button"); if(!btn)return;
+    var btn=e.target.closest("button"); if(!btn || !btn.dataset.filter)return;
     this.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
     btn.classList.add("on");
     var mode=btn.dataset.filter;
