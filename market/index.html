@@ -144,7 +144,7 @@
 .look[hidden]{display:none}
 .look img{max-width:min(92vw,640px);max-height:82vh;object-fit:contain;background:#F0F7F6;border-radius:18px;border:1.5px solid #1C9792}
 .look button{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:700;cursor:pointer}
-.buck{color:#13302B;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}.card{border:1.5px solid #1C9792;border-radius:18px;overflow:hidden;background:#fff}.shot{position:relative}.tagprice{position:absolute;top:10px;right:10px;background:#1C9792;color:#fff;border-radius:999px;padding:4px 10px;font-weight:700;font-size:14px}.card .flag{left:10px;top:10px}@media(max-width:640px){.grid{grid-template-columns:1fr}}input.price::-webkit-outer-spin-button,input.price::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input.price{appearance:textfield;-moz-appearance:textfield}.pick{justify-content:flex-start}.sub{margin-left:auto;font-weight:700;color:#13302B}.name{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.each{color:#1C9792;font-weight:700}.tally{margin:0 12px 14px;padding:12px 4px;overflow:visible}.customer{overflow:visible}body.menu .loop,body.menu .priceblock,body.menu #lead{display:none}</style>
+.buck{color:#13302B;font-weight:700}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}.card{border:1.5px solid #1C9792;border-radius:18px;overflow:hidden;background:#fff}.shot{position:relative}.tagprice{position:absolute;top:10px;right:10px;background:#1C9792;color:#fff;border-radius:999px;padding:4px 10px;font-weight:700;font-size:14px}.card .flag{left:10px;top:10px}@media(max-width:640px){.grid{grid-template-columns:1fr}}input.price::-webkit-outer-spin-button,input.price::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}input.price{appearance:textfield;-moz-appearance:textfield}.pick{justify-content:flex-start}.sub{margin-left:auto;font-weight:700;color:#13302B}.name{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.each{color:#1C9792;font-weight:700}.tally{margin:0 12px 14px;padding:12px 4px;overflow:visible}.customer{overflow:visible}body.menu .loop,body.menu .priceblock,body.menu #lead{display:none}.cart{margin:0 12px 4px;padding:12px 4px 4px;border-top:1px solid #1C9792}.cart .line{display:flex;justify-content:space-between;padding:6px 0;color:#13302B}.cart .empty{margin:0;color:#5d6a64}</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -272,6 +272,10 @@ function render() {
         </div>
       </article>`;
     }).join("")}</div>
+    <div class="cart">
+      <p class="kicker">Cart</p>
+      ${shown.filter(it => (picks[it.id]||0) > 0).map(it => `<div class="line"><span>${it.name} × ${picks[it.id]}</span><b>$${picks[it.id]*it.price}</b></div>`).join("") || "<p class="empty">Nothing picked yet.</p>"}
+    </div>
     <div class="pad tally"><span>Total</span><b>$${total}</b></div>
   `;
   
