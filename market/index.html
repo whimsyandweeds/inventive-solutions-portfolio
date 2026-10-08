@@ -330,7 +330,6 @@ function render() {
       if (btn.dataset.pick === "up" && n < it.qty) picks[it.id] = n+1;
       if (btn.dataset.pick === "down") picks[it.id] = Math.max(0, n-1);
       render();
-document.getElementById("price-pill").onclick=function(){var b=document.getElementById("price-blurb");b.hidden=!b.hidden;};
 
 var bot=document.getElementById("bot"), chat=document.getElementById("chat"), log=document.getElementById("chat-log");
 function say(t, me){ var p=document.createElement("p"); if(me) p.className="me"; p.textContent=t; log.appendChild(p); log.scrollTop=log.scrollHeight; }
@@ -449,6 +448,7 @@ document.getElementById("lead").onsubmit = (e) => {
   thanks.classList.remove("hidden");
   thanks.textContent="Mail is open. Hit send.";
 };
+document.addEventListener("click",function(e){if(e.target&&e.target.id==="price-pill"){var b=document.getElementById("price-blurb");if(b)b.hidden=!b.hidden;}});
 </script>
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a><style>#exit-door{position:fixed;left:18px;bottom:18px;z-index:100000;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:#1a1a1c;border:1px solid #d2d2d2;box-shadow:0 8px 20px rgba(0,0,0,.45)}</style>
 </body>
