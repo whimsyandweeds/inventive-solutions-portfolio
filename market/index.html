@@ -212,7 +212,7 @@ const seed = [
   { id: "bread", name: "Bread", price: 5, qty: 8, sold: false }
 ];
 let items = seed;
-try { const saved = JSON.parse(localStorage.getItem("market-board-3")||""); if (Array.isArray(saved) && saved.length) items = saved; } catch(e) {}
+try { const saved = JSON.parse(localStorage.getItem("market-board-3")||""); if (Array.isArray(saved) && saved.length) items = saved; else items = seed.map(s => Object.assign({}, s)); } catch(e) {}
 seed.forEach(s => { if (!items.some(it => it.id === s.id)) items.unshift(Object.assign({}, s)); });
 function save(){ localStorage.setItem("market-board-3", JSON.stringify(items)); }
 const picks = {};
@@ -274,7 +274,7 @@ function render() {
     }).join("")}</div>
     <div class="cart">
       <p class="kicker">Cart</p>
-      ${shown.filter(it => (picks[it.id]||0) > 0).map(it => `<div class="line"><span>${it.name} × ${picks[it.id]}</span><b>$${picks[it.id]*it.price}</b></div>`).join("") || "<p class="empty">Nothing picked yet.</p>"}
+      ${shown.filter(it => (picks[it.id]||0) > 0).map(it => `<div class="line"><span>${it.name} × ${picks[it.id]}</span><b>$${picks[it.id]*it.price}</b></div>`).join("") || '<p class="empty">Nothing picked yet.</p>'}
     </div>
     <div class="pad tally"><span>Total</span><b>$${total}</b></div>
   `;
