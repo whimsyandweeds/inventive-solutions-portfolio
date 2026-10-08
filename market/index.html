@@ -191,8 +191,8 @@
   <form id="lead">
     <input id="stand" name="stand" placeholder="Farm or stand name" autocomplete="organization">
     <input id="phone" name="phone" placeholder="(702) phone" inputmode="tel" autocomplete="tel">
-    <button class="go" type="submit">See what customers see</button>
-    <p class="note">This demo does not text you. The button opens the customer page.</p>
+    <button class="go" type="submit">Submit</button>
+    <p class="note">Name and phone come to the inbox.</p>
     <div id="thanks" class="ok hidden">Got it. The customer page is open above. I’ll use this number only if you ask me to build it.</div>
   </form>
 
@@ -366,8 +366,22 @@ tabBoard.onclick = () => show("board");
 tabCustomer.onclick = () => show("customer");
 document.getElementById("lead").onsubmit = (e) => {
   e.preventDefault();
-  document.getElementById("thanks").classList.remove("hidden");
-  show("customer");
+  var stand=document.getElementById("stand").value.trim();
+  var phone=document.getElementById("phone").value.trim();
+  var thanks=document.getElementById("thanks");
+  thanks.classList.remove("hidden");
+  thanks.textContent="Sending.";
+  fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+    method:"POST",
+    headers:{ "Content-Type":"application/json", Accept:"application/json" },
+    body: JSON.stringify({ name: stand, phone: phone, _subject: "Market board", _template: "table" })
+  }).then(function(r){ return r.json(); }).then(function(){
+    thanks.textContent="Got it. That went to the inbox.";
+    document.getElementById("stand").value="";
+    document.getElementById("phone").value="";
+  }).catch(function(){
+    thanks.textContent="Did not send. Try again.";
+  });
 };
 </script>
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a><style>#exit-door{position:fixed;left:18px;bottom:18px;z-index:100000;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:#1a1a1c;border:1px solid #d2d2d2;box-shadow:0 8px 20px rgba(0,0,0,.45)}</style>
