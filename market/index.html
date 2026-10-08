@@ -188,7 +188,7 @@ body.dark #price-blurb p{color:#c9d5d1}
 <div id="chat" hidden>
   <div class="chat-head">Ask the board<button id="chat-x" type="button">×</button></div>
   <div id="chat-log"></div>
-  <form id="chat-form"><input id="chat-q" placeholder="Peaches? Where?" autocomplete="off"><button type="submit">Send</button></form>
+  <form id="chat-form"><input id="chat-q" placeholder="Peaches? Where?" autocomplete="off"><button id="chat-send" type="button">Send</button></form>
 </div>
 <div class="wrap">
   <div class="demo"><span class="dot"></span> Demo board · tap sold out</div>
@@ -451,6 +451,25 @@ document.getElementById("lead").onsubmit = (e) => {
 };
 document.addEventListener("click",function(e){if(e.target&&e.target.id==="price-pill"){var b=document.getElementById("price-blurb");if(b)b.hidden=!b.hidden;}});
 document.addEventListener("click",function(e){var t=e.target;if(t&&t.id==="bot"){var c=document.getElementById("chat");c.hidden=!c.hidden;var log=document.getElementById("chat-log");if(!log.childElementCount){var p=document.createElement("p");p.textContent="Menu, where, or contact.";log.appendChild(p);}}});
+
+document.addEventListener("click",function(e){
+  if(!e.target||e.target.id!=="chat-send") return;
+  var q=document.getElementById("chat-q").value.trim();
+  if(!q) return;
+  var log=document.getElementById("chat-log");
+  function line(t,me){var p=document.createElement("p"); if(me)p.className="me"; p.textContent=t; log.appendChild(p); log.scrollTop=log.scrollHeight;}
+  var s=q.toLowerCase();
+  var hit=items.find(function(it){return s.indexOf(it.name.toLowerCase())>=0;});
+  var live=items.filter(function(it){return !it.parked&&!it.sold;});
+  var a="I can do items, prices, where, and contact. Try peaches or where.";
+  if(/where|location|when|hour|saturday|thursday|summerlin|henderson/.test(s)) a="Summerlin Sat 8-1. Henderson Thu 8-1.";
+  else if(/contact|email|phone|call|text|reach/.test(s)) a="whimsyandweeds@gmail.com";
+  else if(hit) a=hit.name+" is $"+hit.price+". "+(hit.sold?"Sold out.":hit.qty+" left.")+(hit.desc?" "+hit.desc:"");
+  else if(/menu|item|have|sell|price|cost/.test(s)) a=live.map(function(it){return it.name+" $"+it.price;}).join(", ")||"Nothing up right now.";
+  line(q,true); line(a); document.getElementById("chat-q").value="";
+  document.getElementById("chat").hidden=false;
+});
+
 </script>
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a><style>#exit-door{position:fixed;left:18px;bottom:18px;z-index:100000;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:#1a1a1c;border:1px solid #d2d2d2;box-shadow:0 8px 20px rgba(0,0,0,.45)}</style>
 </body>
