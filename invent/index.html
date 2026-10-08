@@ -21,7 +21,7 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2
 #look{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.82);display:grid;place-items:center}#look[hidden]{display:none}#look img,#look video{max-width:min(960px,92vw);max-height:82vh;border-radius:16px}#look-x{position:fixed;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid #d2d2d2;background:#111;color:#fff;font-size:20px}</style>
 </head>
 <body>
-<div id="look" hidden><button id="look-x" type="button" aria-label="Close">×</button><video id="look-vid" autoplay muted loop playsinline></video></div><div class="wrap">
+<div id="look" hidden><button id="look-x" type="button" aria-label="Close">×</button><img id="look-img" alt=""></div><div class="wrap">
   <h1>Pick a background</h1>
   <p>Two ways the landing page can sit. Pick one.</p>
   <div class="pair">
@@ -37,7 +37,7 @@ var pick="";
 document.querySelectorAll("[data-pick]").forEach(function(b){b.onclick=function(){pick=b.dataset.pick;document.getElementById("chosen").textContent="Picked "+pick;document.querySelectorAll(".card").forEach(function(c){c.classList.remove("on");});b.closest(".card").classList.add("on");};});
 document.getElementById("send").onclick=function(){if(!pick){document.getElementById("chosen").textContent="Pick A or B first.";return;}location.href="mailto:whimsyandweeds@gmail.com?subject="+encodeURIComponent("Background "+pick)+"&body="+encodeURIComponent("Picked background "+pick);};
 
-document.querySelectorAll(".card video").forEach(function(v){v.ondblclick=function(){var box=document.getElementById("look"), big=document.getElementById("look-vid");big.src=v.currentSrc||"a.mp4";box.hidden=false;};});
+document.querySelectorAll(".card video").forEach(function(v){v.ondblclick=function(){var box=document.getElementById("look");document.getElementById("look-img").src=v.getAttribute("poster")||"../door-still.jpg";box.hidden=false;};});
 document.getElementById("look-x").onclick=function(){document.getElementById("look").hidden=true;};
 </script>
 </body>
