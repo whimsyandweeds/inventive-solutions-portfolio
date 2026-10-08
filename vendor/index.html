@@ -43,6 +43,14 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .addline{display:flex;gap:6px;align-items:center;background:#f5e7a2;color:#3a3208;padding:8px 10px}
 .addline input{flex:1;border:0;background:transparent;color:#3a3208;font:inherit;outline:none}
 .bullets{margin:8px 0 0 16px;padding:0;color:#3a3208}
+
+.fold{border:1px solid #9aa0a6;color:#fff}
+.more[hidden]{display:none}
+.more{margin-top:8px}
+.name{color:#a855f7}
+.count{color:#ff3d8a}
+.why{margin:.4rem 0 0;font-size:.9rem}
+.toggle{position:absolute;right:12px;top:12px;width:22px;height:22px;border-radius:999px;border:1px solid #3d444d;background:#16181b;color:#fff;cursor:pointer}
 </style>
 </head>
 <body>
@@ -51,17 +59,19 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 <p class="kicker">VENDOR</p>
 <h1>Doors I have <span>not knocked</span></h1>
 <p class="sub">Saved from the sheet. Still strangers.</p>
-<div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
+<div class="keys" data-kind="status"><button class="fold" type="button" data-fold="open">Expand all</button><button class="fold" type="button" data-fold="shut">Collapse all</button><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button></div>
 <div class="keys projects"><button class="all on" type="button">AVI</button></div>
 <div class="wall">
 <article class="pin hooked" data-id="starting" data-for="AVI">
 <p class="stamp">WANTED · NOT KNOCKED</p>
 <div class="who"><a class="go" href="https://www.tiktok.com/@startinganyway" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@startinganyway</p></div>
+<div class="more" hidden><p class="why"><b class="name">BillysWorld702POV</b> · <b class="count">4.8K</b> · Also on the collab wall.</p></div>
 
 <span class="for">AVI</span>
 </article><article class="pin" data-id="florena" data-for="AVI">
 <p class="stamp">WANTED · NOT KNOCKED</p>
 <div class="who"><a class="go" href="https://www.tiktok.com/@florenavan" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@florenavan</p></div>
+<div class="more" hidden><p class="why"><b class="name">FlorenaVan</b> · <b class="count">15.3K</b> · Coffee and flowers in Las Vegas. Events and seasonal delivery.</p></div>
 
 <span class="for">AVI</span>
 </article><article class="pin" data-id="shakeey" data-for="AVI">
@@ -77,6 +87,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 </article><article class="pin" data-id="jess" data-for="AVI">
 <p class="stamp">WANTED · NOT KNOCKED</p>
 <div class="who"><a class="go" href="https://www.tiktok.com/@jessieraesbbq" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@jessieraesbbq</p></div>
+<div class="more" hidden><p class="why"><b class="name">Jessie Rae’s BBQ</b> · <b class="count">1.7M</b> · Las Vegas style BBQ. Sun to Thu 11–7, Fri and Sat 11–8.</p></div>
 
 <span class="for">AVI</span>
 </article><article class="pin" data-id="snap" data-for="AVI">
@@ -87,6 +98,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 </article><article class="pin" data-id="kota" data-for="AVI">
 <p class="stamp">WANTED · NOT KNOCKED</p>
 <div class="who"><a class="go" href="https://www.tiktok.com/@kotalovee26" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@kotalovee26</p></div>
+<div class="more" hidden><p class="why"><b class="name">Kota.lovee</b> · <b class="count">4K</b> · Financial services in Las Vegas.</p></div>
 
 <span class="for">AVI</span>
 </article><article class="pin" data-id="kim" data-for="AVI">
@@ -212,6 +224,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 </article><article class="pin hooked" data-id="swangin" data-for="AVI">
 <p class="stamp">WANTED · NOT KNOCKED</p>
 <div class="who"><a class="go" href="https://www.tiktok.com/@swanginlvautodetail" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a><p class="handle">@swanginlvautodetail</p></div>
+<div class="more" hidden><p class="why"><b class="name">Swangin Mobile Detail</b> · <b class="count">32.8K</b> · Also on the collab wall.</p></div>
 
 <span class="for">AVI</span>
 </article>
@@ -238,6 +251,33 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     function paint(){list.innerHTML=""; read(id).forEach(function(line){var li=document.createElement("li"); li.textContent=line; list.appendChild(li);});}
     paint();
     box.querySelector("input").addEventListener("keydown", function(e){if(e.key!=="Enter")return; e.preventDefault(); var v=this.value.trim(); if(!v)return; var lines=read(id); lines.push(v); write(id,lines); this.value=""; paint();});
+  });
+  
+  wall.querySelectorAll(".pin").forEach(function(card){
+    var t=document.createElement("button");
+    t.className="toggle"; t.type="button"; t.textContent="v"; t.setAttribute("aria-label","Open");
+    card.appendChild(t);
+  });
+  function setAll(open){
+    wall.querySelectorAll(".pin").forEach(function(card){
+      var more=card.querySelector(".more");
+      if(more) more.hidden=!open;
+      var t=card.querySelector(".toggle");
+      if(t) t.textContent=open?"^":"v";
+    });
+  }
+  wall.addEventListener("click", function(e){
+    var t=e.target.closest(".toggle");
+    if(!t) return;
+    var more=t.closest(".pin").querySelector(".more");
+    if(!more) return;
+    more.hidden=!more.hidden;
+    t.textContent=more.hidden?"v":"^";
+  });
+  document.querySelector(".keys").addEventListener("click", function(e){
+    var fold=e.target.closest("[data-fold]");
+    if(!fold) return;
+    setAll(fold.dataset.fold==="open");
   });
   wall.addEventListener("click", function(e){var btn=e.target.closest(".pencil"); if(!btn)return; var s=btn.closest(".pin").querySelector(".scratch"); s.hidden=!s.hidden;});
   document.querySelector(".keys").addEventListener("click", function(e){
