@@ -144,7 +144,7 @@
 .look[hidden]{display:none}
 .look img{max-width:min(92vw,640px);max-height:82vh;object-fit:contain;background:#F0F7F6;border-radius:18px;border:1.5px solid #1C9792}
 .look button{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:700;cursor:pointer}
-</style>
+.buck{color:#13302B;font-weight:700}</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -227,7 +227,7 @@ function render() {
         <div class="name edit" contenteditable="true" data-field="name" data-i="${i}">${it.name}</div>
         <div class="meta edit" contenteditable="true" data-field="desc" data-i="${i}">${it.desc || "Add a line"}</div>
         <div class="ops">
-          <input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price">
+          <span class="buck">$</span><input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price">
           <button type="button" data-act="down" data-i="${i}">−</button>
           <span>${it.qty}</span>
           <button type="button" data-act="up" data-i="${i}">+</button>
