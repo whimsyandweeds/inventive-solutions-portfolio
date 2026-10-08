@@ -57,7 +57,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .pin:nth-child(even):before{left:78%}
 .pin:hover{transform:rotate(-2.6deg) translateY(-4px)}
 .pin:nth-child(even):hover{transform:rotate(2.8deg) translateY(-4px)}
-.logo{position:absolute;right:14px;top:36px;width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #f4f1ea;background:#fff;z-index:3}.build{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #14b8a6;color:#5eead4;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}.mkt{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px dashed #e4b83a;color:#e4b83a;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}</style>
+.logo{position:absolute;right:14px;top:36px;width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #f4f1ea;background:#fff;z-index:3}.build{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #14b8a6;color:#5eead4;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}.mkt{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px dashed #e4b83a;color:#e4b83a;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}.pin .pills{display:none}.pin.open .pills{display:flex}</style>
 </head>
 <body>
 <a id="out" href="../" aria-label="Back">←</a>
@@ -265,6 +265,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     wall.querySelectorAll(".pin").forEach(function(card){
       var more=card.querySelector(".more");
       if(more) more.hidden=!open;
+      card.classList.toggle("open", open);
       var t=card.querySelector(".toggle");
       if(t) t.textContent=open?"^":"v";
     });
@@ -275,6 +276,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     var more=t.closest(".pin").querySelector(".more");
     if(!more) return;
     more.hidden=!more.hidden;
+    t.closest(".pin").classList.toggle("open", !more.hidden);
     t.textContent=more.hidden?"v":"^";
   });
   document.querySelector(".folds").addEventListener("click", function(e){
