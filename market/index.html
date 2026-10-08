@@ -69,7 +69,7 @@
     display: grid; grid-template-columns: 72px 1fr auto; gap: 12px;
     align-items: center; padding: 12px 16px; border-top: 1px solid var(--line);
   }
-  .item img { width: 72px; height: 72px; object-fit: cover; border-radius: 12px; background: #eee; }
+  .item img { width: 72px; height: 72px; object-fit: contain; border-radius: 12px; background: #F0F7F6; }
   .name { font-weight: 600; font-size: 16px; }
   .meta { color: var(--muted); font-size: 13px; margin-top: 2px; }
   .sold {
@@ -82,7 +82,7 @@
   .card {
     display: block; text-decoration: none; color: inherit;
   }
-  .card img { width: 100%; height: 210px; object-fit: cover; display: block; }
+  .card img { width: 100%; height: 240px; object-fit: contain; display: block; background: #F0F7F6; cursor: zoom-in; }
   .card .pad { padding: 12px 14px 16px; }
   .price {
     display: inline-block; background: var(--teal); color: #fff; border-radius: 999px;
@@ -139,10 +139,16 @@
 .ask button{flex:1;border-radius:999px;padding:12px;font:inherit;font-weight:600;cursor:pointer}
 .ask .no{background:#fff;border:1.5px solid #1C9792;color:#13302B}
 .ask .yes{background:#13302B;border:0;color:#fff}
-.pick{display:flex;align-items:center;gap:8px;margin-top:12px}.pick button{width:36px;height:36px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:600;cursor:pointer}.pick button:disabled{opacity:.35}.pick .left{color:#5d6a64;font-size:13px}.tally{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #1C9792}.tally b{font-family:Lexend,sans-serif;font-size:28px}</style>
+.pick{display:flex;align-items:center;gap:8px;margin-top:12px}.pick button{width:36px;height:36px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:600;cursor:pointer}.pick button:disabled{opacity:.35}.pick .left{color:#5d6a64;font-size:13px}.tally{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #1C9792}.tally b{font-family:Lexend,sans-serif;font-size:28px}
+.look{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(19,48,43,.72);padding:18px}
+.look[hidden]{display:none}
+.look img{max-width:min(92vw,640px);max-height:82vh;object-fit:contain;background:#F0F7F6;border-radius:18px;border:1.5px solid #1C9792}
+.look button{position:absolute;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1.5px solid #1C9792;background:#fff;color:#13302B;font:inherit;font-weight:700;cursor:pointer}
+</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
+<div class="look" id="look" hidden><button type="button" id="look-x">×</button><img id="look-img" alt=""></div>
 <div class="wrap">
   <div class="demo"><span class="dot"></span> Demo board · tap sold out</div>
   <h1>One link.<br>Your board.<br><em>Live.</em></h1>
@@ -214,7 +220,7 @@ function render() {
   rows.innerHTML = items.map((it, i) => `
     <div class="item ${it.parked ? "parked" : ""} ${it.sold ? "sold" : ""}">
       <label class="pic">
-        <img src="${pic(it)}" alt="${it.name}">
+        <img class="zoom" src="${pic(it)}" alt="${it.name}" data-full="${pic(it)}">
         <input class="photo" data-i="${i}" type="file" accept="image/*">
       </label>
       <div>
@@ -265,6 +271,13 @@ function render() {
     }).join("")}
     <div class="pad tally"><b>$${total}</b><span>Stops at the number on the board.</span></div>
   `;
+  
+  customer.querySelectorAll(".zoom").forEach(img => {
+    img.onclick = () => {
+      document.getElementById("look-img").src = img.dataset.full;
+      document.getElementById("look").hidden = false;
+    };
+  });
   customer.querySelectorAll("[data-pick]").forEach(btn => {
     btn.onclick = () => {
       const it = items.find(x => x.id === btn.dataset.id);
@@ -324,6 +337,7 @@ function askPull(i){
   document.getElementById("ask-line").textContent=items[i].name+" goes grey at the bottom. You can put it back.";
   document.getElementById("ask").hidden=false;
 }
+document.getElementById("look-x").onclick=()=>{ document.getElementById("look").hidden=true; };
 document.getElementById("ask-no").onclick=()=>{ document.getElementById("ask").hidden=true; };
 document.getElementById("ask-yes").onclick=()=>{
   const i=pullIndex;
