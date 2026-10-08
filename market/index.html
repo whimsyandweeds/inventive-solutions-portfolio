@@ -157,11 +157,28 @@ body.dark .switch .on{background:#1C9792;color:#fff}
 body.dark .ops button,body.dark .ops .price{background:transparent;color:#fff;border-color:#1C9792}
 .chip,.go,.tagprice{background:transparent;color:#1C9792;border:1.5px solid #1C9792}
 body.dark .chip,body.dark .go,body.dark .tagprice{color:#fff}
-.meta:empty:before{content:"Add a line";color:#8aa099}</style>
+.meta:empty:before{content:"Add a line";color:#8aa099}.#bot, #bot{position:fixed;right:16px;bottom:76px;z-index:40;width:54px;height:54px;border-radius:50%;border:1.5px solid #1C9792;background:#13302B;color:#fff;font-weight:700}
+#chat{position:fixed;right:16px;bottom:140px;z-index:40;width:min(320px,calc(100% - 32px));background:#FBFCFA;color:#13302B;border:1.5px solid #1C9792;border-radius:16px;padding:10px;display:grid;gap:8px}
+#chat[hidden]{display:none}
+.chat-head{display:flex;justify-content:space-between;font-weight:700}
+#chat-log{max-height:220px;overflow:auto;display:grid;gap:6px;font-size:14px}
+#chat-log p{margin:0;padding:8px 10px;border-radius:12px;background:#F0F7F6}
+#chat-log .me{background:#13302B;color:#fff}
+#chat-form{display:flex;gap:6px}
+#chat-form input{flex:1;border:1.5px solid #1C9792;border-radius:999px;padding:8px 10px}
+#chat-form button{border:0;border-radius:999px;background:#1C9792;color:#fff;padding:8px 12px}
+</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
 <div class="look" id="look" hidden><button type="button" id="look-x">×</button><img id="look-img" alt=""></div>
+
+<button id="bot" type="button" aria-label="Ask">Ask</button>
+<div id="chat" hidden>
+  <div class="chat-head">Ask the board<button id="chat-x" type="button">×</button></div>
+  <div id="chat-log"></div>
+  <form id="chat-form"><input id="chat-q" placeholder="Peaches? Where?" autocomplete="off"><button type="submit">Send</button></form>
+</div>
 <div class="wrap">
   <div class="demo"><span class="dot"></span> Demo board · tap sold out</div>
   <h1>One link.<br>Your board.<br><em>Live.</em></h1>
@@ -295,6 +312,23 @@ function render() {
       if (btn.dataset.pick === "up" && n < it.qty) picks[it.id] = n+1;
       if (btn.dataset.pick === "down") picks[it.id] = Math.max(0, n-1);
       render();
+
+var bot=document.getElementById("bot"), chat=document.getElementById("chat"), log=document.getElementById("chat-log");
+function say(t, me){ var p=document.createElement("p"); if(me) p.className="me"; p.textContent=t; log.appendChild(p); log.scrollTop=log.scrollHeight; }
+function answer(q){
+  var s=q.toLowerCase();
+  var live=items.filter(function(it){ return !it.parked && !it.sold; });
+  if(/where|location|when|hour|saturday|thursday|summerlin|henderson/.test(s)) return "Summerlin Sat 8–1. Henderson Thu 8–1.";
+  if(/contact|email|phone|call|text|reach/.test(s)) return "whimsyandweeds@gmail.com. Stand name and phone land in that inbox.";
+  var hit=items.find(function(it){ return s.indexOf(it.name.toLowerCase())>=0; });
+  if(hit) return hit.name+" is $"+hit.price+". "+(hit.sold?"Sold out.":hit.qty+" left.")+(hit.desc?" "+hit.desc:"");
+  if(/menu|item|have|sell|price|cost/.test(s)) return live.map(function(it){ return it.name+" $"+it.price; }).join(", ") || "Nothing up right now.";
+  return "I can do items, prices, where, and contact. Try peaches or where.";
+}
+bot.onclick=function(){ chat.hidden=!chat.hidden; if(!log.childElementCount) say("Menu, where, or contact."); };
+document.getElementById("chat-x").onclick=function(){ chat.hidden=true; };
+document.getElementById("chat-form").onsubmit=function(e){ e.preventDefault(); var q=document.getElementById("chat-q").value.trim(); if(!q) return; say(q, true); say(answer(q)); document.getElementById("chat-q").value=""; };
+
     };
   });
   rows.querySelectorAll("[contenteditable]").forEach(el => {
