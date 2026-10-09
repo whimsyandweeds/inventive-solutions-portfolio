@@ -386,7 +386,7 @@ function answer(q){
   var hit=items.find(function(it){ return s.indexOf(it.name.toLowerCase())>=0; });
   if(hit) return hit.name+" is $"+hit.price+". "+(hit.sold?"Sold out.":hit.qty+" left.")+(hit.desc?" "+hit.desc:"");
   if(/menu|item|have|sell|price|cost/.test(s)) return live.map(function(it){ return it.name+" $"+it.price; }).join(", ") || "Nothing up right now.";
-  return "I can do items, prices, where, and contact. Try peaches or where.";
+  return "No idea. We don't clock in. Email whimsyandweeds@gmail.com and bother a person.";
 }
 bot.onclick=function(){ chat.hidden=!chat.hidden; if(!log.childElementCount) say("Menu, where, or contact."); };
 document.getElementById("chat-x").onclick=function(){ chat.hidden=true; };
