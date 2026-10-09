@@ -74,7 +74,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .slipkey{border:1.5px solid #9aa0a6;color:#d1d5db}
 
 .pin.next{border:1.5px dashed transparent;background:linear-gradient(#16181c,#16181c) padding-box,repeating-linear-gradient(90deg,#3f8f4a 0 10px,#e4b83a 10px 20px) border-box}
-.art,.ads,.recs{display:inline-block;margin:6px 6px 0 0;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:700;letter-spacing:.04em}.art{border:1px solid #c6a15b;color:#c6a15b}.ads{border:1px solid #a855f7;color:#a855f7}.recs{border:1px solid #1C9792;color:#1C9792}</style>
+.art,.ads,.recs{display:inline-block;margin:6px 6px 0 0;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:700;letter-spacing:.04em}.art{border:1px solid #c6a15b;color:#c6a15b}.ads{border:1px solid #a855f7;color:#a855f7}.recs{border:1px solid #1C9792;color:#1C9792}#find{width:100%;box-sizing:border-box;margin:0 0 12px;border:1px solid #1C9792;border-radius:999px;background:#10211e;color:#fff;padding:10px 14px;font:inherit}.drawer{margin:0 0 8px;border-radius:14px;padding:8px 10px}.drawer summary{cursor:pointer;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px}.drawer.status{border:1px solid #1C9792}.drawer.status summary{color:#1C9792}.drawer.project{border:1px solid #a855f7}.drawer.project summary{color:#c084fc}.drawer.tags{border:1px solid #c6a15b}.drawer.tags summary{color:#c6a15b}.drawer .keys{margin:8px 0 0}</style>
 </head>
 <body>
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a>
@@ -82,9 +82,10 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 <p class="kicker">VENDOR</p>
 <h1>Doors I have <span>not knocked</span></h1>
 <p class="sub">Saved from the sheet. Still strangers.</p>
-<div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button><button class="nogo-key" type="button" data-filter="nogo">No go</button></div>
-<div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj avi" type="button" data-project="AVI">AVI</button></div>
-<div class="keys tags" data-kind="tag"><button class="all on" type="button" data-tag="all">All</button><button class="build" type="button" data-tag="build">Site</button><button class="fix" type="button" data-tag="fix">Fix</button><button class="mkt" type="button" data-tag="mkt">Market</button><button class="spot" type="button" data-tag="spot">Food</button><button class="truck" type="button" data-tag="truck">Truck</button><button class="bag" type="button" data-tag="bag">Pickup</button><button class="slipkey" type="button" data-tag="receipts">Receipts</button><button class="slipkey" type="button" data-tag="noreceipts">No receipts</button></div>
+<input id="find" type="search" placeholder="Find a vendor" autocomplete="off">
+<details class="drawer status"><summary>Status</summary><div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button><button class="nogo-key" type="button" data-filter="nogo">No go</button></div></details>
+<details class="drawer project"><summary>Project</summary><div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj avi" type="button" data-project="AVI">AVI</button></div></details>
+<details class="drawer tags"><summary>Tags</summary><div class="keys tags" data-kind="tag"><button class="all on" type="button" data-tag="all">All</button><button class="build" type="button" data-tag="build">Site</button><button class="fix" type="button" data-tag="fix">Fix</button><button class="mkt" type="button" data-tag="mkt">Market</button><button class="spot" type="button" data-tag="spot">Food</button><button class="truck" type="button" data-tag="truck">Truck</button><button class="bag" type="button" data-tag="bag">Pickup</button><button class="art" type="button" data-tag="art">Art</button><button class="ads" type="button" data-tag="ads">Ads</button><button class="slipkey" type="button" data-tag="receipts">Receipts</button><button class="slipkey" type="button" data-tag="noreceipts">No receipts</button></div></details>
 <div class="keys folds"><button class="fold open" type="button" data-fold="open">Expand all</button><button class="fold shut" type="button" data-fold="shut">Collapse all</button></div>
 <div class="wall">
 <article class="pin" data-id="hungry" data-for="AVI">
@@ -453,7 +454,9 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
       var okProj=state.project==="all"||state.project===proj;
       var has=card.querySelector(".receipts");
       var okTag=state.tag==="all"||(state.tag==="receipts"&&has)||(state.tag==="noreceipts"&&!has)||card.querySelector("."+state.tag);
-      card.style.display=(okStatus&&okProj&&okTag)?"":"none";
+      var q=(document.getElementById("find").value||"").trim().toLowerCase();
+      var okFind=!q||card.textContent.toLowerCase().indexOf(q)!==-1;
+      card.style.display=(okStatus&&okProj&&okTag&&okFind)?"":"none";
     });
   }
   document.querySelector(".projects").addEventListener("click", function(e){
@@ -473,6 +476,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     btn.classList.add("on");
     state.status=btn.dataset.filter; show();
   });
+document.getElementById("find").addEventListener("input", show);
 })();
 </script>
 </body>
