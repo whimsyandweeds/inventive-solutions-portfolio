@@ -7,7 +7,7 @@
   box.innerHTML='<div class="chat-head">Ask<button id="chat-x" type="button">×</button></div><div id="chat-log"></div><form id="chat-form"><input id="chat-q" placeholder="Ask the board" autocomplete="off"><button type="button" id="chat-send">Send</button></form>';
   document.body.appendChild(b); document.body.appendChild(box);
   var style=document.createElement("style");
-  style.textContent="#bot{position:fixed;right:16px;bottom:76px;z-index:40;width:54px;height:54px;border-radius:50%;border:1.5px solid #d2d2d2;background:#111;color:#fff;font-size:22px}#chat{position:fixed;right:16px;bottom:140px;z-index:40;width:min(320px,calc(100% - 32px));background:#16181c;color:#f4f1ea;border:1px solid #d2d2d2;border-radius:16px;padding:12px}#chat[hidden]{display:none}#chat-log{max-height:180px;overflow:auto;font-size:14px}#chat-log p{margin:6px 0}#chat form{display:flex;gap:8px;margin-top:8px}#chat input{flex:1;border:1px solid #2c3138;border-radius:10px;background:#0c0e12;color:#fff;padding:8px}#chat-send,#chat-x{border:0;background:#2a2a2e;color:#fff;border-radius:10px;padding:8px 10px}";
+  style.textContent="#bot{position:fixed;right:10px;bottom:10px;z-index:40;width:48px;height:48px;border-radius:50%;border:1px solid rgba(210,210,210,.55);background:linear-gradient(180deg,rgba(12,14,18,.4),rgba(12,14,18,.18));backdrop-filter:blur(4px);color:#fff;font-size:20px}#chat{position:fixed;right:10px;bottom:66px;z-index:40;width:min(320px,calc(100% - 20px));background:linear-gradient(180deg,rgba(12,14,18,.62),rgba(12,14,18,.38));backdrop-filter:blur(8px);color:#f4f1ea;border:1px solid rgba(210,210,210,.45);border-radius:16px;padding:12px}#chat[hidden]{display:none}#chat-log{max-height:180px;overflow:auto;font-size:14px}#chat-log p{margin:6px 0}#chat form{display:flex;gap:8px;margin-top:8px}#chat input{flex:1;border:1px solid #2c3138;border-radius:10px;background:#0c0e12;color:#fff;padding:8px}#chat-send,#chat-x{border:0;background:#2a2a2e;color:#fff;border-radius:10px;padding:8px 10px}";
   document.head.appendChild(style);
   var lines=[
     "No idea. We don't clock in. Email whimsyandweeds@gmail.com and bother a person.",
@@ -17,7 +17,7 @@
   function say(t){var p=document.createElement("p"); p.textContent=t; document.getElementById("chat-log").appendChild(p);}
   function answer(q){
     var s=q.toLowerCase();
-    if(/email|phone|call|text|contact|reach|hold of|who do i/.test(s)) return "whimsyandweeds@gmail.com. That's the human door.";
+    if(/email|phone|call|text|contact|reach|hold of|who do i|login|password|code|locked|remember/.test(s)) return "Locked out? Email whimsyandweeds@gmail.com. That is the human door.";
     if(/whimsy|weeds|who are/.test(s)) return "Whimsy and Weeds. Private boards. If you need a person, whimsyandweeds@gmail.com.";
     if(/hour|open|saturday|sunday|close|when/.test(s)) return "Saturday hours? Bold. We don't post those. Email whimsyandweeds@gmail.com and ask a person who clocks in.";
     return lines[Math.floor(Math.random()*lines.length)];
