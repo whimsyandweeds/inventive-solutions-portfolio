@@ -324,7 +324,7 @@ try { const saved = JSON.parse(localStorage.getItem("market-board-3")||""); if (
 seed.forEach(s => { if (!items.some(it => it.id === s.id)) items.unshift(Object.assign({}, s)); });
 function save(){ localStorage.setItem("market-board-3", JSON.stringify(items)); }
 const picks = {};
-function pic(it){ return it.photo || ({peaches:"peaches.jpg",eggs:"eggs.jpg",honey:"honey.jpg",bread:"bread.jpg"}[it.id] || "peaches.jpg"); }
+function pic(it){ return it.photo || ({peaches:"peaches-crate.jpg?v=crate",eggs:"eggs.jpg",honey:"honey.jpg",bread:"bread.jpg"}[it.id] || "peaches.jpg"); }
 function render() {
   rows.innerHTML = items.map((it, i) => `
     <div class="item ${it.parked ? "parked" : ""} ${it.sold ? "sold" : ""}">
