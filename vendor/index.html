@@ -40,7 +40,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .scratch{margin-top:8px}
 .scratch[hidden]{display:none}
-.addline{display:flex;gap:6px;align-items:center;background:#f5e7a2;color:#3a3208;padding:8px 10px}
+.addline{display:flex;gap:6px;align-items:flex-start;background:#f5e7a2;color:#3a3208;padding:8px 10px;max-width:100%;box-sizing:border-box}.addline textarea{flex:1;width:100%;min-height:22px;border:0;background:transparent;color:#3a3208;font:inherit;resize:none;overflow:hidden;white-space:pre-wrap;word-break:break-word}.bullets li{white-space:normal;word-break:break-word}
 .addline input{flex:1;border:0;background:transparent;color:#3a3208;font:inherit;outline:none}
 .bullets{margin:8px 0 0 16px;padding:0;color:#3a3208}
 
@@ -399,12 +399,12 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     if(rec) row.prepend(rec);
     var box=document.createElement("div");
     box.className="scratch"; box.hidden=true;
-    box.innerHTML='<ul class="bullets"></ul><label class="addline"><span>•</span><input placeholder="Add a line" /></label>';
+    box.innerHTML='<ul class="bullets"></ul><label class="addline"><span>•</span><textarea rows="1" placeholder="Add a line"></textarea></label>';
     card.appendChild(box);
     var list=box.querySelector(".bullets");
     function paint(){list.innerHTML=""; read(id).forEach(function(line){var li=document.createElement("li"); li.textContent=line; list.appendChild(li);});}
     paint();
-    box.querySelector("input").addEventListener("keydown", function(e){if(e.key!=="Enter")return; e.preventDefault(); var v=this.value.trim(); if(!v)return; var lines=read(id); lines.push(v); write(id,lines); this.value=""; paint();});
+    var field=box.querySelector("textarea"); field.addEventListener("input", function(){this.style.height="auto"; this.style.height=this.scrollHeight+"px";}); field.addEventListener("keydown", function(e){if(e.key!=="Enter"||e.shiftKey)return; e.preventDefault(); var v=this.value.trim(); if(!v)return; var lines=read(id); lines.push(v); write(id,lines); this.value=""; this.style.height="auto"; paint();});
   });
   
   wall.querySelectorAll(".pin").forEach(function(card){
