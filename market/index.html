@@ -223,6 +223,17 @@ body.dark #chat-log p{background:#10211e;color:#f4f7f6}
 body.dark #chat-form input{background:#10211e;color:#f4f7f6;border-color:rgba(255,255,255,.22)}
 .wrap{padding-bottom:96px}
 </style>
+
+<style id="board-rows">
+.switch{display:flex;flex-direction:column;align-items:stretch;gap:8px}
+.switch .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.switch #dark{align-self:flex-start;width:auto!important;min-width:88px}
+.switch .tabs button{width:100%;white-space:nowrap}
+.ops{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:8px}
+.ops .count,.ops .tools{display:flex;align-items:center;gap:8px}
+.ops .n{min-width:18px;text-align:center;font-weight:700}
+.sub:empty{display:none}
+</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -240,8 +251,10 @@ body.dark #chat-form input{background:#10211e;color:#f4f7f6;border-color:rgba(25
   <p class="lede">Change price, stock, and sold out from your phone. Customers see it before Saturday.</p>
 
   <div class="switch"><button id="dark" type="button">Dark</button>
-    <button id="tabBoard" class="on" type="button">Your board</button>
-    <button id="tabCustomer" type="button">What customers see</button>
+    <div class="tabs">
+      <button id="tabBoard" class="on" type="button">Your board</button>
+      <button id="tabCustomer" type="button">Customers</button>
+    </div>
   </div>
 
   <section id="board" class="board">
@@ -310,14 +323,18 @@ function render() {
         <div class="name edit" contenteditable="true" data-field="name" data-i="${i}">${it.name}</div>
         <div class="meta edit" contenteditable="true" data-field="desc" data-i="${i}">${it.desc || ""}</div>
         <div class="ops">
-          <span class="buck">$</span><input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price">
-          <button type="button" data-act="down" data-i="${i}">−</button>
-          <span>${it.qty}</span>
-          <button type="button" data-act="up" data-i="${i}">+</button>
-          <button class="sold ${it.sold ? "on" : ""}" data-act="sold" data-i="${i}" type="button">${it.sold ? "Sold out" : "Sold out"}</button>
-          <button type="button" data-act="orderup" data-i="${i}" aria-label="Move up">↑</button>
-          <button type="button" data-act="orderdown" data-i="${i}" aria-label="Move down">↓</button>
-          <button class="trash" type="button" data-act="trash" data-i="${i}" aria-label="Delete"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6h8M9 6V4h6v2M7 7h10l-1 12H8L7 7zM10 10v6M14 10v6"/></svg></button>
+          <div class="count">
+            <span class="buck">$</span><input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price">
+            <button type="button" data-act="down" data-i="${i}">−</button>
+            <span class="n">${it.qty}</span>
+            <button type="button" data-act="up" data-i="${i}">+</button>
+          </div>
+          <div class="tools">
+            <button class="sold ${it.sold ? "on" : ""}" data-act="sold" data-i="${i}" type="button">Sold out</button>
+            <button type="button" data-act="orderup" data-i="${i}" aria-label="Move up">↑</button>
+            <button type="button" data-act="orderdown" data-i="${i}" aria-label="Move down">↓</button>
+            <button class="trash" type="button" data-act="trash" data-i="${i}" aria-label="Delete"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6h8M9 6V4h6v2M7 7h10l-1 12H8L7 7zM10 10v6M14 10v6"/></svg></button>
+          </div>
         </div>
       </div>
     </div>`).join("");
@@ -349,7 +366,7 @@ function render() {
             <button type="button" data-pick="down" data-id="${it.id}" ${n<=0?"disabled":""}>−</button>
             <span>${n}</span>
             <button type="button" data-pick="up" data-id="${it.id}" ${maxed?"disabled":""}>+</button>
-            <span class="left">${it.sold ? "Sold out" : Math.max(0, it.qty - n) + " left"}</span><span class="sub">$${n * it.price}</span>
+            <span class="left">${it.sold ? "Sold out" : Math.max(0, it.qty - n) + " left"}</span><span class="sub">${n ? "$"+n*it.price : ""}</span>
           </div>
         </div>
       </article>`;
