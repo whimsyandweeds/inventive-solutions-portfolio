@@ -160,7 +160,7 @@ body.dark .ops input.price{color:#fff;-webkit-text-fill-color:#fff;background:#1
 body.dark #dark{color:#fff}
 .chip,.go,.tagprice{background:transparent;color:#1C9792;border:1.5px solid #1C9792}
 body.dark .chip,body.dark .go,body.dark .tagprice{color:#fff}
-.meta:empty:before{content:"Add a line";color:#8aa099}.#bot, #bot{position:fixed;right:16px;bottom:76px;z-index:40;width:54px;height:54px;border-radius:50%;border:1.5px solid #1C9792;background:#13302B;color:#fff;font-weight:700}
+.meta:empty:before{content:"Add a line";color:#8aa099}.name:empty:before{content:"New item";color:#8aa099}.#bot, #bot{position:fixed;right:16px;bottom:76px;z-index:40;width:54px;height:54px;border-radius:50%;border:1.5px solid #1C9792;background:#13302B;color:#fff;font-weight:700}
 #chat{position:fixed;right:16px;bottom:140px;z-index:40;width:min(320px,calc(100% - 32px));background:#FBFCFA;color:#13302B;border:1.5px solid #1C9792;border-radius:16px;padding:10px;display:grid;gap:8px}
 #chat[hidden]{display:none}
 .chat-head{display:flex;justify-content:space-between;font-weight:700}
@@ -351,11 +351,11 @@ document.getElementById("chat-form").onsubmit=function(e){ e.preventDefault(); v
     };
   });
   rows.querySelectorAll("[contenteditable]").forEach(el => {
-    el.onfocus = () => { if (el.textContent.trim() === "Add a line") el.textContent = ""; };
+    el.onfocus = () => { var t=el.textContent.trim(); if (t === "Add a line" || t === "New item") el.textContent = ""; };
     el.onblur = () => {
       const it = items[Number(el.dataset.i)];
       let v = el.textContent.trim();
-      if (v === "Add a line") v = "";
+      if (v === "Add a line" || v === "New item") v = "";
       it[el.dataset.field] = v;
       if (!v && el.dataset.field === "desc") el.textContent = "";
       save();
@@ -411,7 +411,7 @@ document.getElementById("ask-yes").onclick=()=>{
   document.getElementById("ask").hidden=true;
 };
 document.getElementById("add").onclick = () => {
-  items.push({ id: "new"+Date.now(), name: "New item", desc: "", price: 0, qty: 1, sold: false, photo: "peaches.jpg" });
+  items.push({ id: "new"+Date.now(), name: "", desc: "", price: 0, qty: 1, sold: false, photo: "peaches.jpg" });
   save();
   render();
 };
