@@ -223,6 +223,28 @@ body.dark #chat-log p{background:#10211e;color:#f4f7f6}
 body.dark #chat-form input{background:#10211e;color:#f4f7f6;border-color:rgba(255,255,255,.22)}
 .wrap{padding-bottom:96px}
 </style>
+
+<style id="stall-controls">
+.switch{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin-bottom:16px}
+.switch .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.switch button{min-width:0!important;width:100%!important;white-space:nowrap;border-radius:999px!important;border:1.5px solid #a855f7!important;background:transparent!important;color:#a855f7!important;font-weight:700;padding:12px 14px!important;min-height:48px}
+.switch #dark{width:auto!important;align-self:flex-start;padding:8px 14px!important;min-height:40px;border-color:rgba(19,48,43,.28)!important;color:#13302B!important}
+body.dark .switch #dark{border-color:rgba(255,255,255,.28)!important;color:#f4f7f6!important}
+.switch button.on{background:#2ec4b6!important;border-color:#2ec4b6!important;color:#06221f!important}
+.ops{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px}
+.ops .money{display:inline-flex;align-items:center;gap:2px;background:#2ec4b6;color:#06221f;border-radius:999px;padding:0 12px;height:36px;font-weight:800}
+.ops .money span{font-weight:800}
+.ops input.price{width:42px!important;height:32px!important;border:0!important;background:transparent!important;color:#06221f!important;-webkit-text-fill-color:#06221f!important;font-weight:800;padding:0;text-align:left}
+.ops .step,.pick .step{width:44px!important;height:44px!important;border-radius:50%!important;border:0!important;background:#a855f7!important;color:#1a0828!important;-webkit-text-fill-color:#1a0828!important;font-weight:800;font-size:20px;padding:0!important}
+.ops .n,.pick .n{min-width:22px;text-align:center;font-weight:800}
+.ops .sold{width:auto!important;height:36px!important;border-radius:999px!important;border:1.5px solid #f87171!important;background:transparent!important;color:#f87171!important;-webkit-text-fill-color:#f87171!important;padding:0 12px!important}
+.ops .sold.on{background:#6b2a32!important;border-color:#6b2a32!important;color:#f3d6d6!important;-webkit-text-fill-color:#f3d6d6!important}
+.ops .move{width:36px!important;height:36px!important;border-radius:50%!important;border:1px solid rgba(168,85,247,.7)!important;background:transparent!important;color:#a855f7!important;-webkit-text-fill-color:#a855f7!important;padding:0!important}
+.ops .trash{width:36px!important;height:36px!important;border-radius:50%!important;border:1.5px solid #f87171!important;background:transparent!important;color:#f87171!important;padding:0!important}
+.tagprice{background:#2ec4b6!important;color:#06221f!important;font-weight:800}
+.pick .step:disabled{opacity:.35}
+.go{background:#2ec4b6!important;color:#06221f!important;border:0!important;font-weight:800}
+</style>
 </head>
 <body>
 <div class="ask" id="ask" hidden><div class="box"><h3>Pull it off?</h3><p id="ask-line"></p><div class="row"><button class="no" id="ask-no" type="button">Keep it</button><button class="yes" id="ask-yes" type="button">Pull it</button></div></div></div>
@@ -240,8 +262,10 @@ body.dark #chat-form input{background:#10211e;color:#f4f7f6;border-color:rgba(25
   <p class="lede">Change price, stock, and sold out from your phone. Customers see it before Saturday.</p>
 
   <div class="switch"><button id="dark" type="button">Dark</button>
-    <button id="tabBoard" class="on" type="button">Your board</button>
-    <button id="tabCustomer" type="button">What customers see</button>
+    <div class="tabs">
+      <button id="tabBoard" class="on" type="button">Your board</button>
+      <button id="tabCustomer" type="button">What customers see</button>
+    </div>
   </div>
 
   <section id="board" class="board">
@@ -310,14 +334,14 @@ function render() {
         <div class="name edit" contenteditable="true" data-field="name" data-i="${i}">${it.name}</div>
         <div class="meta edit" contenteditable="true" data-field="desc" data-i="${i}">${it.desc || ""}</div>
         <div class="ops">
-          <span class="buck">$</span><input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price">
-          <button type="button" data-act="down" data-i="${i}">−</button>
-          <span>${it.qty}</span>
-          <button type="button" data-act="up" data-i="${i}">+</button>
-          <button class="sold ${it.sold ? "on" : ""}" data-act="sold" data-i="${i}" type="button">${it.sold ? "Sold out" : "Sold out"}</button>
-          <button type="button" data-act="orderup" data-i="${i}" aria-label="Move up">↑</button>
-          <button type="button" data-act="orderdown" data-i="${i}" aria-label="Move down">↓</button>
-          <button class="trash" type="button" data-act="trash" data-i="${i}" aria-label="Delete"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6h8M9 6V4h6v2M7 7h10l-1 12H8L7 7zM10 10v6M14 10v6"/></svg></button>
+          <label class="money"><span>$</span><input class="price" data-i="${i}" type="number" min="0" value="${it.price}" aria-label="Price"></label>
+          <button class="step" type="button" data-act="down" data-i="${i}">−</button>
+          <span class="n">${it.qty}</span>
+          <button class="step" type="button" data-act="up" data-i="${i}">+</button>
+          <button class="sold ${it.sold ? "on" : ""}" data-act="sold" data-i="${i}" type="button">Sold out</button>
+          <button class="move" type="button" data-act="orderup" data-i="${i}" aria-label="Move up">↑</button>
+          <button class="move" type="button" data-act="orderdown" data-i="${i}" aria-label="Move down">↓</button>
+          <button class="trash" type="button" data-act="trash" data-i="${i}" aria-label="Delete"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h8M9 6V4h6v2M7 7h10l-1 12H8L7 7zM10 10v6M14 10v6"/></svg></button>
         </div>
       </div>
     </div>`).join("");
@@ -346,9 +370,9 @@ function render() {
           <div class="name">${it.name}<span class="each">$${it.price}</span></div>
           <div class="meta">${it.desc || ""}</div>
           <div class="pick">
-            <button type="button" data-pick="down" data-id="${it.id}" ${n<=0?"disabled":""}>−</button>
-            <span>${n}</span>
-            <button type="button" data-pick="up" data-id="${it.id}" ${maxed?"disabled":""}>+</button>
+            <button class="step" type="button" data-pick="down" data-id="${it.id}" ${n<=0?"disabled":""}>−</button>
+            <span class="n">${n}</span>
+            <button class="step" type="button" data-pick="up" data-id="${it.id}" ${maxed?"disabled":""}>+</button>
             <span class="left">${it.sold ? "Sold out" : Math.max(0, it.qty - n) + " left"}</span><span class="sub">$${n * it.price}</span>
           </div>
         </div>
