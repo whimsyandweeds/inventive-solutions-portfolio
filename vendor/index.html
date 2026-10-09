@@ -36,7 +36,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
 .receipts ul{list-style:none;margin:8px 0 0;padding:0}
 .receipts a{color:#d8b4fe}
 .for{position:absolute;left:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #a855f7;color:#d8b4fe;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.08em;font-weight:700}
-.pencil{border:1px solid #a855f7;background:transparent;color:#d8b4fe;border-radius:999px;padding:6px 12px}
+.pencil{border:1px solid #a855f7;background:transparent;color:#d8b4fe;border-radius:999px;padding:6px 12px}.pencil.has{border:1.5px solid #2f9e4f;color:#8ee0a8}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .scratch{margin-top:8px}
 .scratch[hidden]{display:none}
@@ -402,7 +402,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
     box.innerHTML='<ul class="bullets"></ul><label class="addline"><span>•</span><textarea rows="1" placeholder="Add a line"></textarea></label>';
     card.appendChild(box);
     var list=box.querySelector(".bullets");
-    function paint(){list.innerHTML=""; read(id).forEach(function(line){var li=document.createElement("li"); li.textContent=line; list.appendChild(li);});}
+    function paint(){list.innerHTML=""; var lines=read(id); lines.forEach(function(line){var li=document.createElement("li"); li.textContent=line; list.appendChild(li);}); row.querySelector(".pencil").classList.toggle("has", lines.length>0);}
     paint();
     var field=box.querySelector("textarea"); field.addEventListener("input", function(){this.style.height="auto"; this.style.height=this.scrollHeight+"px";}); field.addEventListener("keydown", function(e){if(e.key!=="Enter"||e.shiftKey)return; e.preventDefault(); var v=this.value.trim(); if(!v)return; var lines=read(id); lines.push(v); write(id,lines); this.value=""; this.style.height="auto"; paint();});
   });
@@ -417,6 +417,7 @@ h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
       var more=card.querySelector(".more");
       if(more) more.hidden=!open;
       card.classList.toggle("open", open);
+      card.querySelectorAll("details.receipts").forEach(function(d){d.open=open;});
       var t=card.querySelector(".toggle");
       if(t) t.textContent=open?"^":"v";
     });
