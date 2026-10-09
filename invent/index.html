@@ -32,7 +32,7 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2
 #exit-door{position:fixed;left:16px;bottom:16px;width:46px;height:46px;border-radius:50%;border:1px solid #d2d2d2;display:grid;place-items:center;text-decoration:none;z-index:5}
 #look{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.82);display:grid;place-items:center}#look[hidden]{display:none}#look img,#look video{max-width:min(960px,92vw);max-height:82vh;border-radius:16px}#look-x{position:fixed;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid #d2d2d2;background:#111;color:#fff;font-size:22px;display:grid;place-items:center;padding:0;line-height:1}
 #silent,#note{display:none}
-</style>
+.note-label{display:block;margin:16px 0 6px;font-size:12px;color:#c8c8c8}#note-box{width:100%;box-sizing:border-box;min-height:72px;border:1px solid #d2d2d2;border-radius:14px;background:rgba(12,14,18,.45);color:#f4f1ea;padding:12px;font:inherit}#oops{margin-top:12px;border:1px solid #d2d2d2;background:transparent;color:#f4f1ea;border-radius:12px;padding:10px 14px}</style>
 </head>
 <body>
 <div id="look" hidden><button id="look-x" type="button" aria-label="Close">×</button><video id="look-vid" autoplay muted loop playsinline></video></div><div class="wrap">
@@ -42,6 +42,8 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2
     <div class="card"><video autoplay muted loop playsinline poster="a-poster.jpg"><source src="a.mp4" type="video/mp4"></video><p>Background A</p><button type="button" data-pick="A">Pick A</button></div>
     <div class="card"><video autoplay muted loop playsinline poster="b-poster.jpg"><source src="b.mp4" type="video/mp4"></video><p>Background B</p><button type="button" data-pick="B">Pick B</button></div>
   </div>
+  <label class="note-label" for="note-box">Note for the team</label>
+  <textarea id="note-box" placeholder="Don't love either, or want a tweak. Optional."></textarea>
   <div class="pill" id="dock">
     <p id="chosen">Nothing picked yet.</p>
     <button id="send" type="button">Send</button>
@@ -50,6 +52,8 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2
     <p class="kicker">Selection received</p>
     <h2>Your development team has been notified.</h2>
     <p id="filed-line"></p>
+    <button id="oops" type="button">I picked the wrong one</button>
+    <p id="oops-line" hidden>No worries. Pick again and we will update the team.</p>
   </div>
 </div>
 <iframe name="silent-note" id="silent" hidden title=""></iframe>
@@ -59,7 +63,7 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2
   <input type="hidden" name="_subject" id="subj" value="">
   <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
   <input type="hidden" name="selection" id="sel" value="">
-  <input type="hidden" name="page" value="Invent landing background">
+  <input type="hidden" name="page" value="Invent landing background"><input type="hidden" name="note" id="note-field" value="">
 </form>
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10M16 8l4 4-4 4"/></svg></a>
 <script>
@@ -69,7 +73,9 @@ document.querySelectorAll("[data-pick]").forEach(function(b){b.onclick=function(
 document.getElementById("send").onclick=function(){
   if(!pick){document.getElementById("chosen").textContent="Pick A or B first.";return;}
   document.getElementById("subj").value="Landing background "+pick;
-  document.getElementById("sel").value="Client selected Background "+pick+" for the invent landing page.";
+  var note=(document.getElementById("note-box").value||"").trim();
+  document.getElementById("note-field").value=note||"No note.";
+  document.getElementById("sel").value="Client selected Background "+pick+" for the invent landing page."+(note?" Note: "+note:"");
   document.getElementById("note").submit();
   dock.hidden=true;
   document.getElementById("filed-line").textContent="Background "+pick+" is logged. The landing page will be set to that treatment.";
@@ -77,6 +83,7 @@ document.getElementById("send").onclick=function(){
 };
 document.querySelectorAll(".card video").forEach(function(v){v.ondblclick=function(){var box=document.getElementById("look"), big=document.getElementById("look-vid");big.src=(v.querySelector("source")||{}).getAttribute("src")||"";box.hidden=false;big.play();};});
 document.getElementById("look-x").onclick=function(){document.getElementById("look").hidden=true;};
+document.getElementById("oops").onclick=function(){document.getElementById("oops-line").hidden=false;document.getElementById("filed").hidden=true;document.getElementById("dock").hidden=false;document.getElementById("chosen").textContent="No worries. Pick again and we will update the team.";};
 </script>
 </body>
 </html>
