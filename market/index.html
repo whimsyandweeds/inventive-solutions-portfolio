@@ -114,7 +114,7 @@
 .ops button,.ops input{border:1px solid var(--line);background:#fff;border-radius:999px;font:inherit;font-weight:600;font-size:13px}
 .ops input{width:64px;padding:8px 10px;text-align:center}
 .ops button{padding:8px 10px;cursor:pointer}
-.ops .sold{border:1.5px solid #c46a62;color:#c46a62}.ops .sold.on{background:#fde8e6;color:#c46a62;border-color:#c46a62}.ops .trash{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;padding:0}
+.ops .sold{border:1.5px solid #c46a62;color:#c46a62}.ops .sold.on{background:#fde8e6;color:#c46a62;border-color:#c46a62}.ops .trash{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;padding:0;border:1.5px solid #c6a15b;color:#c6a15b}
 .item{grid-template-columns:72px 1fr}
 .ops{grid-column:2}
 .item.parked{opacity:.4;filter:grayscale(1)}
@@ -154,7 +154,7 @@ body.dark .switch .on{background:#1C9792;color:#fff}
 .ops button,.ops .price{background:transparent;color:#13302B;border:1.5px solid #1C9792;border-radius:999px}
 .ops button{width:36px;height:36px;padding:0;border-radius:50%}
 .ops .sold{width:auto;padding:0 12px;border-radius:999px}
-body.dark .ops button,body.dark .ops .price{background:transparent;color:#fff;border-color:#1C9792}body.dark .ops .sold{color:#e7a39c;border-color:#c46a62}
+body.dark .ops button,body.dark .ops .price{background:transparent;color:#fff;border-color:#1C9792}body.dark .ops .trash{color:#c6a15b;border-color:#c6a15b}body.dark .ops .sold{color:#e7a39c;border-color:#c46a62}
 body.dark .ops input.price{color:#fff;-webkit-text-fill-color:#fff;background:#10211e;border:1.5px solid #1C9792;width:72px}
 .ops input.price{color:#13302B;-webkit-text-fill-color:#13302B}
 body.dark #dark{color:#fff}
@@ -273,7 +273,7 @@ function render() {
           <button class="sold ${it.sold ? "on" : ""}" data-act="sold" data-i="${i}" type="button">${it.sold ? "Sold out" : "Sold out"}</button>
           <button type="button" data-act="orderup" data-i="${i}" aria-label="Move up">↑</button>
           <button type="button" data-act="orderdown" data-i="${i}" aria-label="Move down">↓</button>
-          <button class="trash" type="button" data-act="trash" data-i="${i}" aria-label="Delete"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M9 7V5h6v2M8 7l1 13h6l1-13"/></svg></button>
+          <button class="trash" type="button" data-act="trash" data-i="${i}" aria-label="Delete"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 6h8M9 6V4h6v2M7 7h10l-1 12H8L7 7zM10 10v6M14 10v6"/></svg></button>
         </div>
       </div>
     </div>`).join("");
