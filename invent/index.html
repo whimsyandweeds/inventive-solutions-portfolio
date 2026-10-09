@@ -35,12 +35,12 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2
 </style>
 </head>
 <body>
-<div id="look" hidden><button id="look-x" type="button" aria-label="Close">×</button><img id="look-img" alt=""></div><div class="wrap">
+<div id="look" hidden><button id="look-x" type="button" aria-label="Close">×</button><video id="look-vid" autoplay muted loop playsinline></video></div><div class="wrap">
   <h1>Pick a background</h1>
   <p>Two ways the landing page can sit. Pick one.</p>
   <div class="pair">
-    <div class="card"><video autoplay muted loop playsinline poster="../door-still.jpg"><source src="a.mp4" type="video/mp4"></video><p>Background A</p><button type="button" data-pick="A">Pick A</button></div>
-    <div class="card"><video autoplay muted loop playsinline poster="../door-still.jpg"><source src="b.mp4" type="video/mp4"></video><p>Background B</p><button type="button" data-pick="B">Pick B</button></div>
+    <div class="card"><video autoplay muted loop playsinline><source src="a.mp4" type="video/mp4"></video><p>Background A</p><button type="button" data-pick="A">Pick A</button></div>
+    <div class="card"><video autoplay muted loop playsinline><source src="b.mp4" type="video/mp4"></video><p>Background B</p><button type="button" data-pick="B">Pick B</button></div>
   </div>
   <div class="pill" id="dock">
     <p id="chosen">Nothing picked yet.</p>
@@ -75,7 +75,7 @@ document.getElementById("send").onclick=function(){
   document.getElementById("filed-line").textContent="Background "+pick+" is logged. The landing page will be set to that treatment.";
   document.getElementById("filed").hidden=false;
 };
-document.querySelectorAll(".card video").forEach(function(v){v.ondblclick=function(){var box=document.getElementById("look");document.getElementById("look-img").src=v.getAttribute("poster")||"../door-still.jpg";box.hidden=false;};});
+document.querySelectorAll(".card video").forEach(function(v){v.ondblclick=function(){var box=document.getElementById("look"), big=document.getElementById("look-vid");big.src=(v.querySelector("source")||{}).getAttribute("src")||"";box.hidden=false;big.play();};});
 document.getElementById("look-x").onclick=function(){document.getElementById("look").hidden=true;};
 </script>
 </body>
