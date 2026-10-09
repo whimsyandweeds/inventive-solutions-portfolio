@@ -6,41 +6,56 @@
 <title>Pick a background</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#07080b url("wall.jpg") center/cover no-repeat fixed;color:#f4f1ea;font-family:Inter,sans-serif;min-height:100vh;display:grid;place-items:center}
-.wrap{width:min(920px,calc(100% - 28px));margin:0 auto;padding:32px 0}
-h1{font-weight:500;font-size:28px}
+body{margin:0;background:#07080b;color:#f4f1ea;font-family:Inter,sans-serif;min-height:100vh}
+.wrap{width:min(920px,calc(100% - 28px));margin:0 auto;padding:32px 0 48px}
+.chip{display:inline-flex;margin:0 0 14px;padding:5px 12px;border:1px dashed #e6b325;border-radius:999px;color:#e6b325;font-size:11px;letter-spacing:.16em;text-transform:uppercase}
+h1{margin:0;font-weight:600;font-size:32px;letter-spacing:-.03em}
+h1 span{color:#2ec4b6}
+.lede{margin:8px 0 22px;color:#b7b3aa;font-size:16px}
 .pair{display:grid;gap:16px}
 @media(min-width:760px){.pair{grid-template-columns:1fr 1fr}}
-.card{border:1px solid #d2d2d2;border-radius:22px;overflow:hidden;background:linear-gradient(180deg,rgba(12,14,18,.55),rgba(12,14,18,.28));backdrop-filter:blur(6px);box-shadow:0 30px 80px rgba(0,0,0,.35)}
-.stage{height:280px;background:#1a1c20 center/cover}
-video{width:100%;height:280px;object-fit:cover;object-position:center bottom;display:block;background:#111}.pair .card:last-child video{object-position:right center}
-.card p{margin:0;padding:12px 14px}
-button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2e;color:#f4f1ea;border-radius:12px;padding:12px 16px;font:inherit;font-size:15px}
-.card.on{border-color:#d2d2d2;box-shadow:0 0 0 1px #d2d2d2,0 30px 80px rgba(0,0,0,.35)}.card.on button{background:#3a3a40;transform:scale(1.08);box-shadow:0 0 0 2px #d2d2d2;color:#fff}
-.pill{margin:18px 0 0;display:flex;align-items:center;justify-content:space-between;gap:14px;width:fit-content;max-width:100%;padding:8px 8px 8px 18px;border:1px solid rgba(242,238,230,.55);border-radius:999px;background:rgba(8,9,12,.82);box-shadow:0 16px 40px rgba(0,0,0,.45);backdrop-filter:blur(10px)}
+.card{border:1px solid rgba(255,255,255,.14);border-radius:22px;overflow:hidden;background:#101216;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.stage{background:#101216}
+video{width:100%;height:280px;object-fit:cover;object-position:center bottom;display:block;background:#101216}.pair .card:last-child video{object-position:right center}
+.meta{padding:14px 14px 16px}
+.name{margin:0;font-size:17px;font-weight:600}
+.line{margin:4px 0 12px;color:#9c988f;font-size:14px}
+button.use{display:inline-block;margin:0;border:1px solid rgba(255,255,255,.28);background:transparent;color:#f4f1ea;border-radius:999px;padding:10px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.card.on{border-color:#2ec4b6;box-shadow:0 0 0 1.5px #2ec4b6,0 24px 60px rgba(0,0,0,.35)}
+.card.on button.use{background:#2ec4b6;border-color:#2ec4b6;color:#071311}
+.note-label{display:block;margin:18px 0 6px;font-size:12px;color:#9c988f}
+#note-box{width:100%;box-sizing:border-box;min-height:72px;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:#101216;color:#f4f1ea;padding:12px;font:inherit}
+.pill{margin:18px 0 0;display:flex;align-items:center;justify-content:space-between;gap:14px;width:fit-content;max-width:100%;padding:8px 8px 8px 18px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:#101216}
 .pill[hidden]{display:none}
-#chosen{margin:0;padding:0;font-size:14px;letter-spacing:.02em;color:#f4f1ea;white-space:nowrap}
-#send{margin:0;border:0;background:#f4f1ea;color:#111;border-radius:999px;padding:10px 18px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
-#send:hover{background:#fff}
-.pill.on{border-color:#f4f1ea}
-.pill.on #chosen{font-weight:600}
-#filed{margin:22px 0 0;max-width:460px;padding:22px 22px 20px;border:1px solid rgba(210,210,210,.45);border-radius:18px;background:rgba(8,9,12,.72);backdrop-filter:blur(8px)}
+#chosen{margin:0;padding:0;font-size:14px;color:#f4f1ea;white-space:nowrap}
+#send{margin:0;border:0;background:#2ec4b6;color:#071311;border-radius:999px;padding:10px 18px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.pill.on{border-color:#2ec4b6}
+#filed{margin:22px 0 0;max-width:460px;padding:22px 22px 20px;border:1px solid rgba(255,255,255,.14);border-radius:18px;background:#101216}
 #filed[hidden]{display:none}
-#filed .kicker{margin:0 0 8px;padding:0;letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:#b9b3a8}
+#filed .kicker{margin:0 0 8px;padding:0;letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:#e6b325}
 #filed h2{margin:0 0 8px;font-weight:500;font-size:22px;line-height:1.3}
 #filed p{margin:0;padding:0;color:#d7d2c8;font-size:15px;line-height:1.5}
-#exit-door{position:fixed;left:16px;bottom:16px;width:46px;height:46px;border-radius:50%;border:1px solid #d2d2d2;display:grid;place-items:center;text-decoration:none;z-index:5}
-#look{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.82);display:grid;place-items:center}#look[hidden]{display:none}#look img,#look video{max-width:min(960px,92vw);max-height:82vh;border-radius:16px}#look-x{position:fixed;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid #d2d2d2;background:#111;color:#fff;font-size:22px;display:grid;place-items:center;padding:0;line-height:1}
+#oops{margin-top:12px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#f4f1ea;border-radius:999px;padding:10px 14px;font:inherit;cursor:pointer}
+#exit-door{position:fixed;left:16px;bottom:16px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.28);display:grid;place-items:center;text-decoration:none;z-index:5;background:#07080b}
+#look{position:fixed;inset:0;z-index:30;background:rgba(0,0,0,.82);display:grid;place-items:center}#look[hidden]{display:none}#look img,#look video{max-width:min(960px,92vw);max-height:82vh;border-radius:16px}#look-x{position:fixed;top:16px;right:16px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:#111;color:#fff;font-size:22px;display:grid;place-items:center;padding:0;line-height:1}
 #silent,#note{display:none}
-.note-label{display:block;margin:16px 0 6px;font-size:12px;color:#c8c8c8}#note-box{width:100%;box-sizing:border-box;min-height:72px;border:1px solid #d2d2d2;border-radius:14px;background:rgba(12,14,18,.45);color:#f4f1ea;padding:12px;font:inherit}#oops{margin-top:12px;border:1px solid #d2d2d2;background:transparent;color:#f4f1ea;border-radius:12px;padding:10px 14px}</style>
+</style>
 </head>
 <body>
-<div id="look" hidden><button id="look-x" type="button" aria-label="Close">×</button><video id="look-vid" autoplay muted loop playsinline></video></div><div class="wrap">
-  <h1>Pick a background</h1>
-  <p>Two ways the landing page can sit. Pick one.</p>
+<div id="look" hidden><button id="look-x" type="button" aria-label="Close">×</button><video id="look-vid" autoplay muted loop playsinline></video></div>
+<div class="wrap">
+  <p class="chip">Two seats · same page</p>
+  <h1>Pick a <span>background</span></h1>
+  <p class="lede">Two ways the landing page can sit. Pick one.</p>
   <div class="pair">
-    <div class="card"><video autoplay muted loop playsinline poster="a-poster.jpg"><source src="a.mp4" type="video/mp4"></video><p>Background A</p><button type="button" data-pick="A">Pick A</button></div>
-    <div class="card"><video autoplay muted loop playsinline poster="b-poster.jpg"><source src="b.mp4" type="video/mp4"></video><p>Background B</p><button type="button" data-pick="B">Pick B</button></div>
+    <div class="card">
+      <div class="stage"><video autoplay muted loop playsinline poster="a-poster.jpg"><source src="a.mp4" type="video/mp4"></video></div>
+      <div class="meta"><p class="name">Left seat</p><p class="line">It sits back.</p><button class="use" type="button" data-pick="A" data-name="Left seat">Use this</button></div>
+    </div>
+    <div class="card">
+      <div class="stage"><video autoplay muted loop playsinline poster="b-poster.jpg"><source src="b.mp4" type="video/mp4"></video></div>
+      <div class="meta"><p class="name">Right seat</p><p class="line">It leans in.</p><button class="use" type="button" data-pick="B" data-name="Right seat">Use this</button></div>
+    </div>
   </div>
   <label class="note-label" for="note-box">Note for the team</label>
   <textarea id="note-box" placeholder="Don't love either, or want a tweak. Optional."></textarea>
@@ -65,20 +80,20 @@ button,a.pick{display:inline-block;margin:0 14px 14px;border:0;background:#2a2a2
   <input type="hidden" name="selection" id="sel" value="">
   <input type="hidden" name="page" value="Invent landing background"><input type="hidden" name="note" id="note-field" value="">
 </form>
-<a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10M16 8l4 4-4 4"/></svg></a>
+<a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#f4f1ea" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10M16 8l4 4-4 4"/></svg></a>
 <script>
-var pick="";
+var pick="", name="";
 var dock=document.getElementById("dock");
-document.querySelectorAll("[data-pick]").forEach(function(b){b.onclick=function(){pick=b.dataset.pick;document.getElementById("chosen").textContent="Picked "+pick;dock.classList.add("on");document.querySelectorAll(".card").forEach(function(c){c.classList.remove("on");});b.closest(".card").classList.add("on");};});
+document.querySelectorAll("[data-pick]").forEach(function(b){b.onclick=function(){pick=b.dataset.pick;name=b.dataset.name;document.getElementById("chosen").textContent=name+" selected";dock.classList.add("on");document.querySelectorAll(".card").forEach(function(c){c.classList.remove("on");});b.closest(".card").classList.add("on");};});
 document.getElementById("send").onclick=function(){
-  if(!pick){document.getElementById("chosen").textContent="Pick A or B first.";return;}
+  if(!pick){document.getElementById("chosen").textContent="Pick a seat first.";return;}
   document.getElementById("subj").value="Landing background "+pick;
   var note=(document.getElementById("note-box").value||"").trim();
   document.getElementById("note-field").value=note||"No note.";
-  document.getElementById("sel").value="Client selected Background "+pick+" for the invent landing page."+(note?" Note: "+note:"");
+  document.getElementById("sel").value="Client selected Background "+pick+" ("+name+") for the invent landing page."+(note?" Note: "+note:"");
   document.getElementById("note").submit();
   dock.hidden=true;
-  document.getElementById("filed-line").textContent="Background "+pick+" is logged. The landing page will be set to that treatment.";
+  document.getElementById("filed-line").textContent=name+" is logged. The landing page will be set to that treatment.";
   document.getElementById("filed").hidden=false;
 };
 document.querySelectorAll(".card video").forEach(function(v){v.ondblclick=function(){var box=document.getElementById("look"), big=document.getElementById("look-vid");big.src=(v.querySelector("source")||{}).getAttribute("src")||"";box.hidden=false;big.play();};});
