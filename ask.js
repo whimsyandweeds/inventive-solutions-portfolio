@@ -11,6 +11,11 @@
   document.head.appendChild(style);
   if(location.pathname.indexOf("/ads")===0){
     var adsStyle=document.createElement("style");
+    adsStyle.textContent="#bot{border-color:rgba(200,143,192,.55);background:linear-gradient(160deg,rgba(200,143,192,.22),rgba(18,16,23,.28));color:#f0d6ec}#chat{background:linear-gradient(180deg,rgba(26,23,32,.7),rgba(18,16,23,.4));border-color:rgba(200,143,192,.4);color:#e9ddd6}.chat-pick .pick{border-color:rgba(200,143,192,.5);color:#c88fc0}#chat input{border-color:rgba(200,143,192,.3);background:rgba(18,16,23,.6);color:#e9ddd6}#chat-send{background:rgba(200,143,192,.25);color:#e9ddd6}";
+    document.head.appendChild(adsStyle);
+  }
+  if(location.pathname.indexOf("/ads")===0){
+    var adsStyle=document.createElement("style");
     adsStyle.textContent="#bot{border-color:rgba(200,143,192,.55);background:linear-gradient(160deg,rgba(200,143,192,.22),rgba(18,16,23,.28));color:#f4e8f2}#chat{background:linear-gradient(180deg,rgba(26,23,32,.7),rgba(18,16,23,.4));border-color:rgba(200,143,192,.45);color:#e9ddd6}.chat-pick .pick{border-color:rgba(200,143,192,.5);color:#c88fc0}#chat input{border-color:rgba(200,143,192,.35);background:#121017;color:#e9ddd6}#chat-send{background:rgba(200,143,192,.25);color:#e9ddd6}";
     document.head.appendChild(adsStyle);
   }
