@@ -107,5 +107,65 @@ Primary, Variations, Icon`,price:"$500 — $2500",desc:"The whole enchanted tool
   <script type="application/json" data-clippy-inline-media-manifest="1">{"version":1,"slots":[]}</script>
 <a href="../" aria-label="Out" style="position:fixed;left:16px;bottom:16px;z-index:80;width:42px;height:42px;border-radius:50%;border:1px solid #9aa0a6;background:rgba(12,14,18,.45);color:#d1d5db;display:flex;align-items:center;justify-content:center;text-decoration:none;backdrop-filter:blur(8px)">↩</a>
 <script src="/ask.js"></script>
+
+<script>
+(function(){
+  var picked={};
+  function money(s){ var m=String(s).match(/\d[\d,]*/g)||[]; return m.map(function(n){return parseInt(n.replace(/,/g,""),10);}); }
+  function range(){
+    var lows=0, highs=0, names=Object.keys(picked);
+    names.forEach(function(name){ var parts=money(picked[name]); if(!parts.length) return; lows+=parts[0]; highs+=parts[parts.length-1]; });
+    return names.length?names.length+" picked · $"+lows.toLocaleString()+" — $"+highs.toLocaleString():"Tap a line to add it";
+  }
+  function draw(){ var line=document.getElementById("cart-line"); if(line) line.textContent=range(); }
+  function boot(){
+    var cards=document.querySelectorAll(".plaque");
+    if(!cards.length) return setTimeout(boot,200);
+    if(document.getElementById("cart-sheet")) return;
+    cards.forEach(function(card){
+      var title=card.querySelector("h3");
+      var price=card.querySelector(".metal-pill span");
+      if(!title||!price) return;
+      var name=title.textContent.replace(/\s+/g," ").trim();
+      card.style.cursor="pointer";
+      card.onclick=function(){
+        if(picked[name]) delete picked[name]; else picked[name]=price.textContent.trim();
+        card.classList.toggle("on", !!picked[name]);
+        draw();
+      };
+    });
+    var sheet=document.createElement("div");
+    sheet.id="cart-sheet";
+    sheet.innerHTML='<div class="cart-top"><span id="cart-line">Tap a line to add it</span><button id="cart-open" type="button">Send to Tonya</button></div><form id="cart-form" hidden action="https://formsubmit.co/whimsyandweeds@gmail.com" method="POST" target="silent-note"><input type="hidden" name="_subject" value="Whimsy service menu"><input type="hidden" name="_captcha" value="false"><input type="hidden" name="_template" value="table"><input id="cart-items" type="hidden" name="items"><input name="business" placeholder="Business name" required><input name="phone" placeholder="Phone" required><input name="email" type="email" placeholder="Email" required></form><iframe name="silent-note" hidden></iframe><div id="sent-pop" hidden>Sent to Tonya</div>';
+    document.body.appendChild(sheet);
+    document.getElementById("cart-open").onclick=function(){
+      var form=document.getElementById("cart-form");
+      if(form.hidden){ form.hidden=false; return; }
+      var names=Object.keys(picked);
+      if(!names.length) return;
+      document.getElementById("cart-items").value=names.map(function(n){return n+" ("+picked[n]+")";}).join(", ");
+      form.submit();
+      document.getElementById("sent-pop").hidden=false;
+      setTimeout(function(){ document.getElementById("sent-pop").hidden=true; form.hidden=true; }, 1800);
+    };
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();
+})();
+</script>
+<style>
+.plaque.on{box-shadow:0 0 0 1px rgba(200,143,192,.7),0 0 24px rgba(200,143,192,.28)!important}
+#cart-sheet{position:fixed;left:0;right:0;bottom:0;z-index:70;background:rgba(18,16,23,.94);border-top:1px solid rgba(200,143,192,.45);padding:12px 14px calc(14px + env(safe-area-inset-bottom));backdrop-filter:blur(12px)}
+.cart-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#cart-line{color:#e9ddd6;font-size:14px}
+#cart-open{border:0;background:#c88fc0;color:#1a1720;border-radius:999px;padding:10px 16px;font-weight:700}
+#cart-form{display:grid;gap:8px;margin-top:12px}
+#cart-form[hidden]{display:none}
+#cart-form input{border:1px solid rgba(200,143,192,.4);background:#121017;color:#e9ddd6;border-radius:10px;padding:10px 12px}
+#sent-pop{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);z-index:90;background:#c88fc0;color:#1a1720;border-radius:16px;padding:18px 22px;font-weight:700;box-shadow:0 0 30px rgba(200,143,192,.45)}
+#sent-pop[hidden]{display:none}
+body{padding-bottom:84px}
+#bot{bottom:108px;z-index:80}
+#chat{z-index:80}
+</style>
 </body>
 </html>
