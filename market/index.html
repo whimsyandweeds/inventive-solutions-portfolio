@@ -222,6 +222,10 @@ body.dark #chat{background:linear-gradient(180deg,rgba(22,24,28,.55),rgba(12,14,
 body.dark #chat-log p{background:#10211e;color:#f4f7f6}
 body.dark #chat-form input{background:#10211e;color:#f4f7f6;border-color:rgba(255,255,255,.22)}
 .wrap{padding-bottom:96px}
+
+  .landing{min-height:100vh;background:#020617;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 12px 28px;gap:16px}
+  .flyer{width:min(100%,720px);height:auto;border-radius:16px;display:block}
+  .menu{border:1.5px solid #5eead4;color:#5eead4;background:rgba(8,14,24,.55);border-radius:999px;padding:10px 22px;font:inherit;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 </style>
 
 <style id="board-rows">
@@ -258,7 +262,11 @@ body.dark #board .item{background:#152420;border-color:rgba(255,255,255,.12)}
   <div id="chat-log"></div>
   <form id="chat-form"><input id="chat-q" placeholder="Peaches? Where?" autocomplete="off"><button id="chat-send" type="button">Send</button></form>
 </div>
-<div class="wrap">
+<div class="landing">
+  <img class="flyer" src="flyer.jpg" alt="One Tap. Sold Out. The phone-simple website for market vendors.">
+  <button class="menu" id="menu" type="button">Menu</button>
+</div>
+<div class="wrap" id="board-wrap" hidden>
   <div class="demo"><span class="dot"></span> Demo board · tap sold out</div>
   <h1>One link.<br>Your board.<br><em>Live.</em></h1>
   <p class="lede">Change price, stock, and sold out from your phone. Customers see it before Saturday.</p>
@@ -549,5 +557,9 @@ document.addEventListener("click",function(e){
 document.addEventListener("click",function(e){if(e.target&&e.target.id==="chat-x"){document.getElementById("chat").hidden=true;}});
 </script>
 <a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a><style>#exit-door{position:fixed;left:16px;bottom:16px;z-index:100000;width:46px;height:46px;display:grid;place-items:center;border-radius:50%;background:#0e1715;border:1px solid rgba(255,255,255,.28);box-shadow:none}#exit-door svg{stroke:#f4f1ea}</style>
-<script src="/ask.js"></script></body>
+<script src="/ask.js"></script>
+<script>
+document.getElementById("menu").onclick=function(){var w=document.getElementById("board-wrap");w.hidden=!w.hidden;if(!w.hidden)w.scrollIntoView({behavior:"smooth",block:"start"});};
+</script>
+</body>
 </html>
