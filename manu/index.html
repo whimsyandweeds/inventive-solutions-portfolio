@@ -326,10 +326,10 @@ const seed = [
 let items = seed;
 try { const saved = JSON.parse(localStorage.getItem("market-board-3")||""); if (Array.isArray(saved) && saved.length) items = saved.filter(it => !it.parked); else items = seed.map(s => Object.assign({}, s)); } catch(e) {}
 seed.forEach(s => { if (!items.some(it => it.id === s.id)) items.unshift(Object.assign({}, s)); });
-items.forEach(it => { if (it.id === "peaches") it.photo = "peaches-crate.jpg?v=crate"; });
+items.forEach(it => { if (it.id === "peaches") it.photo = "../market/peaches-crate.jpg?v=crate"; });
 function save(){ localStorage.setItem("market-board-3", JSON.stringify(items)); }
 const picks = {};
-function pic(it){ return it.photo || ({peaches:"peaches-crate.jpg?v=crate",eggs:"eggs.jpg",honey:"honey.jpg",bread:"bread.jpg"}[it.id] || "peaches.jpg"); }
+function pic(it){ return it.photo || ({peaches:"../market/peaches-crate.jpg?v=crate",eggs:"../market/eggs.jpg",honey:"../market/honey.jpg",bread:"../market/bread.jpg"}[it.id] || "../market/peaches.jpg"); }
 function render() {
   rows.innerHTML = items.map((it, i) => `
     <div class="item ${it.parked ? "parked" : ""} ${it.sold ? "sold" : ""}">
