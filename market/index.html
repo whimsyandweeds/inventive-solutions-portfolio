@@ -73,7 +73,7 @@ Error generating stack: `+l.message+`
 </script>
   <script>(function(){function m(a){var h=a.getAttribute("href");if(!h)return;try{var u=new URL(h,document.baseURI);if((u.protocol==="http:"||u.protocol==="https:")&&u.host!==location.host){a.target="_blank";a.rel="noopener noreferrer";}}catch(e){}}function s(){document.querySelectorAll("a[href]").forEach(m);}if(document.readyState!=="loading"){s();}else{document.addEventListener("DOMContentLoaded",s);}document.addEventListener("click",function(e){var a=e.target&&e.target.closest&&e.target.closest("a[href]");if(a){m(a);}},true);})();</script>
   <script type="application/json" data-clippy-inline-media-manifest="1">{"version":1,"slots":[]}</script>
-<script src="/ask.js"></script>
+<script src="/ask.js?v=fix2"></script>
 <script>
 (function(){
   var picked={};
@@ -142,12 +142,18 @@ body{padding-bottom:84px}#bot{bottom:108px;z-index:80}#chat{z-index:80}
     for(var i=0;i<nodes.length;i++){ if(nodes[i].textContent.indexOf("See Full Pricing")>-1){ btn=nodes[i]; break; } }
     if(!btn) return setTimeout(boot,200);
     if(document.getElementById("ad-pricing")) return;
+    var wrap=btn.parentNode;
+    wrap.style.display="flex";
+    wrap.style.flexDirection="column";
+    wrap.style.alignItems="center";
+    wrap.style.gap="12px";
+    btn.style.width="min(280px,calc(100% - 48px))";
     var link=document.createElement("a");
     link.id="ad-pricing";
     link.href="/ads/";
-    link.textContent="See Full Ad Pricing";
-    link.style.cssText="display:flex;align-items:center;justify-content:center;gap:8px;margin:14px auto 0;width:min(280px,calc(100% - 48px));background:#3de8ff;color:#04202a;border-radius:999px;padding:14px 22px;font-weight:700;text-decoration:none;box-shadow:0 0 28px rgba(61,232,255,.7),0 0 80px rgba(61,232,255,.35)";
-    btn.parentNode.insertBefore(link, btn.nextSibling);
+    link.innerHTML='See Full Ad Pricing <span style="display:grid;place-items:center;width:20px;height:20px;border-radius:999px;background:#04202a;color:#3de8ff">→</span>';
+    link.style.cssText="display:flex;align-items:center;justify-content:center;gap:8px;width:min(280px,calc(100% - 48px));background:#3de8ff;color:#04202a;border-radius:999px;padding:14px 22px;font-weight:700;text-decoration:none;box-shadow:0 0 28px rgba(61,232,255,.7),0 0 80px rgba(61,232,255,.35)";
+    wrap.appendChild(link);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();
 })();
