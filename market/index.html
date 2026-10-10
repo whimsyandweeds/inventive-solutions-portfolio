@@ -93,7 +93,7 @@ Error generating stack: `+l.message+`
       var p=document.createElement("span");
       p.textContent=price; p.className="price-pill";
       span.replaceWith(n); li.appendChild(p); li.style.cursor="pointer";
-      li.onclick=function(){ if(picked[name]) delete picked[name]; else picked[name]=price; li.classList.toggle("on", !!picked[name]); draw(); if(/chatbot/i.test(name)){var bot=document.getElementById("bot"); if(bot) bot.click();} };
+      li.onclick=function(){ if(picked[name]) delete picked[name]; else picked[name]=price; li.classList.toggle("on", !!picked[name]); draw(); };
     });
     var sheet=document.createElement("div");
     sheet.id="cart-sheet";
