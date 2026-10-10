@@ -22,7 +22,7 @@
     if(/hour|open|saturday|sunday|close|when/.test(s)) return "Saturday hours? Bold. We don't post those. Email whimsyandweeds@gmail.com and ask a person who clocks in.";
     return lines[Math.floor(Math.random()*lines.length)];
   }
-  b.onclick=function(){box.hidden=!box.hidden;};
+  b.onclick=function(){box.hidden=!box.hidden;if(!box.hidden&&!document.getElementById("chat-log").childElementCount) say("Contact Tonya. Email, or text 702-960-3010.");};
   document.getElementById("chat-x").onclick=function(){box.hidden=true;};
   document.getElementById("chat-send").onclick=function(){
     var q=document.getElementById("chat-q").value.trim();
