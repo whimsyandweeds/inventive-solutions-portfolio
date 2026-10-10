@@ -12,13 +12,12 @@
   var lines=[
     "No idea. We don't clock in. Email whimsyandweeds@gmail.com and bother a person.",
     "Cute question. The board does not have that. whimsyandweeds@gmail.com does, allegedly.",
-    "I could invent an answer. That feels like a you problem. Write whimsyandweeds@gmail.com.";
+    "I could invent an answer. That feels like a you problem. Write whimsyandweeds@gmail.com."
   ];
   function say(t){var p=document.createElement("p"); p.textContent=t; document.getElementById("chat-log").appendChild(p);}
   function answer(q){
     var s=q.toLowerCase();
-    if(/phone|call|text|number/.test(s)) return "Text Tonya. 702-960-3010. Hit the Text button and it opens on your phone.";
-    if(/email|contact|reach|hold of|who do i|login|password|code|locked|remember/.test(s)) return "Need a person? Text Tonya at 702-960-3010, or email whimsyandweeds@gmail.com.";
+    if(/phone|call|text|number/.test(s)) return "Text Tonya. 702-960-3010. Hit the Text button and it opens on your phone.";\nif(/email|contact|reach|hold of|who do i|login|password|code|locked|remember/.test(s)) return "Need a person? Text Tonya at 702-960-3010, or email whimsyandweeds@gmail.com."
     if(/whimsy|weeds|who are/.test(s)) return "Whimsy and Weeds. Private boards. If you need a person, whimsyandweeds@gmail.com.";
     if(/hour|open|saturday|sunday|close|when/.test(s)) return "Saturday hours? Bold. We don't post those. Email whimsyandweeds@gmail.com and ask a person who clocks in.";
     return lines[Math.floor(Math.random()*lines.length)];
