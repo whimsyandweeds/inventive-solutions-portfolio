@@ -17,12 +17,12 @@
   function say(t){var p=document.createElement("p"); p.textContent=t; document.getElementById("chat-log").appendChild(p);}
   function answer(q){
     var s=q.toLowerCase();
-    if(/email|phone|call|text|contact|reach|hold of|who do i|login|password|code|locked|remember/.test(s)) return "Locked out? Email whimsyandweeds@gmail.com. That is the human door.";
+    if(/phone|call|text|number/.test(s)) return "Text Tonya. 702-960-3010. Hit the Text button and it opens on your phone.";\nif(/email|contact|reach|hold of|who do i|login|password|code|locked|remember/.test(s)) return "Need a person? Text Tonya at 702-960-3010, or email whimsyandweeds@gmail.com."
     if(/whimsy|weeds|who are/.test(s)) return "Whimsy and Weeds. Private boards. If you need a person, whimsyandweeds@gmail.com.";
     if(/hour|open|saturday|sunday|close|when/.test(s)) return "Saturday hours? Bold. We don't post those. Email whimsyandweeds@gmail.com and ask a person who clocks in.";
     return lines[Math.floor(Math.random()*lines.length)];
   }
-  b.onclick=function(){box.hidden=!box.hidden;if(!box.hidden&&!document.getElementById("chat-log").childElementCount) say("Contact Tonya. Email, or text 702-960-3010.");};
+  b.onclick=function(){box.hidden=!box.hidden;if(!box.hidden&&!document.getElementById("chat-log").childElementCount) say("Contact Tonya. Text 702-960-3010, or email.");};
   document.getElementById("chat-x").onclick=function(){box.hidden=true;};
   document.getElementById("chat-send").onclick=function(){
     var q=document.getElementById("chat-q").value.trim();
