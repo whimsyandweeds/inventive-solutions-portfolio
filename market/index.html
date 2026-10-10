@@ -223,8 +223,17 @@ body.dark #chat-log p{background:#10211e;color:#f4f7f6}
 body.dark #chat-form input{background:#10211e;color:#f4f7f6;border-color:rgba(255,255,255,.22)}
 .wrap{padding-bottom:96px}
 
-  .landing{min-height:100vh;background:#020617;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px 12px 28px;gap:16px}
-  .flyer{width:min(100%,720px);height:auto;border-radius:16px;display:block}
+  .landing{min-height:100vh;background:#020617;background-image:radial-gradient(circle at 1px 1px,rgba(77,184,255,.28) 1px,transparent 0),linear-gradient(rgba(40,120,200,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(40,120,200,.08) 1px,transparent 1px);background-size:22px 22px,44px 44px,44px 44px;display:flex;align-items:center;justify-content:center;padding:0}
+  .stage{position:relative;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+  .flyer{width:100vw;height:100vh;object-fit:contain;display:block}
+  .hot{position:absolute;border:2px solid rgba(120,210,255,.0);border-radius:10px;box-shadow:0 0 0 rgba(77,184,255,0);pointer-events:none}
+  .hot.a{left:8%;top:47.5%;width:26%;height:20%}
+  .hot.b{left:37%;top:47.5%;width:26%;height:20%}
+  .hot.c{left:66%;top:47.5%;width:26%;height:20%}
+  .hot.a{animation:bounce 3.6s ease-in-out infinite}
+  .hot.b{animation:bounce 3.6s ease-in-out .6s infinite}
+  .hot.c{animation:bounce 3.6s ease-in-out 1.2s infinite}
+  @keyframes bounce{0%,70%,100%{border-color:rgba(120,210,255,0);box-shadow:0 0 0 rgba(77,184,255,0);transform:translateY(0)}15%{border-color:rgba(160,220,255,.95);box-shadow:0 0 22px rgba(77,184,255,.75);transform:translateY(-6px)}30%{border-color:rgba(120,210,255,0);box-shadow:0 0 0 rgba(77,184,255,0);transform:translateY(0)}}
   .menu{border:1.5px solid #4db8ff;color:#d7efff;background:rgba(4,12,28,.55);border-radius:999px;padding:10px 22px;font:inherit;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;box-shadow:0 0 18px rgba(40,140,255,.35)}
 </style>
 
@@ -263,7 +272,12 @@ body.dark #board .item{background:#152420;border-color:rgba(255,255,255,.12)}
   <form id="chat-form"><input id="chat-q" placeholder="Peaches? Where?" autocomplete="off"><button id="chat-send" type="button">Send</button></form>
 </div>
 <div class="landing">
-  <img class="flyer" src="flyer.jpg" alt="One Tap. Sold Out. The phone-simple website for market vendors.">
+  <div class="stage">
+    <img class="flyer" src="flyer.jpg" alt="One Tap. Sold Out. The phone-simple website for market vendors.">
+    <span class="hot a"></span>
+    <span class="hot b"></span>
+    <span class="hot c"></span>
+  </div>
 </div>
 <div class="wrap" id="board-wrap" hidden>
   <div class="demo"><span class="dot"></span> Demo board · tap sold out</div>
