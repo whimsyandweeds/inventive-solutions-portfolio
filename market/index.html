@@ -147,12 +147,14 @@ body{padding-bottom:84px}#bot{bottom:108px!important;z-index:90!important}#chat{
     wrap.style.flexDirection="column";
     wrap.style.alignItems="center";
     wrap.style.gap="12px";
-    btn.style.width="min(280px,calc(100% - 48px))";
+    btn.style.width="min(360px,calc(100% - 28px))";
+    btn.style.whiteSpace="nowrap";
+    btn.style.fontSize="16px";
     var link=document.createElement("a");
     link.id="ad-pricing";
     link.href="/ads/";
     link.innerHTML='See Full Ad Pricing <span style="display:grid;place-items:center;width:20px;height:20px;border-radius:999px;background:#04202a;color:#3de8ff">→</span>';
-    link.style.cssText="display:flex;align-items:center;justify-content:center;gap:8px;width:min(280px,calc(100% - 48px));background:#3de8ff;color:#04202a;border-radius:999px;padding:14px 22px;font-weight:700;text-decoration:none;box-shadow:0 0 28px rgba(61,232,255,.7),0 0 80px rgba(61,232,255,.35)";
+    link.style.cssText="display:flex;align-items:center;justify-content:center;gap:8px;width:min(360px,calc(100% - 28px));white-space:nowrap;font-size:16px;background:#3de8ff;color:#04202a;border-radius:999px;padding:14px 22px;font-weight:700;text-decoration:none;box-shadow:0 0 28px rgba(61,232,255,.7),0 0 80px rgba(61,232,255,.35)";
     wrap.appendChild(link);
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",boot); else boot();
