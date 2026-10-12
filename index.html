@@ -69,7 +69,7 @@ function openBoard(){
   t=t.replace(/<title>[^<]*<\/title>/, '<title>Whimsy & Weeds</title>');
   if(t.indexOf('favicon.png')<0) t=t.replace('</head>', '<link rel="icon" href="favicon.png" /><meta name="description" content="Whimsy & Weeds" /></head>');
   t=t.replace('inventstudio.dev</a></p>', 'inventstudio.dev</a></p><p class="next" style="margin-top:.35rem"><strong>Whimsy</strong><a href="https://whimsyandweeds.com/" target="_blank" rel="noopener">whimsyandweeds.com</a></p>');
-  t=t.replace('The asynchronous AI proxy that kills meetings, not momentum.</p>', 'The asynchronous AI proxy that kills meetings, not momentum.</p><p class="next" style="margin-top:.7rem"><strong>V1 testing</strong><a href="https://tag-mesh.vercel.app/" target="_blank" rel="noopener">tag-mesh.vercel.app</a></p>');
+  t=t.replace('The asynchronous AI proxy that kills meetings, not momentum.</p>', 'The asynchronous AI proxy that kills meetings, not momentum.</p><p class="next" style="margin-top:.9rem;display:block"><strong style="display:block;margin-bottom:.2rem">V1 testing</strong><a href="https://tag-mesh.vercel.app/" target="_blank" rel="noopener">tag-mesh.vercel.app</a></p>');
   document.open(); document.write(t); document.close();
 })
 .catch(function(){document.body.textContent='Restore failed. Hard-refresh once more.';});
