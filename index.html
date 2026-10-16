@@ -84,7 +84,7 @@ function openBoard(){
       var opsPanel=document.createElement("div");
       opsPanel.className="panel";
       opsPanel.id="panel-opsblock";
-      opsPanel.innerHTML='<h3 class="crate">OpsBlock — <span>the blocks</span></h3><p class="lede">Website v1 live.</p><div class="photo-wrap"><video class="photo" src="opsblock.mp4" autoplay muted loop playsinline></video><span class="photo-label">OpsBlock</span></div><div class="card" style="margin-top:.7rem"><div class="chips" style="margin:0 0 .55rem"><span class="chip site">Website v1</span></div><h3>OpsBlock</h3><p>The blocks come together.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://whimsyandweeds.github.io/opsblock-site/" target="_blank" rel="noopener">opsblock-site</a></p></div>';
+      opsPanel.innerHTML='<h3 class="crate">OpsBlock — <span>the blocks</span></h3><p class="lede">Website v1 live.</p><div class="grid-2 hug"><div class="photo-wrap"><video class="photo" src="opsblock.mp4" autoplay muted loop playsinline></video><span class="photo-label">OpsBlock</span></div><div class="card"><p class="who">The blocks</p><div class="chips" style="margin:0 0 .55rem"><span class="chip site">Website v1</span><span class="chip ad">Ads Ready</span></div><h3>OpsBlock</h3><p>The blocks come together.</p><p class="next" style="margin-top:.7rem"><strong>The site</strong><a href="https://whimsyandweeds.github.io/opsblock-site/" target="_blank" rel="noopener">opsblock-site</a></p></div></div>';
       var boardInner=document.querySelector("#board .inner");
       if(boardInner) boardInner.appendChild(opsPanel);
     }
