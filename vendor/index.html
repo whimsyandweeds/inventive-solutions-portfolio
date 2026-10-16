@@ -1,1 +1,96 @@
-FULL_CONTENT_HERE
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vendor</title>
+<link rel="icon" href="../favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#1a1c1f;color:#f3f4f6;font-family:Inter,system-ui,sans-serif}
+body{min-height:100vh;background-color:#1a1c1f;background-attachment:fixed;background-image:radial-gradient(ellipse at 78% 18%, rgba(168,85,247,.1), transparent 42%), linear-gradient(145deg, rgba(255,255,255,.07) 0%, rgba(255,255,255,0) 28%, rgba(0,0,0,.22) 100%), linear-gradient(to right, transparent 0, transparent calc(33.3% - 1px), rgba(0,0,0,.55) calc(33.3% - 1px), rgba(255,255,255,.04) 33.3%, transparent calc(33.3% + 2px)), linear-gradient(to right, transparent 0, transparent calc(66.6% - 1px), rgba(0,0,0,.55) calc(66.6% - 1px), rgba(255,255,255,.04) 66.6%, transparent calc(66.6% + 2px)), linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), rgba(0,0,0,.5) calc(50% - 1px), rgba(255,255,255,.035) 50%, transparent calc(50% + 2px)), repeating-linear-gradient(90deg, rgba(255,255,255,.015) 0 1px, transparent 1px 9px), repeating-linear-gradient(0deg, rgba(0,0,0,.06) 0 1px, transparent 1px 14px), linear-gradient(180deg, #2a2d32 0%, #1c1e22 48%, #16181b 100%)}
+#exit-door{position:fixed;left:18px;bottom:18px;z-index:100000;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:#1a1a1c;border:1px solid #d2d2d2;box-shadow:0 8px 20px rgba(0,0,0,.45)}
+main{max-width:980px;margin:0 auto;padding:28px 18px 80px}
+.kicker{letter-spacing:.22em;font-size:.72rem;color:#b8bec7;margin:0}
+h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#a855f7}
+.sub{color:#b8bec7;margin:0 0 22px}
+.keys{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.keys button{padding:7px 14px;border-radius:999px;font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:transparent;cursor:pointer}
+.all{border:1.5px solid #ff3d8a;color:#ff3d8a}
+.key{border:1.5px dashed #2f9e4f;color:#2f9e4f}
+.lane{border:1.5px dashed #e4b83a;color:#e4b83a}
+.proj.avi{border:1.5px solid #a855f7;color:#d8b4fe}.proj.ss{border:1.5px solid #9caf9a;color:#c5d4c2}
+.keys .on{box-shadow:0 0 0 1px currentColor}
+.wall{display:flex;flex-wrap:wrap;gap:28px 22px;align-items:flex-start;padding:18px 8px 28px}
+.pin{position:relative;width:min(260px,100%);background:linear-gradient(180deg,#2a2d32,#1c1e22);border:1.5px dashed #e4b83a;border-radius:18px;padding:22px 16px 28px;box-shadow:0 18px 36px rgba(0,0,0,.4)}
+.pin.hooked{border:1.5px dashed #2f9e4f}
+.pin.hooked:before{background:#2f9e4f}
+.pin:before{content:"";position:absolute;top:-8px;left:22%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#e4b83a;box-shadow:0 7px 0 rgba(0,0,0,.4)}
+.stamp{margin:0 0 8px;color:#e4b83a;font-size:.72rem;letter-spacing:.12em;font-weight:700}
+.who{display:flex;align-items:center;gap:8px}
+.handle{margin:0;font-weight:650}
+.go.ig{background:linear-gradient(135deg,#f9ce34,#ee2a7b 55%,#6228d7);box-shadow:none}
+.go{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;color:#fff;text-decoration:none;border-radius:10px;background:#111;box-shadow:2px 0 0 #25f4ee,-2px 0 0 #fe2c55}
+.receipts{margin-top:10px}
+.receipts summary{display:inline-flex;align-items:center;gap:5px;border:1px solid #a855f7;color:#d8b4fe;border-radius:999px;padding:4px 10px;cursor:pointer;font-size:.72rem;line-height:1;font-weight:600}.pencil{font-size:.72rem;line-height:1;padding:4px 10px}
+.receipts ul{list-style:none;margin:8px 0 0;padding:0}
+.receipts a{color:#d8b4fe}
+.for{position:absolute;left:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #a855f7;color:#d8b4fe;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.08em;font-weight:700}
+.pencil{border:1px solid #a855f7;background:transparent;color:#d8b4fe;border-radius:999px;padding:6px 12px}.pencil.has{border:1.5px solid #2f9e4f;color:#8ee0a8}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.scratch{margin-top:8px}
+.scratch[hidden]{display:none}
+.addline{display:flex;gap:6px;align-items:flex-start;background:#f5e7a2;color:#3a3208;padding:8px 10px;max-width:100%;box-sizing:border-box}.addline textarea{flex:1;width:100%;min-height:22px;border:0;background:transparent;color:#3a3208;font:inherit;resize:none;overflow:hidden;white-space:pre-wrap;word-break:break-word}.bullets li{white-space:normal;word-break:break-word}
+.addline input{flex:1;border:0;background:transparent;color:#3a3208;font:inherit;outline:none}
+.bullets{margin:8px 0 0 16px;padding:0;color:#3a3208}
+
+.folds{margin-top:-6px}.fold.open{border:1.5px solid #a855f7;color:#d8b4fe}.fold.shut{border:1.5px solid #14b8a6;color:#5eead4}
+.more[hidden]{display:none}
+.more{margin-top:8px}
+.name{color:#a855f7}
+.count{color:#ff3d8a}
+.why{margin:.4rem 0 0;font-size:.9rem}
+.toggle{position:absolute;right:12px;top:12px;width:22px;height:22px;border-radius:999px;border:1px solid #3d444d;background:#16181b;color:#fff;cursor:pointer}
+
+.pin{transform:rotate(-1.6deg);transform-origin:22% 0;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.pin:nth-child(even){transform:rotate(1.8deg);transform-origin:78% 0;margin-top:14px}
+.pin:nth-child(even):before{left:78%}
+.pin:hover{transform:rotate(-2.6deg) translateY(-4px)}
+.pin:nth-child(even):hover{transform:rotate(2.8deg) translateY(-4px)}
+.logo{position:absolute;right:14px;top:36px;width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid #f4f1ea;background:#fff;z-index:3}.build{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #14b8a6;color:#5eead4;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}.mkt{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px dashed #e4b83a;color:#e4b83a;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.06em;font-weight:700}.pin .pills{display:none}.pin.open .pills{display:flex}
+.nogo-key{border:1.5px solid #e11d48;color:#fb7185}
+.pin.nogo{border-color:#e11d48}.pin.nogo .stamp{color:#fb7185}
+.pin.nogo:before{background:#e11d48}
+.spot{display:inline-flex;align-items:center;gap:4px}.spot svg{display:block}.spot{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #fb7185;color:#fecdd3;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.04em;font-weight:700}.gem{position:absolute;right:118px;bottom:-11px;background:#1c1e22;border:1.5px solid #e4b83a;color:#f5e7a2;border-radius:999px;padding:3px 9px;font-size:.68rem;letter-spacing:.04em;font-weight:700}.paint{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #c4b5fd;color:#ddd6fe;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.rain{position:absolute;right:118px;bottom:-11px;background:#1c1e22;border:1.5px solid #fb7185;border-radius:999px;padding:2px 8px;font-size:.8rem}.fix{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #14b8a6;color:#5eead4;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.bag{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #fb923c;color:#fdba74;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.truck{position:absolute;right:16px;bottom:-11px;background:#1c1e22;border:1.5px solid #38bdf8;color:#bae6fd;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.tagrow{position:absolute;right:12px;bottom:-11px;display:flex;gap:6px}.tagrow span{position:static}.sip{background:#1c1e22;border:1.5px solid #f9a8d4;color:#fbcfe8;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.postit{margin-top:8px;background:#f5e7a2;color:#3a3208;padding:8px 10px;font-size:.84rem}
+.pin.open .pills{align-items:center}
+.pin.open .pills details.receipts{display:contents}
+.pin.open .receipts ul{flex:1 0 100%;margin:6px 0 0;padding:0}
+.bloom{background:#1c1e22;border:1.5px solid #f9a8d4;color:#fbcfe8;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}
+.pin{padding-bottom:34px}
+.tagrow,.pin .tagrow{position:absolute;right:12px;bottom:-12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:78%}
+.tagrow .mkt,.tagrow .build,.tagrow .spot,.tagrow .fix,.tagrow .truck,.tagrow .bag,.tagrow .paint,.tagrow .rain,.tagrow .gem,.tagrow .sip,.tagrow .bloom{position:static}
+.slip{position:absolute;left:12px;top:10px;z-index:3;font-size:.85rem;opacity:.85;filter:grayscale(.2)}
+.keys.tags button{position:static;letter-spacing:.08em}
+.slipkey{border:1.5px solid #9aa0a6;color:#d1d5db}
+
+.pin.next{border:1.5px dashed transparent;background:linear-gradient(#16181c,#16181c) padding-box,repeating-linear-gradient(90deg,#3f8f4a 0 10px,#e4b83a 10px 20px) border-box}
+.tagrow{position:absolute;right:14px;bottom:-11px;display:flex;gap:6px}.art,.ads,.recs{background:#1c1e22;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700;letter-spacing:.04em}.art{border:1.5px solid #c6a15b;color:#c6a15b}.ads{border:1.5px solid #a855f7;color:#c084fc}.recs{border:1.5px solid #1C9792;color:#5eead4}#find{width:100%;box-sizing:border-box;margin:0 0 12px;border:1px solid #1C9792;border-radius:999px;background:#10211e;color:#fff;padding:10px 14px;font:inherit}.drawer{margin:0 0 8px;border-radius:14px;padding:8px 10px}.drawer summary{cursor:pointer;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:12px}.drawer.status{border:1px solid #1C9792}.drawer.status summary{color:#1C9792}.drawer.project{border:1px solid #a855f7}.drawer.project summary{color:#c084fc}.drawer.tags{border:1px solid #c6a15b}.drawer.tags summary{color:#c6a15b}.drawer .keys{margin:8px 0 0}.act{background:#1c1e22;border:1.5px solid #f59e0b;color:#fcd34d;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.beauty{background:#1c1e22;border:1.5px solid #f472b6;color:#f9a8d4;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.nails{background:#1c1e22;border:1.5px solid #f472b6;color:#f9a8d4;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.book{background:#1c1e22;border:1.5px solid #5eead4;color:#99f6e4;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.photo{background:#1c1e22;border:1.5px solid #d2d2d2;color:#d2d2d2;border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:700}.linktag{display:inline-flex;align-items:center;gap:6px;margin:0 0 8px;padding:3px 10px;border:1px solid #db2777;border-radius:999px;color:#f9a8d4;font-size:.68rem;font-weight:700;letter-spacing:.04em}.linktag i{width:8px;height:8px;border-radius:50%;background:#db2777;box-shadow:0 0 8px #ec4899}</style>
+</head>
+<body>
+<a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#d2d2d2" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M10 12h10"/><path d="M16 8l4 4-4 4"/></svg></a>
+<main>
+<p class="kicker">VENDOR</p>
+<h1>Doors I have <span>not knocked</span></h1>
+<p class="sub">Saved from the sheet. Still strangers.</p>
+<input id="find" type="search" placeholder="Find a vendor" autocomplete="off">
+<details class="drawer status"><summary>Status</summary><div class="keys" data-kind="status"><button class="all on" type="button" data-filter="all">All</button><button class="key" type="button" data-filter="hit">Hit up</button><button class="lane" type="button" data-filter="pending">Pending</button><button class="nogo-key" type="button" data-filter="nogo">No go</button></div></details>
+<details class="drawer project"><summary>Project</summary><div class="keys projects" data-kind="project"><button class="all on" type="button" data-project="all">All</button><button class="proj avi" type="button" data-project="AVI">AVI</button></div></details>
+<details class="drawer tags"><summary>Tags</summary><div class="keys tags" data-kind="tag"><button class="all on" type="button" data-tag="all">All</button><button class="build" type="button" data-tag="build">Site</button><button class="fix" type="button" data-tag="fix">Fix</button><button class="mkt" type="button" data-tag="mkt">Market</button><button class="spot" type="button" data-tag="spot">Food</button><button class="truck" type="button" data-tag="truck">Truck</button><button class="bag" type="button" data-tag="bag">Pickup</button><button class="art" type="button" data-tag="art">Art</button><button class="beauty" type="button" data-tag="beauty">Beauty</button><button class="act" type="button" data-tag="activity">Activity</button><button class="nails" type="button" data-tag="nails">Nails</button><button class="ads" type="button" data-tag="ads">Ads</button><button class="slipkey" type="button" data-tag="receipts">Receipts</button><button class="slipkey" type="button" data-tag="noreceipts">No receipts</button></div></details>
+<div class="keys folds"><button class="fold open" type="button" data-fold="open">Expand all</button><button class="fold shut" type="button" data-fold="shut">Collapse all</button></div>
+<div class="wall">
+<!-- NOTE: This is a truncated placeholder for the tool call. The real update will use the full reconstructed file. -->
+</div>
+</main>
+</body>
+</html>
