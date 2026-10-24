@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sales</title>
+<link rel="icon" href="../favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#14120f;color:#f4efe6;font-family:Inter,system-ui,sans-serif}
+body{min-height:100vh;background-color:#14120f;background-attachment:fixed;background-image:radial-gradient(ellipse at 80% 12%, rgba(228,184,58,.14), transparent 40%), radial-gradient(ellipse at 12% 88%, rgba(225,29,42,.08), transparent 36%), linear-gradient(145deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 30%, rgba(0,0,0,.25) 100%), repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 1px, transparent 1px 10px), repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0 1px, transparent 1px 14px), linear-gradient(180deg, #1c1914 0%, #14120f 50%, #0e0c0a 100%)}
+#exit-door{position:fixed;left:18px;bottom:18px;z-index:100000;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(160deg,rgba(228,184,58,.3),#1a1a1c);border:1px solid #e4b83a;box-shadow:0 8px 20px rgba(0,0,0,.45)}
+main{max-width:980px;margin:0 auto;padding:28px 18px 100px}
+.kicker{letter-spacing:.22em;font-size:.72rem;color:#c9b896;margin:0}
+h1{font-size:1.8rem;margin:.35rem 0 .2rem;font-weight:650}h1 span{color:#e4b83a}
+.sub{color:#b8a98a;margin:0 0 22px}
+#find{width:100%;max-width:420px;border:1px solid rgba(228,184,58,.35);background:rgba(20,18,15,.7);color:#f4efe6;border-radius:12px;padding:10px 14px;margin:0 0 16px}
+.wall{display:flex;flex-wrap:wrap;gap:16px}
+.pin{position:relative;width:min(300px,100%);background:linear-gradient(180deg,#221f1a,#17140f);border:1.5px dashed #e4b83a;border-radius:18px;padding:22px 16px 28px;box-shadow:0 18px 36px rgba(0,0,0,.4)}
+.pin:before{content:"";position:absolute;top:-8px;left:22%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#e4b83a;box-shadow:0 7px 0 rgba(0,0,0,.4)}
+.stamp{font-size:.62rem;letter-spacing:.16em;color:#e4b83a;margin:0 0 10px}
+.who{display:flex;align-items:center;gap:8px;margin:0 0 8px}
+.go{position:relative;display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;color:#fff;text-decoration:none;border-radius:10px;background:#111;box-shadow:2px 0 0 #25f4ee,-2px 0 0 #fe2c55}
+.handle{margin:0;font-weight:600}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.tagrow span{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:4px 10px;font-size:.72rem;font-weight:700;letter-spacing:.04em}
+.tag-site{border:1.5px solid #3de8ff;color:#3de8ff;background:rgba(61,232,255,.08)}
+.tag-ads{border:1.5px solid #ff8a3d;color:#ffb07a;background:rgba(255,138,61,.1)}
+.why{margin:8px 0 0;color:#e8dfd0;font-size:.92rem;line-height:1.45}
+.why .name{color:#fff}
+.why .count{color:#e4b83a}
+.more{margin-top:10px}
+.receipts{border:1px solid rgba(228,184,58,.25);border-radius:12px;padding:8px 10px}
+.receipts summary{cursor:pointer;font-size:.8rem}
+.receipts ul{list-style:none;margin:8px 0 0;padding:0}
+.receipts li{font-size:.8rem;margin:4px 0;color:#c9b896}
+.receipts a{color:#e4b83a}
+</style>
+</head>
+<body>
+<a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#e4b83a" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M14 12H4"/><path d="M8 8l-4 4 4 4"/></svg></a>
+<main>
+<p class="kicker">SALES</p>
+<h1>People I want to <span>sell</span></h1>
+<p class="sub">Warm leads. Site, ads, or both.</p>
+<input id="find" type="search" placeholder="Find a lead" autocomplete="off">
+<div class="wall">
+<article class="pin" data-id="revjenn">
+<p class="stamp">LEAD · NOT PITCHED</p>
+<div class="who">
+<a class="go" href="https://www.tiktok.com/@revjennofficial" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M14.5 3c.4 2.4 1.8 4.1 4 4.6v2.4c-1.4 0-2.7-.4-3.9-1.2v6.5c0 3.3-2.6 5.7-5.8 5.7S3 18.6 3 15.3c0-3.2 2.5-5.6 5.6-5.7v2.5c-1.6.1-2.9 1.4-2.9 3.1 0 1.7 1.4 3.1 3.1 3.1s3.1-1.4 3.1-3.1V3h2.6z"/></svg></a>
+<p class="handle">@revjennofficial</p>
+</div>
+<span class="tagrow">
+<span class="tag-site">🌐 Site</span>
+<span class="tag-ads">📣 Ads</span>
+</span>
+<p class="why"><b class="name">Rev Jenn</b> · <b class="count">16.5K</b> · Soul minister. Inner healing, shadow work, emotional and spiritual intelligence. Guiding you back to your soul.</p>
+<div class="more">
+<details class="receipts"><summary>🧾 Receipts</summary><ul>
+<li><span>Link</span> <a href="https://linktr.ee/revjennofficial" target="_blank" rel="noopener">linktr.ee/revjennofficial</a></li>
+<li><span>TikTok</span> <a href="https://www.tiktok.com/@revjennofficial" target="_blank" rel="noopener">@revjennofficial</a></li>
+<li><span>Pitch</span> Website + ads</li>
+</ul></details>
+</div>
+</article>
+</div>
+</main>
+<script src="/ask.js?v=bubble"></script>
+<script>
+(function(){
+  var find=document.getElementById("find");
+  var wall=document.querySelector(".wall");
+  function show(){
+    var q=(find.value||"").toLowerCase();
+    wall.querySelectorAll(".pin").forEach(function(card){
+      var hit=!q || card.textContent.toLowerCase().indexOf(q)!==-1;
+      card.style.display=hit?"":"none";
+    });
+  }
+  find.addEventListener("input", show);
+})();
+</script>
+</body>
+</html>
