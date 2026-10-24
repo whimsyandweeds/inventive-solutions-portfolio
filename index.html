@@ -121,6 +121,7 @@ function tryDoor(){
   if(key==="ads"){ sessionStorage.removeItem("pipe-door"); location.href="ads/"; return true; }
   if(key==="trap"){ sessionStorage.removeItem("pipe-door"); location.href="trap/"; return true; }
   if(key==="sales"){ sessionStorage.removeItem("pipe-door"); location.href="sales/"; return true; }
+  if(key==="inbox"){ sessionStorage.removeItem("pipe-door"); location.href="inbox/"; return true; }
   return false;
 }
 document.getElementById("door-form").addEventListener("submit", function(e){

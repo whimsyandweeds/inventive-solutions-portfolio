@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Inbox</title>
+<link rel="icon" href="../favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;background:#1a1614;color:#f6efe6;font-family:Inter,system-ui,sans-serif}
+body{min-height:100vh;background-color:#1a1614;background-attachment:fixed;background-image:radial-gradient(ellipse at 85% 10%, rgba(255,122,89,.12), transparent 38%), radial-gradient(ellipse at 8% 90%, rgba(255,214,102,.08), transparent 34%), repeating-linear-gradient(90deg, rgba(255,255,255,.01) 0 1px, transparent 1px 12px), linear-gradient(180deg,#241e1a 0%,#1a1614 50%,#120f0d 100%)}
+#exit-door{position:fixed;left:18px;bottom:18px;z-index:100000;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(160deg,rgba(255,122,89,.35),#1a1a1c);border:1px solid #ff7a59;box-shadow:0 8px 20px rgba(0,0,0,.45)}
+main{max-width:980px;margin:0 auto;padding:28px 18px 120px}
+.kicker{letter-spacing:.22em;font-size:.72rem;color:#e7b7a8;margin:0}
+h1{font-size:1.9rem;margin:.3rem 0 .15rem;font-weight:650}h1 span{color:#ff7a59}
+.sub{color:#c9b6ad;margin:0 0 18px}
+.drop{background:linear-gradient(180deg,rgba(255,122,89,.08),rgba(255,255,255,.02));border:2px dashed #ff7a59;border-radius:22px;padding:16px;margin:0 0 22px}
+.drop h2{margin:0 0 10px;font-family:Caveat,cursive;font-size:1.6rem;color:#ffd2c6}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
+.row input,.row select,.row textarea{background:#120f0d;color:#f6efe6;border:1px solid rgba(255,122,89,.35);border-radius:12px;padding:10px 12px;font:inherit}
+.row input{flex:1;min-width:140px}
+.row select{min-width:120px}
+.row textarea{width:100%;min-height:70px;resize:vertical}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}
+.pills button{border-radius:999px;padding:6px 12px;font-size:.75rem;font-weight:700;cursor:pointer;background:transparent}
+.pills .on{box-shadow:0 0 0 1px currentColor;background:rgba(255,255,255,.04)}
+.v{border:1.5px solid #a855f7;color:#d8b4fe}
+.s{border:1.5px solid #e4b83a;color:#e4b83a}
+.t{border:1.5px solid #E11D2A;color:#ff8a80}
+.i{border:1.5px solid #7ee787;color:#7ee787}
+.o{border:1.5px solid #9ecbff;color:#9ecbff}
+.pinbtn{border:0;background:#ff7a59;color:#1a1614;font-weight:800;letter-spacing:.08em;border-radius:999px;padding:10px 18px;cursor:pointer}
+.wall{display:flex;flex-wrap:wrap;gap:14px}
+.scrap{width:min(280px,100%);background:#2a221c;border-radius:6px 16px 14px 8px;padding:14px 14px 16px;box-shadow:0 12px 28px rgba(0,0,0,.35);transform:rotate(-1deg);position:relative}
+.scrap:nth-child(2n){transform:rotate(1.2deg);background:#241c22}
+.scrap:nth-child(3n){transform:rotate(-.6deg);background:#1e241c}
+.scrap .where{font-size:.68rem;letter-spacing:.14em;font-weight:700;margin:0 0 6px}
+.scrap h3{margin:0 0 6px;font-family:Caveat,cursive;font-size:1.4rem}
+.scrap p{margin:0;color:#e8ddd4;font-size:.88rem;line-height:1.4}
+.scrap .meta{margin-top:8px;font-size:.7rem;color:#b9a89e}
+.scrap .kill{position:absolute;top:6px;right:8px;border:0;background:transparent;color:#ff7a59;cursor:pointer;font-size:16px}
+.empty{color:#b9a89e;font-family:Caveat,cursive;font-size:1.3rem}
+</style>
+</head>
+<body>
+<a id="exit-door" href="../" onclick="sessionStorage.removeItem('pipe-door')" aria-label="Back"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ff7a59" stroke-width="2"><path d="M14 5H7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7"/><path d="M14 12H4"/><path d="M8 8l-4 4 4 4"/></svg></a>
+<main>
+<p class="kicker">INBOX</p>
+<h1>Scraps for <span>later</span></h1>
+<p class="sub">Drop a note while the screenshots cool off. I’ll turn them into cards when you’re back.</p>
+<div class="drop">
+<h2>Pin a scrap</h2>
+<div class="row">
+<input id="who" placeholder="Who / what">
+<select id="where">
+<option value="Vendor">Vendor</option>
+<option value="Sales">Sales</option>
+<option value="Trap">Trap</option>
+<option value="Inbox">Just hold</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div class="pills" id="tags">
+<button type="button" class="v" data-tag="AVI">AVI</button>
+<button type="button" class="s" data-tag="Site">Site</button>
+<button type="button" class="t" data-tag="Ads">Ads</button>
+<button type="button" class="i" data-tag="Crafts">Crafts</button>
+<button type="button" class="o" data-tag="Books">Books</button>
+</div>
+<div class="row"><textarea id="note" placeholder="Little note… where it should go, what you want to sell, anything"></textarea></div>
+<button class="pinbtn" type="button" id="pin">PIN IT</button>
+</div>
+<div class="wall" id="wall"><p class="empty">Nothing pinned yet. Go make a mess.</p></div>
+</main>
+<script>
+(function(){
+  var KEY="inbox-scraps";
+  var tags=document.getElementById("tags");
+  var wall=document.getElementById("wall");
+  var selected=new Set();
+  tags.addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    var t=b.dataset.tag;
+    if(selected.has(t)){selected.delete(t);b.classList.remove("on");}
+    else{selected.add(t);b.classList.add("on");}
+  });
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]");}catch(e){return [];}}
+  function save(list){localStorage.setItem(KEY,JSON.stringify(list));}
+  function paint(){
+    var list=load();
+    if(!list.length){wall.innerHTML='<p class="empty">Nothing pinned yet. Go make a mess.</p>';return;}
+    wall.innerHTML=list.map(function(s,i){
+      return '<article class="scrap"><button class="kill" data-i="'+i+'">×</button><p class="where">'+s.where+' · '+(s.tags.join(" · ")||"no tags")+'</p><h3>'+s.who+'</h3><p>'+s.note+'</p><p class="meta">'+s.when+'</p></article>';
+    }).join("");
+  }
+  document.getElementById("pin").onclick=function(){
+    var who=document.getElementById("who").value.trim();
+    var note=document.getElementById("note").value.trim();
+    if(!who && !note) return;
+    var list=load();
+    list.unshift({who:who||"Untitled scrap",where:document.getElementById("where").value,tags:[...selected],note:note,when:new Date().toLocaleString()});
+    save(list);
+    document.getElementById("who").value="";
+    document.getElementById("note").value="";
+    selected.clear();
+    tags.querySelectorAll("button").forEach(function(b){b.classList.remove("on");});
+    paint();
+  };
+  wall.addEventListener("click",function(e){
+    var b=e.target.closest(".kill"); if(!b) return;
+    var list=load(); list.splice(+b.dataset.i,1); save(list); paint();
+  });
+  paint();
+})();
+</script>
+<script src="/ask.js?v=bubble"></script>
+</body>
+</html>
