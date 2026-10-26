@@ -122,6 +122,7 @@ function tryDoor(){
   if(key==="trap"){ sessionStorage.removeItem("pipe-door"); location.href="trap/"; return true; }
   if(key==="sales"){ sessionStorage.removeItem("pipe-door"); location.href="sales/"; return true; }
   if(key==="inbox"){ sessionStorage.removeItem("pipe-door"); location.href="inbox/"; return true; }
+  if(key==="charity"){ sessionStorage.removeItem("pipe-door"); location.href="charity/"; return true; }
   return false;
 }
 document.getElementById("door-form").addEventListener("submit", function(e){
