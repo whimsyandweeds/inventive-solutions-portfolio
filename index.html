@@ -13,7 +13,7 @@
 
 <div id="gallery">
   <video id="open-vid" autoplay muted playsinline><source src="door-open.mp4" type="video/mp4"></video>
-  <button id="corner-door" type="button" aria-label="Key"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M12 15h9"/><path d="M18 15v3"/><path d="M21 15v2"/></svg></button>
+  <button id="corner-door" type="button" aria-label="Key"><svg viewBox="0 0 24 24" width="18" height="18" style="display:block;transform:translateY(-1px)" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M12 15h9"/><path d="M18 15v3"/><path d="M21 15v2"/></svg></button>
   <div id="wall">
     <a class="frame" href="https://meetavi.world/" style="background-image:url(avi-thumb.png)" target="_blank" rel="noopener">
       <span class="pill">Avi · The hang</span>
@@ -64,11 +64,11 @@
 #gallery.open #bolt{display:none;transform:translateX(-220px)}
 #wall{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;gap:12px;align-items:center;padding:120px 20px 40px;opacity:0;transition:opacity .6s ease .4s;overflow:auto}
 #gallery.open #wall{opacity:1}
-.frame{display:flex;flex-direction:column;justify-content:flex-end;width:min(420px,92vw);min-height:160px;padding:14px 16px;border:6px solid #1a1814;border-radius:6px;background:rgba(12,10,8,.6) center/cover no-repeat;color:#f4f1ea;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45);position:relative}
-.frame:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7));border-radius:2px}.pill{display:inline-flex;align-self:flex-start;background:rgba(12,10,8,.85);color:#f4f1ea;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 12px;font-size:.78rem;font-weight:650;letter-spacing:.02em;position:relative;z-index:2}.frame .cap{font-weight:650;font-size:1rem}
+.frame{display:flex;flex-direction:column;justify-content:flex-end;width:min(380px,88vw);min-height:160px;padding:14px 16px;border:6px solid #1a1814;border-radius:6px;background:rgba(12,10,8,.6) center/cover no-repeat;color:#f4f1ea;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45);position:relative}
+.frame:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7));border-radius:2px}.pill{display:inline-flex;align-self:flex-start;background:rgba(12,10,8,.85);color:#f4f1ea;border:1px solid #d2d2d2;border-radius:999px;padding:5px 12px;font-size:.78rem;font-weight:650;letter-spacing:.02em;position:relative;z-index:2}.frame .cap{font-weight:650;font-size:1rem}
 .frame .sub{font-size:.75rem;color:#c8c0b4;margin-top:2px}
 .frame:hover{border-color:#d2d2d2}
-#corner-door{position:fixed;top:16px;right:16px;z-index:50;width:40px;height:40px;display:grid;place-items:center;background:rgba(12,10,8,.55);color:#f4f1ea;border:1px solid rgba(255,255,255,.22);border-radius:50%;padding:0;cursor:pointer;transition:transform .2s ease,border-color .2s ease}#corner-door:hover,#corner-door:focus{transform:scale(1.12);border-color:rgba(255,255,255,.5)}
+#corner-door{position:fixed;top:16px;right:16px;z-index:50;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(12,10,8,.55);color:#f4f1ea;border:1px solid rgba(255,255,255,.22);border-radius:50%;padding:0;cursor:pointer;line-height:0;transition:transform .2s ease,border-color .2s ease}#corner-door:hover,#corner-door:focus{transform:scale(1.12);border-color:rgba(255,255,255,.5)}
 #door[hidden]{display:none}
 </style>
 <script>
