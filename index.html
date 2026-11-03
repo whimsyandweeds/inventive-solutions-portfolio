@@ -12,8 +12,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <div id="gallery">
+  <video id="open-vid" autoplay muted playsinline><source src="door-open.mp4" type="video/mp4"></video>
   <button id="corner-door" type="button" aria-label="Private">Door</button>
-  <div id="bolt"></div>
   <div id="wall">
     <a class="frame" href="https://meetavi.world/" target="_blank" rel="noopener">
       <span class="cap">Avi</span>
@@ -61,12 +61,13 @@
   #door.bad{animation:shake .35s}
   @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 
-#gallery{min-height:100vh;position:relative;background:#07080b url("door-still.jpg") center 30%/cover no-repeat;font-family:Inter,sans-serif;color:#f4f1ea;overflow:hidden}
+#gallery{min-height:100vh;position:relative;background:#07080b;font-family:Inter,sans-serif;color:#f4f1ea;overflow:hidden}
+#open-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 #bolt{display:none;position:absolute;left:50%;top:42%;width:70px;height:18px;margin-left:-35px;background:linear-gradient(180deg,#e8e4dc,#6e6a64);border-radius:4px;box-shadow:0 2px 6px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.3);z-index:5;transition:transform .7s ease}
 #bolt:before{content:"";position:absolute;left:-10px;top:-4px;width:16px;height:26px;background:linear-gradient(180deg,#f0ece4,#7a7670);border-radius:3px;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
 #bolt:after{content:"";position:absolute;right:8px;top:4px;width:6px;height:6px;border-radius:50%;background:#3a3834;box-shadow:0 0 0 1px #9a9690}
 #gallery.open #bolt{display:none;transform:translateX(-220px)}
-#wall{position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;align-items:center;padding:120px 20px 40px;opacity:0;transition:opacity .6s ease .4s;overflow:auto}
+#wall{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;gap:12px;align-items:center;padding:120px 20px 40px;opacity:0;transition:opacity .6s ease .4s;overflow:auto}
 #gallery.open #wall{opacity:1}
 .frame{display:flex;flex-direction:column;justify-content:flex-end;width:min(420px,92vw);min-height:110px;padding:14px 16px;border:6px solid #1a1814;border-radius:6px;background:rgba(12,10,8,.6);color:#f4f1ea;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45)}
 .frame .cap{font-weight:650;font-size:1rem}
@@ -174,7 +175,9 @@ document.getElementById("door-form").addEventListener("submit", function(e){
 });
 
 var g=document.getElementById("gallery");
-setTimeout(function(){ if(g) g.classList.add("open"); }, 400);
+var v=document.getElementById("open-vid");
+function show(){ if(g) g.classList.add("open"); }
+if(v){ v.addEventListener("ended", show); setTimeout(show, 5600); } else { setTimeout(show, 400); }
 document.getElementById("corner-door").addEventListener("click", function(){
   document.getElementById("door").hidden=false;
   document.getElementById("gallery").hidden=true;
