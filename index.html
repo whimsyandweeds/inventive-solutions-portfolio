@@ -10,7 +10,36 @@
 </head>
 <body>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-<div id="door">
+
+<div id="gallery">
+  <button id="corner-door" type="button" aria-label="Private">Door</button>
+  <div id="bolt"></div>
+  <div id="wall">
+    <a class="frame" href="https://meetavi.world/" target="_blank" rel="noopener">
+      <span class="cap">Avi</span>
+      <span class="sub">The hang</span>
+    </a>
+    <a class="frame" href="https://whimsyandweeds.github.io/Tag-Website/" target="_blank" rel="noopener">
+      <span class="cap">TAG</span>
+      <span class="sub">The mesh</span>
+    </a>
+    <a class="frame" href="https://whimsyandweeds.github.io/sophie-sage-v3/" target="_blank" rel="noopener">
+      <span class="cap">Sophie + Sage</span>
+      <span class="sub">The exit</span>
+    </a>
+    <a class="frame" href="https://whimsyandweeds.github.io/opsblock-site/" target="_blank" rel="noopener">
+      <span class="cap">OpsBlock</span>
+      <span class="sub">The stack</span>
+    </a>
+    <a class="frame" href="https://whimsyandweeds.github.io/street-accountant/" target="_blank" rel="noopener">
+      <span class="cap">Street Accountant</span>
+      <span class="sub">In progress</span>
+    </a>
+  </div>
+</div>
+
+<div id="door" hidden>
+
   <form id="door-form">
     <h1>Private board</h1>
     <label for="door-code">Access code</label>
@@ -31,6 +60,18 @@
   #door button{width:100%;margin-top:16px;background:#2a2a2e;color:#f4f1ea;border:0;border-radius:12px;padding:14px;font-size:15px;letter-spacing:.04em}
   #door.bad{animation:shake .35s}
   @keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+#gallery{min-height:100vh;position:relative;background:#07080b url("door-still.jpg") center 30%/cover no-repeat;font-family:Inter,sans-serif;color:#f4f1ea;overflow:hidden}
+#bolt{position:absolute;left:50%;top:46%;width:180px;height:14px;margin-left:-90px;background:linear-gradient(180deg,#d8d4cc,#8a8680);border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.5);z-index:5;transition:transform .7s ease}
+#gallery.open #bolt{transform:translateX(-220px)}
+#wall{position:absolute;inset:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;align-content:center;padding:70px 24px 40px;opacity:0;transition:opacity .6s ease .4s}
+#gallery.open #wall{opacity:1}
+.frame{display:flex;flex-direction:column;justify-content:flex-end;min-height:140px;padding:14px;border:8px solid #1a1814;border-radius:4px;background:rgba(12,10,8,.55);color:#f4f1ea;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45)}
+.frame .cap{font-weight:650;font-size:1rem}
+.frame .sub{font-size:.75rem;color:#c8c0b4;margin-top:2px}
+.frame:hover{border-color:#d2d2d2}
+#corner-door{position:fixed;top:16px;right:16px;z-index:50;background:#12141a;color:#fff;border:1px solid #d2d2d2;border-radius:999px;padding:.4rem .8rem;font-size:.75rem;cursor:pointer}
+#door[hidden]{display:none}
 </style>
 <script>
 function openBoard(){
@@ -128,6 +169,13 @@ function tryDoor(){
 document.getElementById("door-form").addEventListener("submit", function(e){
   e.preventDefault();
   if(!tryDoor()){ document.getElementById("door-code").value=""; document.getElementById("door").classList.remove("bad"); void document.getElementById("door").offsetWidth; document.getElementById("door").classList.add("bad"); }
+});
+
+var g=document.getElementById("gallery");
+setTimeout(function(){ if(g) g.classList.add("open"); }, 400);
+document.getElementById("corner-door").addEventListener("click", function(){
+  document.getElementById("door").hidden=false;
+  document.getElementById("gallery").hidden=true;
 });
 </script>
 <script src="ask.js?v=door"></script>
