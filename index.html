@@ -173,6 +173,17 @@ var g=document.getElementById("gallery");
 var v=document.getElementById("open-vid");
 function show(){ if(g) g.classList.add("open"); }
 if(v){ v.addEventListener("ended", show); setTimeout(show, 5600); } else { setTimeout(show, 400); }
+
+document.querySelectorAll("#wall .frame").forEach(function(a){
+  var t, held=false;
+  a.addEventListener("pointerdown", function(e){
+    held=false;
+    t=setTimeout(function(){ held=true; window.open(a.href,"_blank"); }, 450);
+  });
+  a.addEventListener("pointerup", function(){ clearTimeout(t); });
+  a.addEventListener("pointerleave", function(){ clearTimeout(t); });
+  a.addEventListener("click", function(e){ if(!held) e.preventDefault(); });
+});
 document.getElementById("corner-door").addEventListener("click", function(){
   document.getElementById("door").hidden=false;
   document.getElementById("gallery").hidden=true;
