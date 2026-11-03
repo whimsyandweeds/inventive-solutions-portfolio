@@ -16,24 +16,19 @@
   <button id="corner-door" type="button" aria-label="Private">Door</button>
   <div id="wall">
     <a class="frame" href="https://meetavi.world/" style="background-image:url(avi-thumb.png)" target="_blank" rel="noopener">
-      <span class="cap">Avi</span>
-      <span class="sub">The hang</span>
-    </a>
-    <a class="frame" href="https://whimsyandweeds.github.io/Tag-Website/" style="background-image:url(tag-thumb.png)" target="_blank" rel="noopener">
-      <span class="cap">TAG</span>
-      <span class="sub">The mesh</span>
-    </a>
-    <a class="frame" href="https://whimsyandweeds.github.io/sophie-sage-v3/" style="background-image:url(ss-thumb.png)" target="_blank" rel="noopener">
-      <span class="cap">Sophie + Sage</span>
-      <span class="sub">The exit</span>
+      <span class="pill">Avi · The hang</span>
     </a>
     <a class="frame" href="https://whimsyandweeds.github.io/opsblock-site/" style="background-image:url(ops-thumb.png)" target="_blank" rel="noopener">
-      <span class="cap">OpsBlock</span>
-      <span class="sub">The stack</span>
+      <span class="pill">OpsBlock · The stack</span>
+    </a>
+    <a class="frame" href="https://whimsyandweeds.github.io/Tag-Website/" style="background-image:url(tag-thumb.png)" target="_blank" rel="noopener">
+      <span class="pill">TAG · The mesh</span>
+    </a>
+    <a class="frame" href="https://whimsyandweeds.github.io/sophie-sage-v3/" style="background-image:url(ss-thumb.png)" target="_blank" rel="noopener">
+      <span class="pill">Sophie + Sage · The exit</span>
     </a>
     <a class="frame" href="https://whimsyandweeds.github.io/street-accountant/" style="background-image:url(acct-thumb.png)" target="_blank" rel="noopener">
-      <span class="cap">Street Accountant</span>
-      <span class="sub">In progress</span>
+      <span class="pill">Street Accountant · In progress</span>
     </a>
   </div>
 </div>
@@ -70,7 +65,7 @@
 #wall{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;gap:12px;align-items:center;padding:120px 20px 40px;opacity:0;transition:opacity .6s ease .4s;overflow:auto}
 #gallery.open #wall{opacity:1}
 .frame{display:flex;flex-direction:column;justify-content:flex-end;width:min(420px,92vw);min-height:160px;padding:14px 16px;border:6px solid #1a1814;border-radius:6px;background:rgba(12,10,8,.6) center/cover no-repeat;color:#f4f1ea;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45);position:relative}
-.frame:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7));border-radius:2px}.frame .cap{font-weight:650;font-size:1rem}
+.frame:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7));border-radius:2px}.pill{display:inline-flex;align-self:flex-start;background:rgba(12,10,8,.85);color:#f4f1ea;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:5px 12px;font-size:.78rem;font-weight:650;letter-spacing:.02em;position:relative;z-index:2}.frame .cap{font-weight:650;font-size:1rem}
 .frame .sub{font-size:.75rem;color:#c8c0b4;margin-top:2px}
 .frame:hover{border-color:#d2d2d2}
 #corner-door{position:fixed;top:16px;right:16px;z-index:50;background:#12141a;color:#fff;border:1px solid #d2d2d2;border-radius:999px;padding:.4rem .8rem;font-size:.75rem;cursor:pointer}
