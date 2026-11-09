@@ -17,9 +17,11 @@
   <div id="wall">
   <div id="gallery-line">The work</div>
     <a class="frame" href="https://meetavi.world/" style="background-image:url(avi-thumb.png)" target="_blank" rel="noopener">
+      <span class="badge">App · Beta</span>
       <span class="pill">Avi · AI Match</span>
     </a>
     <a class="frame" href="https://whimsyandweeds.github.io/opsblock-site/" style="background-image:url(ops-thumb2.png)" target="_blank" rel="noopener">
+      <span class="badge live">Live</span>
       <span class="pill">OpsBlock · Business Services</span>
     </a>
     <a class="frame" href="https://luma-sync.com/" style="background-image:url(luma-thumb.jpg)" target="_blank" rel="noopener">
@@ -33,6 +35,7 @@
       <span class="pill">Street Accountant · In progress</span>
     </a>
     <a class="frame" href="https://whimsyandweeds.github.io/Tag-Website/" style="background-image:url(tag-thumb.png)" target="_blank" rel="noopener">
+      <span class="badge">App · Beta</span>
       <span class="pill">TAG · In progress</span>
     </a>
   </div>
@@ -71,7 +74,10 @@
 #wall{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;gap:12px;align-items:center;padding:120px 20px 40px;opacity:0;transition:opacity .6s ease .4s;overflow:auto}
 #gallery.open #wall{opacity:1}
 .frame{display:flex;flex-direction:column;justify-content:flex-end;width:min(380px,88vw);min-height:160px;padding:14px 16px;border:6px solid #1a1814;border-radius:6px;background:rgba(12,10,8,.6) center/cover no-repeat;color:#f4f1ea;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45);position:relative}
-.frame:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7));border-radius:2px}.pill{display:inline-flex;align-self:flex-end;background:rgba(12,10,8,.7);color:rgba(244,241,234,.85);border:1px solid rgba(210,210,210,.6);border-radius:999px;padding:4px 10px;font-size:.7rem;font-weight:400;letter-spacing:.04em;position:relative;z-index:2}.frame .cap{font-weight:650;font-size:1rem}
+.frame:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(0,0,0,.7));border-radius:2px}.pill{display:inline-flex;align-self:flex-end;background:rgba(12,10,8,.7);color:rgba(244,241,234,.85);border:1px solid rgba(210,210,210,.6);border-radius:999px;padding:4px 10px;font-size:.7rem;font-weight:400;letter-spacing:.04em;position:relative;z-index:2}
+.badge{position:absolute;top:8px;left:8px;display:inline-flex;align-items:center;gap:5px;background:rgba(12,10,8,.85);color:#f4f1ea;border:1px solid rgba(210,210,210,.5);border-radius:999px;padding:3px 9px;font-size:.68rem;font-weight:600;letter-spacing:.04em;z-index:2}
+.badge.live{background:#e10600;border-color:#e10600;color:#fff}
+.badge.live::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px rgba(255,255,255,.25)}.frame .cap{font-weight:650;font-size:1rem}
 .frame .sub{font-size:.75rem;color:#c8c0b4;margin-top:2px}
 .frame:hover{border-color:#d2d2d2}
 #corner-door{position:fixed;top:16px;right:16px;z-index:50;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(12,10,8,.55);color:#f4f1ea;border:1px solid rgba(255,255,255,.22);border-radius:50%;padding:0;cursor:pointer;line-height:0;transition:transform .2s ease,border-color .2s ease}#corner-door:hover,#corner-door:focus{transform:scale(1.12);border-color:rgba(255,255,255,.5)}
