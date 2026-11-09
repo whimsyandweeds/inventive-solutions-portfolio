@@ -197,6 +197,25 @@ document.getElementById("corner-door").addEventListener("click", function(){
   document.getElementById("door").hidden=false;
   document.getElementById("gallery").hidden=true;
 });
+// Reveal gallery cards after door video
+(function(){
+  var gal = document.getElementById("gallery");
+  var vid = document.getElementById("open-vid");
+  function reveal(){
+    if(gal && !gal.classList.contains("open")){
+      gal.classList.add("open");
+    }
+  }
+  if(vid){
+    vid.addEventListener("ended", reveal);
+    setTimeout(reveal, 4200);
+    vid.addEventListener("timeupdate", function(){
+      if(vid.currentTime > 3.5) reveal();
+    });
+  } else {
+    setTimeout(reveal, 1500);
+  }
+})();
 </script>
 <script src="ask.js?v=door"></script>
 </body>
