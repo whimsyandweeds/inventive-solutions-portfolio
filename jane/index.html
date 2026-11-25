@@ -11,4 +11,345 @@
 <style>
 :root{
   --sage:#748969; --sage-dark:#5a6d52; --linen:#F4F2EA; --ink:#23281f; --muted:#5c6356;
-  --card
+  --card:#ffffff; --line:#ddd8c8; --bg:#F4F2EA; --red:#c1271b; --red-dark:#9e1f15;
+  --chip:#e9e6da; --chip-on:#748969; --chip-on-text:#fff;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --linen:#1c201a; --bg:#161916; --ink:#eceade; --muted:#a9ada0; --card:#22261f; --line:#3a4034; --chip:#2c3128; --chip-on:#8aa07f; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+h1,h2{font-family:"Fraunces",serif;line-height:1.1;margin:0}
+a{color:var(--sage-dark)}
+@media (prefers-color-scheme: dark){a{color:#a8bf9c}}
+
+/* Sticky exit bar */
+.exitbar{position:sticky;top:0;z-index:50;background:var(--linen);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.exitbar .label{font-size:13px;color:var(--muted);flex:1;min-width:180px}
+.exitbtn{background:var(--red);color:#fff;border:0;border-radius:999px;padding:10px 20px;font-weight:700;font-size:15px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.exitbtn:hover{background:var(--red-dark)}
+.exitbtn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+.wrap{max-width:1060px;margin:0 auto;padding:28px 16px 64px}
+.hero{padding:8px 0 20px}
+.hero h1{font-size:clamp(30px,6vw,46px);letter-spacing:-.02em}
+.hero p{font-size:17px;color:var(--muted);max-width:640px;margin:12px 0 0}
+.safety{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;margin:18px 0 22px}
+.safety strong{color:var(--ink)}
+
+/* Controls */
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.search{flex:1;min-width:200px}
+.search input{width:100%;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:15px;min-height:44px}
+select{padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:14px;min-height:44px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.pill{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;min-height:36px;line-height:1}
+.pill[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-text);border-color:var(--chip-on)}
+.count{font-size:13px;color:var(--muted);margin:10px 2px 14px}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.badge{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.badge.web{background:#e3ecdc;color:#3f5236}
+@media (prefers-color-scheme: dark){.badge.web{background:#33402c;color:#c2d6b2}}
+.card h3{font-family:"Fraunces",serif;font-size:19px;line-height:1.2;margin:2px 0 0}
+.who{font-size:13px;color:var(--muted);font-weight:600}
+.desc{font-size:14px;color:var(--ink);flex:1}
+.visit{margin-top:4px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;text-decoration:none;background:var(--sage);color:#fff;padding:10px 14px;border-radius:10px;min-height:44px;word-break:break-all}
+.visit:hover{background:var(--sage-dark)}
+.nolink{font-size:13px;color:var(--muted);font-style:italic;border-top:1px dashed var(--line);padding-top:8px}
+
+/* Recommended */
+.section{margin-top:48px}
+.section.top{margin:4px 0 30px}
+.section h2{font-size:28px;margin-bottom:8px}
+.section p.sub{color:var(--muted);margin:0 0 16px;max-width:640px}
+.recgrid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.recgrid{grid-template-columns:1fr 1fr}}
+.rec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column}
+.rec h3{margin:0 0 4px;font-size:16px}
+.rec p{margin:0;font-size:14px;color:var(--muted);flex:1}
+.rec p a{font-weight:600}
+.reclink{align-self:flex-start;margin-top:10px;display:inline-flex;align-items:center;font-weight:700;font-size:14px;text-decoration:none;background:var(--sage);color:#fff;padding:9px 13px;border-radius:9px;min-height:40px}
+.reclink:hover{background:var(--sage-dark)}
+
+/* Suggestion form */
+.suggest{margin-top:56px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px 22px}
+.suggest h2{font-size:24px;margin-bottom:6px}
+.suggest .sub{color:var(--muted);margin:0 0 16px;font-size:15px}
+.suggest-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.suggest-pills .pill{min-height:40px;padding:8px 14px}
+.suggest form{display:flex;flex-direction:column;gap:12px}
+.suggest textarea{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px;font-family:inherit;resize:vertical}
+.suggest input[type="text"],.suggest input[type="email"]{width:100%;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px}
+.suggest button[type="submit"]{align-self:flex-start;background:var(--sage);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;cursor:pointer;min-height:44px}
+.suggest button[type="submit"]:hover{background:var(--sage-dark)}
+.suggest .note{font-size:13px;color:var(--muted);margin-top:4px}
+.suggest .success{display:none;color:var(--sage-dark);font-weight:600;margin-top:8px}
+
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.empty{padding:32px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+</style>
+</head>
+<body>
+<div class="exitbar">
+  <a class="exitbtn" href="https://www.google.com" id="exitBtn" aria-label="Quick exit to Google">✕ Quick Exit</a>
+  <span class="label">Need to leave fast? This button — or the Esc key — takes you straight to Google.</span>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <h1>Survivor Resource Directory</h1>
+    <p>Independent websites and projects started by survivors themselves — memorials, family-court help, stories, money, pets, tech safety, and people trying to connect it all. No big institutions. Just women who lived it and built something.</p>
+  </header>
+
+  <div class="safety"><strong>Reading this somewhere you're monitored?</strong> Use the red Quick Exit button at the top at any time. When you visit another site, check whether it has its own quick-exit button before you stay there.</div>
+
+  <section class="section top" aria-labelledby="rec-h">
+    <h2 id="rec-h">What these sites recommend most</h2>
+    <p class="sub">The books, tools, and guides that come up again and again across the independent sites in the directory below — start here if you're in a hurry.</p>
+    <div class="recgrid">
+      <div class="rec"><h3>“Why Does He Do That?” — Lundy Bancroft</h3><p>The book recommended more than any other. Understanding abusive behavior and control. Free with a library card via the <a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">Libby app</a> (ebook or audiobook). Also borrowable on <a href="https://openlibrary.org/works/OL8076167W/Why_does_he_do_that" target="_blank" rel="noopener noreferrer">Open Library</a>.</p><a class="reclink" href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">Borrow free → Libby</a></div>
+      <div class="rec"><h3>WomensLaw.org</h3><p>State-by-state legal information for survivors, in plain language.</p><a class="reclink" href="https://www.womenslaw.org/" target="_blank" rel="noopener noreferrer">Visit → womenslaw.org</a></div>
+      <div class="rec"><h3>NNEDV Safety Net — Tech Safety</h3><p>Guides for checking phones, location sharing, and online accounts for stalking and tracking.</p><a class="reclink" href="https://www.techsafety.org/about-safety-net" target="_blank" rel="noopener noreferrer">Visit → techsafety.org</a></div>
+      <div class="rec"><h3>myPlan app</h3><p>A private safety-planning app that helps you weigh risks and plan next steps.</p><a class="reclink" href="https://myplanapp.org/" target="_blank" rel="noopener noreferrer">Visit → myplanapp.org</a></div>
+      <div class="rec"><h3>DomesticShelters.org</h3><p>Searchable help finder plus articles on leaving, pets, and practical planning.</p><a class="reclink" href="https://www.domesticshelters.org/" target="_blank" rel="noopener noreferrer">Visit → domesticshelters.org</a></div>
+      <div class="rec"><h3>Aspire News app</h3><p>A disguised safety app — it looks like a news app and can quietly alert trusted contacts.</p><a class="reclink" href="https://www.whengeorgiasmiled.org/get-help/" target="_blank" rel="noopener noreferrer">Visit → whengeorgiasmiled.org</a></div>
+      <div class="rec"><h3>Tech-safety guides</h3><p><a href="https://stopstalkerware.org/stalkerware-detection-removal-and-prevention/" target="_blank" rel="noopener noreferrer">Coalition Against Stalkerware</a>, <a href="https://ceta.tech.cornell.edu/" target="_blank" rel="noopener noreferrer">Cornell’s CETA clinic</a>, <a href="https://ssd.eff.org" target="_blank" rel="noopener noreferrer">EFF Surveillance Self-Defense</a>, and <a href="https://support.apple.com/guide/personal-safety/checklist-1-limit-device-and-account-access-ipsb8deced49/1.0/web/1.0" target="_blank" rel="noopener noreferrer">Apple’s Personal Safety User Guide</a>.</p></div>
+      <div class="rec"><h3>Documentation tools</h3><p><a href="https://victimsvoice.app/the-app/" target="_blank" rel="noopener noreferrer">VictimsVoice</a>, <a href="https://www.ourfamilywizard.com/product-features/calendar" target="_blank" rel="noopener noreferrer">OurFamilyWizard</a>, and <a href="https://alimentor.org/en/" target="_blank" rel="noopener noreferrer">Alimentor</a> — for logging incidents and co-parenting communication.</p></div>
+      <div class="rec"><h3>More books survivors pass around</h3><p><a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">The Gift of Fear</a> · <a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">No Visible Bruises</a> · <a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">The Body Keeps the Score</a> · <a href="https://openlibrary.org/works/OL15840977W/When_dad_hurts_mom" target="_blank" rel="noopener noreferrer">When Dad Hurts Mom</a> — search these in Libby with your library card, or check Open Library.</p></div>
+      <div class="rec"><h3>Safety apps</h3><p><a href="https://wcspittsburgh.org/brightsky/" target="_blank" rel="noopener noreferrer">Bright Sky</a>, <a href="https://www.noonlight.com/noonlight-app" target="_blank" rel="noopener noreferrer">Noonlight</a>, and <a href="https://www.getbsafe.com/" target="_blank" rel="noopener noreferrer">bSafe</a>.</p></div>
+      <div class="rec"><h3>RedRover Relief</h3><p>Help with the cost of boarding pets so you don’t have to leave them behind.</p><a class="reclink" href="https://redrover.org/relief-dv/dv-safe-escape-grants/" target="_blank" rel="noopener noreferrer">Visit → redrover.org</a></div>
+      <div class="rec"><h3>RAINN</h3><p>Support and resources focused on sexual assault, recommended often on sexual-assault survivor sites.</p><a class="reclink" href="https://rainn.org/help-and-healing/hotline/" target="_blank" rel="noopener noreferrer">Visit → rainn.org</a></div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <label class="search"><span class="sr" style="position:absolute;left:-9999px">Search resources</span><input id="q" type="search" placeholder="Search by name, person, or place…" autocomplete="off"></label>
+    <label>Sort
+      <select id="sort">
+        <option value="az">Name A–Z</option>
+        <option value="cat">By category</option>
+        <option value="webfirst">Websites first</option>
+      </select>
+    </label>
+  </div>
+  <div class="pills" id="pills" role="group" aria-label="Filter by category"></div>
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>No resources match that search. Try a different word or tap “All.”</div>
+
+  <section class="suggest" aria-labelledby="suggest-h">
+    <h2 id="suggest-h">Suggest a resource</h2>
+    <p class="sub">Know a survivor-led site, mutual aid, or tool that should be here? Or want to add your own? Drop it below. No account needed.</p>
+    <div class="suggest-pills" id="suggestPills" role="group" aria-label="Type of suggestion">
+      <button type="button" class="pill" data-type="recommend" aria-pressed="true">Recommend a resource</button>
+      <button type="button" class="pill" data-type="add" aria-pressed="false">Add my website</button>
+      <button type="button" class="pill" data-type="other" aria-pressed="false">Something else</button>
+    </div>
+    <form id="suggestForm">
+      <input type="hidden" name="type" id="suggestType" value="recommend">
+      <input type="hidden" name="_subject" value="Jane directory resource suggestion">
+      <textarea name="suggestion" placeholder="Name of the site or resource, and a short note about what it is…" required></textarea>
+      <input type="text" name="name" placeholder="Your name (optional)">
+      <input type="email" name="email" placeholder="Your email (optional — only if you want a reply)">
+      <button type="button" id="submitBtn">Send suggestion</button>
+      <p class="note">Suggestions are reviewed before anything is added. This form is for resource ideas only.</p>
+      <p class="success" id="suggestSuccess">Thanks — got it. We’ll take a look.</p>
+    </form>
+  </section>
+
+  <footer>
+    <p>This is a directory of independent, survivor-led projects. Listings are for information only — always trust your own judgment about what is safe for your situation. If you are in immediate danger, call 911. SafeNest’s 24/7 hotline (call or text) is 702-646-4981.</p>
+    <p style="margin-top:16px;font-size:12px;color:var(--muted);">A Whimsy & Weeds project · made with care</p>
+  </footer>
+</div>
+
+<script>
+var CATS = ["All","Memorials & counting","Family court & legal abuse","Stories & community","Money & mutual aid","Pets, tech & practical","Abuser registries","Networks & libraries"];
+var DATA = [
+{n:"I AM JANE DOE",w:"Katie Wilkins (@LenzMama) · Madison, WI",c:"Stories & community",t:"web",u:"https://iamjanedoeofficial.com/",d:"Sexual-assault solidarity: survivor Q&A, 50-state resources, and advocacy. Has its own Quick Exit button."},
+{n:"We Are Jane Doe",w:"Anonymous",c:"Stories & community",t:"web",u:"https://wearejanedoe.info/",d:"Moderated, anonymous story sharing — no account needed."},
+{n:"Women Count USA: Femicide Accountability Project",w:"Dawn Wilcox, RN · Plano, TX · since 2016",c:"Memorials & counting",t:"web",u:"http://womencountusa.org",d:"One woman hand-researching and profiling women killed by men — about 14,445 women so far."},
+{n:"Black Femicide US / Black Femicide Prevention Coalition",w:"Rosalind Page, RN · Arkansas · since 2015",c:"Memorials & counting",t:"fb",u:"",d:"Counts Black women and girls killed. Runs on Facebook and other social pages — no standalone website found."},
+{n:"THEFAYTH Murder Map",w:"Women-led",c:"Memorials & counting",t:"web",u:"https://thefayth.net/murdermap/",d:"A map of women killed, built from records plus community reports."},
+{n:"The American Femicide",w:"Substack",c:"Memorials & counting",t:"web",u:"https://theamericanfemicide.substack.com/",d:"Femicide commentary and counts on Substack."},
+{n:"Zulu Bodhi",w:"Individual · Facebook",c:"Memorials & counting",t:"fb",u:"",d:"Hand-compiled lists of women killed by husbands, shared on Facebook. Facebook only — no website found."},
+{n:"A Little Piece of Light — “Say Her Name”",w:"Donna Hylton",c:"Memorials & counting",t:"fb",u:"https://www.facebook.com/hyltondonna/posts/pfbid0P4ovt8JC8om2NBTsMbiubt7sR2mNaivZMVu2Hh28FHecNDg97DWrQcLUMyfCWyYVl",d:"Memorial graphics for individual domestic-violence victims, shared on Facebook."},
+{n:"Stand Up Survivor",w:"Facebook community",c:"Memorials & counting",t:"fb",u:"https://www.facebook.com/standupsurvivor/",d:"DV homicide tributes and a large survivor community on Facebook. Facebook page — no separate website listed here."},
+{n:"Break The Silence Against Domestic Violence",w:"Facebook community",c:"Memorials & counting",t:"fb",u:"https://www.facebook.com/btsadv/",d:"Victim stories and #WhyWeRun4Her, on Facebook. Facebook page — no separate website listed here."},
+{n:"NDVR Memorials — National Domestic Violence Registry",w:"Myra Spearman · Gary, IN · since 2007",c:"Memorials & counting",t:"web",u:"https://domesticviolencedatabase.net/domestic-violence-memorials/",d:"Memorials alongside a conviction-based abuser registry."},
+{n:"Native Women in Film — MMIW List",w:"Native Women in Film",c:"Memorials & counting",t:"web",u:"https://www.nativewomeninfilm.com/murdered-missing-native-women/",d:"“One name a day” memorial for murdered and missing Indigenous women."},
+{n:"OneVoiceMyChoice",w:"“Donna” · Weymouth, UK · since 2018",c:"Stories & community",t:"none",u:"",d:"Survivor chat, books, and alarms. No link is given here because its old web address no longer goes to her site — find her by name on social media instead."},
+{n:"One Mom's Battle",w:"Tina Swithin",c:"Family court & legal abuse",t:"web",u:"https://onemomsbattle.com/",d:"Education and advocacy about post-separation abuse and family court."},
+{n:"The Court Said",w:"Anonymous",c:"Family court & legal abuse",t:"web",u:"https://www.thecourtsaid.org/",d:"Stories and resources about family court outcomes."},
+{n:"Custody Court: The Aftermath",w:"",c:"Family court & legal abuse",t:"web",u:"https://custodycourt.org/",d:"Information and stories about custody and post-separation abuse."},
+{n:"The Nurturing Coach",w:"",c:"Stories & community",t:"web",u:"https://thenurturingcoach.com/",d:"Coaching and resources for survivors."},
+{n:"The Hotline / National Domestic Violence Hotline",w:"",c:"Networks & libraries",t:"web",u:"https://www.thehotline.org/",d:"24/7 confidential support. Call 1-800-799-7233 or text START to 88788."},
+{n:"SafeNest",w:"",c:"Networks & libraries",t:"web",u:"https://www.safenest.org/",d:"Las Vegas area shelter and 24/7 hotline: 702-646-4981 (call or text)."},
+{n:"Domestic Violence Awareness Project",w:"",c:"Memorials & counting",t:"web",u:"https://dvawareness.org/",d:"Awareness and memorial resources."},
+{n:"National Coalition Against Domestic Violence",w:"",c:"Networks & libraries",t:"web",u:"https://ncadv.org/",d:"National advocacy and resources."},
+{n:"Futures Without Violence",w:"",c:"Networks & libraries",t:"web",u:"https://www.futureswithoutviolence.org/",d:"Prevention and intervention resources."},
+{n:"Love is Respect",w:"",c:"Networks & libraries",t:"web",u:"https://www.loveisrespect.org/",d:"For young people. Text LOVEIS to 22522 or call 1-866-331-9474."},
+{n:"RAINN",w:"",c:"Networks & libraries",t:"web",u:"https://rainn.org/",d:"National sexual assault hotline: 1-800-656-4673."},
+{n:"National Network to End Domestic Violence",w:"",c:"Networks & libraries",t:"web",u:"https://nnedv.org/",d:"Advocacy and tech safety resources."},
+{n:"WomensLaw.org",w:"",c:"Family court & legal abuse",t:"web",u:"https://www.womenslaw.org/",d:"State-by-state legal information."},
+{n:"TechSafety.org",w:"",c:"Pets, tech & practical",t:"web",u:"https://www.techsafety.org/",d:"Tech safety guides."},
+{n:"myPlan",w:"",c:"Pets, tech & practical",t:"web",u:"https://myplanapp.org/",d:"Private safety planning app."},
+{n:"DomesticShelters.org",w:"",c:"Networks & libraries",t:"web",u:"https://www.domesticshelters.org/",d:"Searchable directory of shelters and resources."},
+{n:"Aspire News",w:"",c:"Pets, tech & practical",t:"web",u:"https://www.whengeorgiasmiled.org/get-help/",d:"Disguised safety app."},
+{n:"Coalition Against Stalkerware",w:"",c:"Pets, tech & practical",t:"web",u:"https://stopstalkerware.org/",d:"Detection and removal of stalkerware."},
+{n:"EFF Surveillance Self-Defense",w:"",c:"Pets, tech & practical",t:"web",u:"https://ssd.eff.org/",d:"Digital security guides."},
+{n:"Apple Personal Safety User Guide",w:"",c:"Pets, tech & practical",t:"web",u:"https://support.apple.com/guide/personal-safety/welcome/web",d:"How to limit device and account access."},
+{n:"VictimsVoice",w:"",c:"Pets, tech & practical",t:"web",u:"https://victimsvoice.app/",d:"Incident documentation app."},
+{n:"OurFamilyWizard",w:"",c:"Family court & legal abuse",t:"web",u:"https://www.ourfamilywizard.com/",d:"Co-parenting communication tool."},
+{n:"Alimentor",w:"",c:"Family court & legal abuse",t:"web",u:"https://alimentor.org/",d:"Co-parenting and documentation."},
+{n:"Bright Sky",w:"",c:"Pets, tech & practical",t:"web",u:"https://wcspittsburgh.org/brightsky/",d:"Safety app."},
+{n:"Noonlight",w:"",c:"Pets, tech & practical",t:"web",u:"https://www.noonlight.com/",d:"Silent alarm app."},
+{n:"bSafe",w:"",c:"Pets, tech & practical",t:"web",u:"https://www.getbsafe.com/",d:"Personal safety app."},
+{n:"RedRover",w:"",c:"Pets, tech & practical",t:"web",u:"https://redrover.org/",d:"Pet boarding grants for survivors."},
+{n:"Libby / OverDrive",w:"",c:"Networks & libraries",t:"web",u:"https://libbyapp.com/",d:"Free ebooks and audiobooks with a library card."},
+{n:"Open Library",w:"",c:"Networks & libraries",t:"web",u:"https://openlibrary.org/",d:"Borrowable ebooks."}
+];
+
+function render(list) {
+  var grid = document.getElementById("grid");
+  var empty = document.getElementById("empty");
+  var count = document.getElementById("count");
+  grid.innerHTML = "";
+  if (!list.length) {
+    empty.hidden = false;
+    count.textContent = "";
+    return;
+  }
+  empty.hidden = true;
+  count.textContent = list.length + " resource" + (list.length === 1 ? "" : "s");
+  list.forEach(function(item) {
+    var card = document.createElement("div");
+    card.className = "card";
+    var badge = document.createElement("span");
+    badge.className = "badge" + (item.t === "web" ? " web" : "");
+    badge.textContent = item.t === "web" ? "Website" : item.t === "fb" ? "Facebook" : "Other";
+    card.appendChild(badge);
+    var h = document.createElement("h3");
+    h.textContent = item.n;
+    card.appendChild(h);
+    if (item.w) {
+      var who = document.createElement("div");
+      who.className = "who";
+      who.textContent = item.w;
+      card.appendChild(who);
+    }
+    var desc = document.createElement("div");
+    desc.className = "desc";
+    desc.textContent = item.d;
+    card.appendChild(desc);
+    if (item.u) {
+      var a = document.createElement("a");
+      a.className = "visit";
+      a.href = item.u;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.textContent = "Visit →";
+      card.appendChild(a);
+    } else {
+      var no = document.createElement("div");
+      no.className = "nolink";
+      no.textContent = "No direct link listed";
+      card.appendChild(no);
+    }
+    grid.appendChild(card);
+  });
+}
+
+function filter() {
+  var q = (document.getElementById("q").value || "").toLowerCase().trim();
+  var sort = document.getElementById("sort").value;
+  var active = document.querySelector(".pill[aria-pressed='true']");
+  var cat = active ? active.dataset.cat : "All";
+  var list = DATA.filter(function(item) {
+    if (cat !== "All" && item.c !== cat) return false;
+    if (!q) return true;
+    return (item.n + " " + (item.w || "") + " " + item.d + " " + item.c).toLowerCase().indexOf(q) !== -1;
+  });
+  if (sort === "az") list.sort(function(a, b) { return a.n.localeCompare(b.n); });
+  else if (sort === "cat") list.sort(function(a, b) { return a.c.localeCompare(b.c) || a.n.localeCompare(b.n); });
+  else if (sort === "webfirst") list.sort(function(a, b) { return (b.t === "web") - (a.t === "web") || a.n.localeCompare(b.n); });
+  render(list);
+}
+
+var pills = document.getElementById("pills");
+CATS.forEach(function(c, i) {
+  var b = document.createElement("button");
+  b.className = "pill";
+  b.type = "button";
+  b.dataset.cat = c;
+  b.textContent = c;
+  b.setAttribute("aria-pressed", i === 0 ? "true" : "false");
+  b.addEventListener("click", function() {
+    pills.querySelectorAll(".pill").forEach(function(p) { p.setAttribute("aria-pressed", "false"); });
+    b.setAttribute("aria-pressed", "true");
+    filter();
+  });
+  pills.appendChild(b);
+});
+
+document.getElementById("q").addEventListener("input", filter);
+document.getElementById("sort").addEventListener("change", filter);
+
+var suggestPills = document.getElementById("suggestPills");
+suggestPills.querySelectorAll(".pill").forEach(function(p) {
+  p.addEventListener("click", function() {
+    suggestPills.querySelectorAll(".pill").forEach(function(x) { x.setAttribute("aria-pressed", "false"); });
+    p.setAttribute("aria-pressed", "true");
+    document.getElementById("suggestType").value = p.dataset.type;
+  });
+});
+
+document.getElementById("exitBtn").addEventListener("click", function(e) {
+  e.preventDefault();
+  window.location.replace("https://www.google.com");
+});
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") window.location.replace("https://www.google.com");
+});
+
+document.getElementById("submitBtn").addEventListener("click", async function() {
+  var btn = this;
+  var form = document.getElementById("suggestForm");
+  var success = document.getElementById("suggestSuccess");
+  var data = new FormData(form);
+  var orig = btn.textContent;
+  btn.textContent = "Sending…";
+  btn.disabled = true;
+  success.style.display = "none";
+  try {
+    var res = await fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+      method: "POST",
+      body: JSON.stringify(Object.fromEntries(data)),
+      headers: { "Content-Type": "application/json", "Accept": "application/json" }
+    });
+    if (res.ok) {
+      success.style.display = "block";
+      form.reset();
+      document.getElementById("suggestType").value = "recommend";
+      suggestPills.querySelectorAll(".pill").forEach(function(p, i) { p.setAttribute("aria-pressed", i === 0 ? "true" : "false"); });
+    } else {
+      alert("Could not send. Try again or email whimsyandweeds@gmail.com directly.");
+    }
+  } catch (err) {
+    alert("Could not send. Check your connection or email whimsyandweeds@gmail.com directly.");
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+});
+
+filter();
+</script>
+</body>
+</html>
