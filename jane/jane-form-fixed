@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Survivor Resource Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sage:#748969; --sage-dark:#5a6d52; --linen:#F4F2EA; --ink:#23281f; --muted:#5c6356;
+  --card:#ffffff; --line:#ddd8c8; --bg:#F4F2EA; --red:#c1271b; --red-dark:#9e1f15;
+  --chip:#e9e6da; --chip-on:#748969; --chip-on-text:#fff;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --linen:#1c201a; --bg:#161916; --ink:#eceade; --muted:#a9ada0; --card:#22261f; --line:#3a4034; --chip:#2c3128; --chip-on:#8aa07f; }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+h1,h2{font-family:"Fraunces",serif;line-height:1.1;margin:0}
+a{color:var(--sage-dark)}
+@media (prefers-color-scheme: dark){a{color:#a8bf9c}}
+
+/* Sticky exit bar */
+.exitbar{position:sticky;top:0;z-index:50;background:var(--linen);border-bottom:1px solid var(--line);padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.exitbar .label{font-size:13px;color:var(--muted);flex:1;min-width:180px}
+.exitbtn{background:var(--red);color:#fff;border:0;border-radius:999px;padding:10px 20px;font-weight:700;font-size:15px;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:8px;text-decoration:none}
+.exitbtn:hover{background:var(--red-dark)}
+.exitbtn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+
+.wrap{max-width:1060px;margin:0 auto;padding:28px 16px 64px}
+.hero{padding:8px 0 20px}
+.hero h1{font-size:clamp(30px,6vw,46px);letter-spacing:-.02em}
+.hero p{font-size:17px;color:var(--muted);max-width:640px;margin:12px 0 0}
+.safety{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;margin:18px 0 22px}
+.safety strong{color:var(--ink)}
+
+/* Controls */
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.search{flex:1;min-width:200px}
+.search input{width:100%;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:15px;min-height:44px}
+select{padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:14px;min-height:44px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 8px}
+.pill{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;min-height:36px;line-height:1}
+.pill[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-text);border-color:var(--chip-on)}
+.count{font-size:13px;color:var(--muted);margin:10px 2px 14px}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:960px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.badge{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--chip);color:var(--muted)}
+.badge.web{background:#e3ecdc;color:#3f5236}
+@media (prefers-color-scheme: dark){.badge.web{background:#33402c;color:#c2d6b2}}
+.card h3{font-family:"Fraunces",serif;font-size:19px;line-height:1.2;margin:2px 0 0}
+.who{font-size:13px;color:var(--muted);font-weight:600}
+.desc{font-size:14px;color:var(--ink);flex:1}
+.visit{margin-top:4px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;text-decoration:none;background:var(--sage);color:#fff;padding:10px 14px;border-radius:10px;min-height:44px;word-break:break-all}
+.visit:hover{background:var(--sage-dark)}
+.nolink{font-size:13px;color:var(--muted);font-style:italic;border-top:1px dashed var(--line);padding-top:8px}
+
+/* Recommended */
+.section{margin-top:48px}
+.section.top{margin:4px 0 30px}
+.section h2{font-size:28px;margin-bottom:8px}
+.section p.sub{color:var(--muted);margin:0 0 16px;max-width:640px}
+.recgrid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.recgrid{grid-template-columns:1fr 1fr}}
+.rec{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column}
+.rec h3{margin:0 0 4px;font-size:16px}
+.rec p{margin:0;font-size:14px;color:var(--muted);flex:1}
+.rec p a{font-weight:600}
+.reclink{align-self:flex-start;margin-top:10px;display:inline-flex;align-items:center;font-weight:700;font-size:14px;text-decoration:none;background:var(--sage);color:#fff;padding:9px 13px;border-radius:9px;min-height:40px}
+.reclink:hover{background:var(--sage-dark)}
+
+/* Suggestion form */
+.suggest{margin-top:56px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px 22px}
+.suggest h2{font-size:24px;margin-bottom:6px}
+.suggest .sub{color:var(--muted);margin:0 0 16px;font-size:15px}
+.suggest-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.suggest-pills .pill{min-height:40px;padding:8px 14px}
+.suggest form{display:flex;flex-direction:column;gap:12px}
+.suggest textarea{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px;font-family:inherit;resize:vertical}
+.suggest input[type="text"],.suggest input[type="email"]{width:100%;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px}
+.suggest button[type="submit"]{align-self:flex-start;background:var(--sage);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;cursor:pointer;min-height:44px}
+.suggest button[type="submit"]:hover{background:var(--sage-dark)}
+.suggest .note{font-size:13px;color:var(--muted);margin-top:4px}
+.suggest .success{display:none;color:var(--sage-dark);font-weight:600;margin-top:8px}
+
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.empty{padding:32px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
+</style>
+</head>
+<body>
+<div class="exitbar">
+  <a class="exitbtn" href="https://www.google.com" id="exitBtn" aria-label="Quick exit to Google">✕ Quick Exit</a>
+  <span class="label">Need to leave fast? This button — or the Esc key — takes you straight to Google.</span>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <h1>Survivor Resource Directory</h1>
+    <p>Independent websites and projects started by survivors themselves — memorials, family-court help, stories, money, pets, tech safety, and people trying to connect it all. No big institutions. Just women who lived it and built something.</p>
+  </header>
+
+  <div class="safety"><strong>Reading this somewhere you're monitored?</strong> Use the red Quick Exit button at the top at any time. When you visit another site, check whether it has its own quick-exit button before you stay there.</div>
+
+  <section class="section top" aria-labelledby="rec-h">
+    <h2 id="rec-h">What these sites recommend most</h2>
+    <p class="sub">The books, tools, and guides that come up again and again across the independent sites in the directory below — start here if you're in a hurry.</p>
+    <div class="recgrid">
+      <div class="rec"><h3>“Why Does He Do That?” — Lundy Bancroft</h3><p>The book recommended more than any other. Understanding abusive behavior and control. Free with a library card via the <a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">Libby app</a> (ebook or audiobook). Also borrowable on <a href="https://openlibrary.org/works/OL8076167W/Why_does_he_do_that" target="_blank" rel="noopener noreferrer">Open Library</a>.</p><a class="reclink" href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">Borrow free → Libby</a></div>
+      <div class="rec"><h3>WomensLaw.org</h3><p>State-by-state legal information for survivors, in plain language.</p><a class="reclink" href="https://www.womenslaw.org/" target="_blank" rel="noopener noreferrer">Visit → womenslaw.org</a></div>
+      <div class="rec"><h3>NNEDV Safety Net — Tech Safety</h3><p>Guides for checking phones, location sharing, and online accounts for stalking and tracking.</p><a class="reclink" href="https://www.techsafety.org/about-safety-net" target="_blank" rel="noopener noreferrer">Visit → techsafety.org</a></div>
+      <div class="rec"><h3>myPlan app</h3><p>A private safety-planning app that helps you weigh risks and plan next steps.</p><a class="reclink" href="https://myplanapp.org/" target="_blank" rel="noopener noreferrer">Visit → myplanapp.org</a></div>
+      <div class="rec"><h3>DomesticShelters.org</h3><p>Searchable help finder plus articles on leaving, pets, and practical planning.</p><a class="reclink" href="https://www.domesticshelters.org/" target="_blank" rel="noopener noreferrer">Visit → domesticshelters.org</a></div>
+      <div class="rec"><h3>Aspire News app</h3><p>A disguised safety app — it looks like a news app and can quietly alert trusted contacts.</p><a class="reclink" href="https://www.whengeorgiasmiled.org/get-help/" target="_blank" rel="noopener noreferrer">Visit → whengeorgiasmiled.org</a></div>
+      <div class="rec"><h3>Tech-safety guides</h3><p><a href="https://stopstalkerware.org/stalkerware-detection-removal-and-prevention/" target="_blank" rel="noopener noreferrer">Coalition Against Stalkerware</a>, <a href="https://ceta.tech.cornell.edu/" target="_blank" rel="noopener noreferrer">Cornell’s CETA clinic</a>, <a href="https://ssd.eff.org" target="_blank" rel="noopener noreferrer">EFF Surveillance Self-Defense</a>, and <a href="https://support.apple.com/guide/personal-safety/checklist-1-limit-device-and-account-access-ipsb8deced49/1.0/web/1.0" target="_blank" rel="noopener noreferrer">Apple’s Personal Safety User Guide</a>.</p></div>
+      <div class="rec"><h3>Documentation tools</h3><p><a href="https://victimsvoice.app/the-app/" target="_blank" rel="noopener noreferrer">VictimsVoice</a>, <a href="https://www.ourfamilywizard.com/product-features/calendar" target="_blank" rel="noopener noreferrer">OurFamilyWizard</a>, and <a href="https://alimentor.org/en/" target="_blank" rel="noopener noreferrer">Alimentor</a> — for logging incidents and co-parenting communication.</p></div>
+      <div class="rec"><h3>More books survivors pass around</h3><p><a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">The Gift of Fear</a> · <a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">No Visible Bruises</a> · <a href="https://libbyapp.com/" target="_blank" rel="noopener noreferrer">The Body Keeps the Score</a> · <a href="https://openlibrary.org/works/OL15840977W/When_dad_hurts_mom" target="_blank" rel="noopener noreferrer">When Dad Hurts Mom</a> — search these in Libby with your library card, or check Open Library.</p></div>
+      <div class="rec"><h3>Safety apps</h3><p><a href="https://wcspittsburgh.org/brightsky/" target="_blank" rel="noopener noreferrer">Bright Sky</a>, <a href="https://www.noonlight.com/noonlight-app" target="_blank" rel="noopener noreferrer">Noonlight</a>, and <a href="https://www.getbsafe.com/" target="_blank" rel="noopener noreferrer">bSafe</a>.</p></div>
+      <div class="rec"><h3>RedRover Relief</h3><p>Help with the cost of boarding pets so you don’t have to leave them behind.</p><a class="reclink" href="https://redrover.org/relief-dv/dv-safe-escape-grants/" target="_blank" rel="noopener noreferrer">Visit → redrover.org</a></div>
+      <div class="rec"><h3>RAINN</h3><p>Support and resources focused on sexual assault, recommended often on sexual-assault survivor sites.</p><a class="reclink" href="https://rainn.org/help-and-healing/hotline/" target="_blank" rel="noopener noreferrer">Visit → rainn.org</a></div>
+    </div>
+  </section>
+
+  <div class="controls">
+    <label class="search"><span class="sr" style="position:absolute;left:-9999px">Search resources</span><input id="q" type="search" placeholder="Search by name, person, or place…" autocomplete="off"></label>
+    <label>Sort
+      <select id="sort">
+        <option value="az">Name A–Z</option>
+        <option value="cat">By category</option>
+        <option value="webfirst">Websites first</option>
+      </select>
+    </label>
+  </div>
+  <div class="pills" id="pills" role="group" aria-label="Filter by category"></div>
+  <p class="count" id="count"></p>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden>No resources match that search. Try a different word or tap “All.”</div>
+
+  <section class="suggest" aria-labelledby="suggest-h">
+    <h2 id="suggest-h">Suggest a resource</h2>
+    <p class="sub">Know a survivor-led site, mutual aid, or tool that should be here? Or want to add your own? Drop it below. No account needed.</p>
+    <div class="suggest-pills" id="suggestPills" role="group" aria-label="Type of suggestion">
+      <button type="button" class="pill" data-type="recommend" aria-pressed="true">Recommend a resource</button>
+      <button type="button" class="pill" data-type="add" aria-pressed="false">Add my website</button>
+      <button type="button" class="pill" data-type="other" aria-pressed="false">Something else</button>
+    </div>
+    <form id="suggestForm" action="https://formsubmit.co/whimsyandweeds@gmail.com" method="POST">
+      <input type="hidden" name="type" id="suggestType" value="recommend">
+      <input type="hidden" name="_subject" value="Jane directory resource suggestion">
+      <textarea name="suggestion" placeholder="Name of the site or resource, and a short note about what it is…" required></textarea>
+      <input type="text" name="name" placeholder="Your name (optional)">
+      <input type="email" name="email" placeholder="Your email (optional — only if you want a reply)">
+      <button type="submit">Send suggestion</button>
+      <p class="note">Suggestions are reviewed before anything is added. This form is for resource ideas only.</p>
+      <p class="success" id="suggestSuccess">Thanks — got it. We’ll take a look.</p>
+    </form>
+  </section>
+
+  <footer>
+    <p>This is a directory of independent, survivor-led projects. Listings are for information only — always trust your own judgment about what is safe for your situation. If you are in immediate danger, call 911. SafeNest’s 24/7 hotline (call or text) is 702-646-4981.</p>
+    <p style="margin-top:16px;font-size:12px;color:var(--muted);">A Whimsy & Weeds project · made with care</p>
+  </footer>
+</div>
+
+<script>
+var CATS = ["All","Memorials & counting","Family court & legal abuse","Stories & community","Money & mutual aid","Pets, tech & practical","Abuser registries","Networks & libraries"];
+var DATA = [
+{n:"I AM JANE DOE",w:"Katie Wilkins (@LenzMama) · Madison, WI",c:"Stories & community",t:"web",u:"https://iamjanedoeofficial.com/",d:"Sexual-assault solidarity: survivor Q&A, 50-state resources, and advocacy. Has its own Quick Exit button."},
+{n:"We Are Jane Doe",w:"Anonymous",c:"Stories & community",t:"web",u:"https://wearejanedoe.info/",d:"Moderated, anonymous story sharing — no account needed."},
+{n:"Women Count USA: Femicide Accountability Project",w:"Dawn Wilcox, RN · Plano, TX · since 2016",c:"Memorials & counting",t:"web",u:"http://womencountusa.org",d:"One woman hand-researching and profiling women killed by men — about 14,445 women so far."},
+{n:"Black Femicide US / Black Femicide Prevention Coalition",w:"Rosalind Page, RN · Arkansas · since 2015",c:"Memorials & counting",t:"fb",u:"",d:"Counts Black women and girls killed. Runs on Facebook and other social pages — no standalone website found."},
+{n:"THEFAYTH Murder Map",w:"Women-led",c:"Memorials & counting",t:"web",u:"https://thefayth.net/murdermap/",d:"A map of women killed, built from records plus community reports."},
+{n:"The American Femicide",w:"Substack",c:"Memorials & counting",t:"web",u:"https://theamericanfemicide.substack.com/",d:"Femicide commentary and counts on Substack."},
+{n:"Zulu Bodhi",w:"Individual · Facebook",c:"Memorials & counting",t:"fb",u:"",d:"Hand-compiled lists of women killed by husbands, shared on Facebook. Facebook only — no website found."},
+{n:"A Little Piece of Light — “Say Her Name”",w:"Donna Hylton",c:"Memorials & counting",t:"fb",u:"https://www.facebook.com/hyltondonna/posts/pfbid0P4ovt8JC8om2NBTsMbiubt7sR2mNaivZMVu2Hh28FHecNDg97DWrQcLUMyfCWyYVl",d:"Memorial graphics for individual domestic-violence victims, shared on Facebook."},
+{n:"Stand Up Survivor",w:"Facebook community",c:"Memorials & counting",t:"fb",u:"https://www.facebook.com/standupsurvivor/",d:"DV homicide tributes and a large survivor community on Facebook. Facebook page — no separate website listed here."},
+{n:"Break The Silence Against Domestic Violence",w:"Facebook community",c:"Memorials & counting",t:"fb",u:"https://www.facebook.com/btsadv/",d:"Victim stories and #WhyWeRun4Her, on Facebook. Facebook page — no separate website listed here."},
+{n:"NDVR Memorials — National Domestic Violence Registry",w:"Myra Spearman · Gary, IN · since 2007",c:"Memorials & counting",t:"web",u:"https://domesticviolencedatabase.net/domestic-violence-memorials/",d:"Memorials alongside a conviction-based abuser registry."},
+{n:"Native Women in Film — MMIW List",w:"Native Women in Film",c:"Memorials & counting",t:"web",u:"https://www.nativewomeninfilm.com/murdered-missing-native-women/",d:"“One name a day” memorial for murdered and missing Indigenous women."},
+{n:"OneVoiceMyChoice",w:"“Donna” · Weymouth, UK · since 2018",c:"Stories & community",t:"none",u:"",d:"Survivor chat, books, and alarms. No link is given here because its old web address no longer goes to her site — find her by name on social media instead."},
+{n:"One Mom's Battle",w:"Tina Swithin · San Luis Obispo, CA · since 2011",c:"Family court & legal abuse",t:"web",u:"https://onemomsbattle.com",d:"Post-separation abuse and family court. Founded Family Court Awareness Month in 2020."},
+{n:"Barron Foundation",w:"Dr. Kreslyn Barron Odum · Georgia · since 2020",c:"Family court & legal abuse",t:"web",u:"https://www.barron-foundation.org/impact",d:"#HotPinkForChildren and Family Court Awareness Month work."},
+{n:"Live Free Legal",w:"Tiffany Lesnik · North Carolina",c:"Family court & legal abuse",t:"web",u:"https://www.livefreelegal.com",d:"Faith-based legal-abuse education from an attorney who is also a survivor. Some offerings are paid."},
+{n:"Voice After Violence",w:"“Rebecca” · Substack",c:"Family court & legal abuse",t:"web",u:"https://voiceafterviolence.substack.com/",d:"Writing on life after leaving, court advocacy, a free clothing store, and a private Facebook group."},
+{n:"Survivor Story NE",w:"Marcy Thiessen & Andrea Aleksandrova · Nebraska",c:"Family court & legal abuse",t:"web",u:"https://survivorstoryne.com/",d:"Family-court advocacy and survivor stories from Nebraska."},
+{n:"Mommy's Heart Inc.",w:"New York",c:"Family court & legal abuse",t:"listing",u:"https://www.idealist.org/en/volunteer-opportunity/4f4a3005616b4ae08227a85a7f81e94d-mommys-heart-inc-to-support-abused-and-neglected-children-mommys-heart-inc-new-york",d:"Free legal and mental-health help for protective mothers. Listed via Idealist."},
+{n:"Mama Wilder Foundation",w:"Grand Junction, CO · since 2023",c:"Family court & legal abuse",t:"listing",u:"https://www.coloradogives.org/organization/Mama-Wilder-Foundation",d:"Volunteer-run cash grants to mothers in family court. Listed via ColoradoGives."},
+{n:"Kayden's Korner",w:"Kathy Sherlock · Yardley, PA",c:"Family court & legal abuse",t:"web",u:"https://kaydenskorner.com",d:"Kayden’s Law advocacy for child safety in custody cases."},
+{n:"Tate's Legacy · Pierce's Pledge · Wyland's Law · Piqui's Justice · Greyson's Choice",w:"Mothers of children killed during custody disputes",c:"Family court & legal abuse",t:"listing",u:"https://centerforjudicialexcellence.org/resources/survivor-led-advocacy-efforts/",d:"Five child-safety law campaigns, listed together in the Center for Judicial Excellence survivor-led directory."},
+{n:"Massachusetts Court Watch",w:"Massachusetts",c:"Family court & legal abuse",t:"web",u:"https://courtwatchmass.com/",d:"Volunteers watching and documenting what happens in court."},
+{n:"No Peace No Quiet Inc.",w:"Rachel DePalma · California · since 2021",c:"Stories & community",t:"web",u:"https://nopeacenoquiet.substack.com/about",d:"An online survivor community on Substack."},
+{n:"Is This Abusive?",w:"Anonymous mother",c:"Stories & community",t:"web",u:"https://isthisabusive.com/about/",d:"Blog and podcast for recognizing abuse — helpful if you’re still asking the question."},
+{n:"Safe Harbor",w:"Kelly King, PA-C",c:"Stories & community",t:"none",u:"",d:"An anonymous survivor forum. Its old web address no longer works — she links the current site from Instagram @kellyking_model_medicine (link in bio)."},
+{n:"WomenSV",w:"Ruth Darlene · Los Altos, CA · since 2011",c:"Pets, tech & practical",t:"web",u:"https://womensv.squarespace.com/",d:"Coercive-control education, including a technology-abuse resources guide."},
+{n:"Giselle Cares Foundation",w:"Giselle Crawford",c:"Money & mutual aid",t:"web",u:"https://gisellecollection.com/pages/giselle-cares-foundation",d:"Relocation help, safe phones, and deposits. Her fund has run dry before after helping a few families, so check if it’s open."},
+{n:"Finding Our Voices (Maine)",w:"Maine",c:"Money & mutual aid",t:"web",u:"https://findingourvoices.net",d:"Get Out Stay Out Fund — cash help for survivors leaving, in Maine."},
+{n:"Nebula",w:"Survivor collective · Open Collective",c:"Money & mutual aid",t:"web",u:"https://opencollective.com/nebula",d:"Mutual-aid cash for survivors, run as a collective."},
+{n:"Survivor Mutual Aid Fund — New Orleans",w:"New Orleans · since 2020",c:"Money & mutual aid",t:"none",u:"",d:"Local mutual aid for survivors. No active website found."},
+{n:"Good Trouble Co-op (DC) · Malikah Queens Fund",w:"Washington, DC",c:"Money & mutual aid",t:"none",u:"",d:"Small mutual-aid funds. Good Trouble Co-op is on Instagram @goodtroubleco.op — no website found."},
+{n:"Hush Puppy Haven",w:"Jen Adams · Daytona, FL",c:"Pets, tech & practical",t:"web",u:"https://hushpuppyhaven.org/Home_Page",d:"Fostering for pets of domestic-violence survivors in Florida."},
+{n:"Praline's Backyard Foundation",w:"Atlanta, GA",c:"Pets, tech & practical",t:"web",u:"https://pralinesbackyardfoundation.org",d:"Pet boarding for survivors in the Atlanta area."},
+{n:"Domestic Violence List",w:"Online",c:"Abuser registries",t:"web",u:"https://www.domesticviolencelist.org",d:"Anonymous abuser reporting. Think carefully before posting or relying on any registry — reports are not court findings."},
+{n:"SurvivorWatch",w:"Survivor-created",c:"Abuser registries",t:"web",u:"https://survivorwatch.org/",d:"Reviewed abuser reports. Same caution: reports are not court findings, and posting can carry legal risk."},
+{n:"You Made A Way",w:"Facebook",c:"Money & mutual aid",t:"fb",u:"https://www.facebook.com/reel/1131350549478896/",d:"Faith-based help focused on financial coercive control. Small Facebook presence."},
+{n:"Freedom Train Project",w:"Tabitha Chapman-Gray",c:"Stories & community",t:"web",u:"https://thefreedomtrainproject.org/about/",d:"Survivor support and community."},
+{n:"OMOT",w:"Tina & Jeania Robinson",c:"Stories & community",t:"fb",u:"https://www.facebook.com/reel/2502513473556716/",d:"Survivor project whose rebuilt site includes a quick-exit button. Found via Facebook."},
+{n:"Battered Not Broken",w:"Marica Phipps-Johnson · since 2014",c:"Stories & community",t:"web",u:"https://www.batterednotbroken.org/batterednotbrokenabout",d:"Survivor support, stories, and encouragement."},
+{n:"Leave The Abuse (Canada)",w:"Anonymous · Canada · since 2025",c:"Stories & community",t:"web",u:"https://leavetheabuse.ca/",d:"A “why I built this” resource site from a survivor in Canada."},
+{n:"The Resilient Blueprint",w:"Nadine Brown",c:"Stories & community",t:"web",u:"https://theresilientblueprint.com/",d:"A survivor newsletter on rebuilding after abuse."},
+{n:"Silent No More",w:"Individual · since 1998 (archived)",c:"Stories & community",t:"web",u:"http://geocities.restorativland.org/Wellesley/Garden/2399/",d:"One of the earliest personal survivor sites, kept in an archive."},
+{n:"WAAR",w:"Roxanne Epperson · Pittsburgh, PA · since 1999",c:"Networks & libraries",t:"listing",u:"https://www.domesticshelters.org/articles/ending-domestic-violence/nonprofit-waar-shows-what-healthy-relationships-look-like",d:"Healthy-relationships education; working to bring one- and two-person survivor operations together."},
+{n:"National Alliance of DV Survivors (NADVS)",w:"Survivor-led nonprofit",c:"Networks & libraries",t:"web",u:"https://nadvs.org",d:"Peer circles, a Facebook group, “Survivor Out Loud,” and a listing of survivor-led organizations and businesses anyone can add to."},
+{n:"Voices of Hope Coalition Alliance",w:"LuKesha Tate · Chicago",c:"Networks & libraries",t:"listing",u:"https://boldjourney.com/meet-lukesha-tate-2/",d:"A coalition of small survivor founders. Profile via Bold Journey."},
+{n:"Survivor Leadership Collective",w:"Boston",c:"Networks & libraries",t:"web",u:"https://www.survivorleadership.com/who-we-are",d:"A collective of survivor leaders in the Boston area."},
+{n:"Speak Your Truth Today — Library",w:"Online library",c:"Networks & libraries",t:"web",u:"http://www.speakyourtruth.today/library",d:"A library of survivor resources and reading."},
+{n:"PreparedYou",w:"Online library",c:"Networks & libraries",t:"web",u:"https://www.thepreparedyou.com/violencefree",d:"Practical preparedness and violence-free living resources."},
+{n:"Shadows of Control",w:"Samara Knight · Substack",c:"Stories & community",t:"web",u:"https://shadowsofcontrol.substack.com/about",d:"Essays on coercive control."},
+{n:"Still Standing",w:"Kaeley Triller Harms · Substack",c:"Stories & community",t:"web",u:"https://kaeleytrillerharms.substack.com/",d:"Survivor writing on standing back up after abuse."},
+{n:"Post-Separation Abuse",w:"Cindy DiTiberio · Substack",c:"Family court & legal abuse",t:"web",u:"https://cindyditiberio.substack.com/",d:"Writing on post-separation abuse and enduring the court process."}
+];
+var TYPE_LABEL={web:"Website",fb:"Facebook",listing:"Listing / profile",none:"No website found"};
+var activeCat="All";
+var pills=document.getElementById('pills');
+CATS.forEach(function(c){
+  var b=document.createElement('button'); b.className='pill'; b.textContent=c; b.setAttribute('aria-pressed', c==='All'?'true':'false');
+  b.addEventListener('click',function(){ activeCat=c; Array.prototype.forEach.call(pills.children,function(x){x.setAttribute('aria-pressed', x.textContent===c?'true':'false')}); render(); });
+  pills.appendChild(b);
+});
+function host(u){ try{ return new URL(u).hostname.replace(/^www\./,''); }catch(e){ return u; } }
+function render(){
+  var q=document.getElementById('q').value.trim().toLowerCase();
+  var sort=document.getElementById('sort').value;
+  var list=DATA.filter(function(x){
+    if(activeCat!=="All" && x.c!==activeCat) return false;
+    if(q && (x.n+" "+x.w+" "+x.d+" "+x.c).toLowerCase().indexOf(q)===-1) return false;
+    return true;
+  });
+  if(sort==="az") list.sort(function(a,b){return a.n.localeCompare(b.n)});
+  if(sort==="cat") list.sort(function(a,b){return a.c.localeCompare(b.c)||a.n.localeCompare(b.n)});
+  if(sort==="webfirst") list.sort(function(a,b){var o={web:0,listing:1,fb:2,none:3}; return o[a.t]-o[b.t]||a.n.localeCompare(b.n)});
+  var grid=document.getElementById('grid'); grid.innerHTML="";
+  list.forEach(function(x){
+    var card=document.createElement('article'); card.className='card';
+    var badge=document.createElement('span'); badge.className='badge'+(x.t==='web'?' web':''); badge.textContent=TYPE_LABEL[x.t]+" · "+x.c;
+    var h=document.createElement('h3'); h.textContent=x.n;
+    var who=document.createElement('div'); who.className='who'; who.textContent=x.w;
+    var d=document.createElement('p'); d.className='desc'; d.textContent=x.d;
+    card.appendChild(badge); card.appendChild(h); card.appendChild(who); card.appendChild(d);
+    if(x.u){
+      var a=document.createElement('a'); a.className='visit'; a.href=x.u; a.target='_blank'; a.rel='noopener noreferrer'; a.textContent='Visit → '+host(x.u);
+      card.appendChild(a);
+    } else {
+      var nl=document.createElement('div'); nl.className='nolink'; nl.textContent = x.t==='fb' ? 'Facebook only — search the name above on Facebook.' : 'No website link — find it by searching the name above.';
+      card.appendChild(nl);
+    }
+    grid.appendChild(card);
+  });
+  document.getElementById('count').textContent = 'Showing '+list.length+' of '+DATA.length+' resources'+(activeCat!=="All" ? ' in “'+activeCat+'”' : '')+'.';
+  document.getElementById('empty').hidden = list.length>0;
+}
+document.getElementById('q').addEventListener('input',render);
+document.getElementById('sort').addEventListener('change',render);
+function exitNow(){ window.location.replace('https://www.google.com'); }
+document.getElementById('exitBtn').addEventListener('click',function(e){ e.preventDefault(); exitNow(); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ exitNow(); } });
+render();
+
+// Suggestion form pills
+var suggestPills=document.getElementById('suggestPills');
+var suggestType=document.getElementById('suggestType');
+Array.prototype.forEach.call(suggestPills.querySelectorAll('.pill'),function(btn){
+  btn.addEventListener('click',function(){
+    Array.prototype.forEach.call(suggestPills.querySelectorAll('.pill'),function(b){ b.setAttribute('aria-pressed','false'); });
+    btn.setAttribute('aria-pressed','true');
+    suggestType.value=btn.getAttribute('data-type');
+  });
+});
+
+// AJAX submit so the button does something and shows success
+document.getElementById('suggestForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = this;
+  var data = {
+    type: form.querySelector('#suggestType').value,
+    suggestion: form.querySelector('textarea[name="suggestion"]').value,
+    name: form.querySelector('input[name="name"]').value,
+    email: form.querySelector('input[name="email"]').value,
+    _subject: "Jane directory resource suggestion"
+  };
+  var btn = form.querySelector('button[type="submit"]');
+  var orig = btn.textContent;
+  btn.textContent = "Sending…";
+  btn.disabled = true;
+  fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "application/json" },
+    body: JSON.stringify(data)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(res) {
+    if (res.success === "true" || res.success === true) {
+      form.reset();
+      document.getElementById('suggestSuccess').style.display = "block";
+      setTimeout(function() { document.getElementById('suggestSuccess').style.display = "none"; }, 6000);
+    } else {
+      alert("Something went wrong. Please try again or email whimsyandweeds@gmail.com directly.");
+    }
+  })
+  .catch(function() {
+    alert("Could not send. Check your connection or email whimsyandweeds@gmail.com directly.");
+  })
+  .finally(function() {
+    btn.textContent = orig;
+    btn.disabled = false;
+  });
+});
+</script>
+</body>
+</html>
