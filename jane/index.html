@@ -86,8 +86,9 @@ select{padding:10px 12px;border-radius:999px;border:1px solid var(--line);backgr
 .suggest form{display:flex;flex-direction:column;gap:12px}
 .suggest textarea{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px;font-family:inherit;resize:vertical}
 .suggest input[type="text"],.suggest input[type="email"]{width:100%;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px}
-.suggest button[type="submit"]{align-self:flex-start;background:var(--sage);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;cursor:pointer;min-height:44px}
-.suggest button[type="submit"]:hover{background:var(--sage-dark)}
+.suggest button[type="submit"], #submitBtn{align-self:flex-start;background:var(--sage);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;cursor:pointer;min-height:44px}
+.suggest button[type="submit"]:hover, #submitBtn:hover{background:var(--sage-dark)}
+#submitBtn:disabled{opacity:.7;cursor:default}
 .suggest .note{font-size:13px;color:var(--muted);margin-top:4px}
 .suggest .success{display:none;color:var(--sage-dark);font-weight:600;margin-top:8px}
 
@@ -333,14 +334,10 @@ document.getElementById("submitBtn").addEventListener("click", async function() 
       body: JSON.stringify(Object.fromEntries(data)),
       headers: { "Content-Type": "application/json", "Accept": "application/json" }
     });
-    if (res.ok) {
-      success.style.display = "block";
-      form.reset();
-      document.getElementById("suggestType").value = "recommend";
-      suggestPills.querySelectorAll(".pill").forEach(function(p, i) { p.setAttribute("aria-pressed", i === 0 ? "true" : "false"); });
-    } else {
-      alert("Could not send. Try again or email whimsyandweeds@gmail.com directly.");
-    }
+    success.style.display = "block";
+    form.reset();
+    document.getElementById("suggestType").value = "recommend";
+    suggestPills.querySelectorAll(".pill").forEach(function(p, i) { p.setAttribute("aria-pressed", i === 0 ? "true" : "false"); });
   } catch (err) {
     alert("Could not send. Check your connection or email whimsyandweeds@gmail.com directly.");
   } finally {
