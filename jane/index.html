@@ -76,6 +76,21 @@ select{padding:10px 12px;border-radius:999px;border:1px solid var(--line);backgr
 .rec p a{font-weight:600}
 .reclink{align-self:flex-start;margin-top:10px;display:inline-flex;align-items:center;font-weight:700;font-size:14px;text-decoration:none;background:var(--sage);color:#fff;padding:9px 13px;border-radius:9px;min-height:40px}
 .reclink:hover{background:var(--sage-dark)}
+
+/* Suggestion form */
+.suggest{margin-top:56px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px 22px}
+.suggest h2{font-size:24px;margin-bottom:6px}
+.suggest .sub{color:var(--muted);margin:0 0 16px;font-size:15px}
+.suggest-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.suggest-pills .pill{min-height:40px;padding:8px 14px}
+.suggest form{display:flex;flex-direction:column;gap:12px}
+.suggest textarea{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px;font-family:inherit;resize:vertical}
+.suggest input[type="text"],.suggest input[type="email"]{width:100%;padding:10px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-size:15px}
+.suggest button[type="submit"]{align-self:flex-start;background:var(--sage);color:#fff;border:0;border-radius:999px;padding:12px 20px;font-weight:700;font-size:15px;cursor:pointer;min-height:44px}
+.suggest button[type="submit"]:hover{background:var(--sage-dark)}
+.suggest .note{font-size:13px;color:var(--muted);margin-top:4px}
+.suggest .success{display:none;color:var(--sage-dark);font-weight:600;margin-top:8px}
+
 footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
 .empty{padding:32px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px}
 </style>
@@ -128,6 +143,25 @@ footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-si
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" hidden>No resources match that search. Try a different word or tap “All.”</div>
 
+  <section class="suggest" aria-labelledby="suggest-h">
+    <h2 id="suggest-h">Suggest a resource</h2>
+    <p class="sub">Know a survivor-led site, mutual aid, or tool that should be here? Or want to add your own? Drop it below. No account needed.</p>
+    <div class="suggest-pills" id="suggestPills" role="group" aria-label="Type of suggestion">
+      <button type="button" class="pill" data-type="recommend" aria-pressed="true">Recommend a resource</button>
+      <button type="button" class="pill" data-type="add" aria-pressed="false">Add my website</button>
+      <button type="button" class="pill" data-type="other" aria-pressed="false">Something else</button>
+    </div>
+    <form id="suggestForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+      <input type="hidden" name="type" id="suggestType" value="recommend">
+      <textarea name="suggestion" placeholder="Name of the site or resource, and a short note about what it is…" required></textarea>
+      <input type="text" name="name" placeholder="Your name (optional)">
+      <input type="email" name="email" placeholder="Your email (optional — only if you want a reply)">
+      <button type="submit">Send suggestion</button>
+      <p class="note">Suggestions are reviewed before anything is added. This form is for resource ideas only.</p>
+      <p class="success" id="suggestSuccess">Thanks — got it. We’ll take a look.</p>
+    </form>
+  </section>
+
   <footer>
     <p>This is a directory of independent, survivor-led projects. Listings are for information only — always trust your own judgment about what is safe for your situation. If you are in immediate danger, call 911. SafeNest’s 24/7 hotline (call or text) is 702-646-4981.</p>
   </footer>
@@ -135,7 +169,6 @@ footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-si
 
 <script>
 var CATS = ["All","Memorials & counting","Family court & legal abuse","Stories & community","Money & mutual aid","Pets, tech & practical","Abuser registries","Networks & libraries"];
-// type: web | fb | listing | none ; url empty when none / unsafe to link
 var DATA = [
 {n:"I AM JANE DOE",w:"Katie Wilkins (@LenzMama) · Madison, WI",c:"Stories & community",t:"web",u:"https://iamjanedoeofficial.com/",d:"Sexual-assault solidarity: survivor Q&A, 50-state resources, and advocacy. Has its own Quick Exit button."},
 {n:"We Are Jane Doe",w:"Anonymous",c:"Stories & community",t:"web",u:"https://wearejanedoe.info/",d:"Moderated, anonymous story sharing — no account needed."},
@@ -236,6 +269,17 @@ function exitNow(){ window.location.replace('https://www.google.com'); }
 document.getElementById('exitBtn').addEventListener('click',function(e){ e.preventDefault(); exitNow(); });
 document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ exitNow(); } });
 render();
+
+// Suggestion form pills
+var suggestPills=document.getElementById('suggestPills');
+var suggestType=document.getElementById('suggestType');
+Array.prototype.forEach.call(suggestPills.querySelectorAll('.pill'),function(btn){
+  btn.addEventListener('click',function(){
+    Array.prototype.forEach.call(suggestPills.querySelectorAll('.pill'),function(b){ b.setAttribute('aria-pressed','false'); });
+    btn.setAttribute('aria-pressed','true');
+    suggestType.value=btn.getAttribute('data-type');
+  });
+});
 </script>
 </body>
 </html>
