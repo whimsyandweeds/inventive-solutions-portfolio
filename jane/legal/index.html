@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<title>Legal Patterns — Survivor Resource Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F2EC; --surface:#FFFFFF; --surface2:#EFE9DF; --ink:#1C2420; --muted:#5B665F;
+  --line:#D8D0C2; --sage:#4F6B54; --sage-bg:#E3EAE1; --clay:#9A4E2E; --clay-bg:#F7E8DE;
+  --gold:#7A5F12; --gold-bg:#F5EED3; --danger:#8F1F1F; --danger-bg:#F9E3E3;
+  --teal:#2F5D5A; --teal-bg:#DFECEA; --plum:#6B3E75; --plum-bg:#F1E6F3; --blue:#2E5A87; --blue-bg:#E3ECF6;
+  --btn:#2F5D5A; --btn-ink:#FFFFFF; --focus:#8A6D1B;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#121614; --surface:#1C2320; --surface2:#262E29; --ink:#EDE8DC; --muted:#AEB8AF;
+    --line:#3A443D; --sage:#A7C9AC; --sage-bg:#243529; --clay:#EBB08E; --clay-bg:#3D2A1F;
+    --gold:#E2CB72; --gold-bg:#37321A; --danger:#F4AAAA; --danger-bg:#422323;
+    --teal:#93CBC4; --teal-bg:#1F3836; --plum:#D9B2E2; --plum-bg:#352539; --blue:#A9CBEF; --blue-bg:#1F2E40;
+    --btn:#93CBC4; --btn-ink:#0F1A18; --focus:#E2CB72;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;line-height:1.55;font-size:17px;overflow-x:hidden}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.2;margin:0}
+a{color:var(--teal);text-underline-offset:3px}
+.exitbar{position:sticky;top:0;z-index:100;background:#1C2420;color:#F6F2EC;padding:8px 0;border-bottom:1px solid #3A443D;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+.exitbar-inner{max-width:760px;margin:0 auto;padding:0 16px;display:flex;gap:10px;align-items:center;justify-content:space-between}
+.exitbar .label{font-size:.8rem;line-height:1.35;margin:0;min-width:0}
+.exitbtn{background:#C0392B;color:#fff;border:0;border-radius:999px;padding:9px 16px;font-weight:700;font-size:.92rem;min-height:42px;white-space:nowrap;flex-shrink:0;cursor:pointer;display:inline-flex;align-items:center;gap:6px;text-decoration:none}
+.exitbtn:hover{background:#96281B}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+.hero{padding:28px 0 18px}
+.kicker{font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--clay);margin:0 0 8px}
+.hero h1{font-size:clamp(1.8rem,6vw,2.6rem)}
+.lede{font-size:1.05rem;color:var(--muted);margin:12px 0 0}
+.before{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--sage);border-radius:14px;padding:16px 18px;margin:18px 0 28px;font-size:.95rem}
+.before strong{color:var(--ink)}
+.q{margin:28px 0;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.q h2{font-size:1.25rem;margin-bottom:6px}
+.q .sub{color:var(--muted);font-size:.9rem;margin:0 0 12px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:.95rem}
+.opt:hover{background:var(--surface2)}
+.opt input{margin-top:3px;flex-shrink:0}
+.opt span{flex:1}
+textarea,input[type="text"],input[type="email"]{width:100%;padding:11px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:16px}
+textarea{min-height:110px;resize:vertical}
+.row{display:flex;gap:10px}
+.row > *{flex:1}
+.note{font-size:.82rem;color:var(--muted);margin:6px 0 0}
+.sbtn{background:var(--btn);color:var(--btn-ink);border:0;border-radius:999px;padding:12px 24px;font:inherit;font-weight:700;font-size:.95rem;cursor:pointer;min-height:46px;margin-top:8px}
+.sbtn:disabled{opacity:.65;cursor:default}
+.success{display:none;color:var(--sage);font-weight:700;margin-top:10px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:24px 0;color:var(--muted);font-size:.9rem}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="exitbar">
+  <div class="exitbar-inner">
+    <span class="label">Need to leave fast? Tap Quick Exit — or press Esc — to go straight to Google.</span>
+    <a class="exitbtn" href="https://www.google.com" id="exitBtn">✕ Quick Exit</a>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="kicker">Legal patterns</p>
+    <h1>What this is called</h1>
+    <p class="lede">A short, private form to help map how systems get used after someone leaves. Tap what fits. Leave anything blank.</p>
+  </header>
+
+  <div class="before">
+    <strong>Before you start</strong><br>
+    Don’t type names. Use general words. Everything is optional. Your answers help show the pattern — not your individual case.
+  </div>
+
+  <form id="legalForm" onsubmit="return false">
+    <input type="hidden" name="_subject" value="Legal patterns form — Jane directory">
+    <input type="hidden" name="type" value="legal-patterns">
+
+    <div class="q">
+      <h2>1. What was the main relationship?</h2>
+      <p class="sub">Tap one.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="Married"> <span>Married</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Living together"> <span>Living together</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Dating"> <span>Dating</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Separated / divorced"> <span>Separated / divorced</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Shared a child only"> <span>Shared a child only</span></label>
+        <label class="opt"><input type="radio" name="q1" value="Other / prefer not to say"> <span>Other / prefer not to say</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>2. Which systems were involved?</h2>
+      <p class="sub">Tap all that apply.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="q2" value="Family court / custody"> <span>Family court / custody</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="Criminal court / protection orders"> <span>Criminal court / protection orders</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="CPS / child welfare"> <span>CPS / child welfare</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="Police"> <span>Police</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="Probation / parole"> <span>Probation / parole</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="Workplace / employer / licensing board"> <span>Workplace / employer / licensing board</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="IRS / financial / credit / tax systems"> <span>IRS / financial / credit / tax systems</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="Medical / mental health holds"> <span>Medical / mental health holds</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="Immigration"> <span>Immigration</span></label>
+        <label class="opt"><input type="checkbox" name="q2" value="None of these"> <span>None of these</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>3. What happened?</h2>
+      <p class="sub">Tap all that apply.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="q3" value="False reports to police or CPS"> <span>False reports to police or CPS</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="Called in false welfare checks on me"> <span>Called in false welfare checks on me</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="Used delays or continuances to drag things out"> <span>Used delays or continuances to drag things out</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="Threatened to report me to police, CPS, or immigration"> <span>Threatened to report me to police, CPS, or immigration</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="Ignored court orders with no consequences"> <span>Ignored court orders with no consequences</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="Lied in court or to officials"> <span>Lied in court or to officials</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="Used the system to control or punish me"> <span>Used the system to control or punish me</span></label>
+        <label class="opt"><input type="checkbox" name="q3" value="Something else"> <span>Something else</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>4. Did it involve your children?</h2>
+      <p class="sub">Tap one.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="Yes"> <span>Yes</span></label>
+        <label class="opt"><input type="radio" name="q4" value="No"> <span>No</span></label>
+        <label class="opt"><input type="radio" name="q4" value="Prefer not to say"> <span>Prefer not to say</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>5. Did he have an inside advantage?</h2>
+      <p class="sub">Tap all that apply.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="q5" value="Worked in law enforcement, courts, or related field"> <span>Worked in law enforcement, courts, or related field</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Knew people in the system"> <span>Knew people in the system</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Knew how to work the system from past experience"> <span>Knew how to work the system from past experience</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Better at performing calm / credible in front of officials"> <span>Better at performing calm / credible in front of officials</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="Had more money for lawyers"> <span>Had more money for lawyers</span></label>
+        <label class="opt"><input type="checkbox" name="q5" value="None of these"> <span>None of these</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>6. About how long did this go on?</h2>
+      <p class="sub">Tap one.</p>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="Less than 6 months"> <span>Less than 6 months</span></label>
+        <label class="opt"><input type="radio" name="q6" value="6–12 months"> <span>6–12 months</span></label>
+        <label class="opt"><input type="radio" name="q6" value="1–3 years"> <span>1–3 years</span></label>
+        <label class="opt"><input type="radio" name="q6" value="More than 3 years"> <span>More than 3 years</span></label>
+        <label class="opt"><input type="radio" name="q6" value="Still happening"> <span>Still happening</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>A. What was the impact on you?</h2>
+      <p class="sub">Tap all that apply.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="qA" value="Lost money, savings, or went into debt"> <span>Lost money, savings, or went into debt</span></label>
+        <label class="opt"><input type="checkbox" name="qA" value="Lost a job or missed work for court/appointments"> <span>Lost a job or missed work for court/appointments</span></label>
+        <label class="opt"><input type="checkbox" name="qA" value="Forced to move or lost housing"> <span>Forced to move or lost housing</span></label>
+        <label class="opt"><input type="checkbox" name="qA" value="Gave up rights, money, or custody just to make it stop"> <span>Gave up rights, money, or custody just to make it stop</span></label>
+        <label class="opt"><input type="checkbox" name="qA" value="Stopped calling police or asking for help again"> <span>Stopped calling police or asking for help again</span></label>
+        <label class="opt"><input type="checkbox" name="qA" value="Severe stress, anxiety, or health impact"> <span>Severe stress, anxiety, or health impact</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>B. Did you try to get help — and what happened?</h2>
+      <p class="sub">Tap all that apply.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" name="qB" value="Legal aid / free lawyers were full or turned me away"> <span>Legal aid / free lawyers were full or turned me away</span></label>
+        <label class="opt"><input type="checkbox" name="qB" value="Police wouldn't take a report or told me “it's a civil matter”"> <span>Police wouldn't take a report or told me “it's a civil matter”</span></label>
+        <label class="opt"><input type="checkbox" name="qB" value="A judge or official dismissed my evidence"> <span>A judge or official dismissed my evidence</span></label>
+        <label class="opt"><input type="checkbox" name="qB" value="Advocates or shelters couldn't help with the legal side"> <span>Advocates or shelters couldn't help with the legal side</span></label>
+        <label class="opt"><input type="checkbox" name="qB" value="Someone in the system believed me and helped"> <span>Someone in the system believed me and helped</span></label>
+        <label class="opt"><input type="checkbox" name="qB" value="I didn't try because I didn't think anyone would believe me"> <span>I didn't try because I didn't think anyone would believe me</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>7. State and ZIP</h2>
+      <p class="sub">State and ZIP help us map where this pattern is happening. Just the state and 5-digit ZIP — no city or street address. Leave blank if unsure or outside the US.</p>
+      <div class="row">
+        <input type="text" name="state" placeholder="State (optional)" maxlength="2" style="max-width:120px">
+        <input type="text" name="zip" placeholder="ZIP (optional)" maxlength="5" style="max-width:140px">
+      </div>
+    </div>
+
+    <div class="q">
+      <h2>8. Anything else you want us to know?</h2>
+      <textarea name="notes" placeholder="Anything else (optional). Leave out names and identifying details."></textarea>
+    </div>
+
+    <div class="q">
+      <h2>9. Safe email</h2>
+      <input type="email" name="email" placeholder="Safe email only (optional)">
+      <p class="note">Only if you want a reply. Use an email no one else can see.</p>
+    </div>
+
+    <button type="button" class="sbtn" id="submitBtn">Send</button>
+    <p class="success" id="success" role="status">Got it. Thank you for sharing this. It helps show the pattern.</p>
+  </form>
+
+  <footer>
+    <p>This form is private. Answers are reviewed by the person who runs this directory. No names are collected on purpose.</p>
+    <p style="margin-top:12px;font-size:12px;">A Whimsy & Weeds project · made with care</p>
+  </footer>
+</div>
+
+<script>
+document.getElementById("exitBtn").addEventListener("click", function(e){
+  e.preventDefault();
+  window.location.replace("https://www.google.com");
+});
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape") window.location.replace("https://www.google.com");
+});
+
+document.getElementById("submitBtn").addEventListener("click", async function(){
+  var btn = this;
+  var form = document.getElementById("legalForm");
+  var success = document.getElementById("success");
+  var orig = btn.textContent;
+  btn.textContent = "Sending…";
+  btn.disabled = true;
+  success.style.display = "none";
+
+  var fd = new FormData(form);
+  ["q2","q3","q5","qA","qB"].forEach(function(name){
+    var vals = [];
+    form.querySelectorAll('input[name="'+name+'"]:checked').forEach(function(c){ vals.push(c.value); });
+    fd.delete(name);
+    if (vals.length) fd.append(name, vals.join("; "));
+  });
+
+  try {
+    var res = await fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+      method: "POST",
+      body: fd,
+      headers: { "Accept": "application/json" }
+    });
+    var j = await res.json().catch(function(){ return {}; });
+    if (String(j.success) !== "true") throw new Error(j.message || "Could not send");
+    success.style.display = "block";
+    form.reset();
+    btn.textContent = "Sent ✓";
+    setTimeout(function(){ btn.textContent = orig; btn.disabled = false; }, 2500);
+  } catch (err) {
+    alert(err.message || "Could not send. You can email whimsyandweeds@gmail.com directly.");
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
