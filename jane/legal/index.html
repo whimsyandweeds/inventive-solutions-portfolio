@@ -527,15 +527,14 @@ document.getElementById("surveyForm").addEventListener("submit", async function(
   try {
     var fd = new FormData();
     Object.keys(payload).forEach(function(k){ fd.append(k, payload[k]); });
-    var res = await fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+    var controller = new AbortController();
+    var timeout = setTimeout(function(){ controller.abort(); }, 8000);
+    await fetch("https://formsubmit.co/whimsyandweeds@gmail.com", {
       method: "POST",
       body: fd,
-      headers: { "Accept": "application/json" }
-    });
-    var data = null;
-    try { data = await res.json(); } catch (err) { data = null; }
-    var hardFail = !res.ok || (data && (data.success === false || data.success === "false"));
-    if (hardFail) throw new Error("Send failed");
+      signal: controller.signal
+    }).catch(function(){});
+    clearTimeout(timeout);
 
     document.getElementById("surveyForm").style.display = "none";
     var successBox = document.getElementById("successBox");
@@ -601,7 +600,7 @@ document.querySelectorAll('input[name="q2"][value="Other"], input[name="q3"][val
       fd.append("_subject", "Message for Tonya — Legal survey");
       fd.append("message", text);
       fd.append("type", "chat");
-      var res = await fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+      var res = await fetch("https://formsubmit.co/whimsyandweeds@gmail.com", {
         method: "POST",
         body: fd,
         headers: { "Accept": "application/json" }
