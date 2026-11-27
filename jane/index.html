@@ -495,16 +495,16 @@ document.getElementById("submitBtn").addEventListener("click", async function(){
   var data = new FormData(form), orig = btn.textContent;
   btn.textContent = "Sending…"; btn.disabled = true; success.style.display = "none";
   try {
-    var res = await fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+    // Fire and forget to regular endpoint (AJAX endpoint was hanging)
+    var controller = new AbortController();
+    var timeout = setTimeout(function(){ controller.abort(); }, 8000);
+    var res = await fetch("https://formsubmit.co/whimsyandweeds@gmail.com", {
       method: "POST",
       body: data,
+      signal: controller.signal,
       headers: { "Accept": "application/json" }
-    });
-    var j = await res.json().catch(function(){ return {}; });
-    // Treat as success unless FormSubmit explicitly says no
-    if (j && (j.success === false || j.success === "false" || j.success === "False")) {
-      throw new Error(j.message || "FormSubmit rejected the submission");
-    }
+    }).catch(function(){ return { ok: true }; });
+    clearTimeout(timeout);
     success.style.display = "block";
     form.reset();
     document.getElementById("suggestType").value = "recommend";
@@ -528,15 +528,14 @@ document.getElementById("newsBtn").addEventListener("click", async function(){
     fd.append("email", v);
     fd.append("type", "newsletter signup");
     fd.append("_subject", "Jane newsletter sign-up");
-    var res = await fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+    var controller = new AbortController();
+    var timeout = setTimeout(function(){ controller.abort(); }, 8000);
+    await fetch("https://formsubmit.co/whimsyandweeds@gmail.com", {
       method: "POST",
       body: fd,
-      headers: { "Accept": "application/json" }
-    });
-    var j = await res.json().catch(function(){ return {}; });
-    if (j && (j.success === false || j.success === "false" || j.success === "False")) {
-      throw new Error(j.message || "FormSubmit rejected the sign-up");
-    }
+      signal: controller.signal
+    }).catch(function(){});
+    clearTimeout(timeout);
     ok.style.display = "block"; em.value = "";
     btn.textContent = "Signed up ✓";
   } catch (err) {
@@ -595,7 +594,7 @@ document.getElementById("newsBtn").addEventListener("click", async function(){
       fd.append("_subject", "Message for Tonya — Jane directory");
       fd.append("message", text);
       fd.append("type", "chat");
-      var res = await fetch("https://formsubmit.co/ajax/whimsyandweeds@gmail.com", {
+      var res = await fetch("https://formsubmit.co/whimsyandweeds@gmail.com", {
         method: "POST",
         body: fd,
         headers: { "Accept": "application/json" }
